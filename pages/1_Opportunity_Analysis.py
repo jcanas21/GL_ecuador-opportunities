@@ -44,14 +44,14 @@ def weighted_index(frame: pd.DataFrame, cols: list[str], weights: list[float]) -
 
 
 defaults = {
-    "w_rca": 0.25,
-    "w_density": 0.25,
-    "w_eff_num_exp": 0.25,
-    "w_alignment_hv": 0.25,
-    "w_pci": 0.25,
-    "w_cog": 0.25,
-    "w_growth": 0.25,
-    "w_market_size": 0.25,
+    "w_rca": 0.00,
+    "w_density": 0.70,
+    "w_eff_num_exp": 0.00,
+    "w_alignment_hv": 0.30,
+    "w_pci": 0.35,
+    "w_cog": 0.35,
+    "w_growth": 0.15,
+    "w_market_size": 0.15,
     "strategic_balance": 0.50,
 }
 for k, v in defaults.items():
