@@ -85,19 +85,6 @@ if rca_max_data < rca_min_data:
 if rca_max_data == rca_min_data:
     rca_max_data = rca_min_data + 0.01
 sector_options = sorted(x for x in df["sector"].dropna().astype(str).unique())
-product_options_df = (
-    df[["hs4", "product_name_short"]]
-    .dropna(subset=["hs4"])
-    .copy()
-    .assign(
-        hs4_code=lambda d: d["hs4"].astype(str).str.zfill(4),
-        product_name_short=lambda d: d["product_name_short"].fillna("").astype(str).str.strip(),
-    )
-    .drop_duplicates(subset=["hs4_code"])
-    .sort_values("hs4_code")
-)
-product_options_df["hs4_label"] = product_options_df["hs4_code"] + " - " + product_options_df["product_name_short"]
-product_label_to_code = dict(zip(product_options_df["hs4_label"], product_options_df["hs4_code"]))
 size_choices = {
     "Total trade (B USD)": "total_trade_b",
     "Potential market size (B USD)": "potential_market_size_b",
@@ -123,8 +110,6 @@ if "rca_min_filter" not in st.session_state:
     st.session_state["rca_min_filter"] = min(max(0.0, prior_min), float(rca_max_data))
 if "selected_sectors" not in st.session_state:
     st.session_state["selected_sectors"] = sector_options
-if "excluded_product_labels" not in st.session_state:
-    st.session_state["excluded_product_labels"] = []
 if "above_median_only" not in st.session_state:
     st.session_state["above_median_only"] = False
 if "above_export_median_only" not in st.session_state:
@@ -198,14 +183,6 @@ selected_sectors = st.sidebar.multiselect(
     default=st.session_state["selected_sectors"],
     key="selected_sectors",
 )
-excluded_product_labels = st.sidebar.multiselect(
-    "Exclude products (HS4)",
-    options=product_options_df["hs4_label"].tolist(),
-    default=st.session_state["excluded_product_labels"],
-    key="excluded_product_labels",
-    help="Exclude one or more HS4 products from the analysis.",
-)
-excluded_hs4_codes = {product_label_to_code[label] for label in excluded_product_labels}
 
 above_median_only = st.sidebar.toggle(
     "CAGR 5y greater than 0",
@@ -290,8 +267,6 @@ flt = flt[
 ]
 if selected_sectors:
     flt = flt[flt["sector"].isin(selected_sectors)]
-if excluded_hs4_codes:
-    flt = flt[~flt["hs4"].astype(str).str.zfill(4).isin(excluded_hs4_codes)]
 if above_median_only:
     flt = flt[flt["market_growth_5y"] > 0]
 if above_export_median_only:
@@ -316,7 +291,6 @@ st.caption(
     f"Raw RCA in [{float(rca_min_filter):.3f}, {float(rca_max_filter):.3f}], "
     f"density percentile in [{density_lo:.2f}, {density_hi:.2f}], "
     f"{len(selected_sectors)} sectors, "
-    f"{len(excluded_hs4_codes)} excluded products, "
     f"CAGR>0 filter={above_median_only}, "
     f"above-export CAGR={above_export_median_only}."
 )
@@ -479,6 +453,8 @@ st.subheader("Opportunity Summary by Sector")
 treemap_size_options = {
     "Potential market size (B USD)": "potential_market_size",
     "Market size (B USD)": "total_trade_b",
+    "Combined Opportunity Score": "combined_score",
+    "Frequency (equal size)": "frequency",
 }
 st.session_state.setdefault("treemap_size_metric_v1", "Potential market size (B USD)")
 treemap_size_label = st.selectbox(
@@ -514,6 +490,7 @@ def _wrap_treemap_label(text: str, width: int = 18) -> str:
 
 
 treemap_df["product_label_wrapped"] = treemap_df["product_label"].map(_wrap_treemap_label)
+treemap_df["frequency"] = 1.0
 
 if treemap_df.empty:
     st.info("No products available for the treemap under the current filters.")
