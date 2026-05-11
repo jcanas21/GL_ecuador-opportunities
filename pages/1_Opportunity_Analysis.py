@@ -480,7 +480,8 @@ treemap_size_options = {
     "Potential market size (B USD)": "potential_market_size",
     "Market size (B USD)": "total_trade_b",
     "Combined Opportunity Score": "combined_score",
-    "Frequency (equal size)": "frequency",
+    "Density Percentile": "density_percentile",
+    "Frequency": "frequency",
 }
 st.session_state.setdefault("treemap_size_metric_v1", "Potential market size (B USD)")
 treemap_size_label = st.selectbox(
@@ -491,7 +492,7 @@ treemap_size_label = st.selectbox(
 treemap_value_col = treemap_size_options[treemap_size_label]
 
 treemap_df = table_display[
-    ["sector", "hs4", "product_name_short", "combined_score", "total_trade_b", "potential_market_size"]
+    ["sector", "hs4", "product_name_short", "combined_score", "total_trade_b", "potential_market_size", "density_percentile"]
 ].copy()
 treemap_df["sector"] = treemap_df["sector"].fillna("Sin sector")
 treemap_df["product_label"] = (
@@ -531,6 +532,7 @@ else:
             "combined_score": ":.3f",
             "total_trade_b": ":.3f",
             "potential_market_size": ":.3f",
+            "density_percentile": ":.3f",
             "product_label": True,
             "sector": False,
             "product_label_wrapped": False,
