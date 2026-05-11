@@ -19,6 +19,10 @@ if df.empty:
 
 FEAS_COLS = ["rca_transformed_z", "density_z", "eff_num_exp_z", "alignment_weighted_percentile_z"]
 ATTR_COLS = ["pci_z", "cog_z", "potential_market_growth_5y_z", "potential_market_size_share_z"]
+# Defensive schema guard for cached/legacy datasets.
+for col in FEAS_COLS + ATTR_COLS + ["potential_market_growth_5y"]:
+    if col not in df.columns:
+        df[col] = 0.0
 SECTOR_COLORS = {
     "Services": "#b23c6f",
     "Textiles": "#7bc8a4",
