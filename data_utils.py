@@ -380,17 +380,40 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
     trade_path = input_dir() / "hs92_country_country_product_year_6_2020_2024.csv"
     distance_path = intermediate_dir() / "ecuador_distance.csv"
     potential_path = intermediate_dir() / "potential_market_by_product.csv"
+    potential_growth_path = intermediate_dir() / "potential_market_growth_by_product.csv"
 
     world_acc = pd.Series(dtype="float64")  # index: (year, hs4)
     ecu_year_acc = pd.Series(dtype="float64")  # index: (year, hs4)
     imports_2024_acc = pd.Series(dtype="float64")  # index: (importer, hs4)
     exp_hs4_2024_acc = pd.Series(dtype="float64")  # index: (exporter, hs4)
 
-    # Potential market by product for Ecuador (HS4).
-    if potential_path.exists():
+    # Potential market size and its 2020-2024 CAGR by product for Ecuador (HS4).
+    if potential_growth_path.exists():
+        pm = pd.read_csv(potential_growth_path)
+        pm["iso3_d"] = pm["iso3_d"].astype(str).str.upper().str.strip()
+        pm = pm[pm["iso3_d"] == FOCUS_ISO].copy()
+        pm["hs4"] = (
+            pm["hs92"]
+            .astype(str)
+            .str.replace(r"\.0$", "", regex=True)
+            .str.replace(r"\D", "", regex=True)
+            .str.zfill(4)
+            .str[-4:]
+        )
+        pm["potential_market_size_2020"] = pd.to_numeric(pm.get("potential_market_size_2020", 0), errors="coerce").fillna(0.0)
+        pm["potential_market_size_2024"] = pd.to_numeric(pm.get("potential_market_size_2024", 0), errors="coerce").fillna(0.0)
+        pm = pm.groupby("hs4", as_index=False)[["potential_market_size_2020", "potential_market_size_2024"]].sum()
+        pm["potential_market_size"] = pm["potential_market_size_2024"]
+        pm["potential_market_growth_5y"] = np.where(
+            (pm["potential_market_size_2020"] > 0) & (pm["potential_market_size_2024"] > 0),
+            (pm["potential_market_size_2024"] / pm["potential_market_size_2020"]) ** (1 / 5) - 1,
+            0.0,
+        )
+        pm = pm[["hs4", "potential_market_size", "potential_market_growth_5y"]]
+    elif potential_path.exists():
         pm = pd.read_csv(potential_path)
         pm["iso3_d"] = pm["iso3_d"].astype(str).str.upper().str.strip()
-        pm = pm[pm["iso3_d"] == "ECU"].copy()
+        pm = pm[pm["iso3_d"] == FOCUS_ISO].copy()
         pm["hs4"] = (
             pm["hs92"]
             .astype(str)
@@ -401,8 +424,9 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
         )
         pm["potential_market_size"] = pd.to_numeric(pm["potential_market_imports_sum"], errors="coerce").fillna(0.0)
         pm = pm.groupby("hs4", as_index=False)["potential_market_size"].sum()
+        pm["potential_market_growth_5y"] = 0.0
     else:
-        pm = pd.DataFrame({"hs4": sorted(valid_hs4), "potential_market_size": 0.0})
+        pm = pd.DataFrame({"hs4": sorted(valid_hs4), "potential_market_size": 0.0, "potential_market_growth_5y": 0.0})
 
     usecols = [
         "country_iso3_code",
@@ -599,8 +623,10 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
     out["ecu_exporter_rank"] = pd.to_numeric(out["ecu_exporter_rank"], errors="coerce")
     out.loc[out["ecu_exporter_rank"] <= 0, "ecu_exporter_rank"] = np.nan
     median_cagr = out["market_growth_5y"].median()
+    median_potential_market_growth = out["potential_market_growth_5y"].median()
     median_ecu_export_cagr = out["ecu_export_growth_5y"].median()
     out["above_median_cagr"] = out["market_growth_5y"] > median_cagr
+    out["above_median_potential_market_growth"] = out["potential_market_growth_5y"] > median_potential_market_growth
     out["above_median_export_cagr"] = out["ecu_export_growth_5y"] > median_ecu_export_cagr
     return out
 
@@ -727,6 +753,7 @@ def load_or_build_v1_hs4_metrics(valid_hs4: Iterable[str], year: int = 2024) -> 
     valid_hs4_set = set(str(x).zfill(4) for x in valid_hs4)
     primary_path = intermediate_dir() / V1_METRICS_FILE
     fallback_path = intermediate_dir() / V1_METRICS_FALLBACK
+    required_cols = {"potential_market_growth_5y"}
 
     for p in [primary_path, fallback_path]:
         if not p.exists():
@@ -736,7 +763,7 @@ def load_or_build_v1_hs4_metrics(valid_hs4: Iterable[str], year: int = 2024) -> 
             continue
         m["hs4"] = m["hs4"].astype(str).str.zfill(4)
         m = m[m["hs4"].isin(valid_hs4_set)].copy()
-        if not m.empty:
+        if not m.empty and required_cols.issubset(set(m.columns)):
             return m
 
     align = compute_network_alignment_indices_hs4(valid_hs4_set, year=year)
@@ -805,6 +832,7 @@ def load_opportunity_dataset() -> pd.DataFrame:
         "potential_market_size_share",
         "market_size",
         "potential_market_size",
+        "potential_market_growth_5y",
         "potential_market_to_market_ratio",
         "total_trade",
         "ecu_total_trade",
@@ -817,13 +845,13 @@ def load_opportunity_dataset() -> pd.DataFrame:
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
     # Keep min-max normalized values for views that need bounded scales (e.g., sizes/ranking views).
-    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "market_size_share", "potential_market_size_share"]:
+    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "potential_market_growth_5y", "market_size_share", "potential_market_size_share"]:
         if col not in df.columns:
             df[col] = 0.0
         df[f"{col}_norm"] = normalize_0_1(df[col])
 
     # Use z-score normalization for feasibility/attractiveness index construction.
-    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "market_size_share", "potential_market_size_share"]:
+    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "potential_market_growth_5y", "market_size_share", "potential_market_size_share"]:
         if col not in df.columns:
             df[col] = 0.0
         df[f"{col}_z"] = normalize_zscore(df[col])
@@ -832,7 +860,7 @@ def load_opportunity_dataset() -> pd.DataFrame:
         ["rca_transformed_z", "density_z", "eff_num_exp_z", "alignment_weighted_percentile_z"]
     ].mean(axis=1)
     df["attractiveness_index"] = df[
-        ["pci_z", "cog_z", "market_growth_5y_z", "potential_market_size_share_z"]
+        ["pci_z", "cog_z", "potential_market_growth_5y_z", "potential_market_size_share_z"]
     ].mean(axis=1)
     df["combined_score"] = (df["feasibility_index"] + df["attractiveness_index"]) / 2
     df["potential_market_size_b"] = pd.to_numeric(df["potential_market_size"], errors="coerce").fillna(0.0) / 1_000_000_000

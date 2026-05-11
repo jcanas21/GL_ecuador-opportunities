@@ -18,7 +18,7 @@ if df.empty:
     st.stop()
 
 FEAS_COLS = ["rca_transformed_z", "density_z", "eff_num_exp_z", "alignment_weighted_percentile_z"]
-ATTR_COLS = ["pci_z", "cog_z", "market_growth_5y_z", "potential_market_size_share_z"]
+ATTR_COLS = ["pci_z", "cog_z", "potential_market_growth_5y_z", "potential_market_size_share_z"]
 SECTOR_COLORS = {
     "Services": "#b23c6f",
     "Textiles": "#7bc8a4",
@@ -101,6 +101,7 @@ product_label_to_code = dict(zip(product_options_df["hs4_label"], product_option
 size_choices = {
     "Total trade (B USD)": "total_trade_b",
     "Potential market size (B USD)": "potential_market_size_b",
+    "Potential market growth (5y)": "potential_market_growth_5y",
     "Raw RCA": "raw_rca",
     "Market growth (5y)": "market_growth_5y",
     "Ecuador export growth (5y)": "ecu_export_growth_5y",
@@ -129,8 +130,10 @@ if "above_median_only" not in st.session_state:
     st.session_state["above_median_only"] = False
 if "above_export_median_only" not in st.session_state:
     st.session_state["above_export_median_only"] = False
+if "above_potential_growth_only" not in st.session_state:
+    st.session_state["above_potential_growth_only"] = False
 if "size_label" not in st.session_state:
-    st.session_state["size_label"] = "Market growth (5y)"
+    st.session_state["size_label"] = "Potential market growth (5y)"
 if "density_pct_range" not in st.session_state:
     st.session_state["density_pct_range"] = (density_pct_min_data, density_pct_max_data)
 
@@ -217,6 +220,11 @@ above_export_median_only = st.sidebar.toggle(
     value=st.session_state["above_export_median_only"],
     key="above_export_median_only",
 )
+above_potential_growth_only = st.sidebar.toggle(
+    "Potential Market Growth (5y) > 0",
+    value=st.session_state["above_potential_growth_only"],
+    key="above_potential_growth_only",
+)
 
 st.sidebar.header("Dimension Balance")
 strategic_balance = st.sidebar.slider(
@@ -253,7 +261,7 @@ with st.sidebar.expander("Attractiveness Components", expanded=True):
     w_pci = st.slider("PCI weight", 0.0, 1.0, float(st.session_state["w_pci"]), 0.05, key="w_pci")
     w_cog = st.slider("COG weight", 0.0, 1.0, float(st.session_state["w_cog"]), 0.05, key="w_cog")
     w_growth = st.slider(
-        "Market growth (5y) weight", 0.0, 1.0, float(st.session_state["w_growth"]), 0.05, key="w_growth"
+        "Potential market growth (5y) weight", 0.0, 1.0, float(st.session_state["w_growth"]), 0.05, key="w_growth"
     )
     w_market_size = st.slider(
         "Potential market size share weight", 0.0, 1.0, float(st.session_state["w_market_size"]), 0.05, key="w_market_size"
@@ -296,6 +304,8 @@ if above_median_only:
     flt = flt[flt["market_growth_5y"] > 0]
 if above_export_median_only:
     flt = flt[flt["above_median_export_cagr"]]
+if above_potential_growth_only:
+    flt = flt[flt["potential_market_growth_5y"] > 0]
 
 if flt.empty:
     st.warning("No products match the current filters.")
@@ -318,7 +328,8 @@ st.caption(
     f"{len(selected_sectors)} sectors, "
     f"{len(excluded_hs4_codes)} excluded products, "
     f"CAGR>0 filter={above_median_only}, "
-    f"above-export CAGR={above_export_median_only}."
+    f"above-export CAGR={above_export_median_only}, "
+    f"potential-market growth>0={above_potential_growth_only}."
 )
 
 fig = px.scatter(
@@ -340,6 +351,7 @@ fig = px.scatter(
         "distance_travelled": ":.2f",
         "density_percentile": ":.3f",
         "market_growth_5y": ":.3%",
+        "potential_market_growth_5y": ":.3%",
         "ecu_export_growth_5y": ":.3%",
         "market_size_share": ":.3%",
         "market_size_b": ":.3f",
@@ -404,6 +416,7 @@ display_cols = [
     "alignment_weighted_percentile",
     "alignment_lead_weighted",
     "market_growth_5y",
+    "potential_market_growth_5y",
     "ecu_export_growth_5y",
     "ecu_total_trade",
     "market_share_change_abs",
@@ -417,6 +430,7 @@ table_display = (
     .head(top_n)
     .assign(
         market_growth_5y=lambda d: d["market_growth_5y"] * 100,
+        potential_market_growth_5y=lambda d: d["potential_market_growth_5y"] * 100,
         ecu_export_growth_5y=lambda d: d["ecu_export_growth_5y"] * 100,
         ecu_total_trade=lambda d: d["ecu_total_trade"] / 1_000_000,
         market_share_change_abs=lambda d: d["market_share_change_abs"] * 100,
@@ -465,6 +479,7 @@ st.dataframe(
         "density": st.column_config.NumberColumn("Density (Raw)", format="%.6f"),
         "density_percentile": st.column_config.NumberColumn("Density Percentile", format="%.3f"),
         "market_growth_5y": st.column_config.NumberColumn("Global Market Growth % (5y)", format="%.2f%%"),
+        "potential_market_growth_5y": st.column_config.NumberColumn("Potential Market Growth % (5y)", format="%.2f%%"),
         "ecu_export_growth_5y": st.column_config.NumberColumn("Country Export Growth % (5y)", format="%.2f%%"),
         "ecu_total_trade": st.column_config.NumberColumn("Country Current Exports (M USD)", format="%.2f"),
         "market_share_change_abs": st.column_config.NumberColumn("Absolute Market Share Change (pp)", format="%.2f"),
@@ -478,6 +493,7 @@ st.dataframe(
 st.subheader("Opportunity Summary by Sector")
 treemap_size_options = {
     "Potential market size (B USD)": "potential_market_size",
+    "Potential market growth (5y)": "potential_market_growth_5y",
     "Market size (B USD)": "total_trade_b",
     "Combined Opportunity Score": "combined_score",
     "Density Percentile": "density_percentile",
@@ -492,7 +508,7 @@ treemap_size_label = st.selectbox(
 treemap_value_col = treemap_size_options[treemap_size_label]
 
 treemap_df = table_display[
-    ["sector", "hs4", "product_name_short", "combined_score", "total_trade_b", "potential_market_size", "density_percentile"]
+    ["sector", "hs4", "product_name_short", "combined_score", "total_trade_b", "potential_market_size", "potential_market_growth_5y", "density_percentile"]
 ].copy()
 treemap_df["sector"] = treemap_df["sector"].fillna("Sin sector")
 treemap_df["product_label"] = (
@@ -532,6 +548,7 @@ else:
             "combined_score": ":.3f",
             "total_trade_b": ":.3f",
             "potential_market_size": ":.3f",
+            "potential_market_growth_5y": ":.3f",
             "density_percentile": ":.3f",
             "product_label": True,
             "sector": False,
