@@ -381,6 +381,7 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
     distance_path = intermediate_dir() / "ecuador_distance.csv"
     potential_path = intermediate_dir() / "potential_market_by_product.csv"
     potential_growth_path = intermediate_dir() / "potential_market_growth_by_product.csv"
+    potential_growth_yearly_path = intermediate_dir() / "potential_market_by_product_year.csv"
 
     world_acc = pd.Series(dtype="float64")  # index: (year, hs4)
     ecu_year_acc = pd.Series(dtype="float64")  # index: (year, hs4)
@@ -388,6 +389,7 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
     exp_hs4_2024_acc = pd.Series(dtype="float64")  # index: (exporter, hs4)
 
     # Potential market size and its 2020-2024 CAGR by product for Ecuador (HS4).
+    # Accept both pre-aggregated growth file and yearly file for robustness across deployments.
     if potential_growth_path.exists():
         pm = pd.read_csv(potential_growth_path)
         pm["iso3_d"] = pm["iso3_d"].astype(str).str.upper().str.strip()
@@ -403,6 +405,35 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
         pm["potential_market_size_2020"] = pd.to_numeric(pm.get("potential_market_size_2020", 0), errors="coerce").fillna(0.0)
         pm["potential_market_size_2024"] = pd.to_numeric(pm.get("potential_market_size_2024", 0), errors="coerce").fillna(0.0)
         pm = pm.groupby("hs4", as_index=False)[["potential_market_size_2020", "potential_market_size_2024"]].sum()
+        pm["potential_market_size"] = pm["potential_market_size_2024"]
+        pm["potential_market_growth_5y"] = np.where(
+            (pm["potential_market_size_2020"] > 0) & (pm["potential_market_size_2024"] > 0),
+            (pm["potential_market_size_2024"] / pm["potential_market_size_2020"]) ** (1 / 5) - 1,
+            0.0,
+        )
+        pm = pm[["hs4", "potential_market_size", "potential_market_growth_5y"]]
+    elif potential_growth_yearly_path.exists():
+        pm = pd.read_csv(potential_growth_yearly_path)
+        pm["iso3_d"] = pm["iso3_d"].astype(str).str.upper().str.strip()
+        pm = pm[pm["iso3_d"] == FOCUS_ISO].copy()
+        pm["hs4"] = (
+            pm["hs92"]
+            .astype(str)
+            .str.replace(r"\.0$", "", regex=True)
+            .str.replace(r"\D", "", regex=True)
+            .str.zfill(4)
+            .str[-4:]
+        )
+        pm["year"] = pd.to_numeric(pm["year"], errors="coerce")
+        pm["potential_market_size"] = pd.to_numeric(pm["potential_market_size"], errors="coerce").fillna(0.0)
+        pm = pm[pm["year"].isin([2020, 2024])].copy()
+        pm = pm.groupby(["hs4", "year"], as_index=False)["potential_market_size"].sum()
+        pm = pm.pivot(index="hs4", columns="year", values="potential_market_size").reset_index()
+        for y in [2020, 2024]:
+            if y not in pm.columns:
+                pm[y] = 0.0
+        pm["potential_market_size_2020"] = pd.to_numeric(pm[2020], errors="coerce").fillna(0.0)
+        pm["potential_market_size_2024"] = pd.to_numeric(pm[2024], errors="coerce").fillna(0.0)
         pm["potential_market_size"] = pm["potential_market_size_2024"]
         pm["potential_market_growth_5y"] = np.where(
             (pm["potential_market_size_2020"] > 0) & (pm["potential_market_size_2024"] > 0),
@@ -764,7 +795,9 @@ def load_or_build_v1_hs4_metrics(valid_hs4: Iterable[str], year: int = 2024) -> 
         m["hs4"] = m["hs4"].astype(str).str.zfill(4)
         m = m[m["hs4"].isin(valid_hs4_set)].copy()
         if not m.empty and required_cols.issubset(set(m.columns)):
-            return m
+            growth_signal = pd.to_numeric(m["potential_market_growth_5y"], errors="coerce").fillna(0.0).abs().sum()
+            if growth_signal > 0:
+                return m
 
     align = compute_network_alignment_indices_hs4(valid_hs4_set, year=year)
     align = align[align["exporter_iso"] == FOCUS_ISO][
