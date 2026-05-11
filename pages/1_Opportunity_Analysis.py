@@ -44,14 +44,14 @@ def weighted_index(frame: pd.DataFrame, cols: list[str], weights: list[float]) -
 
 
 defaults = {
-    "w_rca": 0.00,
-    "w_density": 0.70,
-    "w_eff_num_exp": 0.00,
-    "w_alignment_hv": 0.30,
-    "w_pci": 0.35,
-    "w_cog": 0.35,
-    "w_growth": 0.15,
-    "w_market_size": 0.15,
+    "w_rca": 0.25,
+    "w_density": 0.25,
+    "w_eff_num_exp": 0.25,
+    "w_alignment_hv": 0.25,
+    "w_pci": 0.25,
+    "w_cog": 0.25,
+    "w_growth": 0.25,
+    "w_market_size": 0.25,
     "strategic_balance": 0.50,
 }
 for k, v in defaults.items():
@@ -104,6 +104,10 @@ if "rca_max_filter" not in st.session_state:
     prior = st.session_state.get("rca_range", (rca_min_data, rca_max_data))
     prior_max = float(prior[1]) if isinstance(prior, (tuple, list)) and len(prior) == 2 else float(rca_max_data)
     st.session_state["rca_max_filter"] = min(max(0.0, prior_max), float(rca_max_data))
+if "rca_min_filter" not in st.session_state:
+    prior = st.session_state.get("rca_range", (rca_min_data, rca_max_data))
+    prior_min = float(prior[0]) if isinstance(prior, (tuple, list)) and len(prior) == 2 else 0.0
+    st.session_state["rca_min_filter"] = min(max(0.0, prior_min), float(rca_max_data))
 if "selected_sectors" not in st.session_state:
     st.session_state["selected_sectors"] = sector_options
 if "above_median_only" not in st.session_state:
@@ -143,9 +147,19 @@ ecu_export_min_m = st.sidebar.number_input(
 ecu_export_min_b = ecu_export_min_m / 1000
 
 rca_step = 0.001 if rca_max_data <= 2 else (0.01 if rca_max_data <= 10 else 0.1)
+rca_min_filter = st.sidebar.number_input(
+    "Minimum (Raw) RCA",
+    min_value=0.0,
+    max_value=float(st.session_state["rca_max_filter"]),
+    value=min(float(st.session_state["rca_min_filter"]), float(st.session_state["rca_max_filter"])),
+    step=float(rca_step),
+    format="%.3f" if rca_step < 0.01 else ("%.2f" if rca_step < 0.1 else "%.1f"),
+    key="rca_min_filter",
+    help="Keep products with raw RCA greater than or equal to this value.",
+)
 rca_max_filter = st.sidebar.number_input(
     "Maximum (Raw) RCA",
-    min_value=0.0,
+    min_value=float(rca_min_filter),
     max_value=float(rca_max_data),
     value=float(st.session_state["rca_max_filter"]),
     step=float(rca_step),
@@ -243,6 +257,7 @@ flt["combined_score"] = normalize_0_1(flt["combined_raw"])
 
 flt = flt[flt["total_trade_b"] >= trade_min]
 flt = flt[flt["ecu_total_trade_b"] >= ecu_export_min_b]
+flt = flt[flt["raw_rca"] >= float(rca_min_filter)]
 flt = flt[flt["raw_rca"] <= float(rca_max_filter)]
 density_lo = min(density_pct_range)
 density_hi = max(density_pct_range)
@@ -273,7 +288,7 @@ c3.metric("Avg Attractiveness", f"{flt['attractiveness_index'].mean():.3f}")
 st.caption(
     f"Active filters: trade >= {trade_min:.2f} BUSD, "
     f"ECU exports >= {ecu_export_min_m:.0f} MUSD, "
-    f"Raw RCA <= {float(rca_max_filter):.3f}, "
+    f"Raw RCA in [{float(rca_min_filter):.3f}, {float(rca_max_filter):.3f}], "
     f"density percentile in [{density_lo:.2f}, {density_hi:.2f}], "
     f"{len(selected_sectors)} sectors, "
     f"CAGR>0 filter={above_median_only}, "
@@ -379,6 +394,7 @@ table_display = (
         ecu_export_growth_5y=lambda d: d["ecu_export_growth_5y"] * 100,
         ecu_total_trade=lambda d: d["ecu_total_trade"] / 1_000_000,
         market_share_change_abs=lambda d: d["market_share_change_abs"] * 100,
+        market_size_share=lambda d: d["market_size_share"] * 100,
         potential_market_size=lambda d: d["potential_market_size"] / 1_000_000_000,
         potential_market_to_market_ratio=lambda d: d["potential_market_to_market_ratio"] * 100,
     )
@@ -406,17 +422,30 @@ st.dataframe(
     use_container_width=True,
     hide_index=True,
     column_config={
-        "market_growth_5y": st.column_config.NumberColumn("market_growth_5y (%)", format="%.2f%%"),
-        "ecu_export_growth_5y": st.column_config.NumberColumn("ecu_export_growth_5y (%)", format="%.2f%%"),
-        "ecu_total_trade": st.column_config.NumberColumn("ecu_exports_2024 (M USD)", format="%.2f"),
-        "market_share_change_abs": st.column_config.NumberColumn("market_share_change (pp, 2024-2020)", format="%.2f"),
-        "ecu_exporter_rank": st.column_config.NumberColumn("ECU exporter rank (2024)", format="%.0f"),
+        "rank": st.column_config.NumberColumn("Rank", format="%.0f"),
+        "hs4": st.column_config.TextColumn("HS4"),
+        "product_name_short": st.column_config.TextColumn("Product"),
+        "sector": st.column_config.TextColumn("Sector"),
+        "combined_score": st.column_config.NumberColumn("Combined Opportunity Score", format="%.4f"),
+        "attractiveness_index": st.column_config.NumberColumn("Attractiveness Index", format="%.4f"),
+        "feasibility_index": st.column_config.NumberColumn("Feasibility Index", format="%.4f"),
+        "raw_rca": st.column_config.NumberColumn("Raw RCA", format="%.3f"),
+        "pci": st.column_config.NumberColumn("PCI", format="%.3f"),
+        "cog": st.column_config.NumberColumn("COG", format="%.3f"),
+        "eff_num_exp": st.column_config.NumberColumn("Effective Exporters", format="%.2f"),
+        "ecu_exporter_rank": st.column_config.NumberColumn("Country Exporter Rank (2024)", format="%.0f"),
         "alignment_weighted_percentile": st.column_config.NumberColumn("WNAI Percentile", format="%.1f"),
         "alignment_lead_weighted": st.column_config.NumberColumn("WNAI Lead", format="%.1f"),
-        "density": st.column_config.NumberColumn("density_raw", format="%.6f"),
-        "density_percentile": st.column_config.NumberColumn("density_percentile", format="%.3f"),
-        "potential_market_size": st.column_config.NumberColumn("potential_market_size (B USD)", format="%.3f"),
-        "potential_market_to_market_ratio": st.column_config.NumberColumn("potential/market ratio", format="%.2f%%"),
+        "density": st.column_config.NumberColumn("Density (Raw)", format="%.6f"),
+        "density_percentile": st.column_config.NumberColumn("Density Percentile", format="%.3f"),
+        "market_growth_5y": st.column_config.NumberColumn("Global Market Growth % (5y)", format="%.2f%%"),
+        "ecu_export_growth_5y": st.column_config.NumberColumn("Country Export Growth % (5y)", format="%.2f%%"),
+        "ecu_total_trade": st.column_config.NumberColumn("Country Current Exports (M USD)", format="%.2f"),
+        "market_share_change_abs": st.column_config.NumberColumn("Absolute Market Share Change (pp)", format="%.2f"),
+        "market_size_share": st.column_config.NumberColumn("Global Market Share", format="%.2f%%"),
+        "potential_market_size": st.column_config.NumberColumn("Potential Market Size (B USD)", format="%.3f"),
+        "potential_market_to_market_ratio": st.column_config.NumberColumn("Potential-to-Market Ratio", format="%.2f%%"),
+        "total_trade_b": st.column_config.NumberColumn("Total Trade (B USD)", format="%.3f"),
     },
 )
 
