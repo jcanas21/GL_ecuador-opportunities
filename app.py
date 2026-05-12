@@ -29,7 +29,7 @@ You can:
         """
 - Component variables are normalized (z-score) for score construction.
 - **Feasibility Index** combines: transformed RCA, density, effective exporters, WNAI percentile.
-- **Attractiveness Index** combines: PCI, COG, global market growth (5y), potential market size share.
+- **Attractiveness Index** combines: PCI, COG, global market growth (5y), accessible market size share.
 - **Combined Opportunity Score** rebalances feasibility and attractiveness by your strategic slider, then rescales to 0-1 for ranking.
 """
     )
@@ -54,10 +54,10 @@ You can:
             {"Variable": "Absolute Market Share Change (pp)", "Brief Definition": "Change in Ecuador's world market share from 2020 to 2024.", "How to Read It": "Positive = Ecuador gained share; negative = lost share.", "Unit / Scale": "Percentage points"},
             {"Variable": "Global Market Share", "Brief Definition": "Product's share in total world trade (2024).", "How to Read It": "Higher means the product is more important in global trade.", "Unit / Scale": "Percent"},
             {"Variable": "Total Trade (B USD)", "Brief Definition": "Total world trade value of the product in 2024.", "How to Read It": "Higher means a larger global market.", "Unit / Scale": "Billion USD"},
-            {"Variable": "Potential Market Size (B USD)", "Brief Definition": "Accessible demand proxy based on Ecuador's network-positioned market reach.", "How to Read It": "Higher suggests more demand is realistically reachable.", "Unit / Scale": "Billion USD"},
-            {"Variable": "Potential-to-Market Ratio", "Brief Definition": "Potential market size divided by total global market size.", "How to Read It": "Higher means a larger share of world demand appears structurally reachable.", "Unit / Scale": "Percent"},
+            {"Variable": "Accessible Market Size (B USD)", "Brief Definition": "Accessible demand proxy based on Ecuador's network-positioned market reach.", "How to Read It": "Higher suggests more demand is realistically reachable.", "Unit / Scale": "Billion USD"},
+            {"Variable": "Accessible-to-Market Ratio", "Brief Definition": "Accessible market size divided by total global market size.", "How to Read It": "Higher means a larger share of world demand appears structurally reachable.", "Unit / Scale": "Percent"},
             {"Variable": "Feasibility Index", "Brief Definition": "Composite score from transformed RCA, density, effective exporters, and WNAI percentile.", "How to Read It": "Higher means easier/less risky entry given current capabilities and network.", "Unit / Scale": "0-1"},
-            {"Variable": "Attractiveness Index", "Brief Definition": "Composite score from PCI, COG, global growth, and potential market size share.", "How to Read It": "Higher means stronger upside and strategic value.", "Unit / Scale": "0-1"},
+            {"Variable": "Attractiveness Index", "Brief Definition": "Composite score from PCI, COG, global growth, and accessible market size share.", "How to Read It": "Higher means stronger upside and strategic value.", "Unit / Scale": "0-1"},
             {"Variable": "Combined Opportunity Score", "Brief Definition": "Final score that blends feasibility and attractiveness using user-defined balance and weights.", "How to Read It": "Higher = better overall opportunity under current strategy settings.", "Unit / Scale": "0-1"},
         ]
     )

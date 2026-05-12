@@ -104,8 +104,8 @@ product_options_df["hs4_label"] = product_options_df["hs4_code"] + " - " + produ
 product_label_to_code = dict(zip(product_options_df["hs4_label"], product_options_df["hs4_code"]))
 size_choices = {
     "Total trade (B USD)": "total_trade_b",
-    "Potential market size (B USD)": "potential_market_size_b",
-    "Potential market growth (5y)": "potential_market_growth_5y",
+    "Accessible market size (B USD)": "potential_market_size_b",
+    "Accessible market growth (5y)": "potential_market_growth_5y",
     "Raw RCA": "raw_rca",
     "Market growth (5y)": "market_growth_5y",
     "Ecuador export growth (5y)": "ecu_export_growth_5y",
@@ -121,11 +121,16 @@ if "ecu_export_min_m" not in st.session_state:
 if "rca_max_filter" not in st.session_state:
     prior = st.session_state.get("rca_range", (rca_min_data, rca_max_data))
     prior_max = float(prior[1]) if isinstance(prior, (tuple, list)) and len(prior) == 2 else float(rca_max_data)
-    st.session_state["rca_max_filter"] = min(max(0.0, prior_max), float(rca_max_data))
+    st.session_state["rca_max_filter"] = max(0.0, prior_max)
 if "rca_min_filter" not in st.session_state:
     prior = st.session_state.get("rca_range", (rca_min_data, rca_max_data))
     prior_min = float(prior[0]) if isinstance(prior, (tuple, list)) and len(prior) == 2 else 0.0
-    st.session_state["rca_min_filter"] = min(max(0.0, prior_min), float(rca_max_data))
+    st.session_state["rca_min_filter"] = max(0.0, prior_min)
+st.session_state["rca_min_filter"] = max(0.0, float(st.session_state.get("rca_min_filter", 0.0)))
+st.session_state["rca_max_filter"] = max(
+    float(st.session_state["rca_min_filter"]),
+    float(st.session_state.get("rca_max_filter", rca_max_data)),
+)
 if "selected_sectors" not in st.session_state:
     st.session_state["selected_sectors"] = sector_options
 if "excluded_product_labels" not in st.session_state:
@@ -137,7 +142,7 @@ if "above_export_median_only" not in st.session_state:
 if "above_potential_growth_only" not in st.session_state:
     st.session_state["above_potential_growth_only"] = False
 if "size_label" not in st.session_state:
-    st.session_state["size_label"] = "Potential market growth (5y)"
+    st.session_state["size_label"] = "Accessible market growth (5y)"
 if "density_pct_range" not in st.session_state:
     st.session_state["density_pct_range"] = (density_pct_min_data, density_pct_max_data)
 
@@ -172,7 +177,6 @@ rca_step = 0.001 if rca_max_data <= 2 else (0.01 if rca_max_data <= 10 else 0.1)
 rca_min_filter = st.sidebar.number_input(
     "Minimum (Raw) RCA",
     min_value=0.0,
-    max_value=float(st.session_state["rca_max_filter"]),
     value=min(float(st.session_state["rca_min_filter"]), float(st.session_state["rca_max_filter"])),
     step=float(rca_step),
     format="%.3f" if rca_step < 0.01 else ("%.2f" if rca_step < 0.1 else "%.1f"),
@@ -182,8 +186,7 @@ rca_min_filter = st.sidebar.number_input(
 rca_max_filter = st.sidebar.number_input(
     "Maximum (Raw) RCA",
     min_value=float(rca_min_filter),
-    max_value=float(rca_max_data),
-    value=float(st.session_state["rca_max_filter"]),
+    value=max(float(st.session_state["rca_max_filter"]), float(rca_min_filter)),
     step=float(rca_step),
     format="%.3f" if rca_step < 0.01 else ("%.2f" if rca_step < 0.1 else "%.1f"),
     key="rca_max_filter",
@@ -225,7 +228,7 @@ above_export_median_only = st.sidebar.toggle(
     key="above_export_median_only",
 )
 above_potential_growth_only = st.sidebar.toggle(
-    "Potential Market Growth (5y) > 0",
+    "Accessible Market Growth (5y) > 0",
     value=st.session_state["above_potential_growth_only"],
     key="above_potential_growth_only",
 )
@@ -265,10 +268,10 @@ with st.sidebar.expander("Attractiveness Components", expanded=True):
     w_pci = st.slider("PCI weight", 0.0, 1.0, float(st.session_state["w_pci"]), 0.05, key="w_pci")
     w_cog = st.slider("COG weight", 0.0, 1.0, float(st.session_state["w_cog"]), 0.05, key="w_cog")
     w_growth = st.slider(
-        "Potential market growth (5y) weight", 0.0, 1.0, float(st.session_state["w_growth"]), 0.05, key="w_growth"
+        "Accessible market growth (5y) weight", 0.0, 1.0, float(st.session_state["w_growth"]), 0.05, key="w_growth"
     )
     w_market_size = st.slider(
-        "Potential market size share weight", 0.0, 1.0, float(st.session_state["w_market_size"]), 0.05, key="w_market_size"
+        "Accessible market size share weight", 0.0, 1.0, float(st.session_state["w_market_size"]), 0.05, key="w_market_size"
     )
 
 flt = df.copy()
@@ -333,7 +336,7 @@ st.caption(
     f"{len(excluded_hs4_codes)} excluded products, "
     f"CAGR>0 filter={above_median_only}, "
     f"above-export CAGR={above_export_median_only}, "
-    f"potential-market growth>0={above_potential_growth_only}."
+    f"accessible-market growth>0={above_potential_growth_only}."
 )
 
 fig = px.scatter(
@@ -419,6 +422,7 @@ display_cols = [
     "ecu_exporter_rank",
     "alignment_weighted_percentile",
     "alignment_lead_weighted",
+    "distance_travelled",
     "market_growth_5y",
     "potential_market_growth_5y",
     "ecu_export_growth_5y",
@@ -482,28 +486,29 @@ st.dataframe(
         "alignment_lead_weighted": st.column_config.NumberColumn("WNAI Lead", format="%.1f"),
         "density": st.column_config.NumberColumn("Density (Raw)", format="%.6f"),
         "density_percentile": st.column_config.NumberColumn("Density Percentile", format="%.3f"),
+        "distance_travelled": st.column_config.NumberColumn("Distance Travelled", format="%.2f"),
         "market_growth_5y": st.column_config.NumberColumn("Global Market Growth % (5y)", format="%.2f%%"),
-        "potential_market_growth_5y": st.column_config.NumberColumn("Potential Market Growth % (5y)", format="%.2f%%"),
+        "potential_market_growth_5y": st.column_config.NumberColumn("Accessible Market Growth % (5y)", format="%.2f%%"),
         "ecu_export_growth_5y": st.column_config.NumberColumn("Country Export Growth % (5y)", format="%.2f%%"),
         "ecu_total_trade": st.column_config.NumberColumn("Country Current Exports (M USD)", format="%.2f"),
         "market_share_change_abs": st.column_config.NumberColumn("Absolute Market Share Change (pp)", format="%.2f"),
         "market_size_share": st.column_config.NumberColumn("Global Market Share", format="%.2f%%"),
-        "potential_market_size": st.column_config.NumberColumn("Potential Market Size (B USD)", format="%.3f"),
-        "potential_market_to_market_ratio": st.column_config.NumberColumn("Potential-to-Market Ratio", format="%.2f%%"),
+        "potential_market_size": st.column_config.NumberColumn("Accessible Market Size (B USD)", format="%.3f"),
+        "potential_market_to_market_ratio": st.column_config.NumberColumn("Accessible-to-Market Ratio", format="%.2f%%"),
         "total_trade_b": st.column_config.NumberColumn("Total Trade (B USD)", format="%.3f"),
     },
 )
 
 st.subheader("Opportunity Summary by Sector")
 treemap_size_options = {
-    "Potential market size (B USD)": "potential_market_size",
-    "Potential market growth (5y)": "potential_market_growth_5y",
+    "Accessible market size (B USD)": "potential_market_size",
+    "Accessible market growth (5y)": "potential_market_growth_5y",
     "Market size (B USD)": "total_trade_b",
     "Combined Opportunity Score": "combined_score",
     "Density Percentile": "density_percentile",
     "Frequency": "frequency",
 }
-st.session_state.setdefault("treemap_size_metric_v1", "Potential market size (B USD)")
+st.session_state.setdefault("treemap_size_metric_v1", "Accessible market size (B USD)")
 treemap_size_label = st.selectbox(
     "Treemap size variable",
     options=list(treemap_size_options.keys()),
