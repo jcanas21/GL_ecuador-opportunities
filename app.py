@@ -41,7 +41,7 @@ You can:
             {"Variable": "Raw RCA", "Brief Definition": "Revealed Comparative Advantage: Ecuador's export share in a product divided by the world's export share in that product.", "How to Read It": "Greater than 1 = Ecuador is relatively specialized; less than 1 = weaker specialization.", "Unit / Scale": "Ratio"},
             {"Variable": "Transformed RCA", "Brief Definition": "Min-max version of Raw RCA used for complexity calculations.", "How to Read It": "0 = lowest relative RCA in the sample, 1 = highest.", "Unit / Scale": "0-1"},
             {"Variable": "Density (Raw)", "Brief Definition": "Product-space proximity to Ecuador's current capabilities.", "How to Read It": "Higher means the product is closer to what Ecuador already knows how to export.", "Unit / Scale": "Continuous"},
-            {"Variable": "Density Percentile", "Brief Definition": "Relative rank of density across products.", "How to Read It": "Calculation: percentile = (rank_density - 1) / (N - 1), where rank uses average rank for ties and N is the number of products. 0.80 means denser than 80% of products in the sample.", "Unit / Scale": "0-1"},
+            {"Variable": "Density Percentile", "Brief Definition": "Relative rank of Ecuador's density vs other countries for the same product (year 2024).", "How to Read It": "Calculation by product: percentile = (rank_density - 1) / (N - 1), where rank uses average rank for ties and N is number of countries in that product. 0.80 means Ecuador is above ~80% of countries in that product's density.", "Unit / Scale": "0-1"},
             {"Variable": "Distance Travelled", "Brief Definition": "Weighted average bilateral distance travelled by product, using bilateral export values between origin x and destination y as weights.", "How to Read It": "Higher means exports of that product are concentrated in farther destination markets.", "Unit / Scale": "Distance units (from bilateral distance file)"},
             {"Variable": "Effective Exporters", "Brief Definition": "Effective number of competing exporters in that product (competition breadth).", "How to Read It": "Higher usually implies a broader competitive field.", "Unit / Scale": "Count-like index"},
             {"Variable": "WNAI Percentile", "Brief Definition": "Weighted Network Alignment Index percentile for Ecuador versus major exporters in each product.", "How to Read It": "Higher percentile = Ecuador's trade network is better aligned with high-value demand hubs.", "Unit / Scale": "0-100"},
@@ -66,10 +66,11 @@ You can:
 
     st.markdown("## Algebra and Interpretation")
     st.markdown("### Density Percentile")
-    st.latex(r"\mathrm{DensityPercentile}_i = \frac{\mathrm{rank}(Density_i)-1}{N-1}")
-    st.markdown("- `rank(Density_i)`: rank of product `i` by density (average rank for ties).")
-    st.markdown("- `N`: total number of products in the sample.")
-    st.markdown("- Interpretation: 0.80 means product `i` has higher density than roughly 80% of products.")
+    st.latex(r"\mathrm{DensityPercentile}_{z,i} = \frac{\mathrm{rank}_i(Density_{z,i})-1}{N_i-1}")
+    st.markdown("- `z`: country (Ecuador in this dashboard), `i`: product.")
+    st.markdown("- `rank_i(Density_{z,i})`: rank of Ecuador's density within the cross-country distribution for product `i` (average rank for ties).")
+    st.markdown("- `N_i`: number of countries available for product `i`.")
+    st.markdown("- Interpretation: 0.80 means Ecuador's density is above roughly 80% of countries for that same product.")
 
     st.markdown("### Distance Travelled (by product)")
     st.latex(r"\mathrm{DistanceTravelled}_i = \sum_y \left( Distance_{x,y} \times \frac{X_{x,y,i}}{\sum_y X_{x,y,i}} \right)")

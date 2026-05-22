@@ -822,6 +822,7 @@ def load_or_build_v1_hs4_metrics(valid_hs4: Iterable[str], year: int = 2024) -> 
 def load_opportunity_dataset() -> pd.DataFrame:
     hs_ref = load_hs92_reference()
     valid_hs4 = hs_ref["hs4"].tolist()
+    allowed_countries = load_rankings_countries(2024)
 
     complexity_path = _resolve_intermediate_csv("complexity_ecu_2024.csv", "complexity_calculations.csv")
     c = pd.read_csv(complexity_path)
@@ -837,6 +838,44 @@ def load_opportunity_dataset() -> pd.DataFrame:
         c["rca_transformed"] = pd.to_numeric(c["rca_transformed"], errors="coerce").fillna(0.0)
     else:
         c["rca_transformed"] = c["raw_rca"]
+
+    # Density percentile definition for the dashboard:
+    # for each product i in 2024, rank countries by density and compute Ecuador's
+    # percentile within that product-country distribution.
+    # percentile_{z,i} = (rank_{z,i} - 1) / (N_i - 1), with average rank for ties.
+    try:
+        density_source = _resolve_intermediate_csv("complexity_calculations.csv")
+        g = pd.read_csv(density_source, usecols=["time", "location", "product", "density"])
+        g["time"] = pd.to_numeric(g["time"], errors="coerce")
+        g = g[g["time"] == 2024].copy()
+        g["hs4"] = g["product"].astype(str).str.zfill(4)
+        g["location"] = g["location"].astype(str).str.upper().str.strip()
+        if allowed_countries:
+            g = g[g["location"].isin(allowed_countries)]
+        g = g[g["hs4"].isin(valid_hs4)].copy()
+        g["density"] = pd.to_numeric(g["density"], errors="coerce").fillna(0.0)
+
+        if not g.empty:
+            g["rank_density"] = g.groupby("hs4")["density"].rank(method="average", ascending=True)
+            g["n_countries"] = g.groupby("hs4")["location"].transform("count")
+            g["density_percentile_country"] = np.where(
+                g["n_countries"] > 1,
+                (g["rank_density"] - 1.0) / (g["n_countries"] - 1.0),
+                0.0,
+            )
+            ecu_pct = (
+                g[g["location"] == FOCUS_ISO][["hs4", "density_percentile_country"]]
+                .drop_duplicates("hs4")
+                .rename(columns={"density_percentile_country": "density_percentile"})
+            )
+            c = c.drop(columns=["density_percentile"], errors="ignore").merge(ecu_pct, on="hs4", how="left")
+    except Exception:
+        # Fallback to existing field if the global complexity file is unavailable.
+        pass
+
+    if "density_percentile" not in c.columns:
+        c["density_percentile"] = 0.0
+
     c = c[["hs4", "raw_rca", "rca_transformed", "pci", "cog", "density", "density_percentile"]].drop_duplicates("hs4")
     metrics = load_or_build_v1_hs4_metrics(valid_hs4, year=2024)
 
