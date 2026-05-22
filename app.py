@@ -65,6 +65,12 @@ You can:
     st.dataframe(glossary, use_container_width=True, hide_index=True)
 
     st.markdown("## Algebra and Interpretation")
+    st.markdown("### Density Percentile")
+    st.latex(r"\mathrm{DensityPercentile}_i = \frac{\mathrm{rank}(Density_i)-1}{N-1}")
+    st.markdown("- `rank(Density_i)`: rank of product `i` by density (average rank for ties).")
+    st.markdown("- `N`: total number of products in the sample.")
+    st.markdown("- Interpretation: 0.80 means product `i` has higher density than roughly 80% of products.")
+
     st.markdown("### Distance Travelled (by product)")
     st.latex(r"\mathrm{DistanceTravelled}_i = \sum_y \left( Distance_{x,y} \times \frac{X_{x,y,i}}{\sum_y X_{x,y,i}} \right)")
     st.markdown("- `X_{x,y,i}`: bilateral exports of product `i` from origin `x` to destination `y`.")
