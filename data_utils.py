@@ -877,6 +877,13 @@ def load_opportunity_dataset() -> pd.DataFrame:
             df[col] = 0.0
         df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0)
 
+    df["density_percentile"] = (
+        pd.to_numeric(df["density_percentile"], errors="coerce")
+        .replace([np.inf, -np.inf], 0.0)
+        .fillna(0.0)
+        .clip(lower=0.0)
+    )
+
     # Keep min-max normalized values for views that need bounded scales (e.g., sizes/ranking views).
     for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "potential_market_growth_5y", "market_size_share", "potential_market_size_share"]:
         if col not in df.columns:
