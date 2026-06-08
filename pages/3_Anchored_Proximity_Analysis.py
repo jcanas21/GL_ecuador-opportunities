@@ -178,6 +178,21 @@ def _apply_page3_profile(profile_name: str) -> None:
         )
         st.session_state["p3_proximity_rank_range"] = (1, min(10, max(1, proximity_rank_max)))
 
+
+def _reset_page3_filters() -> None:
+    st.session_state["p3_accessible_market_min"] = 0.0
+    st.session_state["p3_am_cagr_only"] = False
+    st.session_state["p3_selected_anchor_sectors"] = anchor_sectors
+    st.session_state["p3_selected_candidate_sectors"] = candidate_sectors
+    st.session_state["p3_selected_candidate_sections"] = candidate_sections
+    st.session_state["p3_selected_anchor_sections"] = anchor_sections
+    st.session_state["p3_excluded_product_labels"] = []
+    st.session_state["p3_proximity_rank_range"] = (1, min(100, max(1, proximity_rank_max)))
+    st.session_state["p3_anchor_density_range"] = (
+        float(anchor_density_min),
+        float(anchor_density_max),
+    )
+
 with st.sidebar:
     st.header("Preset Profiles")
     if st.button("Top Anchored Candidates", use_container_width=True):
@@ -185,6 +200,9 @@ with st.sidebar:
         st.rerun()
 
     st.header("Anchor Filters")
+    if st.button("Reset all filters", use_container_width=True):
+        _reset_page3_filters()
+        st.rerun()
     selected_anchor_sectors = st.multiselect(
         "Anchor sector",
         options=anchor_sectors,
