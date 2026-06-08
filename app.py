@@ -6,21 +6,49 @@ import streamlit as st
 
 def render_guide_and_glossary() -> None:
     st.title("Ecuador Export Opportunities Dashboard")
-    st.caption("Guide and glossary for the V1 Opportunity Analysis page (HS92 4-digit).")
+    st.caption("Guide and glossary for the V1 dashboard pages (HS92 4-digit).")
 
-    st.markdown("## What This Dashboard Does")
+    st.markdown("## Page 2: Opportunity Analysis")
     st.markdown(
         """
-The **Opportunity Analysis** page ranks HS92 4-digit products by combining two dimensions:
+The **Opportunity Analysis** page (Page 2) ranks HS92 4-digit products by combining two dimensions:
 
 - **Feasibility**: how realistic it is for Ecuador to compete now.
 - **Attractiveness**: how valuable the opportunity is if Ecuador expands in that product.
 
 You can:
-- Filter products by market size, RCA, sector, growth, density percentile, and Ecuador export floor.
+- Filter products by accessible market size, RCA, sector, accessible-market growth, density percentile, and Ecuador export floor.
 - Reweight each component of feasibility and attractiveness.
 - Rebalance overall strategy between feasibility and attractiveness.
 - Explore a ranked product table and sector treemap.
+"""
+    )
+
+    st.markdown("## Page 3: Anchored Proximity Analysis")
+    st.markdown(
+        """
+The **Anchored Proximity Analysis** page starts from a set of anchor products and maps the candidate products that are most proximate to them.
+
+You can:
+- Filter anchor-candidate links by sector, proximity rank, accessible market, anchor density percentile, and anchor sections.
+- Visualize the network as a **Sankey chart** from anchors to candidates.
+- Rank candidate products using the same feasibility-versus-attractiveness logic used in the main dashboard.
+- Explore a candidate table and a candidate treemap sized by **Accessible Market**.
+"""
+    )
+
+    st.markdown("## Page 4: Comparison")
+    st.markdown(
+        """
+The **Comparison** page contrasts the preset recommendations produced by:
+
+- **Apuestas Estrategicas** from Page 2
+- **Top Anchored Candidates** from Page 3
+
+You can:
+- See how much the two recommendation lists overlap.
+- Identify products that appear only in one methodology.
+- Compare preset ranks, accessible market size, WNAI, PCI and COG side by side.
 """
     )
 
@@ -28,8 +56,8 @@ You can:
     st.markdown(
         """
 - Component variables are normalized (z-score) for score construction.
-- **Feasibility Index** combines: transformed RCA, density, effective exporters, WNAI percentile.
-- **Attractiveness Index** combines: PCI, COG, accessible market growth (5y), accessible market size share.
+- **Feasibility Index** combines: RCA continuous, density, effective exporters, WNAI percentile.
+- **Attractiveness Index** combines: PCI, COG, accessible market growth (5y), accessible market size.
 - **Combined Opportunity Score** rebalances feasibility and attractiveness by your strategic slider, then rescales to 0-1 for ranking.
 """
     )
@@ -38,8 +66,8 @@ You can:
     st.caption("Brief definitions plus interpretation guidance for the key technical variables.")
     glossary = pd.DataFrame(
         [
-            {"Variable": "Raw RCA", "Brief Definition": "Revealed Comparative Advantage: Ecuador's export share in a product divided by the world's export share in that product.", "How to Read It": "Greater than 1 = Ecuador is relatively specialized; less than 1 = weaker specialization.", "Unit / Scale": "Ratio"},
-            {"Variable": "Transformed RCA", "Brief Definition": "Min-max version of Raw RCA used for complexity calculations.", "How to Read It": "0 = lowest relative RCA in the sample, 1 = highest.", "Unit / Scale": "0-1"},
+            {"Variable": "RCA", "Brief Definition": "Revealed Comparative Advantage: Ecuador's export share in a product divided by the world's export share in that product.", "How to Read It": "Greater than 1 = Ecuador is relatively specialized; less than 1 = weaker specialization.", "Unit / Scale": "Ratio"},
+            {"Variable": "RCA Continuous", "Brief Definition": "Continuous RCA signal used inside the feasibility score. In the complexity pipeline, the RCA-based continuous input is the transformed version of raw RCA.", "How to Read It": "Higher means stronger revealed specialization without collapsing the signal to a binary threshold.", "Unit / Scale": "Continuous"},
             {"Variable": "Density (Raw)", "Brief Definition": "Product-space proximity to Ecuador's current capabilities.", "How to Read It": "Higher means the product is closer to what Ecuador already knows how to export.", "Unit / Scale": "Continuous"},
             {"Variable": "Density Percentile", "Brief Definition": "Relative rank of Ecuador's density vs other countries for the same product (year 2024).", "How to Read It": "Calculation by product: percentile = (rank_density - 1) / (N - 1), where rank uses average rank for ties and N is number of countries in that product. 0.80 means Ecuador is above ~80% of countries in that product's density.", "Unit / Scale": "0-1"},
             {"Variable": "Distance Travelled", "Brief Definition": "Weighted average bilateral distance travelled by product, using bilateral export values between origin x and destination y as weights.", "How to Read It": "Higher means exports of that product are concentrated in farther destination markets.", "Unit / Scale": "Distance units (from bilateral distance file)"},
@@ -57,8 +85,8 @@ You can:
             {"Variable": "Total Trade (B USD)", "Brief Definition": "Total world trade value of the product in 2024.", "How to Read It": "Higher means a larger global market.", "Unit / Scale": "Billion USD"},
             {"Variable": "Accessible Market Size (B USD)", "Brief Definition": "Accessible demand proxy based on Ecuador's network-positioned market reach.", "How to Read It": "Higher suggests more demand is realistically reachable.", "Unit / Scale": "Billion USD"},
             {"Variable": "Accessible-to-Market Ratio", "Brief Definition": "Accessible market size divided by total global market size.", "How to Read It": "Higher means a larger share of world demand appears structurally reachable.", "Unit / Scale": "Percent"},
-            {"Variable": "Feasibility Index", "Brief Definition": "Composite score from transformed RCA, density, effective exporters, and WNAI percentile.", "How to Read It": "Higher means easier/less risky entry given current capabilities and network.", "Unit / Scale": "0-1"},
-            {"Variable": "Attractiveness Index", "Brief Definition": "Composite score from PCI, COG, global growth, and accessible market size share.", "How to Read It": "Higher means stronger upside and strategic value.", "Unit / Scale": "0-1"},
+            {"Variable": "Feasibility Index", "Brief Definition": "Composite score from RCA continuous, density, effective exporters, and WNAI percentile.", "How to Read It": "Higher means easier/less risky entry given current capabilities and network.", "Unit / Scale": "0-1"},
+            {"Variable": "Attractiveness Index", "Brief Definition": "Composite score from PCI, COG, accessible market growth, and accessible market size.", "How to Read It": "Higher means stronger upside and strategic value.", "Unit / Scale": "0-1"},
             {"Variable": "Combined Opportunity Score", "Brief Definition": "Final score that blends feasibility and attractiveness using user-defined balance and weights.", "How to Read It": "Higher = better overall opportunity under current strategy settings.", "Unit / Scale": "0-1"},
         ]
     )
@@ -78,9 +106,15 @@ You can:
     st.markdown("- Interpretation: weighted average distance travelled by product, where bilateral export value is the weight.")
 
     st.markdown("### Accessible Market Size")
-    st.latex(r"\mathrm{AccessibleMarket}_i = \sum_{y:\,Distance_y \le \mathrm{DistanceTravelled}_i} M_{i,y}")
-    st.markdown("- Uses Distance Travelled as the product-specific cutoff.")
-    st.markdown("- Interpretation: total demand in destinations that are within the product's reachable distance profile.")
+    st.latex(
+        r"\mathrm{AccessibleMarket}_{z,i} = \sum_{y \in \mathcal{A}_{z,i}} M_{i,y}"
+    )
+    st.latex(
+        r"\mathcal{A}_{z,i} = \left\{ y : Distance_{z,y} \le \mathrm{DistanceTravelled}_{z,i}\ \mathrm{or}\ X_{z,y,i} \ge 100{,}000{,}000 \right\}"
+    )
+    st.markdown("- `z`: exporter, `i`: product, `y`: destination market.")
+    st.markdown("- A market is accessible if it is within the product's observed distance profile **or** if the exporter already sells at least USD 100M of that product to that partner.")
+    st.markdown("- Interpretation: total demand in markets that are geographically reachable or already commercially proven at meaningful scale.")
 
     st.markdown("### WNAI (Weighted Network Alignment Index)")
     st.latex(
@@ -102,6 +136,8 @@ st.set_page_config(
 pages = [
     st.Page(render_guide_and_glossary, title="Guide and glossary", icon=":material/menu_book:", default=True),
     st.Page(Path("pages/1_Opportunity_Analysis.py"), title="Opportunity Analysis", icon=":material/insights:"),
+    st.Page(Path("pages/3_Anchored_Proximity_Analysis.py"), title="Anchored Proximity Analysis", icon=":material/account_tree:"),
+    st.Page(Path("pages/4_Comparison.py"), title="Comparison", icon=":material/compare_arrows:"),
 ]
 pg = st.navigation(pages, position="sidebar", expanded=True)
 pg.run()

@@ -9,14 +9,44 @@ import streamlit as st
 
 FOCUS_ISO = "ECU"
 V1_METRICS_FILE = "opportunity_metrics_hs4_ecu.csv"
-V1_METRICS_FALLBACK = "v1_metrics_ecu.csv"
+
+
+HS_SECTION_RULES = [
+    (1, range(1, 6), "1. Live animals; animal products"),
+    (2, range(6, 15), "2. Vegetable products"),
+    (3, range(15, 16), "3. Animal or vegetable fats and oils"),
+    (4, range(16, 25), "4. Prepared foodstuffs; beverages, spirits and tobacco"),
+    (5, range(25, 28), "5. Mineral products"),
+    (6, range(28, 39), "6. Products of the chemical or allied industries"),
+    (7, range(39, 41), "7. Plastics and articles thereof; rubber and articles thereof"),
+    (8, range(41, 44), "8. Raw hides and skins, leather, furskins and articles thereof"),
+    (9, range(44, 47), "9. Wood and articles of wood"),
+    (10, range(47, 50), "10. Pulp, paper and paperboard"),
+    (11, range(50, 64), "11. Textiles and textile articles"),
+    (12, range(64, 68), "12. Footwear, headgear, umbrellas and related articles"),
+    (13, range(68, 71), "13. Articles of stone, plaster, cement, ceramics and glass"),
+    (14, range(71, 72), "14. Pearls, precious stones and metals"),
+    (15, range(72, 84), "15. Base metals and articles of base metal"),
+    (16, range(84, 86), "16. Machinery, mechanical appliances and electrical equipment"),
+    (17, range(86, 90), "17. Vehicles, aircraft, vessels and associated transport equipment"),
+    (18, range(90, 93), "18. Optical, photographic, medical and musical instruments"),
+    (19, range(93, 94), "19. Arms and ammunition"),
+    (20, range(94, 97), "20. Miscellaneous manufactured articles"),
+    (21, range(97, 98), "21. Works of art, collectors' pieces and antiques"),
+]
 
 
 def project_root() -> Path:
     here = Path(__file__).resolve()
-    for parent in here.parents:
-        if (parent / "data" / "input").exists() and (parent / "data" / "intermediate").exists():
-            return parent
+    candidates = [
+        parent for parent in here.parents
+        if (parent / "data" / "input").exists() and (parent / "data" / "intermediate").exists()
+    ]
+    if candidates:
+        for parent in reversed(candidates):
+            if (parent / "data" / "intermediate" / "complexity_calculations.csv").exists():
+                return parent
+        return candidates[0]
     return Path(__file__).resolve().parents[2]
 
 
@@ -26,6 +56,17 @@ def input_dir() -> Path:
 
 def intermediate_dir() -> Path:
     return project_root() / "data" / "intermediate"
+
+
+def output_dir() -> Path:
+    here = Path(__file__).resolve()
+    candidates = [parent / "data" / "output" for parent in here.parents if (parent / "data" / "output").exists()]
+    if candidates:
+        for candidate in reversed(candidates):
+            if (candidate / "anchors_proximity_percentile.csv").exists():
+                return candidate
+        return candidates[0]
+    return project_root() / "data" / "output"
 
 
 def _resolve_intermediate_csv(primary_name: str, fallback_name: str | None = None) -> Path:
@@ -60,6 +101,17 @@ def normalize_zscore(series: pd.Series) -> pd.Series:
     return (s - mu) / sigma
 
 
+def hs4_to_section_name(code: str) -> str:
+    digits = "".join(ch for ch in str(code) if ch.isdigit())
+    if len(digits) < 2:
+        return "Other"
+    chapter = int(digits[:2])
+    for _, chapters, label in HS_SECTION_RULES:
+        if chapter in chapters:
+            return label
+    return "Other"
+
+
 @st.cache_data(show_spinner=False)
 def load_rankings_countries(year: int = 2024) -> set[str]:
     path = input_dir() / "rankings.csv"
@@ -89,6 +141,59 @@ def load_hs92_reference() -> pd.DataFrame:
     df = pd.read_csv(path, encoding="utf-8-sig")
     df["hs4"] = df["product_hs92_code"].astype(str).str.zfill(4)
     return df[["hs4", "product_name_short", "product_name", "sector", "green_product"]].drop_duplicates("hs4")
+
+
+@st.cache_data(show_spinner=False)
+def load_anchor_proximity_dataset() -> pd.DataFrame:
+    path = output_dir() / "anchors_proximity_percentile.csv"
+    df = pd.read_csv(path)
+    for col in ["anchor_hs4", "candidate_hs4"]:
+        if col in df.columns:
+            df[col] = df[col].astype(str).str.zfill(4)
+
+    numeric_cols = [
+        "proximity",
+        "proximity_rank",
+        "eligible_candidate_count",
+        "pci",
+        "cog",
+        "distance_travelled",
+        "accessible_market_size",
+        "accessible_market_size_share",
+        "accessible_market_growth_5y",
+        "alignment_weighted_percentile",
+        "attractiveness_score",
+        "feasibility_score",
+        "combined_score",
+        "anchor_density",
+        "anchor_density_percentile",
+    ]
+    for col in numeric_cols:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0.0)
+
+    df["anchor_sector"] = df.get("anchor_sector", "").fillna("Other").astype(str)
+    df["anchor_hs_section_name"] = df.get("anchor_hs_section_name", "").fillna("Other").astype(str)
+    df["candidate_sector"] = df.get("candidate_sector", "").fillna("Other").astype(str)
+    df["candidate_hs_section_name"] = df.get(
+        "candidate_hs_section_name",
+        df.get("candidate_hs4", "").astype(str).map(hs4_to_section_name),
+    )
+    df["candidate_hs_section_name"] = df["candidate_hs_section_name"].fillna("Other").astype(str)
+    df["accessible_market_size_b"] = pd.to_numeric(df.get("accessible_market_size", 0), errors="coerce").fillna(0.0) / 1_000_000_000
+    try:
+        metrics = pd.read_csv(intermediate_dir() / V1_METRICS_FILE, usecols=["hs4", "raw_rca_trade"])
+        metrics["hs4"] = metrics["hs4"].astype(str).str.zfill(4)
+        metrics["raw_rca_trade"] = pd.to_numeric(metrics["raw_rca_trade"], errors="coerce").fillna(0.0)
+        df = df.merge(
+            metrics.rename(columns={"hs4": "candidate_hs4", "raw_rca_trade": "candidate_raw_rca"}),
+            on="candidate_hs4",
+            how="left",
+        )
+    except Exception:
+        df["candidate_raw_rca"] = 0.0
+    df["candidate_raw_rca"] = pd.to_numeric(df.get("candidate_raw_rca", 0), errors="coerce").fillna(0.0)
+    return df
 
 
 @st.cache_data(show_spinner=False)
@@ -379,6 +484,9 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
     allowed_countries = load_rankings_countries(2024)
     trade_path = input_dir() / "hs92_country_country_product_year_6_2020_2024.csv"
     distance_path = intermediate_dir() / "ecuador_distance.csv"
+    accessible_path = intermediate_dir() / "accessible_market_by_product.csv"
+    accessible_growth_path = intermediate_dir() / "accessible_market_growth_by_product.csv"
+    accessible_growth_yearly_path = intermediate_dir() / "accessible_market_by_product_year.csv"
     potential_path = intermediate_dir() / "potential_market_by_product.csv"
     potential_growth_path = intermediate_dir() / "potential_market_growth_by_product.csv"
     potential_growth_yearly_path = intermediate_dir() / "potential_market_by_product_year.csv"
@@ -388,9 +496,60 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
     imports_2024_acc = pd.Series(dtype="float64")  # index: (importer, hs4)
     exp_hs4_2024_acc = pd.Series(dtype="float64")  # index: (exporter, hs4)
 
-    # Potential market size and its 2020-2024 CAGR by product for Ecuador (HS4).
-    # Accept both pre-aggregated growth file and yearly file for robustness across deployments.
-    if potential_growth_path.exists():
+    # Accessible market size and its 2020-2024 CAGR by product for Ecuador (HS4).
+    # Accept both renamed outputs and legacy potential-market file names for robustness.
+    if accessible_growth_path.exists():
+        pm = pd.read_csv(accessible_growth_path)
+        pm["iso3_o"] = pm["iso3_o"].astype(str).str.upper().str.strip()
+        pm = pm[pm["iso3_o"] == FOCUS_ISO].copy()
+        pm["hs4"] = (
+            pm["hs92"]
+            .astype(str)
+            .str.replace(r"\.0$", "", regex=True)
+            .str.replace(r"\D", "", regex=True)
+            .str.zfill(4)
+            .str[-4:]
+        )
+        pm["accessible_market_size_2020"] = pd.to_numeric(pm.get("accessible_market_size_2020", 0), errors="coerce").fillna(0.0)
+        pm["accessible_market_size_2024"] = pd.to_numeric(pm.get("accessible_market_size_2024", 0), errors="coerce").fillna(0.0)
+        pm = pm.groupby("hs4", as_index=False)[["accessible_market_size_2020", "accessible_market_size_2024"]].sum()
+        pm["accessible_market_size"] = pm["accessible_market_size_2024"]
+        pm["accessible_market_growth_5y"] = np.where(
+            (pm["accessible_market_size_2020"] > 0) & (pm["accessible_market_size_2024"] > 0),
+            (pm["accessible_market_size_2024"] / pm["accessible_market_size_2020"]) ** (1 / 5) - 1,
+            0.0,
+        )
+        pm = pm[["hs4", "accessible_market_size", "accessible_market_growth_5y"]]
+    elif accessible_growth_yearly_path.exists():
+        pm = pd.read_csv(accessible_growth_yearly_path)
+        pm["iso3_o"] = pm["iso3_o"].astype(str).str.upper().str.strip()
+        pm = pm[pm["iso3_o"] == FOCUS_ISO].copy()
+        pm["hs4"] = (
+            pm["hs92"]
+            .astype(str)
+            .str.replace(r"\.0$", "", regex=True)
+            .str.replace(r"\D", "", regex=True)
+            .str.zfill(4)
+            .str[-4:]
+        )
+        pm["year"] = pd.to_numeric(pm["year"], errors="coerce")
+        pm["accessible_market_size"] = pd.to_numeric(pm["accessible_market_size"], errors="coerce").fillna(0.0)
+        pm = pm[pm["year"].isin([2020, 2024])].copy()
+        pm = pm.groupby(["hs4", "year"], as_index=False)["accessible_market_size"].sum()
+        pm = pm.pivot(index="hs4", columns="year", values="accessible_market_size").reset_index()
+        for y in [2020, 2024]:
+            if y not in pm.columns:
+                pm[y] = 0.0
+        pm["accessible_market_size_2020"] = pd.to_numeric(pm[2020], errors="coerce").fillna(0.0)
+        pm["accessible_market_size_2024"] = pd.to_numeric(pm[2024], errors="coerce").fillna(0.0)
+        pm["accessible_market_size"] = pm["accessible_market_size_2024"]
+        pm["accessible_market_growth_5y"] = np.where(
+            (pm["accessible_market_size_2020"] > 0) & (pm["accessible_market_size_2024"] > 0),
+            (pm["accessible_market_size_2024"] / pm["accessible_market_size_2020"]) ** (1 / 5) - 1,
+            0.0,
+        )
+        pm = pm[["hs4", "accessible_market_size", "accessible_market_growth_5y"]]
+    elif potential_growth_path.exists():
         pm = pd.read_csv(potential_growth_path)
         pm["iso3_d"] = pm["iso3_d"].astype(str).str.upper().str.strip()
         pm = pm[pm["iso3_d"] == FOCUS_ISO].copy()
@@ -402,16 +561,16 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
             .str.zfill(4)
             .str[-4:]
         )
-        pm["potential_market_size_2020"] = pd.to_numeric(pm.get("potential_market_size_2020", 0), errors="coerce").fillna(0.0)
-        pm["potential_market_size_2024"] = pd.to_numeric(pm.get("potential_market_size_2024", 0), errors="coerce").fillna(0.0)
-        pm = pm.groupby("hs4", as_index=False)[["potential_market_size_2020", "potential_market_size_2024"]].sum()
-        pm["potential_market_size"] = pm["potential_market_size_2024"]
-        pm["potential_market_growth_5y"] = np.where(
-            (pm["potential_market_size_2020"] > 0) & (pm["potential_market_size_2024"] > 0),
-            (pm["potential_market_size_2024"] / pm["potential_market_size_2020"]) ** (1 / 5) - 1,
+        pm["accessible_market_size_2020"] = pd.to_numeric(pm.get("potential_market_size_2020", 0), errors="coerce").fillna(0.0)
+        pm["accessible_market_size_2024"] = pd.to_numeric(pm.get("potential_market_size_2024", 0), errors="coerce").fillna(0.0)
+        pm = pm.groupby("hs4", as_index=False)[["accessible_market_size_2020", "accessible_market_size_2024"]].sum()
+        pm["accessible_market_size"] = pm["accessible_market_size_2024"]
+        pm["accessible_market_growth_5y"] = np.where(
+            (pm["accessible_market_size_2020"] > 0) & (pm["accessible_market_size_2024"] > 0),
+            (pm["accessible_market_size_2024"] / pm["accessible_market_size_2020"]) ** (1 / 5) - 1,
             0.0,
         )
-        pm = pm[["hs4", "potential_market_size", "potential_market_growth_5y"]]
+        pm = pm[["hs4", "accessible_market_size", "accessible_market_growth_5y"]]
     elif potential_growth_yearly_path.exists():
         pm = pd.read_csv(potential_growth_yearly_path)
         pm["iso3_d"] = pm["iso3_d"].astype(str).str.upper().str.strip()
@@ -425,22 +584,22 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
             .str[-4:]
         )
         pm["year"] = pd.to_numeric(pm["year"], errors="coerce")
-        pm["potential_market_size"] = pd.to_numeric(pm["potential_market_size"], errors="coerce").fillna(0.0)
+        pm["accessible_market_size"] = pd.to_numeric(pm["potential_market_size"], errors="coerce").fillna(0.0)
         pm = pm[pm["year"].isin([2020, 2024])].copy()
-        pm = pm.groupby(["hs4", "year"], as_index=False)["potential_market_size"].sum()
-        pm = pm.pivot(index="hs4", columns="year", values="potential_market_size").reset_index()
+        pm = pm.groupby(["hs4", "year"], as_index=False)["accessible_market_size"].sum()
+        pm = pm.pivot(index="hs4", columns="year", values="accessible_market_size").reset_index()
         for y in [2020, 2024]:
             if y not in pm.columns:
                 pm[y] = 0.0
-        pm["potential_market_size_2020"] = pd.to_numeric(pm[2020], errors="coerce").fillna(0.0)
-        pm["potential_market_size_2024"] = pd.to_numeric(pm[2024], errors="coerce").fillna(0.0)
-        pm["potential_market_size"] = pm["potential_market_size_2024"]
-        pm["potential_market_growth_5y"] = np.where(
-            (pm["potential_market_size_2020"] > 0) & (pm["potential_market_size_2024"] > 0),
-            (pm["potential_market_size_2024"] / pm["potential_market_size_2020"]) ** (1 / 5) - 1,
+        pm["accessible_market_size_2020"] = pd.to_numeric(pm[2020], errors="coerce").fillna(0.0)
+        pm["accessible_market_size_2024"] = pd.to_numeric(pm[2024], errors="coerce").fillna(0.0)
+        pm["accessible_market_size"] = pm["accessible_market_size_2024"]
+        pm["accessible_market_growth_5y"] = np.where(
+            (pm["accessible_market_size_2020"] > 0) & (pm["accessible_market_size_2024"] > 0),
+            (pm["accessible_market_size_2024"] / pm["accessible_market_size_2020"]) ** (1 / 5) - 1,
             0.0,
         )
-        pm = pm[["hs4", "potential_market_size", "potential_market_growth_5y"]]
+        pm = pm[["hs4", "accessible_market_size", "accessible_market_growth_5y"]]
     elif potential_path.exists():
         pm = pd.read_csv(potential_path)
         pm["iso3_d"] = pm["iso3_d"].astype(str).str.upper().str.strip()
@@ -453,11 +612,11 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
             .str.zfill(4)
             .str[-4:]
         )
-        pm["potential_market_size"] = pd.to_numeric(pm["potential_market_imports_sum"], errors="coerce").fillna(0.0)
-        pm = pm.groupby("hs4", as_index=False)["potential_market_size"].sum()
-        pm["potential_market_growth_5y"] = 0.0
+        pm["accessible_market_size"] = pd.to_numeric(pm["potential_market_imports_sum"], errors="coerce").fillna(0.0)
+        pm = pm.groupby("hs4", as_index=False)["accessible_market_size"].sum()
+        pm["accessible_market_growth_5y"] = 0.0
     else:
-        pm = pd.DataFrame({"hs4": sorted(valid_hs4), "potential_market_size": 0.0, "potential_market_growth_5y": 0.0})
+        pm = pd.DataFrame({"hs4": sorted(valid_hs4), "accessible_market_size": 0.0, "accessible_market_growth_5y": 0.0})
 
     usecols = [
         "country_iso3_code",
@@ -640,24 +799,24 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
         .fillna(0.0)
     )
     out["market_size"] = pd.to_numeric(out["total_trade"], errors="coerce").fillna(0.0)
-    total_potential_size = float(pd.to_numeric(out["potential_market_size"], errors="coerce").fillna(0.0).sum())
-    out["potential_market_size_share"] = np.where(
-        total_potential_size > 0,
-        pd.to_numeric(out["potential_market_size"], errors="coerce").fillna(0.0) / total_potential_size,
+    total_accessible_size = float(pd.to_numeric(out["accessible_market_size"], errors="coerce").fillna(0.0).sum())
+    out["accessible_market_size_share"] = np.where(
+        total_accessible_size > 0,
+        pd.to_numeric(out["accessible_market_size"], errors="coerce").fillna(0.0) / total_accessible_size,
         0.0,
     )
-    out["potential_market_to_market_ratio"] = np.where(
+    out["accessible_market_to_market_ratio"] = np.where(
         out["market_size"] > 0,
-        pd.to_numeric(out["potential_market_size"], errors="coerce").fillna(0.0) / out["market_size"],
+        pd.to_numeric(out["accessible_market_size"], errors="coerce").fillna(0.0) / out["market_size"],
         0.0,
     )
     out["ecu_exporter_rank"] = pd.to_numeric(out["ecu_exporter_rank"], errors="coerce")
     out.loc[out["ecu_exporter_rank"] <= 0, "ecu_exporter_rank"] = np.nan
     median_cagr = out["market_growth_5y"].median()
-    median_potential_market_growth = out["potential_market_growth_5y"].median()
+    median_accessible_market_growth = out["accessible_market_growth_5y"].median()
     median_ecu_export_cagr = out["ecu_export_growth_5y"].median()
     out["above_median_cagr"] = out["market_growth_5y"] > median_cagr
-    out["above_median_potential_market_growth"] = out["potential_market_growth_5y"] > median_potential_market_growth
+    out["above_median_accessible_market_growth"] = out["accessible_market_growth_5y"] > median_accessible_market_growth
     out["above_median_export_cagr"] = out["ecu_export_growth_5y"] > median_ecu_export_cagr
     return out
 
@@ -783,39 +942,21 @@ def load_eff_num_exp() -> pd.DataFrame:
 def load_or_build_v1_hs4_metrics(valid_hs4: Iterable[str], year: int = 2024) -> pd.DataFrame:
     valid_hs4_set = set(str(x).zfill(4) for x in valid_hs4)
     primary_path = intermediate_dir() / V1_METRICS_FILE
-    fallback_path = intermediate_dir() / V1_METRICS_FALLBACK
-    required_cols = {"potential_market_growth_5y"}
+    required_cols = {"accessible_market_growth_5y"}
 
-    for p in [primary_path, fallback_path]:
-        if not p.exists():
-            continue
-        m = pd.read_csv(p)
-        if "hs4" not in m.columns:
-            continue
-        m["hs4"] = m["hs4"].astype(str).str.zfill(4)
-        m = m[m["hs4"].isin(valid_hs4_set)].copy()
-        if not m.empty and required_cols.issubset(set(m.columns)):
-            growth_signal = pd.to_numeric(m["potential_market_growth_5y"], errors="coerce").fillna(0.0).abs().sum()
-            if growth_signal > 0:
+    if primary_path.exists():
+        m = pd.read_csv(primary_path)
+        if "hs4" in m.columns:
+            m["hs4"] = m["hs4"].astype(str).str.zfill(4)
+            m = m[m["hs4"].isin(valid_hs4_set)].copy()
+            if not m.empty and required_cols.issubset(set(m.columns)):
                 return m
 
-    align = compute_network_alignment_indices_hs4(valid_hs4_set, year=year)
-    align = align[align["exporter_iso"] == FOCUS_ISO][
-        ["product_code", "unweighted_percentile", "weighted_percentile"]
-    ].rename(
-        columns={
-            "product_code": "hs4",
-            "unweighted_percentile": "alignment_unweighted_percentile",
-            "weighted_percentile": "alignment_weighted_percentile",
-        }
+    raise FileNotFoundError(
+        "Missing precomputed V1 metrics for Ecuador dashboard. "
+        f"Expected {primary_path.name}"
+        + " in the app bundle data/intermediate folder."
     )
-    lead = compute_alignment_leads_hs4(valid_hs4_set, year=year)
-    trade_metrics = compute_trade_metrics(valid_hs4_set)
-    metrics = trade_metrics.merge(align, on="hs4", how="left").merge(lead, on="hs4", how="left")
-    metrics["hs4"] = metrics["hs4"].astype(str).str.zfill(4)
-    metrics = metrics[metrics["hs4"].isin(valid_hs4_set)].copy()
-    metrics.to_csv(primary_path, index=False)
-    return metrics
 
 
 @st.cache_data(show_spinner=True)
@@ -824,7 +965,7 @@ def load_opportunity_dataset() -> pd.DataFrame:
     valid_hs4 = hs_ref["hs4"].tolist()
     allowed_countries = load_rankings_countries(2024)
 
-    complexity_path = _resolve_intermediate_csv("complexity_ecu_2024.csv", "complexity_calculations.csv")
+    complexity_path = _resolve_intermediate_csv("complexity_ecu_2024.csv")
     c = pd.read_csv(complexity_path)
     c["hs4"] = c["product"].astype(str).str.zfill(4)
     if "location" in c.columns:
@@ -838,40 +979,6 @@ def load_opportunity_dataset() -> pd.DataFrame:
         c["rca_transformed"] = pd.to_numeric(c["rca_transformed"], errors="coerce").fillna(0.0)
     else:
         c["rca_transformed"] = c["raw_rca"]
-
-    # Density percentile definition for the dashboard:
-    # for each product i in 2024, rank countries by density and compute Ecuador's
-    # percentile within that product-country distribution.
-    # percentile_{z,i} = (rank_{z,i} - 1) / (N_i - 1), with average rank for ties.
-    try:
-        density_source = _resolve_intermediate_csv("complexity_calculations.csv")
-        g = pd.read_csv(density_source, usecols=["time", "location", "product", "density"])
-        g["time"] = pd.to_numeric(g["time"], errors="coerce")
-        g = g[g["time"] == 2024].copy()
-        g["hs4"] = g["product"].astype(str).str.zfill(4)
-        g["location"] = g["location"].astype(str).str.upper().str.strip()
-        if allowed_countries:
-            g = g[g["location"].isin(allowed_countries)]
-        g = g[g["hs4"].isin(valid_hs4)].copy()
-        g["density"] = pd.to_numeric(g["density"], errors="coerce").fillna(0.0)
-
-        if not g.empty:
-            g["rank_density"] = g.groupby("hs4")["density"].rank(method="average", ascending=True)
-            g["n_countries"] = g.groupby("hs4")["location"].transform("count")
-            g["density_percentile_country"] = np.where(
-                g["n_countries"] > 1,
-                (g["rank_density"] - 1.0) / (g["n_countries"] - 1.0),
-                0.0,
-            )
-            ecu_pct = (
-                g[g["location"] == FOCUS_ISO][["hs4", "density_percentile_country"]]
-                .drop_duplicates("hs4")
-                .rename(columns={"density_percentile_country": "density_percentile"})
-            )
-            c = c.drop(columns=["density_percentile"], errors="ignore").merge(ecu_pct, on="hs4", how="left")
-    except Exception:
-        # Fallback to existing field if the global complexity file is unavailable.
-        pass
 
     if "density_percentile" not in c.columns:
         c["density_percentile"] = 0.0
@@ -901,11 +1008,11 @@ def load_opportunity_dataset() -> pd.DataFrame:
         "alignment_weighted_percentile",
         "market_growth_5y",
         "market_size_share",
-        "potential_market_size_share",
+        "accessible_market_size_share",
         "market_size",
-        "potential_market_size",
-        "potential_market_growth_5y",
-        "potential_market_to_market_ratio",
+        "accessible_market_size",
+        "accessible_market_growth_5y",
+        "accessible_market_to_market_ratio",
         "total_trade",
         "ecu_total_trade",
         "alignment_lead_unweighted",
@@ -924,13 +1031,13 @@ def load_opportunity_dataset() -> pd.DataFrame:
     )
 
     # Keep min-max normalized values for views that need bounded scales (e.g., sizes/ranking views).
-    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "potential_market_growth_5y", "market_size_share", "potential_market_size_share"]:
+    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "accessible_market_growth_5y", "market_size_share", "accessible_market_size_share"]:
         if col not in df.columns:
             df[col] = 0.0
         df[f"{col}_norm"] = normalize_0_1(df[col])
 
     # Use z-score normalization for feasibility/attractiveness index construction.
-    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "potential_market_growth_5y", "market_size_share", "potential_market_size_share"]:
+    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "accessible_market_growth_5y", "market_size_share", "accessible_market_size_share"]:
         if col not in df.columns:
             df[col] = 0.0
         df[f"{col}_z"] = normalize_zscore(df[col])
@@ -939,10 +1046,10 @@ def load_opportunity_dataset() -> pd.DataFrame:
         ["rca_transformed_z", "density_z", "eff_num_exp_z", "alignment_weighted_percentile_z"]
     ].mean(axis=1)
     df["attractiveness_index"] = df[
-        ["pci_z", "cog_z", "potential_market_growth_5y_z", "potential_market_size_share_z"]
+        ["pci_z", "cog_z", "accessible_market_growth_5y_z", "accessible_market_size_share_z"]
     ].mean(axis=1)
     df["combined_score"] = (df["feasibility_index"] + df["attractiveness_index"]) / 2
-    df["potential_market_size_b"] = pd.to_numeric(df["potential_market_size"], errors="coerce").fillna(0.0) / 1_000_000_000
+    df["accessible_market_size_b"] = pd.to_numeric(df["accessible_market_size"], errors="coerce").fillna(0.0) / 1_000_000_000
     df["market_size_b"] = pd.to_numeric(df["market_size"], errors="coerce").fillna(0.0) / 1_000_000_000
     df["total_trade_b"] = df["total_trade"] / 1_000_000_000
     df["ecu_total_trade_b"] = df["ecu_total_trade"] / 1_000_000_000

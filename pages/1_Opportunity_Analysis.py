@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 
 from data_utils import (
@@ -14,7 +15,7 @@ st.caption("Calibrate index components, rebalance feasibility vs attractiveness,
 
 df = load_opportunity_dataset()
 if df.empty:
-    st.warning("No data available for year 2024 / ECU in complexity_calculations.csv.")
+    st.warning("No data available for year 2024 / ECU in complexity_ecu_2024.csv.")
     st.stop()
 
 pci_static_min = float(pd.to_numeric(df["pci"], errors="coerce").min())
@@ -45,9 +46,9 @@ else:
         pci_color_max = pci_static_max
 
 FEAS_COLS = ["rca_transformed_z", "density_z", "eff_num_exp_z", "alignment_weighted_percentile_z"]
-ATTR_COLS = ["pci_z", "cog_z", "potential_market_growth_5y_z", "potential_market_size_share_z"]
+ATTR_COLS = ["pci_z", "cog_z", "accessible_market_growth_5y_z", "accessible_market_size_mm"]
 # Defensive schema guard for cached/legacy datasets.
-for col in FEAS_COLS + ATTR_COLS + ["potential_market_growth_5y"]:
+for col in FEAS_COLS + ATTR_COLS + ["accessible_market_growth_5y"]:
     if col not in df.columns:
         df[col] = 0.0
 SECTOR_COLORS = {
@@ -128,14 +129,9 @@ product_options_df = (
 product_options_df["hs4_label"] = product_options_df["hs4_code"] + " - " + product_options_df["product_name_short"]
 product_label_to_code = dict(zip(product_options_df["hs4_label"], product_options_df["hs4_code"]))
 size_choices = {
-    "Total trade (B USD)": "total_trade_b",
-    "Accessible market size (B USD)": "potential_market_size_b",
-    "Accessible market growth (5y)": "potential_market_growth_5y",
-    "Raw RCA": "raw_rca",
-    "Market growth (5y)": "market_growth_5y",
-    "Ecuador export growth (5y)": "ecu_export_growth_5y",
-    "Effective exporters": "eff_num_exp",
-    "Distance travelled": "distance_travelled",
+    "Accessible market size (B USD)": "accessible_market_size_b",
+    "Accessible market growth (5y)": "accessible_market_growth_5y",
+    "RCA": "raw_rca",
 }
 
 if "trade_min" not in st.session_state:
@@ -160,12 +156,8 @@ if "selected_sectors" not in st.session_state:
     st.session_state["selected_sectors"] = sector_options
 if "excluded_product_labels" not in st.session_state:
     st.session_state["excluded_product_labels"] = []
-if "above_median_only" not in st.session_state:
-    st.session_state["above_median_only"] = False
-if "above_export_median_only" not in st.session_state:
-    st.session_state["above_export_median_only"] = False
-if "above_potential_growth_only" not in st.session_state:
-    st.session_state["above_potential_growth_only"] = False
+if "above_accessible_growth_only" not in st.session_state:
+    st.session_state["above_accessible_growth_only"] = False
 if "size_label" not in st.session_state:
     st.session_state["size_label"] = "Accessible market growth (5y)"
 if "density_pct_range" not in st.session_state:
@@ -175,7 +167,7 @@ if "rows_to_display" not in st.session_state:
 if "ignore_density_filter" not in st.session_state:
     st.session_state["ignore_density_filter"] = False
 st.sidebar.header("Preset Profiles")
-excluded_hs4_preset_codes = {"2711", "2710", "7108", "2709", "2713", "2701"}
+excluded_hs4_preset_codes = {"2711", "2710", "7108", "2709", "2713", "2701", "2603", "2616"}
 excluded_labels_by_code = (
     product_options_df[product_options_df["hs4_code"].isin(excluded_hs4_preset_codes)]
     .sort_values("hs4_code")["hs4_label"]
@@ -184,90 +176,95 @@ excluded_labels_by_code = (
 
 
 def _apply_profile(profile_name: str) -> None:
-    # Common rules across all three profiles
+    # Common rules across all profiles
     st.session_state["trade_min"] = 2.0
     st.session_state["ecu_export_min_m"] = 0.0
-    st.session_state["above_median_only"] = True  # CAGR 5y > 0
-    st.session_state["above_export_median_only"] = False
-    st.session_state["above_potential_growth_only"] = False
+    st.session_state["above_accessible_growth_only"] = True
     st.session_state["selected_sectors"] = sector_options
     st.session_state["excluded_product_labels"] = excluded_labels_by_code
     st.session_state["density_pct_range"] = (float(density_pct_min_data), float(density_pct_upper_bound))
     st.session_state["ignore_density_filter"] = False
 
-    # Attractiveness components (same in all profiles)
-    st.session_state["w_pci"] = 0.35
-    st.session_state["w_cog"] = 0.35
-    st.session_state["w_growth"] = 0.15
-    st.session_state["w_market_size"] = 0.15
-
     if profile_name == "intensive":
-        # Intensive Margin: RCA >= 1 and no density restriction.
+        # Consolidadas
         st.session_state["rca_min_filter"] = 1.00
-        # Keep an open-ended upper bound under the global [lower, upper) rule.
         st.session_state["rca_max_filter"] = float(rca_upper_bound)
         st.session_state["ignore_density_filter"] = True
-        # Feasibility 30%, Attractiveness 70%
-        st.session_state["strategic_balance"] = 0.70
-        # Feasibility components: RCA 30%, WNAI 70%
-        st.session_state["w_rca"] = 0.30
+        st.session_state["strategic_balance"] = 0.80
+        st.session_state["w_rca"] = 0.00
         st.session_state["w_density"] = 0.00
         st.session_state["w_eff_num_exp"] = 0.00
-        st.session_state["w_alignment_hv"] = 0.70
+        st.session_state["w_alignment_hv"] = 1.00
+        st.session_state["w_pci"] = 0.50
+        st.session_state["w_cog"] = 0.00
+        st.session_state["w_growth"] = 0.25
+        st.session_state["w_market_size"] = 0.25
+        st.session_state["rows_to_display"] = 20
 
     elif profile_name == "extensive_low_hanging":
-        # Extensive Margin: Low Hanging Fruits (0.3 < RCA < 1)
+        # Emergentes
         st.session_state["rca_min_filter"] = 0.30
-        st.session_state["rca_max_filter"] = 1.00
-        # Feasibility 70%, Attractiveness 30%
-        st.session_state["strategic_balance"] = 0.30
-        # Feasibility components: RCA 35%, Density 35%, WNAI 30%
+        st.session_state["rca_max_filter"] = 0.99
+        st.session_state["strategic_balance"] = 0.50
         st.session_state["w_rca"] = 0.35
         st.session_state["w_density"] = 0.35
         st.session_state["w_eff_num_exp"] = 0.00
         st.session_state["w_alignment_hv"] = 0.30
+        st.session_state["w_pci"] = 0.35
+        st.session_state["w_cog"] = 0.35
+        st.session_state["w_growth"] = 0.15
+        st.session_state["w_market_size"] = 0.15
+        st.session_state["rows_to_display"] = 20
 
     elif profile_name == "extensive_strategic":
-        # Extensive Margin: Strategic Bets (0 <= RCA < 0.3)
+        # Apuestas Estrategicas
         st.session_state["rca_min_filter"] = 0.00
-        st.session_state["rca_max_filter"] = 0.30
-        # Add density threshold >= 30%
-        st.session_state["density_pct_range"] = (max(0.30, float(density_pct_min_data)), float(density_pct_upper_bound))
-        # Feasibility 30%, Attractiveness 70%
+        st.session_state["rca_max_filter"] = 0.29
+        st.session_state["density_pct_range"] = (
+            max(0.30, float(density_pct_min_data)),
+            min(0.40, float(density_pct_upper_bound)),
+        )
         st.session_state["strategic_balance"] = 0.70
-        # Feasibility components: Density 70%, WNAI 30%
         st.session_state["w_rca"] = 0.00
         st.session_state["w_density"] = 0.70
         st.session_state["w_eff_num_exp"] = 0.00
         st.session_state["w_alignment_hv"] = 0.30
+        st.session_state["w_pci"] = 0.30
+        st.session_state["w_cog"] = 0.35
+        st.session_state["w_growth"] = 0.15
+        st.session_state["w_market_size"] = 0.15
+        st.session_state["rows_to_display"] = 20
 
     elif profile_name == "extensive_balanced":
-        # Extensive Margin (Balanced): 0 <= RCA < 1
+        # Balanceado
         st.session_state["rca_min_filter"] = 0.00
-        st.session_state["rca_max_filter"] = 1.00
-        # Add density threshold >= 30%
-        st.session_state["density_pct_range"] = (max(0.30, float(density_pct_min_data)), float(density_pct_upper_bound))
-        # Feasibility 50%, Attractiveness 50%
+        st.session_state["rca_max_filter"] = 0.99
+        st.session_state["density_pct_range"] = (
+            max(0.30, float(density_pct_min_data)),
+            min(0.40, float(density_pct_upper_bound)),
+        )
         st.session_state["strategic_balance"] = 0.50
-        # Feasibility components: RCA 20%, Density 50%, WNAI 30%
         st.session_state["w_rca"] = 0.20
-        st.session_state["w_density"] = 0.50
+        st.session_state["w_density"] = 0.30
         st.session_state["w_eff_num_exp"] = 0.00
         st.session_state["w_alignment_hv"] = 0.30
-        # Top 40 products as requested
+        st.session_state["w_pci"] = 0.30
+        st.session_state["w_cog"] = 0.35
+        st.session_state["w_growth"] = 0.15
+        st.session_state["w_market_size"] = 0.15
         st.session_state["rows_to_display"] = 40
 
 
-if st.sidebar.button("Intensive Margin", use_container_width=True):
+if st.sidebar.button("Consolidadas", use_container_width=True):
     _apply_profile("intensive")
     st.rerun()
-if st.sidebar.button("Extensive Margin: Low Hanging Fruits", use_container_width=True):
+if st.sidebar.button("Emergentes", use_container_width=True):
     _apply_profile("extensive_low_hanging")
     st.rerun()
-if st.sidebar.button("Extensive Margin: Strategic Bets", use_container_width=True):
+if st.sidebar.button("Apuestas Estrategicas", use_container_width=True):
     _apply_profile("extensive_strategic")
     st.rerun()
-if st.sidebar.button("Extensive Margin (Balanced)", use_container_width=True):
+if st.sidebar.button("Balanceado", use_container_width=True):
     _apply_profile("extensive_balanced")
     st.rerun()
 
@@ -281,9 +278,7 @@ if st.sidebar.button("Reset all filters"):
     st.session_state["density_pct_range"] = (float(density_pct_min_data), float(density_pct_upper_bound))
     st.session_state["selected_sectors"] = sector_options
     st.session_state["excluded_product_labels"] = []
-    st.session_state["above_median_only"] = False
-    st.session_state["above_export_median_only"] = False
-    st.session_state["above_potential_growth_only"] = False
+    st.session_state["above_accessible_growth_only"] = False
     st.session_state["size_label"] = "Accessible market growth (5y)"
     st.session_state["rows_to_display"] = 60
     st.session_state["ignore_density_filter"] = False
@@ -293,13 +288,13 @@ min_dot_size = 4
 max_dot_size = 20
 
 trade_min = st.sidebar.number_input(
-    "Minimum total trade (Billion USD)",
+    "Minimum accessible trade (Billion USD)",
     min_value=0.0,
-    max_value=float(max(trade_max, 0.1)),
+    max_value=float(max(df["accessible_market_size_b"].max() if not df.empty else 0.0, 0.1)),
     step=0.01,
     format="%.2f",
     key="trade_min",
-    help="Type the minimum total trade threshold directly.",
+    help="Type the minimum accessible market threshold directly.",
 )
 
 ecu_export_min_m = st.sidebar.number_input(
@@ -314,7 +309,7 @@ ecu_export_min_m = st.sidebar.number_input(
 ecu_export_min_b = ecu_export_min_m / 1000
 
 rca_min_filter = st.sidebar.number_input(
-    "Minimum (Raw) RCA",
+    "Minimum RCA",
     min_value=0.0,
     step=float(rca_step),
     format="%.3f" if rca_step < 0.01 else ("%.2f" if rca_step < 0.1 else "%.1f"),
@@ -322,7 +317,7 @@ rca_min_filter = st.sidebar.number_input(
     help="Keep products with raw RCA greater than or equal to this value (inclusive lower bound).",
 )
 rca_max_filter = st.sidebar.number_input(
-    "Maximum (Raw) RCA",
+    "Maximum RCA",
     min_value=float(rca_min_filter),
     max_value=float(rca_upper_bound),
     step=float(rca_step),
@@ -355,25 +350,15 @@ excluded_product_labels = st.sidebar.multiselect(
 )
 excluded_hs4_codes = {product_label_to_code[label] for label in excluded_product_labels}
 
-above_median_only = st.sidebar.toggle(
-    "CAGR 5y greater than 0",
-    value=st.session_state["above_median_only"],
-    key="above_median_only",
-)
-above_export_median_only = st.sidebar.toggle(
-    "Above Ecuador Export CAGR",
-    value=st.session_state["above_export_median_only"],
-    key="above_export_median_only",
-)
-above_potential_growth_only = st.sidebar.toggle(
-    "Accessible Market Growth (5y) > 0",
-    value=st.session_state["above_potential_growth_only"],
-    key="above_potential_growth_only",
+above_accessible_growth_only = st.sidebar.toggle(
+    "AM CAGR (5y) > 1%",
+    value=st.session_state["above_accessible_growth_only"],
+    key="above_accessible_growth_only",
 )
 
 st.sidebar.header("Dimension Balance")
 strategic_balance = st.sidebar.slider(
-    "Feasibility = 0  |  Attractiveness = 1",
+    "Feasibility (100%) = 0 | Attractiveness (100%) = 1",
     0.0,
     1.0,
     float(st.session_state["strategic_balance"]),
@@ -388,7 +373,7 @@ if st.sidebar.button("Reset Weights"):
         st.session_state[k] = v
 
 with st.sidebar.expander("Feasibility Components", expanded=True):
-    w_rca = st.slider("Transformed RCA weight", 0.0, 1.0, float(st.session_state["w_rca"]), 0.05, key="w_rca")
+    w_rca = st.slider("RCA Continuous weight", 0.0, 1.0, float(st.session_state["w_rca"]), 0.05, key="w_rca")
     w_density = st.slider("Density weight", 0.0, 1.0, float(st.session_state["w_density"]), 0.05, key="w_density")
     w_eff_num_exp = st.slider(
         "Effective exporters weight", 0.0, 1.0, float(st.session_state["w_eff_num_exp"]), 0.05, key="w_eff_num_exp"
@@ -409,10 +394,11 @@ with st.sidebar.expander("Attractiveness Components", expanded=True):
         "Accessible market growth (5y) weight", 0.0, 1.0, float(st.session_state["w_growth"]), 0.05, key="w_growth"
     )
     w_market_size = st.slider(
-        "Accessible market size share weight", 0.0, 1.0, float(st.session_state["w_market_size"]), 0.05, key="w_market_size"
+        "Accessible market size weight", 0.0, 1.0, float(st.session_state["w_market_size"]), 0.05, key="w_market_size"
     )
 
 flt = df.copy()
+flt["accessible_market_size_mm"] = normalize_0_1(pd.to_numeric(flt["accessible_market_size"], errors="coerce").fillna(0.0))
 flt["feasibility_raw"] = weighted_index(
     flt,
     FEAS_COLS,
@@ -431,7 +417,7 @@ flt["combined_raw"] = ((1 - strategic_balance) * flt["feasibility_index"]) + (
 )
 flt["combined_score"] = normalize_0_1(flt["combined_raw"])
 
-flt = flt[flt["total_trade_b"] >= trade_min]
+flt = flt[flt["accessible_market_size_b"] >= trade_min]
 flt = flt[flt["ecu_total_trade_b"] >= ecu_export_min_b]
 flt = flt[flt["raw_rca"] >= float(rca_min_filter)]
 effective_rca_upper = float(rca_max_filter)
@@ -456,12 +442,8 @@ if selected_sectors:
     flt = flt[flt["sector"].isin(selected_sectors)]
 if excluded_hs4_codes:
     flt = flt[~flt["hs4"].astype(str).str.zfill(4).isin(excluded_hs4_codes)]
-if above_median_only:
-    flt = flt[flt["market_growth_5y"] > 0]
-if above_export_median_only:
-    flt = flt[flt["above_median_export_cagr"]]
-if above_potential_growth_only:
-    flt = flt[flt["potential_market_growth_5y"] > 0]
+if above_accessible_growth_only:
+    flt = flt[flt["accessible_market_growth_5y"] > 0.01]
 
 if flt.empty:
     st.warning("No products match the current filters.")
@@ -477,51 +459,80 @@ c1.metric("Products shown", f"{len(flt):,} / {len(df):,}")
 c2.metric("Avg Feasibility", f"{flt['feasibility_index'].mean():.3f}")
 c3.metric("Avg Attractiveness", f"{flt['attractiveness_index'].mean():.3f}")
 st.caption(
-    f"Active filters: trade >= {trade_min:.2f} BUSD, "
+    f"Active filters: accessible trade >= {trade_min:.2f} BUSD, "
     f"ECU exports >= {ecu_export_min_m:.0f} MUSD, "
-    f"Raw RCA in [{float(rca_min_filter):.3f}, {float(rca_max_filter):.3f}], "
+    f"RCA in [{float(rca_min_filter):.3f}, {float(rca_max_filter):.3f}], "
     f"density percentile in [{density_lo:.2f}, {density_hi:.2f}], "
     f"{len(selected_sectors)} sectors, "
     f"{len(excluded_hs4_codes)} excluded products, "
-    f"CAGR>0 filter={above_median_only}, "
-    f"above-export CAGR={above_export_median_only}, "
-    f"accessible-market growth>0={above_potential_growth_only}."
+    f"AM CAGR (5y) > 1%={above_accessible_growth_only}."
 )
 
-fig = px.scatter(
-    flt,
-    x="feasibility_index",
-    y="attractiveness_index",
-    color="sector",
-    color_discrete_map=SECTOR_COLORS,
-    size="dot_size",
-    size_max=max_dot_size,
-    hover_name="product_name_short",
-    hover_data={
-        "raw_rca": ":.3f",
-        "rca_transformed": ":.3f",
-        "pci": ":.3f",
-        "cog": ":.3f",
-        "density": ":.3f",
-        "eff_num_exp": ":.2f",
-        "distance_travelled": ":.2f",
-        "density_percentile": ":.2f",
-        "market_growth_5y": ":.3%",
-        "potential_market_growth_5y": ":.3%",
-        "ecu_export_growth_5y": ":.3%",
-        "market_size_share": ":.3%",
-        "market_size_b": ":.3f",
-        "potential_market_size_b": ":.3f",
-        "potential_market_to_market_ratio": ":.3%",
-        "total_trade_b": ":.3f",
-        "dot_size": False,
-    },
-    custom_data=["hs4", "product_name_short"],
+hover_cols = [
+    "raw_rca",
+    "rca_transformed",
+    "pci",
+    "cog",
+    "density",
+    "eff_num_exp",
+    "distance_travelled",
+    "density_percentile",
+    "market_growth_5y",
+    "accessible_market_growth_5y",
+    "ecu_export_growth_5y",
+    "market_size_share",
+    "market_size_b",
+    "accessible_market_size_b",
+    "accessible_market_to_market_ratio",
+    "total_trade_b",
+]
+
+fig = go.Figure()
+for sector, grp in flt.groupby("sector", sort=False):
+    customdata = np.column_stack(
+        [grp["hs4"], grp["product_name_short"]] + [pd.to_numeric(grp[c], errors="coerce").fillna(0.0) for c in hover_cols]
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=grp["feasibility_index"],
+            y=grp["attractiveness_index"],
+            mode="markers",
+            name=sector,
+            marker=dict(
+                size=grp["dot_size"],
+                color=SECTOR_COLORS.get(sector, "#6b7280"),
+                opacity=0.78,
+                line=dict(width=0.5, color="#1f2f46"),
+            ),
+            customdata=customdata,
+            hovertemplate=(
+                "<b>%{customdata[1]}</b><br>"
+                "HS4: %{customdata[0]}<br>"
+                "Feasibility: %{x:.3f}<br>"
+                "Attractiveness: %{y:.3f}<br>"
+                "RCA: %{customdata[2]:.3f}<br>"
+                "RCA Continuous: %{customdata[3]:.3f}<br>"
+                "PCI: %{customdata[4]:.3f}<br>"
+                "COG: %{customdata[5]:.3f}<br>"
+                "Density: %{customdata[6]:.3f}<br>"
+                "Effective exporters: %{customdata[7]:.2f}<br>"
+                "Distance travelled: %{customdata[8]:.2f}<br>"
+                "Density percentile: %{customdata[9]:.2f}<br>"
+                "Global market growth (5y): %{customdata[10]:.3%}<br>"
+                "Accessible market growth (5y): %{customdata[11]:.3%}<br>"
+                "Ecuador export growth (5y): %{customdata[12]:.3%}<br>"
+                "Global market share: %{customdata[13]:.3%}<br>"
+                "Market size (B USD): %{customdata[14]:.3f}<br>"
+                "Accessible market size (B USD): %{customdata[15]:.3f}<br>"
+                "Accessible-to-market ratio: %{customdata[16]:.3%}<br>"
+                "Total trade (B USD): %{customdata[17]:.3f}<extra></extra>"
+            ),
+        )
+    )
+
+fig.update_layout(
     title="Feasibility vs Attractiveness (HS92, 2024)",
     template="plotly_white",
-)
-fig.update_traces(marker=dict(opacity=0.78, line=dict(width=0.5, color="#1f2f46")))
-fig.update_layout(
     xaxis_title="Feasibility",
     yaxis_title="Attractiveness",
     legend_title="Sector",
@@ -573,13 +584,13 @@ display_cols = [
     "alignment_lead_weighted",
     "distance_travelled",
     "market_growth_5y",
-    "potential_market_growth_5y",
+    "accessible_market_growth_5y",
     "ecu_export_growth_5y",
     "ecu_total_trade",
     "market_share_change_abs",
     "market_size_share",
-    "potential_market_size",
-    "potential_market_to_market_ratio",
+    "accessible_market_size",
+    "accessible_market_to_market_ratio",
     "total_trade_b",
 ]
 table_display = (
@@ -587,13 +598,13 @@ table_display = (
     .head(top_n)
     .assign(
         market_growth_5y=lambda d: d["market_growth_5y"] * 100,
-        potential_market_growth_5y=lambda d: d["potential_market_growth_5y"] * 100,
+        accessible_market_growth_5y=lambda d: d["accessible_market_growth_5y"] * 100,
         ecu_export_growth_5y=lambda d: d["ecu_export_growth_5y"] * 100,
         ecu_total_trade=lambda d: d["ecu_total_trade"] / 1_000_000,
         market_share_change_abs=lambda d: d["market_share_change_abs"] * 100,
         market_size_share=lambda d: d["market_size_share"] * 100,
-        potential_market_size=lambda d: d["potential_market_size"] / 1_000_000_000,
-        potential_market_to_market_ratio=lambda d: d["potential_market_to_market_ratio"] * 100,
+        accessible_market_size=lambda d: d["accessible_market_size"] / 1_000_000_000,
+        accessible_market_to_market_ratio=lambda d: d["accessible_market_to_market_ratio"] * 100,
     )
 )
 
@@ -626,7 +637,7 @@ st.dataframe(
         "combined_score": st.column_config.NumberColumn("Combined Opportunity Score", format="%.4f"),
         "attractiveness_index": st.column_config.NumberColumn("Attractiveness Index", format="%.4f"),
         "feasibility_index": st.column_config.NumberColumn("Feasibility Index", format="%.4f"),
-        "raw_rca": st.column_config.NumberColumn("Raw RCA", format="%.3f"),
+        "raw_rca": st.column_config.NumberColumn("RCA", format="%.3f"),
         "pci": st.column_config.NumberColumn("PCI", format="%.3f"),
         "cog": st.column_config.NumberColumn("COG", format="%.3f"),
         "eff_num_exp": st.column_config.NumberColumn("Effective Exporters", format="%.2f"),
@@ -637,21 +648,21 @@ st.dataframe(
         "density_percentile": st.column_config.NumberColumn("Density Percentile", format="%.2f"),
         "distance_travelled": st.column_config.NumberColumn("Distance Travelled", format="%.2f"),
         "market_growth_5y": st.column_config.NumberColumn("Global Market Growth % (5y)", format="%.2f%%"),
-        "potential_market_growth_5y": st.column_config.NumberColumn("Accessible Market Growth % (5y)", format="%.2f%%"),
+        "accessible_market_growth_5y": st.column_config.NumberColumn("Accessible Market Growth % (5y)", format="%.2f%%"),
         "ecu_export_growth_5y": st.column_config.NumberColumn("Country Export Growth % (5y)", format="%.2f%%"),
         "ecu_total_trade": st.column_config.NumberColumn("Country Current Exports (M USD)", format="%.2f"),
         "market_share_change_abs": st.column_config.NumberColumn("Absolute Market Share Change (pp)", format="%.2f"),
         "market_size_share": st.column_config.NumberColumn("Global Market Share", format="%.2f%%"),
-        "potential_market_size": st.column_config.NumberColumn("Accessible Market Size (B USD)", format="%.3f"),
-        "potential_market_to_market_ratio": st.column_config.NumberColumn("Accessible-to-Market Ratio", format="%.2f%%"),
+        "accessible_market_size": st.column_config.NumberColumn("Accessible Market Size (B USD)", format="%.3f"),
+        "accessible_market_to_market_ratio": st.column_config.NumberColumn("Accessible-to-Market Ratio", format="%.2f%%"),
         "total_trade_b": st.column_config.NumberColumn("Total Trade (B USD)", format="%.3f"),
     },
 )
 
 st.subheader("Opportunity Summary by Sector")
 treemap_size_options = {
-    "Accessible market size (B USD)": "potential_market_size",
-    "Accessible market growth (5y)": "potential_market_growth_5y",
+    "Accessible market size (B USD)": "accessible_market_size",
+    "Accessible market growth (5y)": "accessible_market_growth_5y",
     "Market size (B USD)": "total_trade_b",
     "Combined Opportunity Score": "combined_score",
     "Density Percentile": "density_percentile",
@@ -683,8 +694,8 @@ treemap_df = table_display[
         "product_name_short",
         "combined_score",
         "total_trade_b",
-        "potential_market_size",
-        "potential_market_growth_5y",
+        "accessible_market_size",
+        "accessible_market_growth_5y",
         "density_percentile",
         "pci",
     ]
@@ -726,7 +737,7 @@ else:
     else:
         st.metric(
             label="Accessible Market Size (B USD) shown",
-            value=f"{treemap_df['potential_market_size'].sum():,.3f}",
+            value=f"{treemap_df['accessible_market_size'].sum():,.3f}",
         )
 
     pci_colorscale = [
@@ -765,8 +776,8 @@ else:
         hover_data={
             "combined_score": ":.3f",
             "total_trade_b": ":.3f",
-            "potential_market_size": ":.3f",
-            "potential_market_growth_5y": ":.3f",
+            "accessible_market_size": ":.3f",
+            "accessible_market_growth_5y": ":.3f",
             "density_percentile": ":.2f",
             "pci": ":.3f",
             "pci_for_color": False,
