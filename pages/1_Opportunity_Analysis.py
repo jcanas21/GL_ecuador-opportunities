@@ -77,9 +77,9 @@ def weighted_index(frame: pd.DataFrame, cols: list[str], weights: list[float]) -
 
 defaults = {
     "w_rca": 0.00,
-    "w_density": 0.70,
+    "w_density": 1.00,
     "w_eff_num_exp": 0.00,
-    "w_alignment_hv": 0.30,
+    "w_alignment_hv": 0.00,
     "w_pci": 0.35,
     "w_cog": 0.35,
     "w_growth": 0.15,
@@ -177,7 +177,7 @@ excluded_labels_by_code = (
 
 def _apply_profile(profile_name: str) -> None:
     # Common rules across all profiles
-    st.session_state["trade_min"] = 2.0
+    st.session_state["trade_min"] = 1.0
     st.session_state["ecu_export_min_m"] = 0.0
     st.session_state["above_accessible_growth_only"] = True
     st.session_state["selected_sectors"] = sector_options
@@ -351,7 +351,7 @@ excluded_product_labels = st.sidebar.multiselect(
 excluded_hs4_codes = {product_label_to_code[label] for label in excluded_product_labels}
 
 above_accessible_growth_only = st.sidebar.toggle(
-    "AM CAGR (5y) > 1%",
+    "AM CAGR (5y) > 0",
     value=st.session_state["above_accessible_growth_only"],
     key="above_accessible_growth_only",
 )
@@ -443,7 +443,7 @@ if selected_sectors:
 if excluded_hs4_codes:
     flt = flt[~flt["hs4"].astype(str).str.zfill(4).isin(excluded_hs4_codes)]
 if above_accessible_growth_only:
-    flt = flt[flt["accessible_market_growth_5y"] > 0.01]
+    flt = flt[flt["accessible_market_growth_5y"] > 0.0]
 
 if flt.empty:
     st.warning("No products match the current filters.")
@@ -465,7 +465,7 @@ st.caption(
     f"density percentile in [{density_lo:.2f}, {density_hi:.2f}], "
     f"{len(selected_sectors)} sectors, "
     f"{len(excluded_hs4_codes)} excluded products, "
-    f"AM CAGR (5y) > 1%={above_accessible_growth_only}."
+    f"AM CAGR (5y) > 0={above_accessible_growth_only}."
 )
 
 hover_cols = [

@@ -148,7 +148,7 @@ st.session_state.setdefault(
 
 
 def _apply_page3_profile(profile_name: str) -> None:
-    st.session_state["p3_accessible_market_min"] = 2.0
+    st.session_state["p3_accessible_market_min"] = 1.0
     st.session_state["p3_am_cagr_only"] = True
     st.session_state["p3_w_wnai"] = 1.0
     st.session_state["p3_selected_anchor_sectors"] = anchor_sectors
@@ -241,7 +241,7 @@ with st.sidebar:
         format="%.2f",
         key="p3_anchor_density_range",
     )
-    am_cagr_only = st.toggle("AM CAGR (5y) > 1%", value=bool(st.session_state["p3_am_cagr_only"]), key="p3_am_cagr_only")
+    am_cagr_only = st.toggle("AM CAGR (5y) > 0", value=bool(st.session_state["p3_am_cagr_only"]), key="p3_am_cagr_only")
 
     st.header("Dimension Balance")
     strategic_balance = st.slider(
@@ -300,7 +300,7 @@ effective_anchor_density_hi = anchor_density_hi + 0.01 if anchor_density_hi >= r
 flt = flt[(anchor_density_2d >= anchor_density_lo) & (anchor_density_2d <= effective_anchor_density_hi)]
 flt = flt[pd.to_numeric(flt["accessible_market_size_b"], errors="coerce") >= float(accessible_market_min)]
 if am_cagr_only:
-    flt = flt[pd.to_numeric(flt["accessible_market_growth_5y"], errors="coerce") > 0.01]
+    flt = flt[pd.to_numeric(flt["accessible_market_growth_5y"], errors="coerce") > 0.0]
 
 candidate_scores = (
     flt.groupby(["candidate_hs4", "candidate_product_name_short", "candidate_sector"], as_index=False)

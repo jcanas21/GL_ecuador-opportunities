@@ -12,8 +12,8 @@ ATTR_COLS = ["pci_z", "cog_z", "accessible_market_growth_5y_z", "accessible_mark
 
 PAGE2_PRESETS = {
     "Consolidadas": {
-        "trade_min": 2.0,
-        "growth_gt": 0.01,
+        "trade_min": 1.0,
+        "growth_gt": 0.0,
         "rca_min": 1.00,
         "rca_max": None,
         "density_range": None,
@@ -23,8 +23,8 @@ PAGE2_PRESETS = {
         "top_n": 20,
     },
     "Emergentes": {
-        "trade_min": 2.0,
-        "growth_gt": 0.01,
+        "trade_min": 1.0,
+        "growth_gt": 0.0,
         "rca_min": 0.30,
         "rca_max": 0.99,
         "density_range": None,
@@ -34,8 +34,8 @@ PAGE2_PRESETS = {
         "top_n": 20,
     },
     "Apuestas Estrategicas": {
-        "trade_min": 2.0,
-        "growth_gt": 0.01,
+        "trade_min": 1.0,
+        "growth_gt": 0.0,
         "rca_min": 0.00,
         "rca_max": 0.29,
         "density_range": (0.30, 0.40),
@@ -45,8 +45,8 @@ PAGE2_PRESETS = {
         "top_n": 20,
     },
     "Balanceado": {
-        "trade_min": 2.0,
-        "growth_gt": 0.01,
+        "trade_min": 1.0,
+        "growth_gt": 0.0,
         "rca_min": 0.00,
         "rca_max": 0.99,
         "density_range": (0.30, 0.40),
@@ -59,8 +59,8 @@ PAGE2_PRESETS = {
 
 PAGE3_PRESETS = {
     "Top Anchored Candidates": {
-        "trade_min": 2.0,
-        "growth_gt": 0.01,
+        "trade_min": 1.0,
+        "growth_gt": 0.0,
         "anchor_density_max": 50.0,
         "proximity_rank_range": (1, 10),
         "exclude_anchor_sections_prefixes": ("1.", "2.", "3."),
