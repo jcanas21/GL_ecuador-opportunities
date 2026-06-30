@@ -40,15 +40,25 @@ Aquí se puede:
     st.markdown("## Página 4: Comparación")
     st.markdown(
         """
-La página de **Comparación** contrasta las recomendaciones predefinidas producidas por:
-
-- **Apuestas Estratégicas** de la Página 2
-- **Top de Candidatos Anclados** de la Página 3
+La página de **Comparación** contrasta las recomendaciones producidas por los presets activos de la Página 2 y la Página 3.
 
 Aquí se puede:
-- Ver cuánto se superponen ambas listas de recomendaciones.
+- Ver cuánto se superponen dos listas de recomendaciones seleccionadas.
 - Identificar productos que aparecen solo en una metodología.
-- Comparar lado a lado rankings predefinidos, tamaño del mercado accesible, DAI, PCI y COG.
+- Comparar lado a lado rankings, tamaño del mercado accesible, DAI, PCI y COG.
+"""
+    )
+
+    st.markdown("## Página 5: Mercado Accesible por Producto")
+    st.markdown(
+        """
+La página de **Mercado Accesible por Producto** permite seleccionar cualquier producto incluido en los presets y visualizar cómo se distribuye su mercado accesible entre países de destino.
+
+Aquí se puede:
+- Elegir un preset de la Página 2 o la Página 3 como fuente de productos.
+- Seleccionar un producto específico dentro de esa lista.
+- Visualizar un **treemap** del mercado accesible por país, coloreado por continente.
+- Ver el tamaño total del mercado accesible y la participación de cada destino.
 """
     )
 
@@ -137,6 +147,7 @@ pages = [
     st.Page(Path("pages/1_Opportunity_Analysis.py"), title="Análisis de Oportunidades", icon=":material/insights:"),
     st.Page(Path("pages/3_Anchored_Proximity_Analysis.py"), title="Análisis de Proximidad Anclada", icon=":material/account_tree:"),
     st.Page(Path("pages/4_Comparison.py"), title="Comparación", icon=":material/compare_arrows:"),
+    st.Page(Path("pages/5_Mercado_Accesible_por_Producto.py"), title="Mercado Accesible por Producto", icon=":material/grid_view:"),
 ]
 pg = st.navigation(pages, position="sidebar", expanded=True)
 pg.run()

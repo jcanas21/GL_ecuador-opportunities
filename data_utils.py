@@ -577,6 +577,15 @@ def output_dir() -> Path:
     return project_root() / "data" / "output"
 
 
+def _nearest_existing_data_file(filename: str, data_subdir: str) -> Path | None:
+    here = Path(__file__).resolve()
+    for parent in here.parents:
+        candidate = parent / "data" / data_subdir / filename
+        if candidate.exists():
+            return candidate
+    return None
+
+
 def _file_mtime_ns(path: Path) -> int:
     try:
         return path.stat().st_mtime_ns
@@ -1520,6 +1529,60 @@ def load_product_market_deep_dive(hs4: str, focus_year: int = 2024) -> tuple[pd.
         ]
 
     return dest_df, share_df, hs6_table
+
+
+@st.cache_data(show_spinner=False)
+def load_accessible_market_destinations_by_product(hs4: str, focus_year: int = 2024) -> pd.DataFrame:
+    hs4 = str(hs4).zfill(4)
+    compact_path = _nearest_existing_data_file("accessible_market_country_hs4_ecu_2024.csv", "intermediate")
+    if compact_path is not None and int(focus_year) == 2024:
+        df = pd.read_csv(compact_path, low_memory=False)
+        if df.empty:
+            return pd.DataFrame(columns=["importer_iso", "accessible_market_imports"])
+        df["hs4"] = df["hs4"].astype(str).str.zfill(4)
+        df["importer_iso"] = df["importer_iso"].astype(str).str.upper().str.strip()
+        df["accessible_market_imports"] = pd.to_numeric(df["accessible_market_imports"], errors="coerce").fillna(0.0)
+        return (
+            df[df["hs4"] == hs4]
+            .groupby("importer_iso", as_index=False)["accessible_market_imports"]
+            .sum()
+            .sort_values("accessible_market_imports", ascending=False)
+            .reset_index(drop=True)
+        )
+
+    detailed_path = _nearest_existing_data_file("accessible_market_by_country_product_year.csv", "intermediate")
+    if detailed_path is None:
+        return pd.DataFrame(columns=["importer_iso", "accessible_market_imports"])
+
+    acc = pd.Series(dtype="float64")
+    usecols = ["year", "iso3_o", "iso3_d", "hs92", "accessible_market", "accessible_market_imports"]
+    for chunk in pd.read_csv(detailed_path, usecols=usecols, chunksize=500_000, low_memory=False):
+        chunk["year"] = pd.to_numeric(chunk["year"], errors="coerce")
+        chunk["hs4"] = chunk["hs92"].astype(str).str.zfill(4)
+        chunk["origin_iso"] = chunk["iso3_o"].astype(str).str.upper().str.strip()
+        chunk["importer_iso"] = chunk["iso3_d"].astype(str).str.upper().str.strip()
+        chunk["accessible_market_imports"] = pd.to_numeric(chunk["accessible_market_imports"], errors="coerce").fillna(0.0)
+        chunk["accessible_market"] = pd.to_numeric(chunk["accessible_market"], errors="coerce").fillna(0).astype(int)
+        chunk = chunk[
+            (chunk["year"] == int(focus_year))
+            & (chunk["origin_iso"] == FOCUS_ISO)
+            & (chunk["hs4"] == hs4)
+            & ((chunk["accessible_market"] == 1) | (chunk["accessible_market_imports"] > 0))
+        ]
+        if chunk.empty:
+            continue
+        grp = chunk.groupby("importer_iso")["accessible_market_imports"].sum()
+        acc = grp.copy() if acc.empty else acc.add(grp, fill_value=0)
+
+    if acc.empty:
+        return pd.DataFrame(columns=["importer_iso", "accessible_market_imports"])
+
+    return (
+        acc.rename("accessible_market_imports")
+        .reset_index()
+        .sort_values("accessible_market_imports", ascending=False)
+        .reset_index(drop=True)
+    )
 
 
 @st.cache_data(show_spinner=False)

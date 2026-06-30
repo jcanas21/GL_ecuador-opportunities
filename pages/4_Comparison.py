@@ -1,77 +1,14 @@
 import numpy as np
-import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from data_utils import load_anchor_proximity_dataset, load_opportunity_dataset, normalize_0_1
+from preset_utils import (
+    PAGE2_PRESETS,
+    PAGE3_PRESETS,
+    build_page2_recommendations,
+    build_page3_recommendations,
+)
 
-
-EXCLUDED_HS4 = {"2711", "2710", "7108", "2709", "2713", "2701", "2603", "2616"}
-FEAS_COLS = ["rca_transformed_z", "density_z", "eff_num_exp_z", "dai_percentile_z"]
-ATTR_COLS = ["pci_z", "cog_z", "accessible_market_growth_5y_z", "accessible_market_size_mm"]
-
-PAGE2_PRESETS = {
-    "Consolidadas": {
-        "trade_min": 1.0,
-        "growth_gt": 0.0,
-        "rca_min": 1.00,
-        "rca_max": None,
-        "density_range": None,
-        "strategic_balance": 0.80,
-        "feas_weights": [0.00, 0.00, 0.00, 1.00],
-        "attr_weights": [0.50, 0.00, 0.25, 0.25],
-        "top_n": 20,
-    },
-    "Emergentes": {
-        "trade_min": 1.0,
-        "growth_gt": 0.0,
-        "rca_min": 0.30,
-        "rca_max": 0.99,
-        "density_range": None,
-        "strategic_balance": 0.50,
-        "feas_weights": [0.35, 0.35, 0.00, 0.30],
-        "attr_weights": [0.35, 0.35, 0.15, 0.15],
-        "top_n": 20,
-    },
-    "Apuestas Estrategicas": {
-        "trade_min": 1.0,
-        "growth_gt": 0.0,
-        "rca_min": 0.00,
-        "rca_max": 0.29,
-        "density_range": (0.30, 0.40),
-        "strategic_balance": 0.70,
-        "feas_weights": [0.00, 0.70, 0.00, 0.30],
-        "attr_weights": [0.30, 0.35, 0.15, 0.15],
-        "top_n": 20,
-    },
-    "Balanceado": {
-        "trade_min": 1.0,
-        "growth_gt": 0.0,
-        "rca_min": 0.00,
-        "rca_max": 0.99,
-        "density_range": (0.30, 0.40),
-        "strategic_balance": 0.50,
-        "feas_weights": [0.20, 0.30, 0.00, 0.30],
-        "attr_weights": [0.30, 0.35, 0.15, 0.15],
-        "top_n": 40,
-    },
-}
-
-PAGE3_PRESETS = {
-    "Top de Candidatos Anclados": {
-        "trade_min": 0.5,
-        "growth_gt": 0.0,
-        "anchor_density_max": 50.0,
-        "proximity_rank_range": (1, 10),
-        "exclude_anchor_sections_prefixes": ("1.", "2.", "3."),
-        "exclude_candidate_sections_prefixes": ("1.", "2.", "3."),
-        "strategic_balance": 0.50,
-        "w_wnai": 0.5,
-        "w_anchor_count": 0.5,
-        "attr_weights": [0.35, 0.35, 0.15, 0.15],
-        "top_n": 30,
-    }
-}
 
 COMPARE_GROUP_COLORS = {
     "Superposición": "#2f5d74",
@@ -80,183 +17,11 @@ COMPARE_GROUP_COLORS = {
 }
 
 
-def weighted_index(frame: pd.DataFrame, cols: list[str], weights: list[float]) -> pd.Series:
-    weight_sum = float(sum(weights))
-    if weight_sum <= 0:
-        return frame[cols].mean(axis=1)
-    arr = np.column_stack([frame[c].to_numpy() for c in cols])
-    w = np.array(weights, dtype=float)
-    return pd.Series((arr * w).sum(axis=1) / weight_sum, index=frame.index)
-
-
-def build_page2_recommendations(profile_name: str) -> pd.DataFrame:
-    profile = PAGE2_PRESETS[profile_name]
-    df = load_opportunity_dataset().copy()
-    if df.empty:
-        return df
-
-    df["hs4"] = df["hs4"].astype(str).str.zfill(4)
-    df["accessible_market_size_mm"] = normalize_0_1(pd.to_numeric(df["accessible_market_size"], errors="coerce").fillna(0.0))
-
-    df["feasibility_raw"] = weighted_index(df, FEAS_COLS, profile["feas_weights"])
-    df["attractiveness_raw"] = weighted_index(df, ATTR_COLS, profile["attr_weights"])
-    df["feasibility_index"] = normalize_0_1(df["feasibility_raw"])
-    df["attractiveness_index"] = normalize_0_1(df["attractiveness_raw"])
-    df["combined_raw"] = (
-        (1 - profile["strategic_balance"]) * df["feasibility_index"]
-        + profile["strategic_balance"] * df["attractiveness_index"]
-    )
-    df["combined_score"] = normalize_0_1(df["combined_raw"])
-
-    density_pct_2d = pd.to_numeric(df["density_percentile"], errors="coerce").fillna(0.0).round(2)
-    raw_rca = pd.to_numeric(df["raw_rca"], errors="coerce").fillna(0.0)
-
-    flt = df[
-        (pd.to_numeric(df["accessible_market_size_b"], errors="coerce") >= profile["trade_min"])
-        & (pd.to_numeric(df["accessible_market_growth_5y"], errors="coerce") > profile["growth_gt"])
-        & (raw_rca >= profile["rca_min"])
-        & (~df["hs4"].isin(EXCLUDED_HS4))
-    ].copy()
-
-    if profile["rca_max"] is not None:
-        flt = flt[raw_rca.loc[flt.index] < profile["rca_max"]]
-
-    if profile["density_range"] is not None:
-        lo, hi = profile["density_range"]
-        flt = flt[(density_pct_2d.loc[flt.index] >= lo) & (density_pct_2d.loc[flt.index] < hi)]
-
-    flt = flt.sort_values(["combined_score", "accessible_market_size_b"], ascending=[False, False]).reset_index(drop=True)
-    flt["page2_rank"] = np.arange(1, len(flt) + 1)
-    return flt.head(profile["top_n"])[
-        [
-            "hs4",
-            "product_name_short",
-            "sector",
-            "combined_score",
-            "page2_rank",
-            "raw_rca",
-            "density_percentile",
-            "dai_percentile",
-            "accessible_market_size_b",
-            "accessible_market_growth_5y",
-            "pci",
-            "cog",
-        ]
-    ].rename(
-        columns={
-            "combined_score": "page2_score",
-            "sector": "page2_sector",
-            "dai_percentile": "page2_dai_pct",
-        }
-    )
-
-
-def build_page3_recommendations(profile_name: str) -> pd.DataFrame:
-    profile = PAGE3_PRESETS[profile_name]
-    df = load_anchor_proximity_dataset().copy()
-    if df.empty:
-        return df
-
-    df["candidate_hs4"] = df["candidate_hs4"].astype(str).str.zfill(4)
-    anchor_sections_ok = ~df["anchor_hs_section_name"].astype(str).str.startswith(profile["exclude_anchor_sections_prefixes"])
-    candidate_sections_ok = ~df["candidate_hs_section_name"].astype(str).str.startswith(profile["exclude_candidate_sections_prefixes"])
-
-    flt = df[
-        (pd.to_numeric(df["accessible_market_size_b"], errors="coerce") >= profile["trade_min"])
-        & (pd.to_numeric(df["accessible_market_growth_5y"], errors="coerce") > profile["growth_gt"])
-        & (pd.to_numeric(df["anchor_density_percentile"], errors="coerce") <= profile["anchor_density_max"])
-        & (pd.to_numeric(df["proximity_rank"], errors="coerce") >= profile["proximity_rank_range"][0])
-        & (pd.to_numeric(df["proximity_rank"], errors="coerce") <= profile["proximity_rank_range"][1])
-        & anchor_sections_ok
-        & candidate_sections_ok
-        & (~df["candidate_hs4"].isin(EXCLUDED_HS4))
-    ].copy()
-
-    candidate_scores = (
-        flt.groupby(
-            [
-                "candidate_hs4",
-                "candidate_product_name_short",
-                "candidate_sector",
-                "candidate_hs_section_name",
-            ],
-            as_index=False,
-        )
-        .agg(
-            accessible_market_size=("accessible_market_size", "first"),
-            accessible_market_size_b=("accessible_market_size_b", "first"),
-            accessible_market_growth_5y=("accessible_market_growth_5y", "first"),
-            dai_percentile=("dai_percentile", "first"),
-            pci=("pci", "first"),
-            cog=("cog", "first"),
-            avg_proximity=("proximity", "mean"),
-            anchor_count=("anchor_hs4", "nunique"),
-        )
-    )
-
-    candidate_scores["wnai_mm"] = normalize_0_1(candidate_scores["dai_percentile"])
-    candidate_scores["anchor_count_mm"] = normalize_0_1(candidate_scores["anchor_count"])
-    candidate_scores["pci_mm"] = normalize_0_1(candidate_scores["pci"])
-    candidate_scores["cog_mm"] = normalize_0_1(candidate_scores["cog"])
-    candidate_scores["accessible_market_growth_mm"] = normalize_0_1(candidate_scores["accessible_market_growth_5y"])
-    candidate_scores["accessible_market_size_mm"] = normalize_0_1(candidate_scores["accessible_market_size"])
-    w_wnai = float(profile.get("w_wnai", 0.0))
-    w_anchor_count = float(profile.get("w_anchor_count", 0.0))
-    denom = w_wnai + w_anchor_count
-    if denom > 0:
-        candidate_scores["feasibility_raw"] = (
-            candidate_scores["wnai_mm"] * w_wnai
-            + candidate_scores["anchor_count_mm"] * w_anchor_count
-        ) / denom
-    else:
-        candidate_scores["feasibility_raw"] = 0.0
-    candidate_scores["feasibility_index"] = normalize_0_1(candidate_scores["feasibility_raw"])
-    attr = candidate_scores[["pci_mm", "cog_mm", "accessible_market_growth_mm", "accessible_market_size_mm"]]
-    attr_weights = np.array(profile["attr_weights"], dtype=float)
-    candidate_scores["attractiveness_raw"] = (attr.to_numpy() * attr_weights).sum(axis=1) / float(attr_weights.sum())
-    candidate_scores["attractiveness_index"] = normalize_0_1(candidate_scores["attractiveness_raw"])
-    candidate_scores["combined_raw"] = (
-        (1 - profile["strategic_balance"]) * candidate_scores["feasibility_index"]
-        + profile["strategic_balance"] * candidate_scores["attractiveness_index"]
-    )
-    candidate_scores["combined_score"] = normalize_0_1(candidate_scores["combined_raw"])
-    candidate_scores = candidate_scores.sort_values(
-        ["combined_score", "accessible_market_size_b"], ascending=[False, False]
-    ).reset_index(drop=True)
-    candidate_scores["page3_rank"] = np.arange(1, len(candidate_scores) + 1)
-
-    return candidate_scores.head(profile["top_n"])[
-        [
-            "candidate_hs4",
-            "candidate_product_name_short",
-            "candidate_sector",
-            "candidate_hs_section_name",
-            "combined_score",
-            "page3_rank",
-            "dai_percentile",
-            "accessible_market_size_b",
-            "accessible_market_growth_5y",
-            "pci",
-            "cog",
-            "avg_proximity",
-            "anchor_count",
-        ]
-    ].rename(
-        columns={
-            "candidate_hs4": "hs4",
-            "candidate_product_name_short": "product_name_short",
-            "candidate_sector": "page3_sector",
-            "dai_percentile": "page3_dai_pct",
-            "combined_score": "page3_score",
-        }
-    )
-
-
 st.title("Comparación")
-st.caption("Compare las recomendaciones producidas por los perfiles seleccionados de la Página 2 y la Página 3.")
+st.caption("Compare las recomendaciones producidas por los perfiles vigentes de la Página 2 y la Página 3.")
 
 csel1, csel2 = st.columns(2)
-page2_preset = csel1.selectbox("Perfil de la Página 2", list(PAGE2_PRESETS.keys()), index=2)
+page2_preset = csel1.selectbox("Perfil de la Página 2", list(PAGE2_PRESETS.keys()), index=0)
 page3_preset = csel2.selectbox("Perfil de la Página 3", list(PAGE3_PRESETS.keys()), index=0)
 
 page2_df = build_page2_recommendations(page2_preset)
@@ -284,6 +49,7 @@ comparison["accessible_market_growth_5y"] = comparison["accessible_market_growth
 comparison["pci"] = comparison["pci_page2"].combine_first(comparison["pci_page3"])
 comparison["cog"] = comparison["cog_page2"].combine_first(comparison["cog_page3"])
 comparison["dai_percentile"] = comparison["page2_dai_pct"].combine_first(comparison["page3_dai_pct"])
+comparison["dai_raw"] = comparison["page2_dai_raw"].combine_first(comparison["page3_dai_raw"])
 
 in_page2 = comparison["page2_rank"].notna()
 in_page3 = comparison["page3_rank"].notna()
@@ -347,6 +113,7 @@ st.dataframe(
             "accessible_market_size_b",
             "accessible_market_growth_5y",
             "dai_percentile",
+            "dai_raw",
             "pci",
             "cog",
         ]
@@ -365,6 +132,7 @@ st.dataframe(
         "accessible_market_size_b": st.column_config.NumberColumn("Tamaño del mercado accesible (miles de millones USD)", format="%.3f"),
         "accessible_market_growth_5y": st.column_config.NumberColumn("Crecimiento del mercado accesible % (5 años)", format="%.2f%%"),
         "dai_percentile": st.column_config.NumberColumn("Percentil DAI", format="%.1f"),
+        "dai_raw": st.column_config.NumberColumn("DAI (bruto)", format="%.3f"),
         "pci": st.column_config.NumberColumn("PCI", format="%.3f"),
         "cog": st.column_config.NumberColumn("COG", format="%.3f"),
     },
@@ -385,6 +153,7 @@ if not overlap.empty:
                 "rank_gap",
                 "accessible_market_size_b",
                 "dai_percentile",
+                "dai_raw",
             ]
         ],
         use_container_width=True,
@@ -398,6 +167,7 @@ if not overlap.empty:
             "rank_gap": st.column_config.NumberColumn(f"Brecha de ranking ({page3_preset} - {page2_preset})", format="%.0f"),
             "accessible_market_size_b": st.column_config.NumberColumn("Tamaño del mercado accesible (miles de millones USD)", format="%.3f"),
             "dai_percentile": st.column_config.NumberColumn("Percentil DAI", format="%.1f"),
+            "dai_raw": st.column_config.NumberColumn("DAI (bruto)", format="%.3f"),
         },
     )
 else:
