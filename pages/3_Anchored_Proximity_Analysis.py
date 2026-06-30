@@ -5,21 +5,21 @@ import plotly.graph_objects as go
 import streamlit as st
 import re
 
-from data_utils import load_anchor_proximity_dataset, normalize_0_1
+from data_utils import load_anchor_proximity_dataset, load_natural_resource_exclusion_labels, normalize_0_1
 
 
 SECTOR_COLORS = {
-    "Services": "#b23c6f",
+    "Servicios": "#b23c6f",
     "Textiles": "#7bc8a4",
-    "Agriculture": "#e5c21a",
-    "Stone": "#caa46b",
-    "Minerals": "#a88b7d",
-    "Metals": "#c9656b",
-    "Chemicals": "#b07ac9",
-    "Vehicles": "#7a6cc3",
-    "Machinery": "#6e8fc3",
-    "Electronics": "#74c5c6",
-    "Other": "#2f5d74",
+    "Agricultura": "#e5c21a",
+    "Piedra": "#caa46b",
+    "Minerales": "#a88b7d",
+    "Metales": "#c9656b",
+    "Químicos": "#b07ac9",
+    "Vehículos": "#7a6cc3",
+    "Maquinaria": "#6e8fc3",
+    "Electrónica": "#74c5c6",
+    "Otros": "#2f5d74",
 }
 
 
@@ -57,12 +57,12 @@ def _section_sort_key(label: str) -> tuple[int, str]:
     return (10_000, text.lower())
 
 
-st.title("Anchored Proximity Analysis")
-st.caption("Explore candidate products connected to anchor products through proximity links.")
+st.title("Análisis de Proximidad Anclada")
+st.caption("Explore productos candidatos conectados con productos ancla a través de vínculos de proximidad.")
 
 df = load_anchor_proximity_dataset()
 if df.empty:
-    st.warning("No anchor proximity data available.")
+    st.warning("No hay datos disponibles de proximidad anclada.")
     st.stop()
 
 pci_series = pd.to_numeric(df["pci"], errors="coerce").replace([np.inf, -np.inf], np.nan).dropna()
@@ -108,6 +108,7 @@ candidate_label_to_code = dict(
 )
 proximity_rank_max = int(pd.to_numeric(df["proximity_rank"], errors="coerce").max())
 accessible_market_max = float(df["accessible_market_size_b"].max()) if not df.empty else 0.0
+candidate_rca_max = float(pd.to_numeric(df["candidate_raw_rca"], errors="coerce").max()) if not df.empty else 0.0
 anchor_density_min = float(pd.to_numeric(df["anchor_density_percentile"], errors="coerce").min()) if not df.empty else 0.0
 anchor_density_max = float(pd.to_numeric(df["anchor_density_percentile"], errors="coerce").max()) if not df.empty else 1.0
 if anchor_density_max == anchor_density_min:
@@ -119,6 +120,10 @@ excluded_labels_by_code = (
     .sort_values("candidate_hs4")["candidate_label"]
     .tolist()
 )
+natural_resource_exclusion_labels = [
+    label for label in load_natural_resource_exclusion_labels()
+    if label in set(candidate_products_df["candidate_label"].tolist())
+]
 anchor_sections_excluding_123 = [
     s for s in anchor_sections if not str(s).startswith(("1.", "2.", "3."))
 ]
@@ -127,9 +132,11 @@ candidate_sections_excluding_123 = [
 ]
 
 st.session_state.setdefault("p3_accessible_market_min", 0.0)
+st.session_state.setdefault("p3_candidate_rca_max", float(candidate_rca_max))
 st.session_state.setdefault("p3_am_cagr_only", False)
 st.session_state.setdefault("p3_strategic_balance", 0.50)
-st.session_state.setdefault("p3_w_wnai", 1.0)
+st.session_state.setdefault("p3_w_wnai", 0.5)
+st.session_state.setdefault("p3_w_anchor_count", 0.5)
 st.session_state.setdefault("p3_w_pci", 0.35)
 st.session_state.setdefault("p3_w_cog", 0.35)
 st.session_state.setdefault("p3_w_growth", 0.15)
@@ -145,12 +152,15 @@ st.session_state.setdefault(
     "p3_anchor_density_range",
     (float(anchor_density_min), float(anchor_density_max)),
 )
+st.session_state.setdefault("p3_above_median_proximity_only", False)
 
 
 def _apply_page3_profile(profile_name: str) -> None:
-    st.session_state["p3_accessible_market_min"] = 1.0
+    st.session_state["p3_accessible_market_min"] = 0.5
+    st.session_state["p3_candidate_rca_max"] = float(candidate_rca_max)
     st.session_state["p3_am_cagr_only"] = True
-    st.session_state["p3_w_wnai"] = 1.0
+    st.session_state["p3_w_wnai"] = 0.5
+    st.session_state["p3_w_anchor_count"] = 0.5
     st.session_state["p3_selected_anchor_sectors"] = anchor_sectors
     st.session_state["p3_selected_candidate_sectors"] = candidate_sectors
     st.session_state["p3_selected_candidate_sections"] = candidate_sections
@@ -161,17 +171,18 @@ def _apply_page3_profile(profile_name: str) -> None:
         float(anchor_density_min),
         float(anchor_density_max),
     )
+    st.session_state["p3_above_median_proximity_only"] = False
 
     if profile_name == "top_candidates":
-        st.session_state["p3_strategic_balance"] = 0.70
+        st.session_state["p3_strategic_balance"] = 0.50
         st.session_state["p3_w_pci"] = 0.35
         st.session_state["p3_w_cog"] = 0.35
         st.session_state["p3_w_growth"] = 0.15
         st.session_state["p3_w_market"] = 0.15
-        st.session_state["p3_candidates_to_display"] = 40
+        st.session_state["p3_candidates_to_display"] = 30
         st.session_state["p3_selected_anchor_sections"] = anchor_sections_excluding_123
         st.session_state["p3_selected_candidate_sections"] = candidate_sections_excluding_123
-        st.session_state["p3_excluded_product_labels"] = excluded_labels_by_code
+        st.session_state["p3_excluded_product_labels"] = natural_resource_exclusion_labels
         st.session_state["p3_anchor_density_range"] = (
             float(anchor_density_min),
             min(50.0, float(anchor_density_max)),
@@ -181,7 +192,10 @@ def _apply_page3_profile(profile_name: str) -> None:
 
 def _reset_page3_filters() -> None:
     st.session_state["p3_accessible_market_min"] = 0.0
+    st.session_state["p3_candidate_rca_max"] = float(candidate_rca_max)
     st.session_state["p3_am_cagr_only"] = False
+    st.session_state["p3_w_wnai"] = 0.5
+    st.session_state["p3_w_anchor_count"] = 0.5
     st.session_state["p3_selected_anchor_sectors"] = anchor_sectors
     st.session_state["p3_selected_candidate_sectors"] = candidate_sectors
     st.session_state["p3_selected_candidate_sections"] = candidate_sections
@@ -192,49 +206,53 @@ def _reset_page3_filters() -> None:
         float(anchor_density_min),
         float(anchor_density_max),
     )
+    st.session_state["p3_above_median_proximity_only"] = False
 
 with st.sidebar:
-    st.header("Preset Profiles")
-    if st.button("Top Anchored Candidates", use_container_width=True):
+    st.header("Perfiles predefinidos")
+    if st.button("Top de Candidatos Anclados", use_container_width=True):
         _apply_page3_profile("top_candidates")
         st.rerun()
 
-    st.header("Anchor Filters")
-    if st.button("Reset all filters", use_container_width=True):
+    st.header("Filtros de anclas")
+    if st.button("Restablecer todos los filtros", use_container_width=True):
         _reset_page3_filters()
         st.rerun()
+    if st.button("Excluir recursos naturales", use_container_width=True):
+        st.session_state["p3_excluded_product_labels"] = natural_resource_exclusion_labels
+        st.rerun()
     selected_anchor_sectors = st.multiselect(
-        "Anchor sector",
+        "Sector del ancla",
         options=anchor_sectors,
         default=st.session_state["p3_selected_anchor_sectors"],
         key="p3_selected_anchor_sectors",
     )
     selected_candidate_sectors = st.multiselect(
-        "Candidate sector",
+        "Sector del candidato",
         options=candidate_sectors,
         default=st.session_state["p3_selected_candidate_sectors"],
         key="p3_selected_candidate_sectors",
     )
     selected_candidate_sections = st.multiselect(
-        "Candidate sections",
+        "Secciones del candidato",
         options=candidate_sections,
         default=st.session_state["p3_selected_candidate_sections"],
         key="p3_selected_candidate_sections",
     )
     selected_anchor_sections = st.multiselect(
-        "Anchor sections",
+        "Secciones del ancla",
         options=anchor_sections,
         default=st.session_state["p3_selected_anchor_sections"],
         key="p3_selected_anchor_sections",
     )
     excluded_product_labels = st.multiselect(
-        "Exclude products (HS4)",
+        "Excluir productos (HS4)",
         options=candidate_products_df["candidate_label"].tolist(),
         default=st.session_state["p3_excluded_product_labels"],
         key="p3_excluded_product_labels",
     )
     proximity_rank_range = st.slider(
-        "Proximity rank range",
+        "Rango del ranking de proximidad",
         min_value=1,
         max_value=max(1, proximity_rank_max),
         value=st.session_state["p3_proximity_rank_range"],
@@ -242,7 +260,7 @@ with st.sidebar:
         key="p3_proximity_rank_range",
     )
     accessible_market_min = st.number_input(
-        "Minimum accessible trade (Billion USD)",
+        "Mercado accesible mínimo (miles de millones USD)",
         min_value=0.0,
         max_value=float(max(accessible_market_max, 0.1)),
         value=float(st.session_state["p3_accessible_market_min"]),
@@ -250,8 +268,17 @@ with st.sidebar:
         format="%.2f",
         key="p3_accessible_market_min",
     )
+    candidate_rca_max_input = st.number_input(
+        "RCA máximo del candidato",
+        min_value=0.0,
+        max_value=float(max(candidate_rca_max, 0.1)),
+        value=float(st.session_state["p3_candidate_rca_max"]),
+        step=0.1,
+        format="%.3f",
+        key="p3_candidate_rca_max",
+    )
     anchor_density_range = st.slider(
-        "Anchor density percentile",
+        "Percentil de densidad del ancla",
         min_value=float(anchor_density_min),
         max_value=float(anchor_density_max),
         value=st.session_state["p3_anchor_density_range"],
@@ -259,27 +286,40 @@ with st.sidebar:
         format="%.2f",
         key="p3_anchor_density_range",
     )
-    am_cagr_only = st.toggle("AM CAGR (5y) > 0", value=bool(st.session_state["p3_am_cagr_only"]), key="p3_am_cagr_only")
+    above_median_proximity_only = st.toggle(
+        "Solo proximidad por encima de la mediana del país",
+        value=bool(st.session_state["p3_above_median_proximity_only"]),
+        key="p3_above_median_proximity_only",
+    )
+    am_cagr_only = st.toggle("CAGR del mercado accesible (5 años) > 0", value=bool(st.session_state["p3_am_cagr_only"]), key="p3_am_cagr_only")
 
-    st.header("Dimension Balance")
+    st.header("Balance de Dimensiones")
     strategic_balance = st.slider(
-        "Feasibility (100%) = 0 | Attractiveness (100%) = 1",
+        "Factibilidad (100%) = 0 | Atractivo (100%) = 1",
         0.0,
         1.0,
         float(st.session_state["p3_strategic_balance"]),
         0.05,
         key="p3_strategic_balance",
     )
-    st.header("Weight Controls")
-    st.caption("Page 3 uses WNAI for feasibility and lets you reweight attractiveness components.")
-    with st.expander("Feasibility Components", expanded=True):
-        st.caption("WNAI is the sole feasibility component on this page.")
-        w_wnai = st.slider("WNAI weight", 0.0, 1.0, float(st.session_state["p3_w_wnai"]), 0.05, key="p3_w_wnai")
-    with st.expander("Attractiveness Components", expanded=True):
-        w_pci = st.slider("PCI weight", 0.0, 1.0, float(st.session_state["p3_w_pci"]), 0.05, key="p3_w_pci")
-        w_cog = st.slider("COG weight", 0.0, 1.0, float(st.session_state["p3_w_cog"]), 0.05, key="p3_w_cog")
+    st.header("Controles de Pesos")
+    st.caption("La Página 3 usa DAI para la factibilidad y permite reponderar los componentes de atractivo.")
+    with st.expander("Componentes de Factibilidad", expanded=True):
+        st.caption("La factibilidad combina el DAI y el número normalizado de anclas vinculadas a cada candidato.")
+        w_wnai = st.slider("Peso del DAI", 0.0, 1.0, float(st.session_state["p3_w_wnai"]), 0.05, key="p3_w_wnai")
+        w_anchor_count = st.slider(
+            "Peso del número de anclas",
+            0.0,
+            1.0,
+            float(st.session_state["p3_w_anchor_count"]),
+            0.05,
+            key="p3_w_anchor_count",
+        )
+    with st.expander("Componentes de Atractivo", expanded=True):
+        w_pci = st.slider("Peso de PCI", 0.0, 1.0, float(st.session_state["p3_w_pci"]), 0.05, key="p3_w_pci")
+        w_cog = st.slider("Peso de COG", 0.0, 1.0, float(st.session_state["p3_w_cog"]), 0.05, key="p3_w_cog")
         w_growth = st.slider(
-            "Accessible market growth (5y) weight",
+            "Peso del crecimiento del mercado accesible (5 años)",
             0.0,
             1.0,
             float(st.session_state["p3_w_growth"]),
@@ -287,7 +327,7 @@ with st.sidebar:
             key="p3_w_growth",
         )
         w_market = st.slider(
-            "Accessible market size weight",
+            "Peso del tamaño del mercado accesible",
             0.0,
             1.0,
             float(st.session_state["p3_w_market"]),
@@ -311,12 +351,15 @@ flt = flt[
     (pd.to_numeric(flt["proximity_rank"], errors="coerce") >= proximity_rank_range[0])
     & (pd.to_numeric(flt["proximity_rank"], errors="coerce") <= proximity_rank_range[1])
 ]
+if above_median_proximity_only:
+    flt = flt[pd.to_numeric(flt["proximity_above_country_median"], errors="coerce").fillna(0).astype(int).eq(1)]
 anchor_density_2d = pd.to_numeric(flt["anchor_density_percentile"], errors="coerce").fillna(0.0).round(2)
 anchor_density_lo = round(min(anchor_density_range), 2)
 anchor_density_hi = round(max(anchor_density_range), 2)
 effective_anchor_density_hi = anchor_density_hi + 0.01 if anchor_density_hi >= round(float(anchor_density_max), 2) else anchor_density_hi
 flt = flt[(anchor_density_2d >= anchor_density_lo) & (anchor_density_2d <= effective_anchor_density_hi)]
 flt = flt[pd.to_numeric(flt["accessible_market_size_b"], errors="coerce") >= float(accessible_market_min)]
+flt = flt[pd.to_numeric(flt["candidate_raw_rca"], errors="coerce").fillna(0.0) <= float(candidate_rca_max_input)]
 if am_cagr_only:
     flt = flt[pd.to_numeric(flt["accessible_market_growth_5y"], errors="coerce") > 0.0]
 
@@ -326,19 +369,43 @@ candidate_scores = (
         accessible_market_size=("accessible_market_size", "first"),
         accessible_market_size_b=("accessible_market_size_b", "first"),
         accessible_market_growth_5y=("accessible_market_growth_5y", "first"),
-        alignment_weighted_percentile=("alignment_weighted_percentile", "first"),
+        dai_index=("dai_index", "first"),
+        dai_percentile=("dai_percentile", "first"),
+        candidate_raw_rca=("candidate_raw_rca", "first"),
         pci=("pci", "first"),
         cog=("cog", "first"),
         avg_proximity=("proximity", "mean"),
         anchor_count=("anchor_hs4", "nunique"),
     )
 )
-candidate_scores["wnai_mm"] = normalize_0_1(candidate_scores["alignment_weighted_percentile"])
+anchor_lists = (
+    flt.assign(
+        anchor_label=lambda d: d["anchor_hs4"].astype(str).str.zfill(4) + " - " + d["anchor_product_name_short"].astype(str)
+    )
+    .groupby(["candidate_hs4", "candidate_product_name_short"], as_index=False)
+    .agg(anchors_linked=("anchor_label", lambda s: " | ".join(sorted(pd.unique(s)))))
+)
+candidate_scores = candidate_scores.merge(
+    anchor_lists,
+    on=["candidate_hs4", "candidate_product_name_short"],
+    how="left",
+)
+candidate_scores["wnai_mm"] = normalize_0_1(candidate_scores["dai_percentile"])
+candidate_scores["anchor_count_mm"] = normalize_0_1(candidate_scores["anchor_count"])
 candidate_scores["pci_mm"] = normalize_0_1(candidate_scores["pci"])
 candidate_scores["cog_mm"] = normalize_0_1(candidate_scores["cog"])
 candidate_scores["accessible_market_growth_mm"] = normalize_0_1(candidate_scores["accessible_market_growth_5y"])
 candidate_scores["accessible_market_size_mm"] = normalize_0_1(candidate_scores["accessible_market_size"])
-candidate_scores["feasibility_index"] = candidate_scores["wnai_mm"]
+feas_cols = ["wnai_mm", "anchor_count_mm"]
+feas_weights = np.array([w_wnai, w_anchor_count], dtype=float)
+feas_weight_sum = float(feas_weights.sum())
+if feas_weight_sum <= 0:
+    candidate_scores["feasibility_raw"] = candidate_scores[feas_cols].mean(axis=1)
+else:
+    candidate_scores["feasibility_raw"] = (
+        candidate_scores[feas_cols].to_numpy() * feas_weights
+    ).sum(axis=1) / feas_weight_sum
+candidate_scores["feasibility_index"] = normalize_0_1(candidate_scores["feasibility_raw"])
 attr_cols = ["pci_mm", "cog_mm", "accessible_market_growth_mm", "accessible_market_size_mm"]
 attr_weights = np.array([w_pci, w_cog, w_growth, w_market], dtype=float)
 attr_weight_sum = float(attr_weights.sum())
@@ -349,7 +416,7 @@ else:
         candidate_scores[attr_cols].to_numpy() * attr_weights
     ).sum(axis=1) / attr_weight_sum
 candidate_scores["attractiveness_index"] = normalize_0_1(candidate_scores["attractiveness_raw"])
-if float(w_wnai) <= 0:
+if float(w_wnai) <= 0 and float(w_anchor_count) <= 0:
     candidate_scores["feasibility_index"] = 0.0
 candidate_scores["combined_raw"] = (
     (1 - strategic_balance) * candidate_scores["feasibility_index"]
@@ -372,12 +439,12 @@ flt = flt.merge(
 )
 
 c1, c2, c3 = st.columns(3)
-c1.metric("Links shown", f"{len(flt):,}")
-c2.metric("Unique anchors", f"{flt['anchor_hs4'].nunique():,}")
-c3.metric("Unique candidates", f"{flt['candidate_hs4'].nunique():,}")
+c1.metric("Vínculos mostrados", f"{len(flt):,}")
+c2.metric("Anclas únicas", f"{flt['anchor_hs4'].nunique():,}")
+c3.metric("Candidatos únicos", f"{flt['candidate_hs4'].nunique():,}")
 
 if flt.empty:
-    st.info("No anchor-candidate links match the current filters.")
+    st.info("Ningún vínculo ancla-candidato coincide con los filtros actuales.")
     st.stop()
 
 anchor_labels = (
@@ -412,10 +479,10 @@ sankey_df["target"] = sankey_df["candidate_node"].map(candidate_node_ids)
 
 node_labels = anchor_labels["node_label"].tolist() + candidate_labels["node_label"].tolist()
 node_colors = (
-    [SECTOR_COLORS.get(s, SECTOR_COLORS["Other"]) for s in anchor_labels["anchor_sector"].tolist()]
-    + [SECTOR_COLORS.get(s, SECTOR_COLORS["Other"]) for s in candidate_labels["candidate_sector"].tolist()]
+    [SECTOR_COLORS.get(s, SECTOR_COLORS["Otros"]) for s in anchor_labels["anchor_sector"].tolist()]
+    + [SECTOR_COLORS.get(s, SECTOR_COLORS["Otros"]) for s in candidate_labels["candidate_sector"].tolist()]
 )
-link_colors = [_hex_to_rgba(SECTOR_COLORS.get(s, SECTOR_COLORS["Other"]), alpha=0.4) for s in sankey_df["candidate_sector"].tolist()]
+link_colors = [_hex_to_rgba(SECTOR_COLORS.get(s, SECTOR_COLORS["Otros"]), alpha=0.4) for s in sankey_df["candidate_sector"].tolist()]
 
 sankey = go.Figure(
     go.Sankey(
@@ -437,15 +504,15 @@ sankey = go.Figure(
                 axis=-1,
             ),
             hovertemplate=(
-                "Anchor sector: %{customdata[0]}<br>"
-                "Candidate sector: %{customdata[1]}<br>"
-                "Total proximity: %{customdata[2]:.4f}<extra></extra>"
+                "Sector del ancla: %{customdata[0]}<br>"
+                "Sector del candidato: %{customdata[1]}<br>"
+                "Proximidad total: %{customdata[2]:.4f}<extra></extra>"
             ),
         ),
     )
 )
 sankey.update_layout(
-    title="Anchor-to-Candidate Proximity Sankey",
+    title="Sankey de proximidad de anclas a candidatos",
     font=dict(size=12),
     margin=dict(t=60, l=10, r=10, b=10),
     height=760,
@@ -458,7 +525,7 @@ st.session_state["p3_candidates_to_display"] = min(
     top_n_max,
 )
 top_n = st.slider(
-    "Candidates to display",
+    "Candidatos a mostrar",
     min_value=10,
     max_value=top_n_max,
     value=int(st.session_state["p3_candidates_to_display"]),
@@ -483,37 +550,43 @@ st.dataframe(
             "combined_score",
             "attractiveness_index",
             "feasibility_index",
+            "dai_index",
             "pci",
             "cog",
-            "alignment_weighted_percentile",
+            "dai_percentile",
+            "candidate_raw_rca",
             "accessible_market_growth_5y",
             "accessible_market_size_b",
             "avg_proximity",
             "anchor_count",
+            "anchors_linked",
         ]
     ],
     use_container_width=True,
     hide_index=True,
     column_config={
-        "rank": st.column_config.NumberColumn("Rank", format="%.0f"),
+        "rank": st.column_config.NumberColumn("Ranking", format="%.0f"),
         "candidate_hs4": st.column_config.TextColumn("HS4"),
-        "candidate_product_name_short": st.column_config.TextColumn("Product"),
+        "candidate_product_name_short": st.column_config.TextColumn("Producto"),
         "candidate_sector": st.column_config.TextColumn("Sector"),
-        "combined_score": st.column_config.NumberColumn("Combined Opportunity Score", format="%.4f"),
-        "attractiveness_index": st.column_config.NumberColumn("Attractiveness Index", format="%.4f"),
-        "feasibility_index": st.column_config.NumberColumn("Feasibility Index", format="%.4f"),
+        "combined_score": st.column_config.NumberColumn("Puntaje Combinado de Oportunidad", format="%.4f"),
+        "attractiveness_index": st.column_config.NumberColumn("Índice de Atractivo", format="%.4f"),
+        "feasibility_index": st.column_config.NumberColumn("Índice de Factibilidad", format="%.4f"),
+        "dai_index": st.column_config.NumberColumn("DAI (bruto)", format="%.3f"),
         "pci": st.column_config.NumberColumn("PCI", format="%.3f"),
         "cog": st.column_config.NumberColumn("COG", format="%.3f"),
-        "alignment_weighted_percentile": st.column_config.NumberColumn("WNAI Percentile", format="%.1f"),
-        "accessible_market_growth_5y": st.column_config.NumberColumn("Accessible Market Growth % (5y)", format="%.2f%%"),
-        "accessible_market_size_b": st.column_config.NumberColumn("Accessible Market Size (B USD)", format="%.3f"),
-        "avg_proximity": st.column_config.NumberColumn("Average Proximity", format="%.4f"),
-        "anchor_count": st.column_config.NumberColumn("Anchor Count", format="%.0f"),
+        "dai_percentile": st.column_config.NumberColumn("Percentil DAI", format="%.1f"),
+        "candidate_raw_rca": st.column_config.NumberColumn("RCA del candidato", format="%.3f"),
+        "accessible_market_growth_5y": st.column_config.NumberColumn("Crecimiento del mercado accesible % (5 años)", format="%.2f%%"),
+        "accessible_market_size_b": st.column_config.NumberColumn("Tamaño del mercado accesible (miles de millones USD)", format="%.3f"),
+        "avg_proximity": st.column_config.NumberColumn("Proximidad promedio", format="%.4f"),
+        "anchor_count": st.column_config.NumberColumn("Número de anclas", format="%.0f"),
+        "anchors_linked": st.column_config.TextColumn("Anclas vinculadas"),
     },
 )
 
-st.subheader("Anchor Proximity Candidates")
-treemap_color_label = st.selectbox("Treemap color variable", ["Sector", "PCI (raw)"], key="anchor_treemap_color")
+st.subheader("Candidatos por Proximidad a Anclas")
+treemap_color_label = st.selectbox("Variable de color del treemap", ["Sector", "PCI (bruto)"], key="anchor_treemap_color")
 
 treemap_df = candidate_table.head(top_n).copy()
 treemap_df["product_label"] = treemap_df["candidate_hs4"].astype(str).str.zfill(4) + " - " + treemap_df["candidate_product_name_short"].astype(str)
@@ -521,7 +594,7 @@ treemap_df["product_label_wrapped"] = treemap_df["product_label"].map(_wrap_labe
 treemap_df["pci_for_color"] = pd.to_numeric(treemap_df["pci"], errors="coerce").clip(pci_color_min, pci_color_max)
 
 st.metric(
-    label="Accessible Market Size (B USD) shown",
+    label="Tamaño del mercado accesible mostrado (miles de millones USD)",
     value=f"{treemap_df['accessible_market_size_b'].sum():,.3f}",
 )
 
@@ -557,7 +630,8 @@ treemap = px.treemap(
         "combined_score": ":.3f",
         "accessible_market_size_b": ":.3f",
         "accessible_market_growth_5y": ":.3%",
-        "alignment_weighted_percentile": ":.1f",
+        "dai_index": ":.3f",
+        "dai_percentile": ":.1f",
         "pci": ":.3f",
         "anchor_count": ":.0f",
         "avg_proximity": ":.4f",
@@ -565,9 +639,9 @@ treemap = px.treemap(
         "product_label_wrapped": False,
     },
     title=(
-        f"Anchor Proximity Candidates (n = {len(treemap_df)} candidates shown | "
-        f"Accessible Market total = {treemap_df['accessible_market_size_b'].sum():,.3f} B USD) "
-        f"| size = Accessible market size (B USD) | color = {treemap_color_label}"
+        f"Candidatos por Proximidad a Anclas (n = {len(treemap_df)}  candidatos mostrados | "
+        f"Mercado Accesible total = {treemap_df['accessible_market_size_b'].sum():,.3f} B USD) "
+        f"| tamaño = mercado accesible (miles de millones USD) | color = {treemap_color_label}"
     ),
 )
 treemap.update_traces(

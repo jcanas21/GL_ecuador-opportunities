@@ -5,139 +5,138 @@ import streamlit as st
 
 
 def render_guide_and_glossary() -> None:
-    st.title("Ecuador Export Opportunities Dashboard")
-    st.caption("Guide and glossary for the V1 dashboard pages (HS92 4-digit).")
+    st.title("Tablero de Oportunidades de Exportación del Ecuador")
+    st.caption("Guía y glosario de las páginas del tablero V1 (HS92 a 4 dígitos).")
 
-    st.markdown("## Page 2: Opportunity Analysis")
+    st.markdown("## Página 2: Análisis de Oportunidades")
     st.markdown(
         """
-The **Opportunity Analysis** page (Page 2) ranks HS92 4-digit products by combining two dimensions:
+La página de **Análisis de Oportunidades** (Página 2) clasifica los productos HS92 a 4 dígitos combinando dos dimensiones:
 
-- **Feasibility**: how realistic it is for Ecuador to compete now.
-- **Attractiveness**: how valuable the opportunity is if Ecuador expands in that product.
+- **Factibilidad**: qué tan realista es que Ecuador compita hoy en ese producto.
+- **Atractivo**: qué tan valiosa es la oportunidad si Ecuador se expande en ese producto.
 
-You can:
-- Filter products by accessible market size, RCA, sector, accessible-market growth, density percentile, and Ecuador export floor.
-- Reweight each component of feasibility and attractiveness.
-- Rebalance overall strategy between feasibility and attractiveness.
-- Explore a ranked product table and sector treemap.
+Aquí se puede:
+- Filtrar productos por tamaño de mercado accesible, RCA, sector, crecimiento del mercado accesible, percentil de densidad y piso mínimo de exportaciones del Ecuador.
+- Reponderar cada componente de factibilidad y atractivo.
+- Rebalancear la estrategia general entre factibilidad y atractivo.
+- Explorar una tabla de productos priorizados y un treemap sectorial.
 """
     )
 
-    st.markdown("## Page 3: Anchored Proximity Analysis")
+    st.markdown("## Página 3: Análisis de Proximidad Anclada")
     st.markdown(
         """
-The **Anchored Proximity Analysis** page starts from a set of anchor products and maps the candidate products that are most proximate to them.
+La página de **Análisis de Proximidad Anclada** parte de un conjunto de productos ancla y mapea los productos candidatos más próximos a ellos.
 
-You can:
-- Filter anchor-candidate links by sector, proximity rank, accessible market, anchor density percentile, and anchor sections.
-- Visualize the network as a **Sankey chart** from anchors to candidates.
-- Rank candidate products using the same feasibility-versus-attractiveness logic used in the main dashboard.
-- Explore a candidate table and a candidate treemap sized by **Accessible Market**.
+Aquí se puede:
+- Filtrar vínculos ancla-candidato por sector, rango de proximidad, mercado accesible, percentil de densidad del ancla y secciones del ancla.
+- Visualizar la red como un **gráfico Sankey** desde anclas hacia candidatos.
+- Clasificar productos candidatos usando la misma lógica de factibilidad versus atractivo del tablero principal.
+- Explorar una tabla de candidatos y un treemap de candidatos dimensionado por **Mercado Accesible**.
 """
     )
 
-    st.markdown("## Page 4: Comparison")
+    st.markdown("## Página 4: Comparación")
     st.markdown(
         """
-The **Comparison** page contrasts the preset recommendations produced by:
+La página de **Comparación** contrasta las recomendaciones predefinidas producidas por:
 
-- **Apuestas Estrategicas** from Page 2
-- **Top Anchored Candidates** from Page 3
+- **Apuestas Estratégicas** de la Página 2
+- **Top de Candidatos Anclados** de la Página 3
 
-You can:
-- See how much the two recommendation lists overlap.
-- Identify products that appear only in one methodology.
-- Compare preset ranks, accessible market size, WNAI, PCI and COG side by side.
+Aquí se puede:
+- Ver cuánto se superponen ambas listas de recomendaciones.
+- Identificar productos que aparecen solo en una metodología.
+- Comparar lado a lado rankings predefinidos, tamaño del mercado accesible, DAI, PCI y COG.
 """
     )
 
-    st.markdown("## How Scores Are Built")
+    st.markdown("## Cómo se Construyen los Puntajes")
     st.markdown(
         """
-- Component variables are normalized (z-score) for score construction.
-- **Feasibility Index** combines: RCA continuous, density, effective exporters, WNAI percentile.
-- **Attractiveness Index** combines: PCI, COG, accessible market growth (5y), accessible market size.
-- **Combined Opportunity Score** rebalances feasibility and attractiveness by your strategic slider, then rescales to 0-1 for ranking.
+- Las variables componentes se normalizan (z-score) para construir los puntajes.
+- El **Índice de Factibilidad** combina: RCA continuo, densidad, exportadores efectivos y percentil DAI.
+- El **Índice de Atractivo** combina: PCI, COG, crecimiento del mercado accesible (5 años) y tamaño del mercado accesible.
+- El **Puntaje Combinado de Oportunidad** rebalancea factibilidad y atractivo según el control estratégico y luego se reescala entre 0 y 1 para ordenar.
 """
     )
 
-    st.markdown("## Variable Glossary (Main Page)")
-    st.caption("Brief definitions plus interpretation guidance for the key technical variables.")
+    st.markdown("## Glosario de Variables (Página Principal)")
+    st.caption("Definiciones breves y guía de interpretación para las variables técnicas clave.")
     glossary = pd.DataFrame(
         [
-            {"Variable": "RCA", "Brief Definition": "Revealed Comparative Advantage: Ecuador's export share in a product divided by the world's export share in that product.", "How to Read It": "Greater than 1 = Ecuador is relatively specialized; less than 1 = weaker specialization.", "Unit / Scale": "Ratio"},
-            {"Variable": "RCA Continuous", "Brief Definition": "Continuous RCA signal used inside the feasibility score. In the complexity pipeline, the RCA-based continuous input is the transformed version of raw RCA.", "How to Read It": "Higher means stronger revealed specialization without collapsing the signal to a binary threshold.", "Unit / Scale": "Continuous"},
-            {"Variable": "Density (Raw)", "Brief Definition": "Product-space proximity to Ecuador's current capabilities.", "How to Read It": "Higher means the product is closer to what Ecuador already knows how to export.", "Unit / Scale": "Continuous"},
-            {"Variable": "Density Percentile", "Brief Definition": "Relative rank of Ecuador's density vs other countries for the same product (year 2024).", "How to Read It": "Calculation by product: percentile = (rank_density - 1) / (N - 1), where rank uses average rank for ties and N is number of countries in that product. 0.80 means Ecuador is above ~80% of countries in that product's density.", "Unit / Scale": "0-1"},
-            {"Variable": "Distance Travelled", "Brief Definition": "Weighted average bilateral distance travelled by product, using bilateral export values between origin x and destination y as weights.", "How to Read It": "Higher means exports of that product are concentrated in farther destination markets.", "Unit / Scale": "Distance units (from bilateral distance file)"},
-            {"Variable": "Effective Exporters", "Brief Definition": "Effective number of competing exporters in that product (competition breadth).", "How to Read It": "Higher usually implies a broader competitive field.", "Unit / Scale": "Count-like index"},
-            {"Variable": "WNAI Percentile", "Brief Definition": "Weighted Network Alignment Index percentile for Ecuador versus major exporters in each product.", "How to Read It": "Higher percentile = Ecuador's trade network is better aligned with high-value demand hubs.", "Unit / Scale": "0-100"},
-            {"Variable": "WNAI Lead", "Brief Definition": "Ecuador's WNAI percentile minus the median percentile of top competitors.", "How to Read It": "Positive = Ecuador leads peers; negative = Ecuador trails peers.", "Unit / Scale": "Percentile points"},
-            {"Variable": "PCI", "Brief Definition": "Product Complexity Index: sophistication level of the product based on global export structures.", "How to Read It": "Higher often signals stronger long-term upgrading potential.", "Unit / Scale": "Continuous"},
-            {"Variable": "COG", "Brief Definition": "Complexity Outlook Gain proxy: potential capability gain from moving into the product.", "How to Read It": "Higher suggests larger strategic learning/upgrading potential.", "Unit / Scale": "Continuous"},
-            {"Variable": "Global Market Growth % (5y)", "Brief Definition": "5-year compound annual growth of world trade in the product.", "How to Read It": "Positive and higher values indicate faster-expanding global demand.", "Unit / Scale": "Percent per year"},
-            {"Variable": "Country Export Growth % (5y)", "Brief Definition": "5-year compound annual growth of Ecuador's exports in the product.", "How to Read It": "Higher means Ecuador is scaling faster in that product.", "Unit / Scale": "Percent per year"},
-            {"Variable": "Country Current Exports (M USD)", "Brief Definition": "Ecuador's export value in 2024 for the product.", "How to Read It": "Higher means a larger current export base.", "Unit / Scale": "Million USD"},
-            {"Variable": "Country Exporter Rank (2024)", "Brief Definition": "Ecuador's global rank among exporters of that product by value.", "How to Read It": "Lower rank number is better (e.g., 3 is better than 20).", "Unit / Scale": "Rank"},
-            {"Variable": "Absolute Market Share Change (pp)", "Brief Definition": "Change in Ecuador's world market share from 2020 to 2024.", "How to Read It": "Positive = Ecuador gained share; negative = lost share.", "Unit / Scale": "Percentage points"},
-            {"Variable": "Global Market Share", "Brief Definition": "Product's share in total world trade (2024).", "How to Read It": "Higher means the product is more important in global trade.", "Unit / Scale": "Percent"},
-            {"Variable": "Total Trade (B USD)", "Brief Definition": "Total world trade value of the product in 2024.", "How to Read It": "Higher means a larger global market.", "Unit / Scale": "Billion USD"},
-            {"Variable": "Accessible Market Size (B USD)", "Brief Definition": "Accessible demand proxy based on Ecuador's network-positioned market reach.", "How to Read It": "Higher suggests more demand is realistically reachable.", "Unit / Scale": "Billion USD"},
-            {"Variable": "Accessible-to-Market Ratio", "Brief Definition": "Accessible market size divided by total global market size.", "How to Read It": "Higher means a larger share of world demand appears structurally reachable.", "Unit / Scale": "Percent"},
-            {"Variable": "Feasibility Index", "Brief Definition": "Composite score from RCA continuous, density, effective exporters, and WNAI percentile.", "How to Read It": "Higher means easier/less risky entry given current capabilities and network.", "Unit / Scale": "0-1"},
-            {"Variable": "Attractiveness Index", "Brief Definition": "Composite score from PCI, COG, accessible market growth, and accessible market size.", "How to Read It": "Higher means stronger upside and strategic value.", "Unit / Scale": "0-1"},
-            {"Variable": "Combined Opportunity Score", "Brief Definition": "Final score that blends feasibility and attractiveness using user-defined balance and weights.", "How to Read It": "Higher = better overall opportunity under current strategy settings.", "Unit / Scale": "0-1"},
+            {"Variable": "RCA", "Definición breve": "Ventaja Comparativa Revelada: participación de Ecuador en las exportaciones de un producto dividida por la participación mundial de ese mismo producto.", "Cómo leerla": "Mayor que 1 = Ecuador está relativamente especializado; menor que 1 = especialización más débil.", "Unidad / escala": "Razón"},
+            {"Variable": "RCA continuo", "Definición breve": "Señal continua derivada del RCA usada dentro del índice de factibilidad. En la rutina de complejidad, la entrada continua basada en RCA es una transformación del RCA bruto.", "Cómo leerla": "Un valor mayor indica una especialización revelada más fuerte sin reducir la señal a un umbral binario.", "Unidad / escala": "Continuo"},
+            {"Variable": "Densidad (bruta)", "Definición breve": "Proximidad en el espacio de productos respecto de las capacidades actuales del Ecuador.", "Cómo leerla": "Un valor mayor significa que el producto está más cerca de lo que Ecuador ya sabe exportar.", "Unidad / escala": "Continuo"},
+            {"Variable": "Percentil de densidad", "Definición breve": "Posición relativa de la densidad del Ecuador frente a otros países en el mismo producto (año 2024).", "Cómo leerla": "Cálculo por producto: percentil = (rank_density - 1) / (N - 1), donde el rango usa el promedio en caso de empates y N es el número de países en ese producto. Un valor de 0.80 significa que Ecuador está por encima de aproximadamente el 80% de los países en densidad para ese producto.", "Unidad / escala": "0-1"},
+            {"Variable": "Distancia recorrida", "Definición breve": "Distancia bilateral promedio ponderada recorrida por producto, usando como ponderadores los valores exportados bilateralmente entre el origen x y el destino y.", "Cómo leerla": "Un valor mayor implica que las exportaciones de ese producto se concentran en mercados de destino más lejanos.", "Unidad / escala": "Unidades de distancia (del archivo de distancias bilaterales)"},
+            {"Variable": "Exportadores efectivos", "Definición breve": "Número efectivo de exportadores competidores en ese producto (amplitud de competencia).", "Cómo leerla": "Un valor mayor suele implicar un campo competitivo más amplio.", "Unidad / escala": "Índice similar a un conteo"},
+            {"Variable": "Percentil DAI", "Definición breve": "Percentil del Índice de Alineación de la Demanda para Ecuador frente a los principales exportadores en cada producto.", "Cómo leerla": "Un percentil más alto indica que las relaciones comerciales del Ecuador están mejor alineadas con donde se concentra la demanda mundial de ese producto.", "Unidad / escala": "0-100"},
+            {"Variable": "Ventaja DAI", "Definición breve": "Percentil DAI del Ecuador menos el percentil mediano de los principales competidores.", "Cómo leerla": "Positivo = Ecuador supera a sus pares; negativo = Ecuador queda rezagado frente a ellos.", "Unidad / escala": "Puntos percentiles"},
+            {"Variable": "PCI", "Definición breve": "Índice de Complejidad del Producto: nivel de sofisticación del producto basado en las estructuras exportadoras globales.", "Cómo leerla": "Un valor mayor suele señalar un potencial de escalamiento de largo plazo más fuerte.", "Unidad / escala": "Continuo"},
+            {"Variable": "COG", "Definición breve": "Proxy de Ganancia de Perspectiva de Complejidad: potencial ganancia de capacidades al ingresar en el producto.", "Cómo leerla": "Un valor mayor sugiere mayor potencial estratégico de aprendizaje y escalamiento.", "Unidad / escala": "Continuo"},
+            {"Variable": "Crecimiento del mercado global % (5 años)", "Definición breve": "Tasa compuesta anual de crecimiento a 5 años del comercio mundial del producto.", "Cómo leerla": "Valores positivos y más altos indican una demanda global en expansión más rápida.", "Unidad / escala": "Porcentaje por año"},
+            {"Variable": "Crecimiento de las exportaciones del país % (5 años)", "Definición breve": "Tasa compuesta anual de crecimiento a 5 años de las exportaciones del Ecuador en el producto.", "Cómo leerla": "Un valor mayor indica que Ecuador está escalando más rápido en ese producto.", "Unidad / escala": "Porcentaje por año"},
+            {"Variable": "Exportaciones actuales del país (M USD)", "Definición breve": "Valor exportado por Ecuador en 2024 para el producto.", "Cómo leerla": "Un valor mayor implica una base exportadora actual más grande.", "Unidad / escala": "Millones de USD"},
+            {"Variable": "Ranking exportador del país (2024)", "Definición breve": "Posición global del Ecuador entre los exportadores de ese producto por valor.", "Cómo leerla": "Un número de ranking menor es mejor (por ejemplo, 3 es mejor que 20).", "Unidad / escala": "Ranking"},
+            {"Variable": "Cambio absoluto en cuota de mercado (pp)", "Definición breve": "Cambio en la participación de mercado mundial del Ecuador entre 2020 y 2024.", "Cómo leerla": "Positivo = Ecuador ganó participación; negativo = perdió participación.", "Unidad / escala": "Puntos porcentuales"},
+            {"Variable": "Cuota de mercado global", "Definición breve": "Participación del producto en el comercio mundial total (2024).", "Cómo leerla": "Un valor mayor significa que el producto es más importante en el comercio global.", "Unidad / escala": "Porcentaje"},
+            {"Variable": "Comercio total (miles de millones USD)", "Definición breve": "Valor total del comercio mundial del producto en 2024.", "Cómo leerla": "Un valor mayor significa un mercado global más grande.", "Unidad / escala": "Miles de millones de USD"},
+            {"Variable": "Tamaño del mercado accesible (miles de millones USD)", "Definición breve": "Proxy de demanda accesible basada en el alcance de mercado del Ecuador según su posicionamiento en red.", "Cómo leerla": "Un valor mayor sugiere que más demanda es alcanzable de manera realista.", "Unidad / escala": "Miles de millones de USD"},
+            {"Variable": "Razón mercado accesible / mercado total", "Definición breve": "Tamaño del mercado accesible dividido por el tamaño total del mercado global.", "Cómo leerla": "Un valor mayor implica que una mayor fracción de la demanda mundial parece estructuralmente alcanzable.", "Unidad / escala": "Porcentaje"},
+            {"Variable": "Índice de factibilidad", "Definición breve": "Puntaje compuesto de RCA continuo, densidad, exportadores efectivos y percentil DAI.", "Cómo leerla": "Un valor mayor implica una entrada más fácil o menos riesgosa dadas las capacidades actuales y la alineación de la red comercial.", "Unidad / escala": "0-1"},
+            {"Variable": "Índice de atractivo", "Definición breve": "Puntaje compuesto de PCI, COG, crecimiento del mercado accesible y tamaño del mercado accesible.", "Cómo leerla": "Un valor mayor implica mayor potencial y valor estratégico.", "Unidad / escala": "0-1"},
+            {"Variable": "Puntaje combinado de oportunidad", "Definición breve": "Puntaje final que combina factibilidad y atractivo usando el balance y los pesos definidos por el usuario.", "Cómo leerla": "Más alto = mejor oportunidad general bajo la configuración estratégica actual.", "Unidad / escala": "0-1"},
         ]
     )
     st.dataframe(glossary, use_container_width=True, hide_index=True)
 
-    st.markdown("## Algebra and Interpretation")
-    st.markdown("### Density Percentile")
+    st.markdown("## Álgebra e Interpretación")
+    st.markdown("### Percentil de Densidad")
     st.latex(r"\mathrm{DensityPercentile}_{z,i} = \frac{\mathrm{rank}_i(Density_{z,i})-1}{N_i-1}")
-    st.markdown("- `z`: country (Ecuador in this dashboard), `i`: product.")
-    st.markdown("- `rank_i(Density_{z,i})`: rank of Ecuador's density within the cross-country distribution for product `i` (average rank for ties).")
-    st.markdown("- `N_i`: number of countries available for product `i`.")
-    st.markdown("- Interpretation: 0.80 means Ecuador's density is above roughly 80% of countries for that same product.")
+    st.markdown("- `z`: país (Ecuador en este tablero), `i`: producto.")
+    st.markdown("- `rank_i(Density_{z,i})`: posición de la densidad del Ecuador dentro de la distribución entre países para el producto `i` (rango promedio en caso de empates).")
+    st.markdown("- `N_i`: número de países disponibles para el producto `i`.")
+    st.markdown("- Interpretación: 0.80 significa que la densidad del Ecuador está por encima de aproximadamente el 80% de los países para ese mismo producto.")
 
-    st.markdown("### Distance Travelled (by product)")
+    st.markdown("### Distancia Recorrida (por producto)")
     st.latex(r"\mathrm{DistanceTravelled}_i = \sum_y \left( Distance_{x,y} \times \frac{X_{x,y,i}}{\sum_y X_{x,y,i}} \right)")
-    st.markdown("- `X_{x,y,i}`: bilateral exports of product `i` from origin `x` to destination `y`.")
-    st.markdown("- Interpretation: weighted average distance travelled by product, where bilateral export value is the weight.")
+    st.markdown("- `X_{x,y,i}`: exportaciones bilaterales del producto `i` desde el origen `x` hacia el destino `y`.")
+    st.markdown("- Interpretación: distancia promedio ponderada recorrida por el producto, donde el valor exportado bilateral es el ponderador.")
 
-    st.markdown("### Accessible Market Size")
+    st.markdown("### Tamaño del Mercado Accesible")
     st.latex(
         r"\mathrm{AccessibleMarket}_{z,i} = \sum_{y \in \mathcal{A}_{z,i}} M_{i,y}"
     )
     st.latex(
         r"\mathcal{A}_{z,i} = \left\{ y : Distance_{z,y} \le \mathrm{DistanceTravelled}_{z,i}\ \mathrm{or}\ X_{z,y,i} \ge 100{,}000{,}000 \right\}"
     )
-    st.markdown("- `z`: exporter, `i`: product, `y`: destination market.")
-    st.markdown("- A market is accessible if it is within the product's observed distance profile **or** if the exporter already sells at least USD 100M of that product to that partner.")
-    st.markdown("- Interpretation: total demand in markets that are geographically reachable or already commercially proven at meaningful scale.")
+    st.markdown("- `z`: exportador, `i`: producto, `y`: mercado de destino.")
+    st.markdown("- Un mercado es accesible si está dentro del perfil observado de distancia del producto **o** si el exportador ya vende al menos USD 100 millones de ese producto a ese socio.")
+    st.markdown("- Interpretación: demanda total en mercados que son geográficamente alcanzables o ya probados comercialmente a escala relevante.")
 
-    st.markdown("### WNAI (Weighted Network Alignment Index)")
-    st.latex(
-        r"\mathrm{WNAI}_{z,i} = \sum_y \left[ \left( \frac{X_{z,y}/M_y}{X_z/WT} \right) \times \left( \frac{M_{i,y}}{M_y} \right) \times GDPShare_y \right]"
-    )
-    st.markdown("- `z`: exporter (Ecuador in this dashboard), `i`: product, `y`: partner market.")
-    st.markdown("- First term: relative pipe thickness (where exporter over-indexes vs world average).")
-    st.markdown("- Second term: product relevance in each partner's import basket.")
-    st.markdown("- Third term: partner economic weight.")
-    st.markdown("- Interpretation: higher WNAI means Ecuador's strongest trade links are better aligned with large, product-relevant markets.")
+    st.markdown("### DAI (Índice de Alineación de la Demanda)")
+    st.latex(r"\mathrm{DAI}_{z,i} = \sum_y C_{z,y}\,\omega_{i,y}")
+    st.latex(r"C_{z,y} = \frac{X_{z,y}/M_y}{X_z/WT}")
+    st.latex(r"\omega_{i,y} = \frac{M_{i,y}}{\sum_{y'} M_{i,y'}}")
+    st.markdown("- `z`: exportador (Ecuador en este tablero), `i`: producto, `y`: mercado socio.")
+    st.markdown("- `C_{z,y}` mide afinidad comercial revelada: compara la participación de Ecuador en las importaciones totales del mercado `y` con la participación global de Ecuador en el comercio mundial.")
+    st.markdown("- `\\omega_{i,y}` mide el peso de demanda específico del producto: la proporción de las importaciones mundiales del producto `i` que compra el mercado `y`.")
+    st.markdown("- Interpretación: el DAI es un promedio ponderado por demanda de las afinidades comerciales del Ecuador. Valores mayores que 1 significan que la demanda del producto `i` se concentra en mercados donde Ecuador tiene una presencia importadora relativamente superior a su peso global; valores menores que 1 significan que la demanda se concentra donde Ecuador tiene una presencia relativamente débil.")
 
 
 st.set_page_config(
-    page_title="Ecuador Opportunities",
+    page_title="Oportunidades del Ecuador",
     page_icon=":bar_chart:",
     layout="wide",
 )
 
 pages = [
-    st.Page(render_guide_and_glossary, title="Guide and glossary", icon=":material/menu_book:", default=True),
-    st.Page(Path("pages/1_Opportunity_Analysis.py"), title="Opportunity Analysis", icon=":material/insights:"),
-    st.Page(Path("pages/3_Anchored_Proximity_Analysis.py"), title="Anchored Proximity Analysis", icon=":material/account_tree:"),
-    st.Page(Path("pages/4_Comparison.py"), title="Comparison", icon=":material/compare_arrows:"),
+    st.Page(render_guide_and_glossary, title="Guía y glosario", icon=":material/menu_book:", default=True),
+    st.Page(Path("pages/1_Opportunity_Analysis.py"), title="Análisis de Oportunidades", icon=":material/insights:"),
+    st.Page(Path("pages/3_Anchored_Proximity_Analysis.py"), title="Análisis de Proximidad Anclada", icon=":material/account_tree:"),
+    st.Page(Path("pages/4_Comparison.py"), title="Comparación", icon=":material/compare_arrows:"),
 ]
 pg = st.navigation(pages, position="sidebar", expanded=True)
 pg.run()

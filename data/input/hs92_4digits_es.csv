@@ -1,0 +1,1242 @@
+hs4,product_name_short,product_name_short_es
+0101,Horses,Caballos
+0102,Bovine,Bovinos
+0103,Swine,Porcinos
+0104,Sheep,Ovinos
+0105,Fowl,Aves de corral
+0106,Other live animals,Otros animales vivos
+0201,Beef,Carne bovina
+0202,Beef (frozen),Carne bovina congelada
+0203,Pork,Carne porcina
+0204,Lamb,Carne ovina
+0205,Horse meat,Carne de caballo
+0206,Edible offal,Despojos comestibles
+0207,Poultry,Carne de ave
+0208,Other meat,Otras carnes
+0209,Pig and poultry fat,Grasa de cerdo y de ave
+0210,Preserved meat,Carne conservada
+0301,Live Fish,Peces vivos
+0302,"Fish, excluding fillets","Pescado, excluidos los filetes"
+0303,"Frozen fish, excluding fillets","Pescado congelado, excluidos los filetes"
+0304,Fish fillets,Filetes de pescado
+0305,Preserved fish,Pescado conservado
+0306,Crustaceans,Crustáceos
+0307,Molluscs,Moluscos
+0401,Milk,Leche
+0402,"Milk, concentrated",Leche concentrada
+0403,Fermented milk products,Productos lácteos fermentados
+0404,Whey,Suero de leche
+0405,Butter,Mantequilla
+0406,Cheese,Queso
+0407,"Eggs, in shell",Huevos con cáscara
+0408,Egg yolks,Yemas de huevo
+0409,Honey,Miel
+0410,"Edible animal products, n.e.c.","Productos animales comestibles, n.e.p."
+0501,"Human hair, unworked",Cabello humano en bruto
+0502,Brushmaking hair,Pelo para cepillería
+0503,Horsehair,Crin
+0504,"Animal guts, except fish","Tripas de animales, excepto pescado"
+0505,Feathers and down,Plumas y plumón
+0506,"Bones, simply prepared",Huesos simplemente preparados
+0507,Whalebone & horns,Barbas de ballena y cuernos
+0508,Coral and shells,Coral y conchas
+0509,Sponges of animal origin,Esponjas de origen animal
+0510,Animal products used in pharmaceuticals,Productos animales utilizados en productos farmacéuticos
+0511,Animal products n.e.c.,Productos animales n.e.p.
+0601,Flower bulbs,Bulbos florales
+0602,Other live plants,Las demás plantas vivas
+0603,Cut flowers,Flores cortadas
+0604,Other parts of plants,Las demás partes de plantas
+0701,Potatoes,Papas
+0702,Tomatoes,Tomates
+0703,"Onions, shallots, garlic","Cebollas, chalotes y ajos"
+0704,"Cabbages, cauliflowers, broccoli","Coles, coliflores y brócoli"
+0705,Lettuce,Lechuga
+0706,Carrots & turnips,Zanahorias y nabos
+0707,Cucumbers,Pepinos
+0708,Legumes,Legumbres
+0709,Other vegetables,Las demás hortalizas
+0710,Frozen vegetables,Hortalizas congeladas
+0711,"Vegetables, provisionally preserved",Hortalizas conservadas provisionalmente
+0712,"Vegetables, dried",Hortalizas secas
+0713,"Legumes, dried",Legumbres secas
+0714,Tubers,Tubérculos
+0801,Cashew nuts & coconuts,Anacardos y cocos
+0802,Other nuts,Otros frutos secos
+0803,Bananas and plantains,Bananas y plátanos
+0804,"Avocados, pineapples, mangos, etc.","Aguacates, piñas, mangos, etc."
+0805,Citrus fruit,Frutas cítricas
+0806,Grapes,Uvas
+0807,Melons and papayas,Melones y papayas
+0808,Apples & pears,Manzanas y peras
+0809,Peaches & cherries,Duraznos y cerezas
+0810,Other fresh fruit,Otras frutas frescas
+0811,"Fruits and nuts, frozen",Frutas y frutos secos congelados
+0812,"Fruits and nuts, provisionally preserved",Frutas y frutos secos conservados provisionalmente
+0813,"Fruits, dried",Frutas secas
+0814,Peel of citrus fruit or melons,Cáscaras de agrios o de melones
+0901,Coffee,Café
+0902,Tea,Té
+0903,Mate,Mate
+0904,Pepper,Pimienta
+0905,Vanilla,Vainilla
+0906,Cinnamon,Canela
+0907,Cloves,Clavo de olor
+0908,Nutmeg,Nuez moscada
+0909,"Anise, fennel, etc.","Anís, hinojo, etc."
+0910,Spices,Especias
+1001,Wheat and meslin,Trigo y morcajo
+1002,Rye,Centeno
+1003,Barley,Cebada
+1004,Oats,Avena
+1005,Corn,Maíz
+1006,Rice,Arroz
+1007,Grain sorghum,Sorgo de grano
+1008,Other cereals,Los demás cereales
+1101,Wheat or meslin flour,Harina de trigo o morcajo
+1102,Cereal flours,Harinas de cereales
+1103,Cereal meals,Harinas gruesas de cereales
+1104,Worked cereal grains,Granos de cereal trabajados
+1105,Potato flour,Harina de papa
+1106,Flour of dried legumes,Harina de legumbres secas
+1107,Malt,Malta
+1108,Starches,Almidones
+1109,Wheat gluten,Gluten de trigo
+1201,Soya beans,Habas de soja
+1202,Peanuts,Maní
+1203,Copra,Copra
+1204,Linseed,Linaza
+1205,Rape or colza seeds,Semillas de colza o nabina
+1206,Sunflower seeds,Semillas de girasol
+1207,Other oil seeds,Las demás semillas oleaginosas
+1208,Flours of oil seeds,Harinas de semillas oleaginosas
+1209,Seeds used for sowing,Semillas para siembra
+1210,Hop cones,Conos de lúpulo
+1211,"Plants used in perfumery, pharmacy or insecticide","Plantas utilizadas en perfumería, farmacia o insecticidas"
+1212,Seaweeds & edible vegetable products,Algas y productos vegetales comestibles
+1213,Cereal straw and husks,Paja y cascarillas de cereales
+1214,Forage products,Productos forrajeros
+1301,Lac,Goma laca
+1302,Vegetable saps and extracts,Jugos y extractos vegetales
+1401,Vegetable materials used for plaiting,Materias vegetales utilizadas para trenzado
+1402,Vegetable materials used as stuffing,Materias vegetales utilizadas como relleno
+1403,Vegetable materials used for brooms,Materias vegetales utilizadas para escobas
+1404,Vegetable products n.e.c.,Productos vegetales n.e.p.
+1501,"Pig and poultry fat, rendered","Pig y poultry fat, rendered"
+1502,"Bovine, sheep and goat fats","Grasas bovinas, ovinas y caprinas"
+1503,"Lard oil, tallow oil etc.","Lard aceite, tallow aceite etc."
+1504,Fish oils,Aceites de pescado
+1505,Wool grease,Lana grease
+1506,Other animal fats and oils,Otras grasas y aceites animales
+1507,Soybean oil,Soybean aceite
+1508,Peanut oil,Peanut aceite
+1509,Olive oil,Olive aceite
+1510,"Olive oil, blended","Olive aceite, blended"
+1511,Palm oil,Aceite de palma
+1512,Sunflower seed oil,Sunflower semilla aceite
+1513,Coconut & palm kernel oil,Coco y aceite de palmiste
+1514,"Rapeseed, colza or mustard oil,","Rapeseed, colza o mustard aceite"
+1515,Other vegetable fats and oils,Otros vegetal fats y aceites
+1516,"Vegetable fats, hydrogenated","Vegetal fats, hydrogenated"
+1517,Margarine,Margarina
+1518,"Animal or vegetable fats and oils, processed","Grasas y aceites animales o vegetales, procesados"
+1519,Stearic acid,Ácido esteárico
+1520,Glycerol,Glicerol
+1521,Vegetable waxes and beeswax,Vegetal waxes y beeswax
+1522,Degras and wax residues,Degras y wax residues
+1601,Sausages,Salchichas y productos similares de carne
+1602,Other prepared or preserved meat,Otros preparado o conservado meat
+1603,Extracts and juices of meat or fish,Extractos y juices de meat o pescado
+1604,Prepared or preserved fish,Preparado o conservado pescado
+1605,Prepared aquatic invertibrates,Invertebrados acuáticos preparados
+1701,Sugarcane & sucrose,Sugarcane y sucrose
+1702,Other sugars,Otros sugars
+1703,Molasses,Melaza
+1704,Confectionery sugar,Azúcar de confitería
+1801,Cocoa beans,Granos de cacao
+1802,Cocoa residues,Residuos de cacao
+1803,Cocoa paste,Pasta de cacao
+1804,Cocoa butter,Manteca de cacao
+1805,Cocoa powder,Cacao en polvo
+1806,Chocolates,Chocolate y demás preparaciones con cacao
+1901,Malt extract,Extracto de malta
+1902,Pasta,Pastas alimenticias
+1903,Tapioca,Tapioca
+1904,Cereal foods,Alimentos a base de cereales
+1905,Bakery products,Productos de panadería
+2001,Pickled fruits and vegetables,Pickled frutas y hortalizas
+2002,"Tomatoes, prepared or preserved","Tomatoes, preparado o conservado"
+2003,"Mushrooms, prepared or preserved","Mushrooms, preparado o conservado"
+2004,"Other vegetables, frozen","Otros hortalizas, congelado"
+2005,"Other vegetables, prepared or preserved","Las demás hortalizas, preparadas o conservadas"
+2006,"Vegetables, fruits and nuts, preserved by sugar","Hortalizas, frutas y frutos secos, conservado by sugar"
+2007,"Jams, jellies and marmalades",Mermeladas y jaleas de frutas
+2008,"Fruits and nuts, otherwise prepared","Frutas y frutos secos, preparadas de otro modo"
+2009,Fruit juices,Jugos de fruta
+2101,Coffee extracts,Extractos de café
+2102,Yeasts,Levaduras
+2103,Sauces and seasonings,Sauces y seasonings
+2104,Soups and broths,Soups y broths
+2105,Ice cream,Helados
+2106,Food preparations n.e.c.,Preparaciones alimenticias n.e.p.
+2201,Waters,Aguas
+2202,"Waters, flavored or sweetened","Waters, flavored o sweetened"
+2203,Beer,Cerveza
+2204,Wine,Vino
+2205,"Wine, flavored",Vino aromatizado
+2206,Other fermented beverages,Otros fermented beverages
+2207,Ethyl alcohol > 80%,Alcohol etílico > 80%
+2208,Spirits < 80% alcohol,Bebidas espirituosas < 80% de alcohol
+2209,Vinegars,Vinagre
+2301,"Flours of fish, for animal feed",Harinas de pescado para alimentos para animales
+2302,Cereal residues,Residuos de cereales
+2303,Starch residues,Residuos de la industria del almidón
+2304,Solid soybean residues,Residuos sólidos de soja
+2305,Solid peanut residues,Residuos sólidos de maní
+2306,Solid vegetable oil and fat residues,Residuos sólidos de aceites y grasas vegetales
+2307,Wine lees,Lías de vino
+2308,Vegetable materials for animal feeding,Materiales vegetales para alimentación animal
+2309,Animal feed,Alimentos para animales
+2401,Unmanufactured tobacco,Tabaco sin manufacturar
+2402,Cigars and cigarettes,Cigars y cigarettes
+2403,Other manufactured tobacco,Otros manufactured tabaco
+2501,Salt,Sal
+2502,Unroasted iron pyrites,Unroasted hierro pyrites
+2503,"Sulphur, crude",Azufre en bruto
+2504,Natural graphite,Grafito natural
+2505,Natural sands,Arenas naturales
+2506,Quartz,Cuarzo
+2507,Kaolin,Caolín
+2508,Clays,Arcillas
+2509,Chalk,Creta
+2510,Natural calcium phosphates,Fosfatos de calcio naturales
+2511,Natural barium sulfate,Sulfato de bario natural
+2512,Siliceous fossil meals and earths,Harinas silíceas fósiles y tierras silíceas
+2513,Natural abrasives,Abrasivos naturales
+2514,Slate,Pizarra
+2515,Marble,Mármol
+2516,Granite,Granito
+2517,Gravel,Grava y piedra triturada
+2518,Dolomite,Dolomita
+2519,Natural magnesia,Magnesia natural
+2520,Gypsum,Yeso
+2521,Limstone,Caliza
+2522,Quicklime,Cal viva
+2523,Cements,Cementos
+2524,Asbestos,Asbesto
+2525,Mica,Mica
+2526,Natural steatite,Esteatita natural
+2527,Natural cryolite,Criolita natural
+2528,Natural borates,Boratos naturales
+2529,Feldspar,Feldespato
+2530,Mineral substances n.e.c.,Sustancias minerales n.e.p.
+2601,Iron ores and concentrates,Hierro minerales y concentrates
+2602,Manganese > 47% by weight,Minerales de manganeso > 47% en peso
+2603,Copper ore,Mineral de cobre
+2604,Nickel ore,Mineral de níquel
+2605,Cobalt ore,Cobalt mineral
+2606,Aluminum ore,Aluminio mineral
+2607,Lead ore,Plomo mineral
+2608,Zinc ore,Mineral de zinc
+2609,Tin ore,Mineral de estaño
+2610,Chromium ore,Chromium mineral
+2611,Tungsten ore,Tungsten mineral
+2612,Uranium ore,Uranium mineral
+2613,Molybdenum ore,Molybdenum mineral
+2614,Titanium ore,Titanium mineral
+2615,Zirconium ore,Zirconium mineral
+2616,Precious metal ores,Minerales de metales preciosos
+2617,Other ores,Otros minerales
+2618,Granulated iron or steel slag,Granulated hierro o acero slag
+2619,Iron or steel slag,Hierro o acero slag
+2620,"Slag, ash and residues containing metals","Slag, ash y residues containing metales"
+2621,Other slag and ash,Las demás escorias y cenizas
+2701,Coal,Carbón
+2702,Lignite,Lignito
+2703,Peat,Turba
+2704,Coke,Coque
+2705,Non-petroleum gases,Gases no derivados del petróleo
+2706,"Tar distilled from coal, lignite etc.","Alquitrán destilado de carbón, lignito, etc."
+2707,Oils etc. from high temperature coal tar,Aceites etc. from high temperature coal tar
+2708,Pitch and pitch coke,Pitch y pitch coke
+2709,"Petroleum oils, crude","Aceites de petróleo, crudos"
+2710,"Petroleum oils, refined","Aceites de petróleo, refinados"
+2711,Petroleum gases,Gases de petróleo
+2712,Petroleum jelly,Vaselina
+2713,Petroleum coke,Coque de petróleo
+2714,"Bitumen and asphalt, natural",Betún y asfalto naturales
+2715,Bituminous mixtures,Mezclas bituminosas
+2716,Electrical energy,Energía eléctrica
+2801,Iodine,Yodo
+2802,"Sulfur, sublimed or precipitated","Sulfur, sublimed o precipitated"
+2803,Carbon,Carbono
+2804,Silicon & rare gases,Silicon y rare gases
+2805,Rare-earth metals,Rare-earth metales
+2806,Hydrochloric acid,Ácido clorhídrico
+2807,"Sulfiric acid, oleum",Ácido sulfúrico y oleum
+2808,Sulfonitric acids,Ácidos sulfonítricos
+2809,Phosphoric acid etc.,"Ácido fosfórico, etc."
+2810,Oxides of boron; boric acids,Óxidos de boro; ácidos bóricos
+2811,Other inorganic acids,Los demás ácidos inorgánicos
+2812,Halides of nonmetals,Halides de nonmetals
+2813,Sulfides of nonmetals,Sulfides de nonmetals
+2814,Ammonia,Amoníaco
+2815,Sodium hydroxide,Hidróxido de sodio
+2816,Hydroxides or peroxides of magnesium,Hidróxidos o peróxidos de magnesio
+2817,Zinc oxide or peroxide,Óxido o peróxido de zinc
+2818,Aluminum oxide,Óxido de aluminio
+2819,Chromium oxides and hydroxides,Óxidos e hidróxidos de cromo
+2820,Manganese oxides,Óxidos de manganeso
+2821,Iron oxides and hydroxides,Óxidos e hidróxidos de hierro
+2822,Cobalt oxides and hydroxides,Óxidos e hidróxidos de cobalto
+2823,Titanium oxides,Óxidos de titanio
+2824,Lead oxides,Plomo oxides
+2825,"Metal base oxides, n.e.c.","Óxidos metálicos básicos, n.e.p."
+2826,Flourides,Fluoruros
+2827,"Chlorides, bromides, iodides etc.","Cloruros, bromuros, yoduros, etc."
+2828,Hyopchlorites,Hipocloritos
+2829,Sodium chlorate,Clorato de sodio
+2830,Sulfides; polysulfides,Sulfuros y polisulfuros
+2831,Dithionites and sulfoxylates,Dithionites y sulfoxylates
+2832,Sulfites,Sulfitos
+2833,Sulfates,Sulfatos
+2834,"Nitrites, nitrates",Nitritos y nitratos
+2835,Phosphates,Fosfatos
+2836,Carbonates,Carbonatos
+2837,Cyanides,Cianuros
+2838,"Fulminates, cyanates and thiocyanates","Fulminates, cyanates y thiocyanates"
+2839,Silicates,Silicatos
+2840,Borates,Boratos
+2841,Salts of oxometallic acids,Sales de ácidos oxometálicos
+2842,Other salts of acids,Las demás sales de ácidos
+2843,Compounds of precious metals,Compounds de preciosos metales
+2844,Uranium,Uranio
+2845,Non-radioactive isotopes,Isótopos no radiactivos
+2846,Compounds of rare-earth metals,Compuestos de metales de tierras raras
+2847,Hydrogen peroxide,Peróxido de hidrógeno
+2848,Phosphides,Fosfuros
+2849,Carbides,Carburos
+2850,"Hydrides, nitrides, azides, silicides and borides","Hydrides, nitrides, azides, silicides y borides"
+2851,"Inorganic compounds, liquid or compressed air","Inorganic compounds, liquid o comprimido air"
+2901,Acyclic hydrocarbons,Hidrocarburos acíclicos
+2902,Cyclic hydrocarbons,Hidrocarburos cíclicos
+2903,Halogenated derivatives of hydrocarbons,Derivados halogenados de hidrocarburos
+2904,"Sulfonated, nitrated derivatives of hydrocarbons",Derivados sulfonados o nitrados de hidrocarburos
+2905,Acyclic alcohols,Alcoholes acíclicos
+2906,Cyclic alcohols,Alcoholes cíclicos
+2907,"Phenols, phenol-alcohols",Fenoles y fenol-alcoholes
+2908,Derivatives of phenols,Derivados de fenoles
+2909,Ethers,Éteres
+2910,Epoxides,Epóxidos
+2911,Acetals and hemiacetals,Acetals y hemiacetals
+2912,Aldehydes,Aldehídos
+2913,Derivatives of aldehydes,Derivados de aldehídos
+2914,Ketones and quinones,Ketones y quinones
+2915,Saturated acyclic monocarboxylic acids,Ácidos monocarboxílicos acíclicos saturados
+2916,Unsaturated acyclic monocarboxylic acids,Ácidos monocarboxílicos acíclicos insaturados
+2917,Polycarboxylic acids,Ácidos policarboxílicos
+2918,Carboxylic acids with additional oxygen function,Ácidos carboxílicos con función oxigenada adicional
+2919,Phosporic esters,Ésteres fosfóricos
+2920,Esters of other inorganic acids of nonmetals,Ésteres de otros ácidos inorgánicos de no metales
+2921,Amine-function compounds,Compuestos con función amina
+2922,Oxygen-function amino-compounds,Aminocompuestos con función oxigenada
+2923,Quaternary ammonium salts and hydroxides,Sales e hidróxidos de amonio cuaternario
+2924,Carboxyamide-function compounds,Compuestos con función carboxiamida
+2925,Carboxyimide-function compounds,Compuestos con función carboxiimida
+2926,Nitrile-function compounds,Compuestos con función nitrilo
+2927,"Diazo-, azo-, or azoxy-compounds","Compuestos diazo-, azo- o azoxi-"
+2928,Organix derivatives of hydrazine,Derivados orgánicos de la hidrazina
+2929,Isocyanates,Isocianatos
+2930,Organo-sulfur compounds,Compuestos organosulfurados
+2931,Other organo-inorganic compounds,Otros organo-inorganic compounds
+2932,Heterocyclic compounds with oxygen hetero-atom(s) only,Compuestos heterocíclicos solo con heteroátomos de oxígeno
+2933,Heterocyclic compounds with nitrogen hetero-atom(s) only,Compuestos heterocíclicos solo con heteroátomos de nitrógeno
+2934,Nucleic acids and their salts,Ácidos nucleicos y sus sales
+2935,Sulfonamides,Sulfonamidas
+2936,Vitamins,Vitaminas
+2937,Hormones,Hormonas
+2938,Glycosides,Glucósidos
+2939,Vegetable alkaloids,Vegetal alkaloids
+2940,"Other sugars, chemically pure","Otros sugars, chemically pure"
+2941,Antibiotics,Antibióticos
+2942,Other organic compounds,Otros organic compounds
+3001,Heparin for therapeutic use,Heparina para uso terapéutico
+3002,Serums and vaccines,Serums y vaccines
+3003,"Medicaments, not packaged",Medicamentos sin envasar
+3004,"Medicaments, packaged",Medicamentos envasados
+3005,"Wadding, gauze and bandages","Wadding, gauze y bandages"
+3006,Pharmaceutical goods,Productos farmacéuticos
+3101,Animal or vegetable fertilizers,Fertilizantes animales o vegetales
+3102,Nitrogenous fertilizers,Nitrogenous fertilizantes
+3103,Phosphatic fertilizers,Phosphatic fertilizantes
+3104,Potassic fertilizers,Potassic fertilizantes
+3105,Mixed fertilizers,Mixed fertilizantes
+3201,Vegetable tanning extracts,Vegetal tanning extractos
+3202,Synthetic tanning substances,Sustancias curtientes sintéticas
+3203,Coloring matter of animal or vegetable origin,Materias colorantes de origen animal o vegetal
+3204,Synthetic organic coloring matter,Materias colorantes orgánicas sintéticas
+3205,Color lakes,Lacas colorantes
+3206,Other coloring matter,Otros materias colorantes
+3207,Prepared pigments,Preparado pigments
+3208,"Paints and varnishes, nonaqueous","Paints y varnishes, nonaqueous"
+3209,"Paints and varnishes, aqueous","Paints y varnishes, aqueous"
+3210,Other paints and varnishes,Otros paints y varnishes
+3211,Prepared driers,Preparado driers
+3212,"Pigments, nonaqueous",Pigmentos no acuosos
+3213,Artists' colors,Colores para artistas
+3214,Glaziers' putty,Masillas de vidriero
+3215,Ink,Tintas
+3301,Essential oils,Essential aceites
+3302,Mixtures of odoriferous subtances,Mixtures de odoriferous subtances
+3303,Perfumes,Perfumes
+3304,Make-up preparations,Make-up preparaciones
+3305,Hair products,Productos capilares
+3306,Dental hygiene products,Productos de higiene dental
+3307,Toiletries,Artículos de tocador
+3401,Soap,Jabón
+3402,Cleaning products,Productos de limpieza
+3403,Lubricants,Lubricantes
+3404,Artificial and prepared waxes,Artificial y preparado waxes
+3405,Polishes and creams,Polishes y creams
+3406,Candles,Velas
+3407,Modeling pastes,Pastas para modelar
+3501,Casein,Caseína
+3502,Albumins,Albúminas
+3503,Gelatin,Gelatina
+3504,Peptones,Peptonas
+3505,Dextrins and other modified starches,Dextrins y otros modified starches
+3506,Glues and adhesives,Glues y adhesives
+3507,Enzymes,Enzimas
+3601,Propellant powders,Pólvoras propulsoras
+3602,"Prepared explosives, except gunpowder","Preparado explosives, except gunpowder"
+3603,Detonators,Detonadores
+3604,Fireworks,Fuegos artificiales
+3605,Matches,Fósforos
+3606,Ferrocerium and other pyrophoric alloys,Ferrocerium y otros pyrophoric alloys
+3701,Photographic plates,Placas fotográficas
+3702,Photographic film in rolls,Película fotográfica en rollos
+3703,Photographic paper,Papel fotográfico
+3704,"Photographic film, not developed",Película fotográfica sin revelar
+3705,"Photographic film, developed",Película fotográfica revelada
+3706,Motion-picture film,Motion-picture película
+3707,Chemical preparations for photographic uses,Preparaciones químicas para usos fotográficos
+3801,Artificial graphite,Grafito artificial
+3802,Activated carbon,Carbón activado
+3803,Tall oil,Tall aceite
+3804,Residual lyes,Lejías residuales
+3805,Turpentines,Trementinas
+3806,Rosin and resin acids,Colofonia y ácidos resínicos
+3807,Wood tar and oils,Madera tar y aceites
+3808,"Insecticides, rodenticides, fungicides, etc.","Insecticidas, rodenticidas, fungicidas, etc."
+3809,Finishing agents,Aprestos y productos de acabado
+3810,Pickling preparations for metal surfaces,Preparaciones para el decapado de superficies metálicas
+3811,Anti-knock,Preparaciones antidetonantes
+3812,Stabilizers for rubber or plastic,Estabilizantes para caucho o plástico
+3813,Preparations for fire extinguishers,Preparaciones para extintores de incendios
+3814,Organic composite solvents and thinners,Organic composite solvents y thinners
+3815,Catalytic preparations,Catalytic preparaciones
+3816,Refractory cements,Cementos refractarios
+3817,Mixed alkylbenzenes,Alquilbencenos mezclados
+3818,Chemical elements for electronics,Elementos químicos para electrónica
+3819,Hydraulic fluids,Fluidos hidráulicos
+3820,Antifreezing preparation,Antifreezing preparación
+3821,Prepared culture media for micro-organisms,Medios de cultivo preparados para microorganismos
+3822,Diagnostic or laboratory reagents,Diagnostic o laboratory reagents
+3823,Industrial monocarboxylic fatty acids,Ácidos grasos monocarboxílicos industriales
+3901,Polymers of ethylene,Polímeros de etileno
+3902,Polymers of propylene,Polímeros de propileno
+3903,Polymers of styrene,Polymers de styrene
+3904,Polymers of vinyl chloride,Polymers de vinyl chloride
+3905,Polymers of vinyl acetate,Polymers de vinyl acetate
+3906,Acrylic polymers,Polímeros acrílicos
+3907,Polyacetals,Poliacetales
+3908,Polyamides,Poliamidas
+3909,Amino-resins,Aminorresinas
+3910,Silicones in primary forms,Siliconas en formas primarias
+3911,Petroleum resins,Resinas de petróleo
+3912,Cellulose n.e.c.,Celulosa n.e.p.
+3913,Natural polymers,Polímeros naturales
+3914,Ion-exchangers based on polymers,Intercambiadores de iones a base de polímeros
+3915,Plastic waste,Plástico desechos
+3916,Monofilament,Monofilamentos
+3917,Plastic tubes and fittings,Tubos y accesorios de plástico
+3918,Plastic floor coverings,Plástico floor coverings
+3919,Self-adhesive plastic sheets,Self-adhesive plástico hojas
+3920,"Other plates of plastics, noncellular and not reinforced","Las demás placas de plástico, no celulares ni reforzadas"
+3921,"Other plastic plates, sheets etc.","Las demás placas, hojas y láminas de plástico"
+3922,"Baths, sinks etc.","Bañeras, lavabos, etc."
+3923,Packing lids,Tapas para envases
+3924,Plastic household articles,Artículos domésticos de plástico
+3925,Plastic builders' ware,Artículos de plástico para construcción
+3926,Other articles of plastic,Otros artículos de plástico
+4001,Natural rubber,Caucho natural
+4002,Synthetic rubber,Caucho sintético
+4003,Reclaimed rubber,Reclaimed caucho
+4004,Scrap of rubber,Chatarra de caucho
+4005,Compounded rubber,Compounded caucho
+4006,Unvulcanized rubber rods,Unvulcanized caucho rods
+4007,Vulcanized rubber thread and cord,Vulcanized caucho thread y cord
+4008,Vulcanized rubber plates,Vulcanized caucho placas
+4009,Vulcanized rubber tubes,Tubos de caucho vulcanizado
+4010,Conveyor belts of vulcanized rubber,Conveyor belts de vulcanized caucho
+4011,New pneumatic tires of rubber,Nuevos neumáticos neumáticos de caucho
+4012,Used pneumatic tires of rubber,Neumáticos usados de caucho
+4013,Rubber inner tubes,Cámaras de caucho
+4014,Rubber hygenic or pharmeceutical items,Caucho hygenic o pharmeceutical items
+4015,Vulcanized rubber articles of apparel,Vulcanized caucho artículos de apparel
+4016,Other articles of vulcanized rubber,Otros artículos de vulcanized caucho
+4017,Hard rubber,Hard caucho
+4101,Raw hides of bovines or equines,Cueros en bruto de bovinos o equinos
+4102,Raw skins of sheep or lambs,Pieles en bruto de ovinos o corderos
+4103,Other raw hides and skins,Otros cueros en bruto y pieles
+4104,Tanned hides of bovines or equines,Cueros curtidos de bovinos o equinos
+4105,Tanned sheepskins,Pieles curtidas de ovino
+4106,Tanned skins of other animals,Pieles curtidas de los demás animales
+4107,Bovine leather further prepared,Bovinos cuero further preparado
+4108,Chamois leather,Chamois cuero
+4109,Patent leather,Patent cuero
+4110,Waste of leather,Desechos de cuero
+4111,Composition leather,Composition cuero
+4201,Saddlery and harnesses,Saddlery y harnesses
+4202,Trunks or cases,Trunks o cases
+4203,Leather apparel,Cuero apparel
+4204,Articles of leather for technical uses,Artículos de cuero para usos técnicos
+4205,Other articles of leather,Otros artículos de cuero
+4206,Articles of gut,Artículos de tripa
+4301,Other raw furskins,Las demás pieles finas en bruto
+4302,Other tanned furskins,Las demás pieles finas curtidas o adobadas
+4303,Furskin apparel,Prendas de peletería
+4304,Artificial fur,Peletería artificial
+4401,Fuel wood,Fuel madera
+4402,Wood charcoal,Madera charcoal
+4403,Wood in the rough,Madera en bruto
+4404,Strips and other pieces of wood,Strips y otros pieces de madera
+4405,Wood wool or flour,Lana o harina de madera
+4406,Wooden railway ties,De madera ferroviarios ties
+4407,Wood sawn lengthwise,Madera aserrada longitudinalmente
+4408,Sheets for veneering for plywood,Hojas para chapado de madera contrachapada
+4409,Wood shaped along its edges,Madera shaped along its edges
+4410,Particle board and similar board,Particle board y similar board
+4411,Fiberboard of wood,Fiberboard de madera
+4412,Plywood,Madera contrachapada
+4413,Densified wood,Densified madera
+4414,Wooden frames,De madera monturas
+4415,Packing boxes,Embalaje boxes
+4416,"Casks, barrels, etc. of wood","Casks, barrels, etc. de madera"
+4417,Wooden tools,Herramientas de madera
+4418,Wood carpentry for construction,Carpintería de madera para construcción
+4419,Wooden kitchenware,De madera kitchenware
+4420,"Wood marquetry, ornaments, etc.","Madera marquetry, ornaments, etc."
+4421,Other articles of wood,Otros artículos de madera
+4501,"Natural cork, raw",Corcho natural en bruto
+4502,"Natural cork, debacked",Corcho natural descortezado
+4503,Articles of natural cork,Artículos de corcho natural
+4504,Agglomerated cork,Corcho aglomerado
+4601,Products of plaiting materials,Productos de materias trenzables
+4602,Basketwork,Cestería
+4701,Mechanical woodpulp,Pasta mecánica de madera
+4702,"Chemical woodpulp, dissolving grade","Químico woodpulp, dissolving grade"
+4703,"Chemical woodpulp, soda or sulfate","Químico woodpulp, soda o sulfato"
+4704,"Chemical woodpulp, sulfite","Químico woodpulp, sulfite"
+4705,Semichemical woodpulp,Pasta semiquímica de madera
+4706,Pulps of recovered paper fibers,Pulps de recovered papel fibras
+4707,Paper waste,Desechos de papel
+4801,Newsprint,Papel prensa
+4802,Paper used for graphic purposes,Papel para usos gráficos
+4803,Tissue,Papel tisú
+4804,Uncoated kraft paper and paperboard,Uncoated kraft papel y cartón
+4805,Other uncoated paper and paperboard,Los demás papeles y cartones sin estucar
+4806,Transparent paper,Transparent papel
+4807,Uncoated composite paper,Uncoated composite papel
+4808,Corrugated paper and paperboard,Corrugated papel y cartón
+4809,Carbon paper,Carbon papel
+4810,"Paper and paperboard, coated with kaolin","Papel y cartón, coated con kaolin"
+4811,"Cellulose wadding, coated",Guata de celulosa recubierta
+4812,Filter blocks of paper pulp,Filter blocks de papel pulp
+4813,Cigarette paper,Cigarette papel
+4814,Wallpaper,Papel pintado
+4815,Floor coverings of paper,Floor coverings de papel
+4816,Other carbon paper,Los demás papeles carbón
+4817,Letterstock,Artículos de correspondencia
+4818,Toilet paper,Papel higiénico
+4819,Cardboard packing containers,Envases de cartón para embalaje
+4820,Notebooks,Cuadernos
+4821,Paper labels,Papel labels
+4822,"Bobbins, spools, cops of paper","Bobbins, spools, cops de papel"
+4823,Other paper cut to size,Otros papel cut to size
+4901,"Books, brochures etc.","Libros, folletos, etc."
+4902,"Newspapers, journals and periodicals","Newspapers, journals y periodicals"
+4903,Children's books,Libros infantiles
+4904,"Music, printed or in manuscript","Music, printed o in manuscript"
+4905,Maps,Mapas
+4906,"Architectural, engineering, etc. drawings","Planos y dibujos de arquitectura, ingeniería, etc."
+4907,Unused stamps,Sellos sin usar
+4908,Transfers (decalcomanias),Calcomanías
+4909,Printed or illustrated postcards,Printed o illustrated postcards
+4910,Calendars,Calendarios
+4911,Other printed matter,Otros printed matter
+5001,Silkworm cocoons,Capullos de seda
+5002,Raw silk,Seda en bruto
+5003,Silk waste,Desechos de seda
+5004,Silk yarn,Hilado de seda
+5005,Yarn from silk waste,Hilado de desperdicios de seda
+5006,"Silk yarn, for retail sale",Hilado de seda para venta al por menor
+5007,Woven silk fabrics,Tejidos de seda
+5101,Wool,Lana
+5102,Animal hair,Pelo animal
+5103,Wool or animal hair waste,Desechos de lana o pelo animal
+5104,Garnetted stock of wool or animal hair,Fibras regeneradas de lana o pelo animal
+5105,"Wool, combed",Lana peinada
+5106,"Yarn of carded wool, not for retail sale","Hilado de lana cardada, no para venta al por menor"
+5107,"Yarn of combed wool, not for retail sale","Hilado de lana peinada, no para venta al por menor"
+5108,"Yarn of animal hair, not for retail sale","Hilados de pelo animal, no para venta al por menor"
+5109,"Yarn of wool or animal hair, for retail sale","Hilados de lana o pelo animal, para venta al por menor"
+5110,Yarn of coarse animal hair or of horsehair,Hilados de pelo animal grueso o crin
+5111,Woven fabrics of carded wool,Tejidos de carded lana
+5112,Woven fabrics of combed wool,Tejidos de combed lana
+5113,Woven fabrics of coarse animal hair,Tejidos de pelo animal grueso
+5201,Raw cotton,Algodón en bruto
+5202,Cotton waste,Algodón desechos
+5203,"Cotton, carded or combed","Algodón, carded o combed"
+5204,Cotton sewing thread,Algodón sewing thread
+5205,Cotton yarn of > 85%,Algodón hilados de > 85%
+5206,Cotton yarn of < 85%,Algodón hilados de < 85%
+5207,Cotton yarn for retail sale,Hilado de algodón para venta al por menor
+5208,Woven fabrics of cotton of > 85% weighing < 200 g/m2,Tejidos de algodón de > 85% weighing < 200 g/m2
+5209,Woven fabrics of cotton of < 85% weighing > 200 g/m2,Tejidos de algodón de < 85% con peso > 200 g/m2
+5210,Woven fabrics of cotton of < 85% weighing < 200 g/m2,Tejidos de algodón de < 85% weighing < 200 g/m2
+5211,Woven fabrics of cotton of < 85% weighing > 200 g/m2,Tejidos de algodón de < 85% weighing > 200 g/m2
+5212,Other woven cotton fabrics,Otros tejidos algodón tejidos
+5301,"Flax, raw or processed","Lino, en bruto o procesado"
+5302,Hemp fiber,Hemp fibra
+5303,Textile bast fibers,Textil bast fibras
+5304,Sisal and agave fibers,Sisal y agave fibras
+5305,Vegetable textile fibers,Vegetal textil fibras
+5306,Flax yarn,Hilado de lino
+5307,Yarn of textile bast fibers,Hilados de textil bast fibras
+5308,Yarn of other vegetable textile fibers,Hilados de otros vegetal textil fibras
+5309,Woven fabrics of flax,Tejidos de lino
+5310,Woven fabrics of jute or of other textile bast fibers,Tejidos de jute o de otros textil bast fibras
+5311,Woven fabrics of vegetable textile fibers,Tejidos de vegetal textil fibras
+5401,Synthetic sowing thread,Hilo de coser sintético
+5402,Synthetic filament yarn,Hilado de filamentos sintéticos
+5403,Artificial filament yarn,Hilado de filamentos artificiales
+5404,"Synthetic monofilament >67 dtex, thickness < 1mm","Monofilamento sintético >67 dtex, espesor < 1 mm"
+5405,"Artificial monofilament >67dtex t<1mm, strip, straws t<5mm","Monofilamento artificial >67 dtex, espesor < 1 mm; tiras y pajas < 5 mm"
+5406,Synthetic filament yarn for retail sale,Hilado de filamentos sintéticos para venta al por menor
+5407,Woven fabrics of synthetic filament yarn,Tejidos de hilados de filamentos sintéticos
+5408,Woven fabrics of artificial filament yarn,Tejidos de hilados de filamentos artificiales
+5501,Synthetic filament tow,Cables de filamentos sintéticos
+5502,Artificial filament tow,Cables de filamentos artificiales
+5503,Synthetic staple fibers,Fibras sintéticas discontinuas
+5504,"Artificial staple fibers, not processed for spinning","Fibras discontinuas artificiales, no preparadas para hilar"
+5505,Waste of man-made fibers,Desechos de fibras manufacturadas
+5506,"Synthetic staple fibers, processed","Fibras sintéticas discontinuas, procesadas"
+5507,"Artificial staple fibers, processed","Fibras discontinuas artificiales, preparadas"
+5508,Synthetic staple fibers sewing thread,Hilo de coser de fibras sintéticas discontinuas
+5509,"Yarn of synthetic staple fibers, not for retail sale","Hilados de fibras sintéticas discontinuas, no para venta al por menor"
+5510,"Yarn of artificial staple fibers, not for retail sale","Hilados de fibras artificiales discontinuas, no para venta al por menor"
+5511,"Yarn of synthetic staple fibers, for retail sale","Hilados de fibras sintéticas discontinuas, para venta al por menor"
+5512,Woven fabrics of > 85% synthetic staple fibers,Tejidos con > 85% de fibras sintéticas discontinuas
+5513,Woven fabrics of < 85% synthetic staple fibers weighing < 170 g/m2,"Tejidos con < 85% de fibras sintéticas discontinuas, peso < 170 g/m2"
+5514,Woven fabrics of < 85% synthetic staple fibers weighing > 170 g/m2,"Tejidos con < 85% de fibras sintéticas discontinuas, peso > 170 g/m2"
+5515,Other woven fabrics of synthetic staple fibers,Los demás tejidos de fibras sintéticas discontinuas
+5516,Woven fabrics of artificial staple fibers,Tejidos de fibras artificiales discontinuas
+5601,Wadding of textile materials,Wadding de textil materiales
+5602,Felt,Fieltro
+5603,Nonwoven textiles,Telas no tejidas
+5604,Rubber textiles,Caucho textiles
+5605,Metallised yarn,Metallised hilados
+5606,Gimp yarn,Hilados entorchados
+5607,Twine and ropes of baste fibers,Twine y ropes de baste fibras
+5608,Nets,Redes
+5609,"Articles of yarn, rope etc not elsewhere clasified","Artículos de hilados, cuerdas, etc., no clasificados en otra parte"
+5701,"Carpets, knotted",Alfombras anudadas
+5702,Woven carpets and rugs,Tejidos carpets y rugs
+5703,"Carpets, tufted",Alfombras de mechón insertado
+5704,Carpets of felt,Carpets de felt
+5705,Other carpets,Otros carpets
+5801,Woven pile fabrics,Tejidos de pelo
+5802,Terry cloth,Terry telas
+5803,Gauze,Gasas
+5804,Lace and net fabrics,Lace y net tejidos
+5805,Hand-woven tapestries,Hand-tejidos tapestries
+5806,Narrow woven fabrics,Narrow tejidos
+5807,Labels and badges of textiles,Labels y badges de textiles
+5808,Braids in piece,Trenzas en pieza
+5809,Woven fabric incorporating metal threads,Tejidos con hilos metálicos incorporados
+5810,Embroidery in the piece,Bordados en pieza
+5811,Quilted textile products,Productos textiles acolchados
+5901,Stiffened textiles,Textiles endurecidos
+5902,Tire cord fabric,Tejido para cordones de neumáticos
+5903,Textile fabrics impregnated with plastics,Textil tejidos impregnated con plásticos
+5904,Linoleum,Linóleo
+5905,Textile wall coverings,Textil wall coverings
+5906,Rubberized textile fabrics,Rubberized textil tejidos
+5907,"Other textile fabrics impregnated, coated or covered","Otros textil tejidos impregnated, coated o covered"
+5908,Textile wicks,Textil wicks
+5909,Textile hosepiping and similar tubing,Textil hosepiping y similar tubing
+5910,"Transmission belts or belting, of textile material","Transmission belts o belting, de textil material"
+5911,Textile articles for technical use,Artículos textiles para usos técnicos
+6001,"Pile fabrics, knit","Tejidos de pelo, de punto"
+6002,Other knitted fabrics,Otros knitted tejidos
+6101,"Men's overcoats, knit","Abrigos para hombre, de punto"
+6102,"Women's overcoats, knit","Abrigos para mujer, de punto"
+6103,"Men's suits, knit","Trajes para hombre, de punto"
+6104,"Women's suits, knit","Trajes para mujer, de punto"
+6105,"Men's shirts, knit","Camisas para hombre, de punto"
+6106,"Women's shirts, knit","Camisas para mujer, de punto"
+6107,"Men's undergarments, knit","Ropa interior para hombre, de punto"
+6108,"Women's undergarments, knit","Ropa interior para mujer, de punto"
+6109,"T-shirts, knit","Camisetas, de punto"
+6110,"Sweaters, pullovers, sweatshirts etc., knit","Suéteres, pullovers, sudaderas, etc., de punto"
+6111,"Babies' garments, knit","Prendas para bebé, de punto"
+6112,"Activewear, knit",Prendas deportivas de punto
+6113,Garments knit with impregnated fibers,Prendas de punto con fibras impregnadas
+6114,"Other garments, knit","Las demás prendas, de punto"
+6115,"Socks, stockings, etc., knit","Calcetines, medias, etc., de punto"
+6116,"Gloves, knit","Guantes, de punto"
+6117,"Other clothing accesories, knit","Los demás accesorios de vestir, de punto"
+6201,"Men's overcoats, not knit","Abrigos para hombre, no de punto"
+6202,"Womens overcoats, not knit","Abrigos para mujer, no de punto"
+6203,Men's suits and pants,Trajes y pantalones para hombre
+6204,Women's suits and pants,Trajes y pantalones para mujer
+6205,Men's shirts,Camisas para hombre
+6206,Women's shirts,Camisas para mujer
+6207,Men's undergarments,Ropa interior para hombre
+6208,Women's undergarments,Ropa interior femenina
+6209,Babies' garments,Prendas para bebé
+6210,Garments made of textile felts and nonwoven fabric,Prendas confeccionadas con fieltros textiles y telas sin tejer
+6211,Activewear,Prendas deportivas y otras prendas de vestir
+6212,Brassieres,Sostenes y prendas similares
+6213,Handkerchiefs,Pañuelos
+6214,"Shawls, scarves, etc.","Chales, bufandas, etc."
+6215,"Ties, bow ties and cravats","Ties, bow ties y cravats"
+6216,Gloves,Guantes
+6217,Other clothing accesories,Otros clothing accesories
+6301,Blankets,Mantas
+6302,House linen,Ropa de hogar
+6303,Curtains,Cortinas
+6304,Other furnishing articles,Otros furnishing artículos
+6305,Bags for packing goods,Sacos para envasar mercancías
+6306,"Tents, tarpaulins, etc.","Tiendas de campaña, lonas, etc."
+6307,Other made up articles,Otros made up artículos
+6308,Needlecraft sets of woven fabric and yarn,Needlecraft sets de tejidos tejido y hilados
+6309,Used clothes and textiles,Ropa y textiles usados
+6310,Used or new rags textile scraps,Trapos usados o nuevos y desechos textiles
+6401,Waterproof footwear,Calzado impermeable
+6402,Other footwear of rubber or plastics,Los demás calzados de caucho o plástico
+6403,Leather footwear,Cuero footwear
+6404,Textile footwear,Textil footwear
+6405,Other footwear,Otros footwear
+6406,Parts of footwear,Partes de footwear
+6501,Hat forms,Cascos y formas para sombreros
+6502,Hat shapes,Formas para sombreros
+6503,Felt hats,Sombreros de fieltro
+6504,Hats,Sombreros
+6505,"Hats, knit","Sombreros, de punto"
+6506,Other headgear,Otros headgear
+6507,Headbands,Cintas para la cabeza
+6601,Umbrellas,Paraguas
+6602,Walking sticks,Bastones
+6603,Parts of umbrellas or walking sticks,Partes de paraguas o bastones
+6701,Feathers or down,Feathers o down
+6702,Artificial flowers,Flores artificiales
+6703,Human animal hair prepared for use in wigs,Pelo animal humano preparado para uso en pelucas
+6704,Wigs,Pelucas
+6801,"Flagstones, of natural stone",Losas de piedra natural
+6802,Worked building stone,Trabajado building stone
+6803,Worked slate,Trabajado slate
+6804,Grindstones,Muelas y piedras de amolar
+6805,Natural or artificial abrasive powder,Polvos abrasivos naturales o artificiales
+6806,Mineral wools and insulating materials,Mineral wools y insulating materiales
+6807,Asphalt,Productos de asfalto
+6808,Panels of vegetable fibers,Panels de vegetal fibras
+6809,Plaster articles,Plaster artículos
+6810,"Articles of cement, of concrete or of artificial stone","Artículos de cement, de concrete o de artificial stone"
+6811,Asbestos-cement or cellulose fiber-cement,Asbestos-cement o cellulose fibra-cement
+6812,Asbestos fibres,Fibras de asbesto
+6813,Friction material and articles thereof,Friction material y artículos thereof
+6814,Mica articles,Mica artículos
+6815,Articles of stone or of other mineral substances,Artículos de stone o de otros mineral substances
+6901,"Bricks, blocks, and other ceramic goods","Bricks, blocks, y otros ceramic mercancías"
+6902,"Bricks, tiles and similar refractory ceramic constructional goods","Bricks, tiles y similar refractory ceramic constructional mercancías"
+6903,Other refractory ceramic goods,Otros refractory ceramic mercancías
+6904,Ceramic building bricks,Ladrillos cerámicos de construcción
+6905,Architectural ceramic ornaments,Ornamentos cerámicos arquitectónicos
+6906,Ceramic pipes,Tuberías cerámicas
+6907,Unglazed ceramic flags and pavers,Baldosas y adoquines cerámicos sin esmaltar
+6908,Glazed ceramic flags and pavers,Baldosas y adoquines cerámicos esmaltados
+6909,Ceramic wares for technical ware,Artículos cerámicos para usos técnicos
+6910,"Ceramic sinks, washbasins, and similar sanitary fixtures","Fregaderos, lavabos y aparatos sanitarios similares de cerámica"
+6911,Porcelain or china household articles,Artículos domésticos de porcelana o loza
+6912,Ceramic household articles,Artículos domésticos de cerámica
+6913,Ornamental ceramic articles,Ornamental ceramic artículos
+6914,Other ceramic articles,Otros ceramic artículos
+7001,Cullet and other scraps of glass,Cascotes y demás desechos de vidrio
+7002,Glass balls,Bolas de vidrio
+7003,"Glass, cast or rolled",Vidrio colado o laminado
+7004,Drawn and blown glass,Vidrio estirado o soplado
+7005,Float glass,Vidrio flotado
+7006,Worked glass,Vidrio trabajado
+7007,Safety glass,Vidrio de seguridad
+7008,Multiple-walled insulating glass,Vidrio aislante de paredes múltiples
+7009,Glass mirrors,Espejos de vidrio
+7010,Glass containers for conveyance,Envases de vidrio para transporte
+7011,Glass envelopes,Ampollas de vidrio
+7012,Glass inners for vacuum flasks,Recipientes interiores de vidrio para termos
+7013,Glassware for interior decorative use,Artículos de vidrio para decoración de interiores
+7014,Signaling glassware,Vidriería para señalización
+7015,Clock or watch glasses and similar glasses,Clock o reloj glasses y similar glasses
+7016,Glass paving blocks or other molded products,"Bloques, ladrillos y demás artículos moldeados de vidrio"
+7017,"Laboratory, hygienic or pharmaceutical glassware","Artículos de vidrio para laboratorio, higiene o farmacia"
+7018,Glass beads,Cuentas de vidrio
+7019,Glass fibers,Fibras de vidrio
+7020,Other articles of glass,Los demás artículos de vidrio
+7101,Pearls,Perlas
+7102,Diamonds,Diamantes
+7103,Precious stones,Preciosos stones
+7104,Synthetic precious stones,Piedras preciosas sintéticas
+7105,Diamond dust,Polvo de diamante
+7106,Silver,Plata
+7107,Silver clad metals,Silver revestidos metales
+7108,Gold,Oro
+7109,Gold clad metals,Gold revestidos metales
+7110,Platinum,Platino
+7111,Platinum clad metals,Metales chapados con platino
+7112,Scrap of precious metal,Desechos de metal precioso
+7113,Jewelry of precious metal,Joyería de metal precioso
+7114,Goldsmith and silversmith wares,Artículos de orfebrería y platería
+7115,Other articles of precious metals,Otros artículos de preciosos metales
+7116,Articles of precious stones,Artículos de preciosos stones
+7117,Imitation jewelry,Bisutería
+7118,Coin,Monedas
+7201,Pig iron,Pig hierro
+7202,Ferroalloys,Ferroaleaciones
+7203,Ferrous products from the reduction of iron ore,Productos ferrosos obtenidos por reducción de mineral de hierro
+7204,Ferrous waste and scrap,Ferrous desechos y chatarra
+7205,Powders of iron or steel,Polvos de hierro o acero
+7206,Iron and nonalloy steel,Hierro y sin alear acero
+7207,Semifinished products of iron or nonalloy steel,Productos semiterminados de hierro o acero sin alear
+7208,"Flat-rolled iron, width > 600mm, hot-rolled, not clad","Productos laminados planos de hierro, ancho > 600 mm, laminados en caliente, sin revestir"
+7209,"Flat-rolled iron, width > 600mm, cold-rolled, not clad","Productos laminados planos de hierro, ancho > 600 mm, laminados en frío, sin revestir"
+7210,"Flat rolled iron, width > 600mm, clad","Productos laminados planos de hierro, ancho > 600 mm, revestidos"
+7211,"Flat-rolled iron, width < 600mm, not clad","Productos laminados planos de hierro, ancho < 600 mm, sin revestir"
+7212,"Flat-rolled iron, width < 600mm, clad","Laminados planos hierro, ancho < 600mm, revestidos"
+7213,Hot rolled bars of iron,Barras laminadas en caliente de hierro
+7214,"Other bars of iron, not further worked than forged","Las demás barras de hierro, sin trabajar más que forjadas"
+7215,Other bars and rods of iron or nonalloy steel,Otros bars y rods de hierro o sin alear acero
+7216,Angles of iron or nonalloy steel,Angles de hierro o sin alear acero
+7217,Wire of iron or nonalloy steel,Alambre de hierro o acero sin alear
+7218,Stainless steel in ingots,Acero inoxidable en lingotes
+7219,Flat-rolled products of stainless steel of a width > 600 mm,"Productos laminados planos de acero inoxidable, ancho > 600 mm"
+7220,Flat-rolled products of stainless steel of a width < 600 mm,"Productos laminados planos de acero inoxidable, ancho < 600 mm"
+7221,"Bars of stainless steel, hot-rolled","Bars de inoxidable acero, laminados en caliente"
+7222,Other bars and rods of stainless steel,Otros bars y rods de inoxidable acero
+7223,Wire of stainless steel,Alambre de acero inoxidable
+7224,Other alloy steel in primary form,Otros aleado acero in primary form
+7225,"Flat-rolled products of other alloy steel, width > 600 mm","Productos laminados planos de los demás aceros aleados, ancho > 600 mm"
+7226,"Flat-rolled products of other alloy steel, width < 600 mm","Productos laminados planos de los demás aceros aleados, ancho < 600 mm"
+7227,Bars of other alloy steel,Bars de otros aleado acero
+7228,Other bars and rods of other alloy steel,Otros bars y rods de otros aleado acero
+7229,Wire of other alloy steel,Alambre de los demás aceros aleados
+7301,Sheet piling of iron or steel,Sheet piling de hierro o acero
+7302,Railway construction material of iron or steel,Ferroviarios construction material de hierro o acero
+7303,Tubes of cast iron,Tubos de fundición
+7304,"Tubes, seamless, of iron or steel",Tubos sin costura de hierro o acero
+7305,"Other tubes and pipes, diameter > 406.4 mm, of iron or steel","Los demás tubos y caños, diámetro > 406.4 mm, de hierro o acero"
+7306,"Other tubes, pipes and hollow profiles of iron or steel","Otros tubos, caños y perfiles huecos de hierro o acero"
+7307,Tube or pipe fittings of iron or steel,Tube o pipe fittings de hierro o acero
+7308,"Structures and their parts, of iron or steel","Estructuras y sus partes, de hierro o acero"
+7309,"Tanks etc. > 300 liters, iron or steel","Tanks etc. > 300 liters, hierro o acero"
+7310,"Tanks etc. < 300 liters, iron or steel","Tanks etc. < 300 liters, hierro o acero"
+7311,Containers for compressed or liquified gas,Recipientes para gas comprimido o licuado
+7312,"Wire of iron or steel, not insulated","Alambre de hierro o acero, sin aislar"
+7313,Barbed wire of iron or steel,Alambre de púas de hierro o acero
+7314,Cloth of iron or steel wire,Telas metálicas de alambre de hierro o acero
+7315,Chain of iron or steel,Chain de hierro o acero
+7316,Anchors of iron or steel,Anchors de hierro o acero
+7317,Nails and similar articles of iron or steel,Clavos y artículos similares de hierro o acero
+7318,Screws and similar articles of iron or steel,Screws y similar artículos de hierro o acero
+7319,Articles for sewing of iron or steel,Artículos para coser de hierro o acero
+7320,Springs of iron or steel,Springs de hierro o acero
+7321,Stoves and similar non-electric appliances of iron or steel,Estufas y aparatos similares no eléctricos de hierro o acero
+7322,Radiators for central heating of iron or steel,Radiadores para calefacción central de hierro o acero
+7323,Household articles of iron or steel,Artículos domésticos de hierro o acero
+7324,Sanitary ware and parts of iron or steel,Aparatos sanitarios y sus partes de hierro o acero
+7325,Other cast articles of iron or steel,Otros cast artículos de hierro o acero
+7326,Other articles of iron or steel,Otros artículos de hierro o acero
+7401,Copper mattes,Cobre mattes
+7402,Unrefined copper,Unrefined cobre
+7403,Refined copper and copper alloys,Refined cobre y cobre alloys
+7404,Copper waste and scrap,Cobre desechos y chatarra
+7405,Master alloys of copper,Master alloys de cobre
+7406,Copper powders and flakes,Polvos y escamas de cobre
+7407,"Copper bars, rods and profiles","Barras, varillas y perfiles de cobre"
+7408,Copper wire,Alambre de cobre
+7409,"Copper plates, sheets and strip > 0.15 mm","Cobre placas, hojas y strip > 0.15 mm"
+7410,Copper foil < 0.15 mm thick,Cobre foil < 0.15 mm thick
+7411,Copper tubes and pipes,Tubos y caños de cobre
+7412,Copper tube or pipe fittings,Cobre tube o pipe fittings
+7413,"Copper wire, uninsulated",Alambre de cobre sin aislar
+7414,Endless bands of copper wire for machinery,Bandas sin fin de alambre de cobre para maquinaria
+7415,Screws and similar articles of copper,Screws y similar artículos de cobre
+7416,Copper springs,Cobre springs
+7417,Copper cooking products,Artículos de cocina de cobre
+7418,Household articles of copper,Artículos domésticos de cobre
+7419,Other articles of copper,Otros artículos de cobre
+7501,Nickel mattes,Matas de níquel
+7502,Nickel unwrought,Níquel en bruto
+7503,Nickel waste and scrap,Nickel desechos y chatarra
+7504,Nickel powders,Polvos de níquel
+7505,"Nickel bars, wire etc.","Barras, alambre, etc. de níquel"
+7506,Nickel plates,Nickel placas
+7507,Nickel tubes and pipes,Tubos y caños de níquel
+7508,Other articles of nickel,Otros artículos de nickel
+7601,Unwrought aluminum,Unwrought aluminio
+7602,"Waste or scrap, aluminium",Desechos y chatarra de aluminio
+7603,Aluminum powders,Polvos de aluminio
+7604,Aluminum bars,Barras y perfiles de aluminio
+7605,Aluminum wire,Alambre de aluminio
+7606,Aluminum plates > 0.2 mm,Aluminio placas > 0.2 mm
+7607,Aluminum foil < 0.2 mm,Aluminio foil < 0.2 mm
+7608,Aluminum tubes and pipes,Tubos y caños de aluminio
+7609,Aluminum tube or pipe fittings,Aluminio tube o pipe fittings
+7610,"Aluminum structures (bridges, towers etc)","Aluminio structures (bridges, towers etc)"
+7611,"Aluminum containers, >300 liters","Recipientes de aluminio, >300 litros"
+7612,"Aluminum containers, <300 liters","Recipientes de aluminio, <300 litros"
+7613,Aluminum containers for compressed or liquefied gas,Recipientes de aluminio para gas comprimido o licuado
+7614,"Aluminum wire, not insulated","Alambre de aluminio, sin aislar"
+7615,Household articles of aluminum,Artículos domésticos de aluminio
+7616,Other articles of aluminum,Otros artículos de aluminio
+7801,Lead refined unwrought,Plomo refinado en bruto
+7802,Lead waste or scrap,Plomo desechos o chatarra
+7803,"Lead bars, rods, profiles and wire","Barras, varillas, perfiles y alambre de plomo"
+7804,Lead foil <2mm,Plomo foil <2mm
+7805,"Lead tubes, pipes and fittings","Tubos, caños y accesorios de plomo"
+7806,Other articles of lead,Otros artículos de plomo
+7901,Unwrought zinc,Zinc en bruto
+7902,Zinc waste and scrap,Zinc desechos y chatarra
+7903,Zinc powders,Polvos de zinc
+7904,Zinx bars and wire,Barras y alambre de zinc
+7905,Zinc plates and foil,Placas y hojas de zinc
+7906,"Zinc tubes, pipes and tube or pipe fittings",Tubos y accesorios de tubería de zinc
+7907,Other articles of zinc,Otros artículos de zinc
+8001,Unwrought tin,Estaño en bruto
+8002,Tin waste and scrap,Tin desechos y chatarra
+8003,Tin bars and wire,Barras y alambre de estaño
+8004,"Tin plates, sheets and strips, thickness > 0.2 mm","Tin placas, hojas y strips, thickness > 0.2 mm"
+8005,"Tin foil, thickness < 0.2 mm","Hojas de estaño de espesor < 0,2 mm"
+8006,Tin pipes or tubes and pipe fittings,Tubos o caños y accesorios de estaño
+8007,Other articles of tin,Otros artículos de tin
+8101,Tungsten (wolfram),Tungsteno (wolframio)
+8102,Molybdenum,Molibdeno
+8103,Tantalum,Tantalio
+8104,Magnesium,Magnesio
+8105,Cobalt,Cobalto
+8106,Bismuth,Bismuto
+8107,Cadmium,Cadmio
+8108,Titanium,Titanio
+8109,Zirconium,Circonio
+8110,Antimony,Antimonio
+8111,Manganese,Manganeso
+8112,Other metals,Otros metales
+8113,Cermets,Cermets
+8201,Handtools for gardening,Herramientas de mano para jardinería
+8202,Handsaws,Sierras de mano
+8203,"Pliers, pincers and other metal handtools","Alicates, tenazas y otras herramientas de mano de metal"
+8204,Wrenches,Llaves de ajuste
+8205,Hand tools n.e.c.,"Herramientas de mano, n.e.p."
+8206,Retail tool sets,Juegos de herramientas para venta al por menor
+8207,Interchangeable tools for hand tools,Herramientas intercambiables para herramientas de mano
+8208,Knives and blades for machines,Cuchillas y hojas para máquinas
+8209,"Articles for utensils, of cermet","Artículos para utensilios, de cermet"
+8210,"Hand-operated appliances, food preparation, <10kg","Aparatos accionados a mano para preparar alimentos, <10 kg"
+8211,Knife sets,Cuchillos y juegos de cuchillos
+8212,Razors,Navajas y maquinillas de afeitar
+8213,Scissors,Tijeras
+8214,Other cutlery,Otros cutlery
+8215,Cutlery,Cubiertos
+8301,Padlocks and locks,Candados y cerraduras
+8302,"Base metal mountings, fittings and similar articles","Herrajes, guarniciones y artículos similares de metal común"
+8303,Safes,Cajas de caudales
+8304,"Paper trays and similar office equipment, of base metal","Bandejas para papel y equipos de oficina similares, de metal común"
+8305,"Paper clips and similar office articles, of metal","Clips para papel y artículos de oficina similares, de metal"
+8306,"Ornaments, statuettes, etc. of metal","Adornos, estatuillas, etc. de metal"
+8307,Flexible tubing of base metal,Tubos flexibles de metal común
+8308,"Clasps, buckles etc. of metal","Broches, hebillas, etc. de metal"
+8309,"Stoppers, caps and lids of metal","Tapones, cápsulas y tapas de metal"
+8310,Sign plates and similar plates of base metal,Placas indicadoras y similares de metal común
+8311,Wire etc. used for welding,"Alambre, etc., utilizado para soldadura"
+8401,Nuclear reactors and related equipment,Reactores nucleares y equipo relacionado
+8402,Steam boilers,Steam calderas
+8403,Central heating boilers,Central calefacción calderas
+8404,Auxiliary parts for use with boilers,Partes auxiliares para uso con calderas
+8405,Water gas generators,Generadores de gas de agua
+8406,Steam turbines,Turbinas de vapor
+8407,Spark-ignition reciprocating internal combustion piston engines,Motores de pistón de encendido por chispa
+8408,Compression-ignition internal combustion piston engines,Motores de encendido por compresión
+8409,Parts suitable for use with spark-ignition engines,Partes adecuadas para uso con motores de encendido por chispa
+8410,"Hydraulic turbines, water wheels and regulators","Hydraulic turbines, water wheels y regulators"
+8411,Gas turbines,Turbinas de gas
+8412,Other engines and motors,Otros engines y motors
+8413,Pumps for liquids,Bombas para líquidos
+8414,"Pumps, compressors, fans, etc.","Bombas, compressors, fans, etc."
+8415,Air conditioners,Aires acondicionados
+8416,Furnace burners,Quemadores para hornos
+8417,Industrial furnaces,Hornos industriales
+8418,"Refrigerators, freezers",Refrigeradores y congeladores
+8419,Equipment for temperature change of materials,Equipos para cambio de temperatura de materiales
+8420,"Calendering or other rolling machines, other than for metals or glass","Calandrias y otras máquinas laminadoras, excepto para metales o vidrio"
+8421,Centrifuges,Centrífugas
+8422,Dish washing machines,Dish washing máquinas
+8423,Weighing machinery,Weighing maquinaria
+8424,Sprays and powder dispersers,Pulverizadores y dispersores de polvo
+8425,Pulleys and winches,Pulleys y winches
+8426,Ships' derricks; cranes,Plumas de buque y grúas
+8427,Fork-lift trucks,Montacargas
+8428,Other lifting machinery,Otros lifting maquinaria
+8429,"Self-propelled bulldozers, excavators and road rollers","Self-propelled bulldozers, excavators y road rollers"
+8430,"Other moving, excavating or boring machinery","Otros moving, excavating o boring maquinaria"
+8431,Parts for use with hoists and excavation machinery,Partes para uso con polipastos y maquinaria de excavación
+8432,Machinery for soil preparation or cultivation,Maquinaria para preparación o cultivo del suelo
+8433,Harvesting or agricultural machinery,Maquinaria de cosecha y otras máquinas agrícolas
+8434,Dairy machinery,Dairy maquinaria
+8435,Machines for wine and juice production,Máquinas para producción de vino y jugos
+8436,Other agricultural machinery,Las demás máquinas agrícolas
+8437,Machinery for processing grain,Maquinaria para procesar granos
+8438,Machinery for the industrial preparation of food or drink,Maquinaria para la preparación industrial de alimentos o bebidas
+8439,Machinery for making paper,Maquinaria para fabricar papel
+8440,Bookbinding machinery,Bookbinding maquinaria
+8441,Other machinery for making paper,Las demás maquinarias para fabricar papel
+8442,Machinery for making printing components,Maquinaria para fabricar componentes de impresión
+8443,Printers and copiers,Printers y copiers
+8444,"Machines to extrude, cut manmade textile fibres","Máquinas to extrude, cut manmade textil fibres"
+8445,Machines for preparing textile fibers,Máquinas para preparar fibras textiles
+8446,Looms,Telares
+8447,Knitting machines,Knitting máquinas
+8448,Auxiliary machinery for use with knitting and textile machines,Maquinaria auxiliar para uso con máquinas de tejer y textiles
+8449,Machinery to manufacture felt,Maquinaria to manufacture felt
+8450,Household- or laundry-type washing machines,Máquinas lavadoras domésticas o de lavandería
+8451,Machinery for processing fabrics,Maquinaria para procesar tejidos
+8452,Sewing machines,Máquinas de coser
+8453,Machinery for preparing leather,Maquinaria para preparar cuero
+8454,Machines used in metallurgy,Máquinas utilizadas en metalurgia
+8455,Metal-rolling mills,Trenes de laminación de metal
+8456,Machines for working materials by laser and similar means,Máquinas para trabajar materiales por láser y medios similares
+8457,Machining centers for working metal,Centros de mecanizado para trabajar metal
+8458,Lathes for removing metal,Tornos para arranque de metal
+8459,Machine tools for drilling by removing metal,Máquinas herramienta para perforar por arranque de metal
+8460,Machines with grinding stones for finishing metal,Máquinas con piedras de esmeril para acabado de metal
+8461,Other machine tools for planing and cutting metals,Las demás máquinas herramienta para cepillar y cortar metales
+8462,Machine tools for molding and forging metals,Máquinas herramienta para moldear y forjar metales
+8463,"Other machine tools for working metal, without removal",Otras máquinas herramienta para trabajar metal sin arranque de materia
+8464,Machine tools for working stone,Máquinas herramienta para trabajar piedra
+8465,Machine tools for working wood,Máquinas herramienta para trabajar madera
+8466,Parts and accessories for metal working machines,Partes y accesorios para máquinas para trabajar metal
+8467,"Tools for hand working, pneumatic, hydraulic motors","Herramientas de mano, neumáticas o con motor hidráulico"
+8468,Machinery for soldering,Maquinaria para soldadura
+8469,Word processing machines,Word procesamiento máquinas
+8470,"Cash registers, calculators, etc.","Cajas registradoras, calculadoras, etc."
+8471,Computers,Computadoras
+8472,Other office machines,Otros oficina máquinas
+8473,Parts and accessories for office machines,Partes y accesorios para máquinas de oficina
+8474,Machinery for working minerals,Maquinaria para trabajar minerales
+8475,Machines for assembling electric lamps,Máquinas para ensamblar lámparas eléctricas
+8476,Automatic goods-vending machines,Automatic mercancías-vending máquinas
+8477,Machinery for working rubber or plastics,Maquinaria para trabajar caucho o plástico
+8478,Machinery for preparing tobacco,Maquinaria para preparar tabaco
+8479,Machines n.e.c.,Máquinas n.e.c.
+8480,Molding boxes for metal foundry,Cajas de moldeo para fundición de metal
+8481,Appliances for thermostatically controlled valves,Aparatos para válvulas controladas termostáticamente
+8482,Ball or roller bearings,Ball o roller bearings
+8483,Transmission shafts,Árboles de transmisión
+8484,Gaskets and similar joints of metal sheeting,Juntas y empaques similares de chapas metálicas
+8485,"Machinery parts, not containing electrical features, n.e.c.","Partes de maquinaria, sin componentes eléctricos, n.e.p."
+8501,Electric motors and generators,Motores y generadores eléctricos
+8502,Electric generating sets and rotary converters,Grupos electrógenos y convertidores rotativos
+8503,Parts for use with electric generators,Partes para uso con generadores eléctricos
+8504,Electrical transformers,Eléctrico transformers
+8505,Electromagnets,Electroimanes
+8506,Primary cells and primary batteries,Primary cells y primary batteries
+8507,Batteries,Baterías
+8508,Vacuum cleaners,Aspiradoras
+8509,Electromechanical domestic appliances,Aparatos electrodomésticos electromecánicos
+8510,Electric shavers and hair clippers,Afeitadoras eléctricas y cortadoras de cabello
+8511,Electrical ignition equipment,Equipos eléctricos de encendido
+8512,Electrical lighting equipment used for motor vehicles,Equipos eléctricos de alumbrado utilizados en vehículos automotores
+8513,Portable electric lamps,Lámparas eléctricas portátiles
+8514,Industrial electric furnaces,Hornos eléctricos industriales
+8515,Electric soldering machines,Máquinas eléctricas de soldadura
+8516,Electric heaters,Calentadores eléctricos
+8517,Telephones,Teléfonos
+8518,Microphones,Micrófonos
+8519,Sound reproducing apparatus,Aparatos de reproducción de sonido
+8520,Magnetic tape recorders,Grabadoras de cinta magnética
+8521,Video recording apparatus,Aparatos de grabación de video
+8522,Parts and accessories for video or sound equipment,Partes y accesorios para equipos de video o sonido
+8523,Sound storage media,Medios de almacenamiento de sonido
+8524,"Tapes, cassettes, records and compact disks","Tapes, cassettes, records y compact disks"
+8525,"Transmission apparatus for radio, telephone and TV","Aparatos de transmisión para radio, telefonía y televisión"
+8526,Radar,Radar
+8527,Reception apparatus for radio broadcasting,Aparatos receptores para radiodifusión
+8528,Monitors and projectors,Monitors y projectors
+8529,"Parts of radios, telephones, and T.V.s","Partes de radios, telephones, y T.V.s"
+8530,Electric signal and traffic controls,Controles eléctricos de señalización y tráfico
+8531,Electric sound or visual signaling apparatus,Aparatos eléctricos de señalización sonora o visual
+8532,Electrical capacitors,Eléctrico capacitors
+8533,Electrical resistors,Eléctrico resistors
+8534,Electronic printed circuits,Circuitos impresos electrónicos
+8535,Electrical apparatus for > 1k volts,Aparatos eléctricos para > 1 kV
+8536,Electrical apparatus for < 1k volts,Aparatos eléctricos para < 1 kV
+8537,Electrical boards,Eléctrico boards
+8538,Parts for electrical apparatus,Partes para aparatos eléctricos
+8539,Electrical filament,Eléctrico filament
+8540,"Thermionic, cold cathode or photocathode tubes","Tubos termoiónicos, de cátodo frío o fotocátodo"
+8541,Semiconductor devices,Dispositivos semiconductores
+8542,Electronic integrated circuits,Circuitos integrados electrónicos
+8543,Electrical machines with individual functions n.e.c.,Eléctrico máquinas con individual functions n.e.c.
+8544,Insulated electrical wire,Alambre eléctrico aislado
+8545,Carbon articles for eletrical purposes,Artículos de carbono para usos eléctricos
+8546,Electrical insulators of any material,Eléctrico insulators de any material
+8547,Insulating fittings for electrical machines,Piezas aislantes para máquinas eléctricas
+8548,Waste and scrap of batteries,Desechos y chatarra de batteries
+8601,Electric trains,Trenes eléctricos
+8602,Other rail locomotives,Otros rail locomotives
+8603,Self-propelled railway coaches,Self-propelled ferroviarios coches
+8604,Railway service vehicles,Ferroviarios service vehículos
+8605,"Railway coaches, not self-propelled","Coches ferroviarios, no autopropulsados"
+8606,"Railway cars, not self-propelled","Vagones ferroviarios, no autopropulsados"
+8607,Parts of railway locomotives,Partes de locomotoras o material rodante ferroviario
+8608,Railway track fixtures,Accesorios para vías férreas
+8609,Containers for multimodal transportation,Contenedores para transporte multimodal
+8701,Tractors,Tractores
+8702,Buses,Autobuses
+8703,Cars,Automóviles
+8704,Motor vehicles for transporting goods,Vehículos automotores para transporte mercancías
+8705,Special purpose motor vehicles,Special purpose vehículos automotores
+8706,Vehicle chassis fitted with engines,Vehicle chassis fitted con engines
+8707,Vehicle Bodies,Carrocerías de vehículos
+8708,Parts of motor vehicles,Partes de vehículos automotores
+8709,Work trucks,Vehículos industriales
+8710,Tanks and other armored fighting vehicles,Tanks y otros armored fighting vehículos
+8711,Motorcycles,Motocicletas
+8712,Bicycles,Bicicletas
+8713,Wheelchairs,Sillas de ruedas
+8714,Parts of motorcycles or wheelchairs,Partes de motorcycles o wheelchairs
+8715,Baby carriages,Cochecitos de bebé
+8716,Trailers and semi-trailers,Remolques y semirremolques
+8801,"Gliders, hang gliders",Planeadores y alas delta
+8802,Other aircraft and spacecraft,Las demás aeronaves y vehículos espaciales
+8803,Parts of other aircraft,Partes de las demás aeronaves
+8804,Parachutes,Paracaídas
+8805,Aircraft launching gear,Equipos de lanzamiento para aeronaves
+8901,Cargo ships and similar vessels,Buques de carga y embarcaciones similares
+8902,Fishing vessels,Barcos de pesca
+8903,Pleasure or sport boats,Pleasure o sport boats
+8904,Tugs and pusher craft,Tugs y pusher craft
+8905,"Special function vessels, n.e.c.","Buques para funciones especiales, n.e.p."
+8906,Other vessels,Los demás buques
+8907,Other floating structures,Otros flotantes structures
+8908,Floating structures for scrapping,Flotantes structures para desguace
+9001,Optical fibers,Optical fibras
+9002,Lenses and other optical elements,Lentes y otros elementos ópticos
+9003,"Frames for spectacles, goggles",Monturas para gafas o antiparras
+9004,Glasses,Gafas
+9005,Binoculars and telescopes,Binoculares y telescopios
+9006,Photographic cameras,Cámaras fotográficas
+9007,Cinematographic cameras and projectors,Cinematographic cámaras y projectors
+9008,Still image projectors,Proyectores de imagen fija
+9009,Electrostatic photo-copyers,Fotocopiadoras electrostáticas
+9010,"Apparatus and equipment for photographic laboratories, n.e.c.","Aparatos y equipos para laboratorios fotográficos, n.e.p."
+9011,Optical microscopes,Microscopios ópticos
+9012,"Microscopes, other than optical","Microscopes, otros que optical"
+9013,Liquid crystal devices,Dispositivos de cristal líquido
+9014,Navigational instruments,Navigational instrumentos
+9015,Surveying instruments,Instrumentos topográficos
+9016,Balances of a sensitivity < 50 milligram,Balances de a sensitivity < 50 milligram
+9017,Drafting tables and machines,Drafting tables y máquinas
+9018,Medical instruments,Instrumentos médicos
+9019,Therapy applicances,Aparatos de terapia
+9020,Other breathing appliances and gas masks,Los demás aparatos respiratorios y máscaras de gas
+9021,Orthopedic appliances,Aparatos ortopédicos
+9022,X-ray machines,X-ray máquinas
+9023,Instruments designed for demonstrational purposes,Instrumentos diseñados para demostración
+9024,Machines for testing the mechanical properties of materials,Máquinas para ensayar las propiedades mecánicas de los materiales
+9025,"Thermometers, hydrometers etc.","Termómetros, hidrómetros, etc."
+9026,Instruments for measuring properties of liquids or gases,Instrumentos para medir propiedades de líquidos o gases
+9027,Instruments for physical or chemical analysis,Instrumentos para análisis físico o químico
+9028,"Gas, liquid or electricity meters","Gas, liquid o electricity meters"
+9029,Meters,Contadores y medidores
+9030,Instruments for measuring electricity,Instrumentos para medir electricidad
+9031,Measuring instruments,Measuring instrumentos
+9032,Automatic regulating instruments,Automatic regulating instrumentos
+9033,Other parts for machines and appliances,Las demás partes para máquinas y aparatos
+9101,Watches with precious metal,Relojes con metal precioso
+9102,Watches,Relojes
+9103,Clocks with watch movements,Clocks con reloj movements
+9104,Instrument panel clocks for vehicles,Relojes de tablero para vehículos
+9105,Other clocks,Otros clocks
+9106,Apparatus for measuring intervals of time,Aparatos para medir intervalos de tiempo
+9107,Time switches,Interruptores horarios
+9108,"Watch movements, complete","Reloj movements, complete"
+9109,"Clock movements, complete",Mecanismos de relojería completos
+9110,"Clock movements, complete, unassembled","Mecanismos de relojería completos, sin ensamblar"
+9111,Watch cases and parts,Reloj cases y partes
+9112,Clock cases,Cajas para relojes
+9113,Watch straps,Reloj straps
+9114,Other clock or watch parts,Otros clock o reloj partes
+9201,Pianos,Pianos
+9202,"Musical instruments, string","Musical instrumentos, string"
+9203,"Harmoniums, pipe organs, etc","Armonios, órganos de tubos, etc."
+9204,Accordions and similar instruments,Acordeones e instrumentos similares
+9205,"Musical instruments, wind",Instrumentos musicales de viento
+9206,"Musical instruments, percussion",Instrumentos musicales de percusión
+9207,"Musical instruments, electric",Instrumentos musicales eléctricos
+9208,"Other musical instruments, n.e.c.","Otros musical instrumentos, n.e.c."
+9209,Parts of musical instruments,Partes de musical instrumentos
+9301,"Military weapons, other than pistols and swords","Military weapons, otros que pistols y swords"
+9302,Revolvers and pistols,Revolvers y pistols
+9303,Other firearms,Otros firearms
+9304,"Other arms (air guns, truncheons, etc.)","Otros arms (air guns, truncheons, etc.)"
+9305,Parts of military weapons,Partes de military weapons
+9306,Munitions of war,Munitions de war
+9307,Swords,Espadas
+9401,Seats,Asientos
+9402,"Medical, dental or veterinary furniture","Medical, dental o veterinary furniture"
+9403,Other furniture and parts,Los demás muebles y sus partes
+9404,Mattresses and bedding,Mattresses y bedding
+9405,Lamps,Lámparas
+9406,Prefabricated buildings,Construcciones prefabricadas
+9501,"Rideable wheeled toys, dolls carriages",Juguetes con ruedas para montar y cochecitos de muñecas
+9502,Dolls,Muñecas
+9503,Toys,Juguetes
+9504,Games,Juegos
+9505,Christmas and other festivity articles,Christmas y otros festivity artículos
+9506,Sports equipment,Equipos deportivos
+9507,Fishing and hunting equipment,Equipos de pesca y caza
+9508,Fairground amusements,Atracciones de feria
+9601,Worked animal carving material,Material de talla animal trabajado
+9602,Worked vegetable or mineral carving material,Trabajado vegetal o mineral material de talla
+9603,Brooms and mops,Escobas y mops
+9604,Hand sieves and riddles,Hand sieves y riddles
+9605,Travel sets,Juegos de viaje
+9606,Buttons,Botones
+9607,Slide fasteners,Cremalleras
+9608,Pens,Bolígrafos y plumas
+9609,"Pencils, crayons, pastels, etc.","Lápices, crayones, pasteles, etc."
+9610,"Slates and boards, with writing or drawing surfaces","Slates y boards, con writing o drawing superficies"
+9611,Hand-operated stamps,Sellos manuales
+9612,Typewriter ribbons and ink pads,Cintas para máquina de escribir y almohadillas para tinta
+9613,Cigarette lighters,Encendedores
+9614,Smoking pipes,Pipas
+9615,"Combs, hair-slides etc.","Peines, pasadores, etc."
+9616,Scent sprays,Scent pulverizadores
+9617,Vacuum vessels,Recipientes al vacío
+9618,Mannequins,Maniquíes
+9701,Paintings and drawings,Paintings y drawings
+9702,Original engravings,Grabados originales
+9703,Sculptures,Esculturas
+9704,Postage or revenue stamps,Postage o revenue stamps
+9705,Collectors pieces,Piezas de colección
+9706,Antiques >100 years,Antigüedades > 100 años

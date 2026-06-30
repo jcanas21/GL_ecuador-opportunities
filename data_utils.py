@@ -5,6 +5,7 @@ from typing import Iterable
 
 import numpy as np
 import pandas as pd
+import re
 import streamlit as st
 
 FOCUS_ISO = "ECU"
@@ -12,28 +13,535 @@ V1_METRICS_FILE = "opportunity_metrics_hs4_ecu.csv"
 
 
 HS_SECTION_RULES = [
-    (1, range(1, 6), "1. Live animals; animal products"),
-    (2, range(6, 15), "2. Vegetable products"),
-    (3, range(15, 16), "3. Animal or vegetable fats and oils"),
-    (4, range(16, 25), "4. Prepared foodstuffs; beverages, spirits and tobacco"),
-    (5, range(25, 28), "5. Mineral products"),
-    (6, range(28, 39), "6. Products of the chemical or allied industries"),
-    (7, range(39, 41), "7. Plastics and articles thereof; rubber and articles thereof"),
-    (8, range(41, 44), "8. Raw hides and skins, leather, furskins and articles thereof"),
-    (9, range(44, 47), "9. Wood and articles of wood"),
-    (10, range(47, 50), "10. Pulp, paper and paperboard"),
-    (11, range(50, 64), "11. Textiles and textile articles"),
-    (12, range(64, 68), "12. Footwear, headgear, umbrellas and related articles"),
-    (13, range(68, 71), "13. Articles of stone, plaster, cement, ceramics and glass"),
-    (14, range(71, 72), "14. Pearls, precious stones and metals"),
-    (15, range(72, 84), "15. Base metals and articles of base metal"),
-    (16, range(84, 86), "16. Machinery, mechanical appliances and electrical equipment"),
-    (17, range(86, 90), "17. Vehicles, aircraft, vessels and associated transport equipment"),
-    (18, range(90, 93), "18. Optical, photographic, medical and musical instruments"),
-    (19, range(93, 94), "19. Arms and ammunition"),
-    (20, range(94, 97), "20. Miscellaneous manufactured articles"),
-    (21, range(97, 98), "21. Works of art, collectors' pieces and antiques"),
+    (1, range(1, 6), "1. Animales vivos y productos del reino animal"),
+    (2, range(6, 15), "2. Productos del reino vegetal"),
+    (3, range(15, 16), "3. Grasas y aceites animales o vegetales"),
+    (4, range(16, 25), "4. Alimentos preparados; bebidas, licores y tabaco"),
+    (5, range(25, 28), "5. Productos minerales"),
+    (6, range(28, 39), "6. Productos de las industrias químicas o conexas"),
+    (7, range(39, 41), "7. Plásticos y sus manufacturas; caucho y sus manufacturas"),
+    (8, range(41, 44), "8. Pieles, cueros y sus manufacturas"),
+    (9, range(44, 47), "9. Madera y sus manufacturas"),
+    (10, range(47, 50), "10. Pasta de madera, papel y cartón"),
+    (11, range(50, 64), "11. Textiles y sus manufacturas"),
+    (12, range(64, 68), "12. Calzado, sombreros, paraguas y artículos afines"),
+    (13, range(68, 71), "13. Manufacturas de piedra, yeso, cemento, cerámica y vidrio"),
+    (14, range(71, 72), "14. Perlas, piedras preciosas y metales preciosos"),
+    (15, range(72, 84), "15. Metales comunes y sus manufacturas"),
+    (16, range(84, 86), "16. Máquinas, aparatos mecánicos y material eléctrico"),
+    (17, range(86, 90), "17. Vehículos, aeronaves, buques y equipo de transporte"),
+    (18, range(90, 93), "18. Instrumentos ópticos, fotográficos, médicos y musicales"),
+    (19, range(93, 94), "19. Armas y municiones"),
+    (20, range(94, 97), "20. Manufacturas diversas"),
+    (21, range(97, 98), "21. Obras de arte, piezas de colección y antigüedades"),
 ]
+
+SECTOR_LABELS_ES = {
+    "Services": "Servicios",
+    "Textiles": "Textiles",
+    "Agriculture": "Agricultura",
+    "Stone": "Piedra",
+    "Minerals": "Minerales",
+    "Metals": "Metales",
+    "Chemicals": "Químicos",
+    "Vehicles": "Vehículos",
+    "Machinery": "Maquinaria",
+    "Electronics": "Electrónica",
+    "Other": "Otros",
+}
+
+HS4_LABEL_EXACT_ES = {
+    "Horses": "Caballos",
+    "Bovine": "Bovinos",
+    "Swine": "Porcinos",
+    "Sheep": "Ovinos",
+    "Fowl": "Aves de corral",
+    "Other live animals": "Otros animales vivos",
+    "Beef": "Carne bovina",
+    "Beef (frozen)": "Carne bovina (congelada)",
+    "Pork": "Carne porcina",
+    "Lamb": "Carne ovina",
+    "Horse meat": "Carne de caballo",
+    "Edible offal": "Despojos comestibles",
+    "Poultry": "Aves de corral",
+    "Other meat": "Otras carnes",
+    "Pig and poultry fat": "Grasa de cerdo y de aves",
+    "Preserved meat": "Carne conservada",
+    "Live Fish": "Peces vivos",
+    "Fish, excluding fillets": "Pescado, excluidos los filetes",
+    "Frozen fish, excluding fillets": "Pescado congelado, excluidos los filetes",
+    "Fish fillets": "Filetes de pescado",
+    "Preserved fish": "Pescado conservado",
+    "Crustaceans": "Crustáceos",
+    "Molluscs": "Moluscos",
+    "Milk": "Leche",
+    "Milk, concentrated": "Leche concentrada",
+    "Fermented milk products": "Productos lácteos fermentados",
+    "Whey": "Suero de leche",
+    "Butter": "Mantequilla",
+    "Cheese": "Queso",
+    "Eggs, in shell": "Huevos con cáscara",
+    "Egg yolks": "Yemas de huevo",
+    "Honey": "Miel",
+    "Coffee": "Café",
+    "Coffee extracts": "Extractos de café",
+    "Salt": "Sal",
+    "Copper ore": "Mineral de cobre",
+    "Petroleum oils, crude": "Aceites de petróleo, crudos",
+    "Petroleum oils, refined": "Aceites de petróleo, refinados",
+    "Petroleum gases": "Gases de petróleo",
+    "Electrical energy": "Energía eléctrica",
+    "Gold": "Oro",
+    "Medicaments, packaged": "Medicamentos, envasados",
+    "Polymers of ethylene": "Polímeros de etileno",
+    "Wooden tools": "Herramientas de madera",
+    "T-shirts, knit": "Camisetas de punto",
+    "Pig iron": "Arrabio",
+    "Copper mattes": "Matas de cobre",
+    "Unwrought aluminum": "Aluminio en bruto",
+    "Electric motors and generators": "Motores y generadores eléctricos",
+    "Cars": "Automóviles",
+    "Medical instruments": "Instrumentos médicos",
+}
+
+HS4_CODE_OVERRIDE_ES = {
+    "0503": "Crin",
+    "0814": "Cáscaras de cítricos o melones",
+    "1001": "Trigo y morcajo",
+    "1101": "Harina de trigo o morcajo",
+    "1102": "Harinas de cereales",
+    "1103": "Sémolas y harinas gruesas de cereales",
+    "1104": "Granos de cereales trabajados",
+    "1109": "Gluten de trigo",
+    "1212": "Algas y demás productos vegetales comestibles",
+    "1213": "Paja y cascarilla de cereales",
+    "1214": "Productos forrajeros",
+    "1404": "Productos vegetales n.e.p.",
+    "1515": "Otras grasas y aceites vegetales",
+    "1703": "Melazas",
+    "1905": "Productos de panadería",
+    "2106": "Preparaciones alimenticias n.e.p.",
+    "2201": "Aguas",
+    "2202": "Aguas saborizadas o azucaradas",
+    "2302": "Residuos de cereales",
+    "2501": "Sal",
+    "2619": "Escorias de hierro o acero",
+    "2817": "Óxido o peróxido de zinc",
+    "3006": "Productos farmacéuticos",
+    "3101": "Fertilizantes animales o vegetales",
+    "3204": "Materias colorantes orgánicas sintéticas",
+    "3202": "Materias curtientes sintéticas",
+    "3208": "Pinturas y barnices, no acuosos",
+    "3209": "Pinturas y barnices, acuosos",
+    "3210": "Las demás pinturas y barnices",
+    "3305": "Productos capilares",
+    "3306": "Productos de higiene dental",
+    "3402": "Productos de limpieza",
+    "3812": "Estabilizantes para caucho o plástico",
+    "3820": "Preparaciones anticongelantes",
+    "3901": "Polímeros de etileno",
+    "3902": "Polímeros de propileno",
+    "3903": "Polímeros de estireno",
+    "3904": "Polímeros de cloruro de vinilo",
+    "3905": "Polímeros de acetato de vinilo",
+    "3906": "Polímeros acrílicos",
+    "3914": "Intercambiadores de iones a base de polímeros",
+    "3924": "Artículos domésticos de plástico",
+    "3925": "Artículos de plástico para construcción",
+    "4002": "Caucho sintético",
+    "4007": "Hilo y cuerda de caucho vulcanizado",
+    "4009": "Tubos de caucho vulcanizado",
+    "4014": "Artículos higiénicos o farmacéuticos de caucho",
+    "4601": "Productos de materias trenzables",
+    "4101": "Cueros en bruto de bovinos o equinos",
+    "4405": "Lana y harina de madera",
+    "4703": "Pasta química de madera, a la sosa o al sulfato",
+    "5204": "Hilo de coser de algodón",
+    "5401": "Hilo de coser sintético",
+    "5503": "Fibras discontinuas sintéticas",
+    "5506": "Fibras discontinuas sintéticas, procesadas",
+    "5508": "Hilo de coser de fibras discontinuas sintéticas",
+    "5512": "Tejidos de más de 85% de fibras discontinuas sintéticas",
+    "5513": "Tejidos de menos de 85% de fibras discontinuas sintéticas con peso < 170 g/m2",
+    "5514": "Tejidos de menos de 85% de fibras discontinuas sintéticas con peso > 170 g/m2",
+    "5515": "Otros tejidos de fibras discontinuas sintéticas",
+    "5811": "Productos textiles acolchados",
+    "6203": "Trajes y pantalones para hombre",
+    "6204": "Trajes y pantalones para mujer",
+    "6205": "Camisas para hombre",
+    "6206": "Camisas para mujer",
+    "6207": "Ropa interior para hombre",
+    "6911": "Artículos domésticos de porcelana o loza",
+    "6912": "Artículos domésticos de cerámica",
+    "7013": "Artículos de vidrio para decoración de interiores",
+    "7014": "Artículos de vidrio para señalización",
+    "7017": "Artículos de vidrio para laboratorio, higiene o farmacia",
+    "7019": "Fibras de vidrio",
+    "7104": "Piedras preciosas sintéticas",
+    "7203": "Productos ferrosos obtenidos por reducción de mineral de hierro",
+    "7207": "Productos semiterminados de hierro o acero sin alear",
+    "7210": "Productos laminados planos de hierro, ancho > 600 mm, revestidos",
+    "7219": "Productos laminados planos de acero inoxidable de ancho > 600 mm",
+    "7220": "Productos laminados planos de acero inoxidable de ancho < 600 mm",
+    "7225": "Productos laminados planos de los demás aceros aleados, ancho > 600 mm",
+    "7226": "Productos laminados planos de los demás aceros aleados, ancho < 600 mm",
+    "7307": "Accesorios para tuberías de hierro o acero",
+    "7308": "Estructuras y sus partes, de hierro o acero",
+    "7309": "Depósitos, etc., > 300 litros, de hierro o acero",
+    "7321": "Estufas y aparatos similares no eléctricos de hierro o acero",
+    "7323": "Artículos domésticos de hierro o acero",
+    "7314": "Telas metálicas de alambre de hierro o acero",
+    "7317": "Clavos y artículos similares de hierro o acero",
+    "7322": "Radiadores para calefacción central de hierro o acero",
+    "7325": "Otros artículos moldeados de hierro o acero",
+    "7417": "Utensilios de cocina de cobre",
+    "7418": "Artículos domésticos de cobre",
+    "7602": "Desechos y chatarra de aluminio",
+    "7610": "Estructuras de aluminio (puentes, torres, etc.)",
+    "7615": "Artículos domésticos de aluminio",
+    "7616": "Otros artículos de aluminio",
+    "8210": "Aparatos accionados a mano para preparar alimentos, <10 kg",
+    "8301": "Candados y cerraduras",
+    "8405": "Generadores de gas de agua",
+    "8412": "Otros motores",
+    "8418": "Refrigeradores y congeladores",
+    "8421": "Centrífugas",
+    "8422": "Máquinas para lavar vajilla",
+    "8432": "Maquinaria para preparación o cultivo del suelo",
+    "8433": "Maquinaria de cosecha o agrícola",
+    "8450": "Máquinas lavadoras domésticas o de lavandería",
+    "8452": "Máquinas de coser",
+    "8501": "Motores y generadores eléctricos",
+    "8502": "Grupos electrógenos y convertidores rotativos",
+    "8509": "Aparatos electrodomésticos electromecánicos",
+    "8510": "Afeitadoras eléctricas y cortadoras de cabello",
+    "8512": "Equipos eléctricos de alumbrado para vehículos automotores",
+    "8513": "Lámparas eléctricas portátiles",
+    "8514": "Hornos eléctricos industriales",
+    "8515": "Máquinas eléctricas de soldadura",
+    "8516": "Calentadores eléctricos",
+    "8530": "Controles eléctricos de señalización y tráfico",
+    "8536": "Aparatos eléctricos para < 1 kV",
+    "8538": "Partes para aparatos eléctricos",
+    "8546": "Aisladores eléctricos de cualquier material",
+    "8601": "Trenes eléctricos",
+    "8607": "Partes de locomotoras o material rodante ferroviario",
+    "8702": "Autobuses",
+    "8716": "Remolques y semirremolques",
+    "8901": "Buques de carga y embarcaciones similares",
+    "8902": "Barcos de pesca",
+    "8903": "Embarcaciones de recreo o deporte",
+    "8905": "Buques para funciones especiales, n.e.p.",
+    "8906": "Los demás buques",
+    "8907": "Las demás estructuras flotantes",
+    "8908": "Estructuras flotantes para desguace",
+    "9020": "Los demás aparatos respiratorios y máscaras de gas",
+    "9021": "Aparatos ortopédicos",
+    "9402": "Muebles médicos, dentales o veterinarios",
+    "9401": "Asientos",
+    "9403": "Otros muebles y sus partes",
+}
+
+HS4_LABEL_REGEX_REPLACEMENTS = [
+    (r"\bprepared or preserved\b", "preparado o conservado"),
+    (r"\bpreserved\b", "conservado"),
+    (r"\bfrozen\b", "congelado"),
+    (r"\bother\b", "otros"),
+    (r"\blive\b", "vivos"),
+    (r"\bexcluding\b", "excluidos"),
+    (r"\bfillets\b", "filetes"),
+    (r"\bfish\b", "pescado"),
+    (r"\bcrustaceans\b", "crustáceos"),
+    (r"\bmolluscs\b", "moluscos"),
+    (r"\bmilk\b", "leche"),
+    (r"\bconcentrated\b", "concentrada"),
+    (r"\bfermented\b", "fermentados"),
+    (r"\bproducts\b", "productos"),
+    (r"\bwhey\b", "suero"),
+    (r"\bbutter\b", "mantequilla"),
+    (r"\bcheese\b", "queso"),
+    (r"\beggs\b", "huevos"),
+    (r"\bhoney\b", "miel"),
+    (r"\bcoffee\b", "café"),
+    (r"\bextracts\b", "extractos"),
+    (r"\btea\b", "té"),
+    (r"\bmate\b", "mate"),
+    (r"\bpepper\b", "pimienta"),
+    (r"\bspices\b", "especias"),
+    (r"\bvegetables\b", "hortalizas"),
+    (r"\blegumes\b", "legumbres"),
+    (r"\bfruit\b", "fruta"),
+    (r"\bfruits\b", "frutas"),
+    (r"\bnuts\b", "frutos secos"),
+    (r"\bbananas\b", "bananos"),
+    (r"\bcitrus\b", "cítricos"),
+    (r"\bgrapes\b", "uvas"),
+    (r"\bapples\b", "manzanas"),
+    (r"\bpears\b", "peras"),
+    (r"\bpotatoes\b", "papas"),
+    (r"\btomatoes\b", "tomates"),
+    (r"\bonions\b", "cebollas"),
+    (r"\bgarlic\b", "ajo"),
+    (r"\blettuce\b", "lechuga"),
+    (r"\bcarrots\b", "zanahorias"),
+    (r"\bcucumbers\b", "pepinos"),
+    (r"\btubers\b", "tubérculos"),
+    (r"\bflowers\b", "flores"),
+    (r"\bplants\b", "plantas"),
+    (r"\bwooden\b", "de madera"),
+    (r"\bwood\b", "madera"),
+    (r"\btools\b", "herramientas"),
+    (r"\bmedicaments\b", "medicamentos"),
+    (r"\bpackaged\b", "envasados"),
+    (r"\bpolymers\b", "polímeros"),
+    (r"\bethylene\b", "etileno"),
+    (r"\bwoven fabrics\b", "tejidos"),
+    (r"\bcotton\b", "algodón"),
+    (r"\bweighing\b", "con peso"),
+    (r"\bknit\b", "de punto"),
+    (r"\bmotors\b", "motores"),
+    (r"\bgenerators\b", "generadores"),
+    (r"\belectric\b", "eléctrico"),
+    (r"\belectrical\b", "eléctrico"),
+    (r"\bmedical\b", "médico"),
+    (r"\binstruments\b", "instrumentos"),
+    (r"\bcars\b", "automóviles"),
+    (r"\bpetroleum oils\b", "aceites de petróleo"),
+    (r"\bpetroleum gases\b", "gases de petróleo"),
+    (r"\bcrude\b", "crudos"),
+    (r"\brefined\b", "refinados"),
+    (r"\bore\b", "mineral"),
+    (r"\bores\b", "minerales"),
+    (r"\bcopper\b", "cobre"),
+    (r"\bgold\b", "oro"),
+    (r"\bsilver\b", "plata"),
+    (r"\bdiamonds\b", "diamantes"),
+    (r"\bprecious stones\b", "piedras preciosas"),
+    (r"\baluminum\b", "aluminio"),
+    (r"\bunwrought\b", "en bruto"),
+    (r"\bmm\b", "mm"),
+    (r"\band\b", "y"),
+    (r"\bof\b", "de"),
+    (r"\bor\b", "o"),
+    (r"\bfor\b", "para"),
+    (r"\bwith\b", "con"),
+    (r"\bin\b", "en"),
+]
+
+HS4_LABEL_WORD_FIXES = {
+    "and": "y",
+    "or": "o",
+    "of": "de",
+    "for": "para",
+    "with": "con",
+    "than": "que",
+    "used": "usados",
+    "new": "nuevos",
+    "raw": "en bruto",
+    "plants": "plantas",
+    "plant": "planta",
+    "seeds": "semillas",
+    "seed": "semilla",
+    "sowing": "siembra",
+    "stuffing": "relleno",
+    "brooms": "escobas",
+    "cocoa": "cacao",
+    "paste": "pasta",
+    "butter": "manteca",
+    "powder": "polvo",
+    "graphite": "grafito",
+    "sands": "arenas",
+    "sand": "arena",
+    "calcium": "calcio",
+    "phosphates": "fosfatos",
+    "phosphate": "fosfato",
+    "sulfate": "sulfato",
+    "abrasives": "abrasivos",
+    "magnesia": "magnesia",
+    "steatite": "esteatita",
+    "cryolite": "criolita",
+    "borates": "boratos",
+    "precious": "preciosos",
+    "ores": "minerales",
+    "ore": "mineral",
+    "photographic": "fotográfico",
+    "plates": "placas",
+    "plate": "placa",
+    "film": "película",
+    "paper": "papel",
+    "developed": "revelada",
+    "preparations": "preparaciones",
+    "preparation": "preparación",
+    "pickling": "decapado",
+    "surfaces": "superficies",
+    "stabilizers": "estabilizantes",
+    "elements": "elementos",
+    "culture": "cultivo",
+    "media": "medios",
+    "noncellular": "no celulares",
+    "reinforced": "reforzadas",
+    "pneumatic": "neumáticos",
+    "tires": "neumáticos",
+    "skins": "pieles",
+    "skin": "piel",
+    "sheep": "ovinos",
+    "lambs": "corderos",
+    "leather": "cuero",
+    "furskins": "pieles finas",
+    "sheets": "hojas",
+    "veneering": "chapado",
+    "wooden": "de madera",
+    "cork": "corcho",
+    "debacked": "descortezado",
+    "cardboard": "cartón",
+    "packing": "embalaje",
+    "silk": "seda",
+    "woven": "tejidos",
+    "cotton": "algodón",
+    "flax": "lino",
+    "glass": "vidrio",
+    "mirrors": "espejos",
+    "beads": "cuentas",
+    "fibers": "fibras",
+    "fiber": "fibra",
+    "jewelry": "joyería",
+    "imitation": "imitación",
+    "flat-rolled": "laminados planos",
+    "width": "ancho",
+    "hot-rolled": "laminados en caliente",
+    "cold-rolled": "laminados en frío",
+    "clad": "revestidos",
+    "forged": "forjados",
+    "wire": "alambre",
+    "nonalloy": "sin alear",
+    "stainless": "inoxidable",
+    "alloy": "aleado",
+    "containers": "recipientes",
+    "container": "recipiente",
+    "compressed": "comprimido",
+    "liquified": "licuado",
+    "barbed": "de púas",
+    "cloth": "telas",
+    "radiators": "radiadores",
+    "central": "central",
+    "heating": "calefacción",
+    "copper": "cobre",
+    "aluminum": "aluminio",
+    "lead": "plomo",
+    "handtools": "herramientas de mano",
+    "gardening": "jardinería",
+    "pliers": "alicates",
+    "pincers": "tenazas",
+    "interchangeable": "intercambiables",
+    "knives": "cuchillas",
+    "blades": "hojas",
+    "office": "oficina",
+    "trays": "bandejas",
+    "clips": "clips",
+    "stoppers": "tapones",
+    "caps": "cápsulas",
+    "lids": "tapas",
+    "boilers": "calderas",
+    "pumps": "bombas",
+    "liquids": "líquidos",
+    "sprays": "pulverizadores",
+    "dispersers": "dispersores",
+    "processing": "procesamiento",
+    "grain": "granos",
+    "fabrics": "tejidos",
+    "fabric": "tejido",
+    "soldering": "soldadura",
+    "lamps": "lámparas",
+    "broadcasting": "radiodifusión",
+    "insulated": "aislado",
+    "coaches": "coches",
+    "railway": "ferroviario",
+    "cameras": "cámaras",
+    "frames": "monturas",
+    "spectacles": "gafas",
+    "goggles": "antiparras",
+    "watches": "relojes",
+    "watch": "reloj",
+    "sports": "deportivos",
+    "fishing": "pesca",
+    "hunting": "caza",
+    "floating": "flotantes",
+    "scrapping": "desguace",
+    "transporting": "transporte",
+    "goods": "mercancías",
+    "household": "domésticos",
+    "pharmaceutical": "farmacéuticos",
+    "appliances": "aparatos",
+    "motors": "motores",
+    "generators": "generadores",
+    "heaters": "calentadores",
+    "parts": "partes",
+    "structures": "estructuras",
+    "furniture": "muebles",
+    "seats": "asientos",
+    "refrigerators": "refrigeradores",
+    "freezers": "congeladores",
+    "orthopedic": "ortopédicos",
+    "centrifuges": "centrífugas",
+    "harvesting": "cosecha",
+    "sewing": "coser",
+    "washing": "lavadoras",
+    "machines": "máquinas",
+    "machine": "máquina",
+    "motors": "motores",
+    "generators": "generadores",
+    "padlocks": "candados",
+    "locks": "cerraduras",
+    "trailers": "remolques",
+    "semi-trailers": "semirremolques",
+    "buses": "autobuses",
+    "perfumes": "perfumes",
+    "pharmeceutical": "farmacéuticos",
+    "hygienic": "higiénicos",
+    "hygienic": "higiénicos",
+    "items": "artículos",
+    "flour": "harina",
+    "meals": "harinas",
+    "wheat": "trigo",
+    "meslin": "morcajo",
+    "waters": "aguas",
+    "sweetened": "azucaradas",
+    "flavored": "saborizadas",
+    "residues": "residuos",
+    "tanning": "curtientes",
+    "substances": "sustancias",
+    "cleaning": "limpieza",
+    "antifreezing": "anticongelantes",
+    "bovines": "bovinos",
+    "equinos": "equinos",
+    "slag": "escorias",
+}
+
+
+def translate_hs4_label_es(text: str) -> str:
+    s = "" if text is None else str(text).strip()
+    if not s:
+        return s
+    if s in HS4_LABEL_EXACT_ES:
+        return HS4_LABEL_EXACT_ES[s]
+
+    out = s
+    for pattern, repl in HS4_LABEL_REGEX_REPLACEMENTS:
+        out = re.sub(pattern, repl, out, flags=re.IGNORECASE)
+    for old, new in HS4_LABEL_WORD_FIXES.items():
+        out = re.sub(rf"\b{re.escape(old)}\b", new, out, flags=re.IGNORECASE)
+
+    out = re.sub(r"\s+", " ", out).strip(" ,;")
+    if out:
+        out = out[0].upper() + out[1:]
+    return out
+
+
+def translate_sector_label_es(text: str) -> str:
+    s = "" if text is None else str(text).strip()
+    if not s:
+        return "Otros"
+    return SECTOR_LABELS_ES.get(s, s)
 
 
 def project_root() -> Path:
@@ -67,6 +575,13 @@ def output_dir() -> Path:
                 return candidate
         return candidates[0]
     return project_root() / "data" / "output"
+
+
+def _file_mtime_ns(path: Path) -> int:
+    try:
+        return path.stat().st_mtime_ns
+    except FileNotFoundError:
+        return -1
 
 
 def _resolve_intermediate_csv(primary_name: str, fallback_name: str | None = None) -> Path:
@@ -104,12 +619,12 @@ def normalize_zscore(series: pd.Series) -> pd.Series:
 def hs4_to_section_name(code: str) -> str:
     digits = "".join(ch for ch in str(code) if ch.isdigit())
     if len(digits) < 2:
-        return "Other"
+        return "Otros"
     chapter = int(digits[:2])
     for _, chapters, label in HS_SECTION_RULES:
         if chapter in chapters:
             return label
-    return "Other"
+    return "Otros"
 
 
 @st.cache_data(show_spinner=False)
@@ -140,19 +655,93 @@ def load_hs92_reference() -> pd.DataFrame:
     path = input_dir() / "hs92_4digits.csv"
     df = pd.read_csv(path, encoding="utf-8-sig")
     df["hs4"] = df["product_hs92_code"].astype(str).str.zfill(4)
+
+    es_path = input_dir() / "hs92_4digits_master_es.csv"
+    if not es_path.exists():
+        raise FileNotFoundError(
+            f"Falta el archivo maestro de traducciones HS4: {es_path}"
+        )
+
+    es = pd.read_csv(es_path, encoding="utf-8-sig")
+    required_cols = {"hs4", "product_name_short_es"}
+    missing_cols = required_cols.difference(es.columns)
+    if missing_cols:
+        raise ValueError(
+            f"El archivo maestro HS4 no contiene las columnas requeridas: {sorted(missing_cols)}"
+        )
+
+    es["hs4"] = es["hs4"].astype(str).str.zfill(4)
+    es["product_name_short_es"] = es["product_name_short_es"].fillna("").astype(str).str.strip()
+    if es["hs4"].nunique() != 1241:
+        raise ValueError(
+            f"El archivo maestro HS4 debería tener 1241 códigos únicos y tiene {es['hs4'].nunique()}."
+        )
+    if (es["product_name_short_es"] == "").any():
+        missing_codes = es.loc[es["product_name_short_es"] == "", "hs4"].tolist()[:20]
+        raise ValueError(
+            f"El archivo maestro HS4 contiene traducciones vacías. Ejemplos: {missing_codes}"
+        )
+
+    df = df.merge(es[["hs4", "product_name_short_es"]], on="hs4", how="left", validate="one_to_one")
+    if df["product_name_short_es"].isna().any():
+        missing_codes = df.loc[df["product_name_short_es"].isna(), "hs4"].tolist()[:20]
+        raise ValueError(
+            f"El archivo maestro HS4 no cubre todos los códigos. Ejemplos faltantes: {missing_codes}"
+        )
+
+    df["product_name_short"] = df["product_name_short_es"].astype(str).str.strip()
+    sector_series = df["sector"] if "sector" in df.columns else pd.Series(["Other"] * len(df), index=df.index)
+    df["sector"] = sector_series.map(translate_sector_label_es)
     return df[["hs4", "product_name_short", "product_name", "sector", "green_product"]].drop_duplicates("hs4")
 
 
 @st.cache_data(show_spinner=False)
-def load_anchor_proximity_dataset() -> pd.DataFrame:
+def load_natural_resource_exclusion_labels() -> list[str]:
+    df = load_hs92_reference().copy()
+    df["hs4"] = df["hs4"].astype(str).str.zfill(4)
+    df["name"] = (
+        df["product_name_short"]
+        .fillna(df["product_name"])
+        .fillna("")
+        .astype(str)
+        .str.strip()
+    )
+    df["sector"] = df["sector"].fillna("").astype(str)
+    df["chapter"] = pd.to_numeric(df["hs4"].str[:2], errors="coerce").fillna(0).astype(int)
+
+    raw_minerals = df["chapter"].eq(25) & ~df["hs4"].isin({"2522", "2523"})
+    raw_ores = df["hs4"].between("2601", "2617")
+    all_fuel_and_oil_related = df["chapter"].eq(27)
+    raw_precious_stones = df["hs4"].isin({"7101", "7102", "7103", "7108"})
+
+    is_natural_resource = raw_minerals | raw_ores | all_fuel_and_oil_related | raw_precious_stones
+
+    out = df.loc[is_natural_resource, ["hs4", "name"]].drop_duplicates("hs4").sort_values("hs4")
+    return (out["hs4"] + " - " + out["name"]).tolist()
+
+
+@st.cache_data(show_spinner=False)
+def _load_anchor_proximity_dataset_cached(_mtime_ns: int) -> pd.DataFrame:
     path = output_dir() / "anchors_proximity_percentile.csv"
     df = pd.read_csv(path)
     for col in ["anchor_hs4", "candidate_hs4"]:
         if col in df.columns:
             df[col] = df[col].astype(str).str.zfill(4)
 
+    if "dai_percentile" not in df.columns and "alignment_weighted_percentile" in df.columns:
+        df["dai_percentile"] = df["alignment_weighted_percentile"]
+    if "dai_lead" not in df.columns and "alignment_lead_weighted" in df.columns:
+        df["dai_lead"] = df["alignment_lead_weighted"]
+    if "dai_index" not in df.columns:
+        df["dai_index"] = 0.0
+    if "alignment_weighted_percentile" not in df.columns and "dai_percentile" in df.columns:
+        df["alignment_weighted_percentile"] = df["dai_percentile"]
+    if "alignment_lead_weighted" not in df.columns and "dai_lead" in df.columns:
+        df["alignment_lead_weighted"] = df["dai_lead"]
+
     numeric_cols = [
         "proximity",
+        "proximity_above_country_median",
         "proximity_rank",
         "eligible_candidate_count",
         "pci",
@@ -161,6 +750,9 @@ def load_anchor_proximity_dataset() -> pd.DataFrame:
         "accessible_market_size",
         "accessible_market_size_share",
         "accessible_market_growth_5y",
+        "dai_index",
+        "dai_percentile",
+        "dai_lead",
         "alignment_weighted_percentile",
         "attractiveness_score",
         "feasibility_score",
@@ -172,14 +764,22 @@ def load_anchor_proximity_dataset() -> pd.DataFrame:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors="coerce").fillna(0.0)
 
-    df["anchor_sector"] = df.get("anchor_sector", "").fillna("Other").astype(str)
-    df["anchor_hs_section_name"] = df.get("anchor_hs_section_name", "").fillna("Other").astype(str)
-    df["candidate_sector"] = df.get("candidate_sector", "").fillna("Other").astype(str)
+    df["anchor_sector"] = df.get("anchor_sector", "").fillna("Other").astype(str).map(translate_sector_label_es)
+    anchor_section_fallback = df.get("anchor_hs_section_name", "").fillna("Otros").astype(str)
+    df["anchor_hs_section_name"] = df["anchor_hs4"].astype(str).map(hs4_to_section_name).where(
+        df["anchor_hs4"].astype(str).str.len() >= 4,
+        anchor_section_fallback,
+    )
+    df["candidate_sector"] = df.get("candidate_sector", "").fillna("Other").astype(str).map(translate_sector_label_es)
     df["candidate_hs_section_name"] = df.get(
         "candidate_hs_section_name",
         df.get("candidate_hs4", "").astype(str).map(hs4_to_section_name),
     )
-    df["candidate_hs_section_name"] = df["candidate_hs_section_name"].fillna("Other").astype(str)
+    df["candidate_hs_section_name"] = df["candidate_hs4"].astype(str).map(hs4_to_section_name).where(
+        df["candidate_hs4"].astype(str).str.len() >= 4,
+        df["candidate_hs_section_name"],
+    )
+    df["candidate_hs_section_name"] = df["candidate_hs_section_name"].fillna("Otros").astype(str)
     df["accessible_market_size_b"] = pd.to_numeric(df.get("accessible_market_size", 0), errors="coerce").fillna(0.0) / 1_000_000_000
     try:
         metrics = pd.read_csv(intermediate_dir() / V1_METRICS_FILE, usecols=["hs4", "raw_rca_trade"])
@@ -193,6 +793,18 @@ def load_anchor_proximity_dataset() -> pd.DataFrame:
     except Exception:
         df["candidate_raw_rca"] = 0.0
     df["candidate_raw_rca"] = pd.to_numeric(df.get("candidate_raw_rca", 0), errors="coerce").fillna(0.0)
+    return df
+
+
+def load_anchor_proximity_dataset() -> pd.DataFrame:
+    path = output_dir() / "anchors_proximity_percentile.csv"
+    df = _load_anchor_proximity_dataset_cached(_file_mtime_ns(path))
+    ref = load_hs92_reference()[["hs4", "product_name_short"]].copy()
+    hs4_to_name = dict(zip(ref["hs4"].astype(str).str.zfill(4), ref["product_name_short"].astype(str).str.strip()))
+    df["anchor_hs4"] = df["anchor_hs4"].astype(str).str.zfill(4)
+    df["candidate_hs4"] = df["candidate_hs4"].astype(str).str.zfill(4)
+    df["anchor_product_name_short"] = df["anchor_hs4"].map(hs4_to_name).fillna(df.get("anchor_product_name_short", "")).astype(str).str.strip()
+    df["candidate_product_name_short"] = df["candidate_hs4"].map(hs4_to_name).fillna(df.get("candidate_product_name_short", "")).astype(str).str.strip()
     return df
 
 
@@ -291,6 +903,8 @@ def compute_network_alignment_indices_hs4(valid_hs4: Iterable[str], year: int = 
             [[int(year)], products, exporters],
             names=["year", "product_code", "exporter_iso"],
         ).to_frame(index=False)
+        base["dai_index"] = 0.0
+        base["dai_percentile"] = 0.0
         base["unweighted_index"] = 0.0
         base["weighted_index"] = 0.0
         base["unweighted_percentile"] = 0.0
@@ -300,6 +914,8 @@ def compute_network_alignment_indices_hs4(valid_hs4: Iterable[str], year: int = 
                 "year",
                 "product_code",
                 "exporter_iso",
+                "dai_index",
+                "dai_percentile",
                 "unweighted_index",
                 "unweighted_percentile",
                 "weighted_index",
@@ -316,50 +932,47 @@ def compute_network_alignment_indices_hs4(valid_hs4: Iterable[str], year: int = 
     pipe = xzy.merge(M_y.reset_index(), on="importer", how="left").merge(
         X_z.reset_index(), on="exporter_iso", how="left"
     )
-    pipe["local_ms"] = np.where(pipe["M_y"] > 0, pipe["X_zy"] / pipe["M_y"], 0.0)
-    pipe["world_ms"] = np.where(world_total > 0, pipe["X_z"] / world_total, 0.0)
-    pipe["tii"] = np.where(pipe["world_ms"] > 0, pipe["local_ms"] / pipe["world_ms"], 0.0)
-    pipe["tii"] = pipe["tii"].replace([np.inf, -np.inf], 0.0).fillna(0.0)
+    # Demand Alignment Index kernel:
+    # C(z,y) = (X_zy / X_z) / (M_y / WT)
+    # omega(i,y) = M_iy / world_import_i
+    pipe["export_share_to_y"] = np.where(pipe["X_z"] > 0, pipe["X_zy"] / pipe["X_z"], 0.0)
+    pipe["market_share_world_trade"] = np.where(world_total > 0, pipe["M_y"] / world_total, 0.0)
+    pipe["dai_affinity"] = np.where(
+        pipe["market_share_world_trade"] > 0,
+        pipe["export_share_to_y"] / pipe["market_share_world_trade"],
+        0.0,
+    )
+    pipe["dai_affinity"] = pipe["dai_affinity"].replace([np.inf, -np.inf], 0.0).fillna(0.0)
 
     miy = miy_acc.rename("M_iy").reset_index()
     miy.columns = ["importer", "product_code", "M_iy"]
-    pbr = miy.merge(M_y.reset_index(), on="importer", how="left")
-    pbr["PBR"] = np.where(pbr["M_y"] > 0, pbr["M_iy"] / pbr["M_y"], 0.0)
+    world_import_i = miy.groupby("product_code")["M_iy"].sum().rename("world_import_i")
+    demand = miy.merge(world_import_i.reset_index(), on="product_code", how="left")
+    demand["omega"] = np.where(demand["world_import_i"] > 0, demand["M_iy"] / demand["world_import_i"], 0.0)
+    demand["omega"] = demand["omega"].replace([np.inf, -np.inf], 0.0).fillna(0.0)
 
-    partners = sorted(set(pipe["importer"]).union(set(pbr["importer"])))
-    tii_mat = (
-        pipe.pivot(index="exporter_iso", columns="importer", values="tii")
+    partners = sorted(set(pipe["importer"]).union(set(demand["importer"])))
+    affinity_mat = (
+        pipe.pivot(index="exporter_iso", columns="importer", values="dai_affinity")
         .reindex(index=exporters, columns=partners, fill_value=0.0)
         .fillna(0.0)
     )
-    pbr_mat = (
-        pbr.pivot(index="importer", columns="product_code", values="PBR")
+    omega_mat = (
+        demand.pivot(index="importer", columns="product_code", values="omega")
         .reindex(index=partners, columns=products, fill_value=0.0)
         .fillna(0.0)
     )
 
-    unweighted_arr = tii_mat.to_numpy(dtype=float) @ pbr_mat.to_numpy(dtype=float)
+    dai_arr = affinity_mat.to_numpy(dtype=float) @ omega_mat.to_numpy(dtype=float)
 
-    gdp_w = _load_gdp_ppp_weights(year).reindex(partners).fillna(0.0)
-    pbr_weighted_mat = pbr_mat.mul(gdp_w, axis=0)
-    weighted_arr = tii_mat.to_numpy(dtype=float) @ pbr_weighted_mat.to_numpy(dtype=float)
-
-    unweighted_df = (
-        pd.DataFrame(unweighted_arr, index=exporters, columns=products)
+    dai_df = (
+        pd.DataFrame(dai_arr, index=exporters, columns=products)
         .stack(future_stack=True)
-        .rename("unweighted_index")
+        .rename("dai_index")
         .reset_index()
         .rename(columns={"level_0": "exporter_iso", "level_1": "product_code"})
     )
-    weighted_df = (
-        pd.DataFrame(weighted_arr, index=exporters, columns=products)
-        .stack(future_stack=True)
-        .rename("weighted_index")
-        .reset_index()
-        .rename(columns={"level_0": "exporter_iso", "level_1": "product_code"})
-    )
-
-    out = unweighted_df.merge(weighted_df, on=["exporter_iso", "product_code"], how="left")
+    out = dai_df.copy()
     out["year"] = int(year)
 
     if not xzi_acc.empty:
@@ -377,17 +990,19 @@ def compute_network_alignment_indices_hs4(valid_hs4: Iterable[str], year: int = 
     comparison_set = pd.concat([top30, ecu_rows], ignore_index=True).drop_duplicates()
     out = out.merge(comparison_set, on=["product_code", "exporter_iso"], how="inner")
 
-    out["unweighted_percentile"] = (
-        out.groupby("product_code")["unweighted_index"].rank(method="average", pct=True) * 100
-    )
-    out["weighted_percentile"] = (
-        out.groupby("product_code")["weighted_index"].rank(method="average", pct=True) * 100
-    )
+    out["dai_percentile"] = out.groupby("product_code")["dai_index"].rank(method="average", pct=True) * 100
+    # Compatibility aliases for existing downstream files/scripts.
+    out["unweighted_index"] = out["dai_index"]
+    out["weighted_index"] = out["dai_index"]
+    out["unweighted_percentile"] = out["dai_percentile"]
+    out["weighted_percentile"] = out["dai_percentile"]
     return out[
         [
             "year",
             "product_code",
             "exporter_iso",
+            "dai_index",
+            "dai_percentile",
             "unweighted_index",
             "unweighted_percentile",
             "weighted_index",
@@ -433,9 +1048,10 @@ def compute_alignment_leads_hs4(valid_hs4: Iterable[str], year: int = 2024) -> p
 
     base = pd.DataFrame({"hs4": sorted(valid_hs4)})
     if xzi_acc.empty:
+        base["dai_lead"] = 0.0
         base["alignment_lead_unweighted"] = 0.0
         base["alignment_lead_weighted"] = 0.0
-        return base
+        return base[["hs4", "dai_lead", "alignment_lead_unweighted", "alignment_lead_weighted"]]
 
     exports = xzi_acc.rename("exports_2024").reset_index()
     exports.columns = ["exporter_iso", "hs4", "exports_2024"]
@@ -448,34 +1064,30 @@ def compute_alignment_leads_hs4(valid_hs4: Iterable[str], year: int = 2024) -> p
     )
 
     align = compute_network_alignment_indices_hs4(valid_hs4, year=year).rename(columns={"product_code": "hs4"})[
-        ["hs4", "exporter_iso", "unweighted_percentile", "weighted_percentile"]
+        ["hs4", "exporter_iso", "dai_percentile"]
     ]
 
     comp = top5.merge(align, on=["hs4", "exporter_iso"], how="left")
     comp_med = comp.groupby("hs4", as_index=False).agg(
-        competitor_median_unweighted=("unweighted_percentile", "median"),
-        competitor_median_weighted=("weighted_percentile", "median"),
+        competitor_median_dai=("dai_percentile", "median"),
     )
 
     ecu = align[align["exporter_iso"] == "ECU"][
-        ["hs4", "unweighted_percentile", "weighted_percentile"]
+        ["hs4", "dai_percentile"]
     ].rename(
         columns={
-            "unweighted_percentile": "ecu_unweighted_percentile",
-            "weighted_percentile": "ecu_weighted_percentile",
+            "dai_percentile": "ecu_dai_percentile",
         }
     )
 
     out = base.merge(ecu, on="hs4", how="left").merge(comp_med, on="hs4", how="left")
-    out["alignment_lead_unweighted"] = (
-        pd.to_numeric(out["ecu_unweighted_percentile"], errors="coerce").fillna(0.0)
-        - pd.to_numeric(out["competitor_median_unweighted"], errors="coerce").fillna(0.0)
+    out["dai_lead"] = (
+        pd.to_numeric(out["ecu_dai_percentile"], errors="coerce").fillna(0.0)
+        - pd.to_numeric(out["competitor_median_dai"], errors="coerce").fillna(0.0)
     )
-    out["alignment_lead_weighted"] = (
-        pd.to_numeric(out["ecu_weighted_percentile"], errors="coerce").fillna(0.0)
-        - pd.to_numeric(out["competitor_median_weighted"], errors="coerce").fillna(0.0)
-    )
-    return out[["hs4", "alignment_lead_unweighted", "alignment_lead_weighted"]]
+    out["alignment_lead_unweighted"] = out["dai_lead"]
+    out["alignment_lead_weighted"] = out["dai_lead"]
+    return out[["hs4", "dai_lead", "alignment_lead_unweighted", "alignment_lead_weighted"]]
 
 
 @st.cache_data(show_spinner=True)
@@ -728,30 +1340,10 @@ def compute_trade_metrics(valid_hs4: Iterable[str]) -> pd.DataFrame:
     share_df["market_share_change_abs"] = share_df["ecu_market_share_2024"] - share_df["ecu_market_share_2020"]
     share_df = share_df[["hs4", "ecu_market_share_2020", "ecu_market_share_2024", "market_share_change_abs"]]
 
-    distance = pd.read_csv(distance_path)
-    if "iso3" not in distance.columns and "iso3_d" in distance.columns:
-        distance = distance.rename(columns={"iso3_d": "iso3"})
-    if "distance" not in distance.columns and "dist" in distance.columns:
-        distance = distance.rename(columns={"dist": "distance"})
-    distance["iso3"] = distance["iso3"].astype(str).str.upper().str.strip()
-
-    imports_2024 = imports_2024_acc.rename("imports_dest").reset_index()
-    imports_2024.columns = ["importer", "hs4", "imports_dest"]
-    world_trade_2024 = world[world["year"] == 2024][["hs4", "world_value"]].rename(columns={"world_value": "world_trade_hs4"})
-
-    dist_terms = imports_2024.merge(world_trade_2024, on="hs4", how="left")
-    dist_terms = dist_terms.merge(distance, left_on="importer", right_on="iso3", how="left")
-    dist_terms["distance"] = pd.to_numeric(dist_terms["distance"], errors="coerce").fillna(0)
-    dist_terms["distance_term"] = np.where(
-        dist_terms["world_trade_hs4"] > 0,
-        dist_terms["distance"] * (dist_terms["imports_dest"] / dist_terms["world_trade_hs4"]),
-        0,
-    )
-    distance_travelled = (
-        dist_terms.groupby("hs4", as_index=False)["distance_term"]
-        .sum()
-        .rename(columns={"distance_term": "distance_travelled"})
-    )
+    # Use the canonical product-level travelled distance from hs92_attributes.csv.
+    # This is the export-weighted bilateral distance generated in data_processing.ipynb
+    # and is the same threshold used to construct accessible market.
+    distance_travelled = load_hs4_distance_attributes()
 
     # Effective number of exporters (Hill number of order 2 / inverse HHI) under the same 145-country filter.
     if exp_hs4_2024_acc.empty:
@@ -939,17 +1531,32 @@ def load_eff_num_exp() -> pd.DataFrame:
 
 
 @st.cache_data(show_spinner=False)
+def load_hs4_distance_attributes() -> pd.DataFrame:
+    path = _resolve_intermediate_csv("hs92_attributes.csv")
+    df = pd.read_csv(path, usecols=["hs92", "travelled_distance"])
+    df["hs4"] = df["hs92"].astype(str).str.zfill(4)
+    df["distance_travelled"] = pd.to_numeric(df["travelled_distance"], errors="coerce").fillna(0.0)
+    return df[["hs4", "distance_travelled"]].drop_duplicates("hs4")
+
+
+@st.cache_data(show_spinner=False)
 def load_or_build_v1_hs4_metrics(valid_hs4: Iterable[str], year: int = 2024) -> pd.DataFrame:
     valid_hs4_set = set(str(x).zfill(4) for x in valid_hs4)
     primary_path = intermediate_dir() / V1_METRICS_FILE
     required_cols = {"accessible_market_growth_5y"}
+    required_alignment_sets = [
+        {"dai_percentile", "dai_lead"},
+        {"alignment_weighted_percentile", "alignment_lead_weighted"},
+    ]
 
     if primary_path.exists():
         m = pd.read_csv(primary_path)
         if "hs4" in m.columns:
             m["hs4"] = m["hs4"].astype(str).str.zfill(4)
             m = m[m["hs4"].isin(valid_hs4_set)].copy()
-            if not m.empty and required_cols.issubset(set(m.columns)):
+            cols = set(m.columns)
+            has_alignment = any(req.issubset(cols) for req in required_alignment_sets)
+            if not m.empty and required_cols.issubset(cols) and has_alignment:
                 return m
 
     raise FileNotFoundError(
@@ -988,6 +1595,20 @@ def load_opportunity_dataset() -> pd.DataFrame:
 
     df = c.merge(hs_ref, on="hs4", how="left")
     df = df.merge(metrics, on="hs4", how="left")
+    if "dai_percentile" not in df.columns and "alignment_weighted_percentile" in df.columns:
+        df["dai_percentile"] = df["alignment_weighted_percentile"]
+    if "dai_lead" not in df.columns and "alignment_lead_weighted" in df.columns:
+        df["dai_lead"] = df["alignment_lead_weighted"]
+    if "dai_index" not in df.columns:
+        df["dai_index"] = 0.0
+    df["alignment_weighted_percentile"] = pd.to_numeric(
+        df.get("dai_percentile", df.get("alignment_weighted_percentile", 0.0)),
+        errors="coerce",
+    ).fillna(0.0)
+    df["alignment_lead_weighted"] = pd.to_numeric(
+        df.get("dai_lead", df.get("alignment_lead_weighted", 0.0)),
+        errors="coerce",
+    ).fillna(0.0)
     # Prefer RCA recomputed from trade shares for filtering/display as "raw RCA".
     if "raw_rca_trade" in df.columns:
         df["raw_rca"] = pd.to_numeric(df["raw_rca_trade"], errors="coerce").fillna(0.0)
@@ -1005,6 +1626,9 @@ def load_opportunity_dataset() -> pd.DataFrame:
         "density_percentile",
         "eff_num_exp",
         "distance_travelled",
+        "dai_index",
+        "dai_percentile",
+        "dai_lead",
         "alignment_weighted_percentile",
         "market_growth_5y",
         "market_size_share",
@@ -1031,19 +1655,19 @@ def load_opportunity_dataset() -> pd.DataFrame:
     )
 
     # Keep min-max normalized values for views that need bounded scales (e.g., sizes/ranking views).
-    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "accessible_market_growth_5y", "market_size_share", "accessible_market_size_share"]:
+    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "dai_percentile", "pci", "cog", "market_growth_5y", "accessible_market_growth_5y", "market_size_share", "accessible_market_size_share"]:
         if col not in df.columns:
             df[col] = 0.0
         df[f"{col}_norm"] = normalize_0_1(df[col])
 
     # Use z-score normalization for feasibility/attractiveness index construction.
-    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "alignment_weighted_percentile", "pci", "cog", "market_growth_5y", "accessible_market_growth_5y", "market_size_share", "accessible_market_size_share"]:
+    for col in ["raw_rca", "rca_transformed", "density", "eff_num_exp", "distance_travelled", "dai_percentile", "pci", "cog", "market_growth_5y", "accessible_market_growth_5y", "market_size_share", "accessible_market_size_share"]:
         if col not in df.columns:
             df[col] = 0.0
         df[f"{col}_z"] = normalize_zscore(df[col])
 
     df["feasibility_index"] = df[
-        ["rca_transformed_z", "density_z", "eff_num_exp_z", "alignment_weighted_percentile_z"]
+        ["rca_transformed_z", "density_z", "eff_num_exp_z", "dai_percentile_z"]
     ].mean(axis=1)
     df["attractiveness_index"] = df[
         ["pci_z", "cog_z", "accessible_market_growth_5y_z", "accessible_market_size_share_z"]
