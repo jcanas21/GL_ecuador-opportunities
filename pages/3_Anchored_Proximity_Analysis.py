@@ -194,10 +194,10 @@ def _apply_page3_profile(profile_name: str) -> None:
 
     if profile_name == "top_candidates":
         st.session_state["p3_strategic_balance"] = 0.50
-        st.session_state["p3_w_pci"] = 0.50
-        st.session_state["p3_w_cog"] = 0.00
-        st.session_state["p3_w_growth"] = 0.25
-        st.session_state["p3_w_market"] = 0.25
+        st.session_state["p3_w_pci"] = 0.35
+        st.session_state["p3_w_cog"] = 0.35
+        st.session_state["p3_w_growth"] = 0.15
+        st.session_state["p3_w_market"] = 0.15
         st.session_state["p3_candidates_to_display"] = 30
         st.session_state["p3_candidate_rca_max"] = 0.50
         st.session_state["p3_selected_anchor_sections"] = anchor_sections_excluding_123
@@ -736,7 +736,7 @@ treemap.update_traces(
     textfont=dict(size=18, color="#ffffff"),
     marker=dict(line=dict(width=1, color="rgba(255,255,255,0.45)")),
 )
-treemap.update_layout(margin=dict(t=60, l=10, r=10, b=95), height=850)
+treemap.update_layout(margin=dict(t=60, l=10, r=10, b=95), height=700)
 if treemap_color_label == "Sector":
     treemap.update_layout(
         legend=dict(
