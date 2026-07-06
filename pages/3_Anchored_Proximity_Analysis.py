@@ -706,7 +706,7 @@ treemap.update_traces(
     textfont=dict(size=18, color="#ffffff"),
     marker=dict(line=dict(width=1, color="rgba(255,255,255,0.45)")),
 )
-treemap.update_layout(margin=dict(t=60, l=10, r=10, b=95), height=880)
+treemap.update_layout(margin=dict(t=60, l=10, r=10, b=95), height=850)
 if treemap_color_label == "Sector":
     treemap.update_layout(
         legend=dict(

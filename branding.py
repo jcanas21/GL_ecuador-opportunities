@@ -9,7 +9,7 @@ import streamlit as st
 
 ROOT = Path(__file__).resolve().parent
 ASSETS = ROOT / "assets"
-GROWTH_LAB_LOGO = ASSETS / "growth_lab_logo_crop.png"
+GROWTH_LAB_LOGO = ASSETS / "growth_lab_logo_black.png"
 ECUADOR_FLAG = ASSETS / "bandera_ecuador.svg"
 
 

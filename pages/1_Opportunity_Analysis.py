@@ -770,7 +770,7 @@ else:
     )
     treemap.update_layout(
         margin=dict(t=60, l=10, r=10, b=95),
-        height=880,
+        height=850,
     )
     if treemap_color_col == "sector":
         treemap.update_layout(

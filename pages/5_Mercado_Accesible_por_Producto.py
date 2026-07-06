@@ -189,7 +189,7 @@ fig.update_traces(
 fig.update_layout(
     title=f"Treemap del mercado accesible para {selected_product_label} | Fuente: {source_label}",
     margin=dict(t=70, l=8, r=8, b=48),
-    height=880,
+    height=850,
     legend_title_text="Continente",
     legend=dict(orientation="h", yanchor="top", y=-0.03, xanchor="center", x=0.5),
 )
@@ -262,7 +262,7 @@ fig_comp.update_traces(
 fig_comp.update_layout(
     title=f"Treemap de competidores para {selected_market_name} | Producto {selected_product_label}",
     margin=dict(t=70, l=8, r=8, b=48),
-    height=880,
+    height=850,
     legend_title_text="Continente",
     legend=dict(orientation="h", yanchor="top", y=-0.03, xanchor="center", x=0.5),
 )
