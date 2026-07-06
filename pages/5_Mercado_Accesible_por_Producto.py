@@ -86,7 +86,7 @@ def build_country_name_map() -> dict[str, str]:
 
 PRESET_SOURCES = {
     "Página 2 · Margen Intensivo": ("page2", "Margen Intensivo"),
-    "Página 3 · Candidatos seleccionados": ("page3", "Candidatos seleccionados"),
+    "Página 3 · Margen Extensivo": ("page3", "Margen Extensivo"),
 }
 
 

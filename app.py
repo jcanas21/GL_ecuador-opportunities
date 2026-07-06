@@ -12,61 +12,48 @@ def render_guide_and_glossary() -> None:
         "Guía y glosario de las páginas del tablero V1 (HS92 a 4 dígitos).",
     )
 
-    st.markdown("## Página 2: Análisis de Oportunidades")
     st.markdown(
         """
-La página de **Análisis de Oportunidades** (Página 2) clasifica los productos HS92 a 4 dígitos combinando dos dimensiones:
+### Qué hace este tablero
 
-- **Factibilidad**: qué tan realista es que Ecuador compita hoy en ese producto.
-- **Atractivo**: qué tan valiosa es la oportunidad si Ecuador se expande en ese producto.
+Este tablero ayuda a **priorizar oportunidades de diversificación exportadora para el Ecuador** a nivel **HS92 de 4 dígitos**, combinando dos preguntas complementarias:
 
-Aquí se puede:
-- Filtrar productos por tamaño de mercado accesible, RCA, sector, crecimiento del mercado accesible, percentil de densidad y piso mínimo de exportaciones del Ecuador.
-- Reponderar cada componente de factibilidad y atractivo.
-- Rebalancear la estrategia general entre factibilidad y atractivo.
-- Explorar una tabla de productos priorizados y un treemap sectorial.
+- **¿Qué productos son atractivos?**  
+  Porque tienen mercados grandes o crecientes, o porque aportan sofisticación productiva.
+- **¿Qué productos son factibles?**  
+  Porque están más cerca de las capacidades actuales del país o porque la red comercial del Ecuador ya está relativamente bien alineada con la demanda global de ese producto.
+
+La lógica del tablero no busca identificar “el producto más complejo” en abstracto, sino **productos que puedan convertirse en oportunidades plausibles y accionables** para la agenda exportadora del país.
 """
     )
 
-    st.markdown("## Página 3: Análisis de Proximidad Anclada")
     st.markdown(
         """
-La página de **Análisis de Proximidad Anclada** parte de un conjunto de productos ancla y mapea los productos candidatos más próximos a ellos.
+### Cuatro páginas
 
-Aquí se puede:
-- Filtrar vínculos ancla-candidato por sector, rango de proximidad, mercado accesible, percentil de densidad del ancla y secciones del ancla.
-- Visualizar la red como un **gráfico Sankey** desde anclas hacia candidatos.
-- Clasificar productos candidatos usando la misma lógica de factibilidad versus atractivo del tablero principal.
-- Explorar una tabla de candidatos y un treemap de candidatos dimensionado por **Mercado Accesible**.
+- **Guía y glosario** (acá): contexto metodológico, definiciones y fórmulas clave.
+- **Análisis de Oportunidades**: tablero principal para visualizar el análisis de complejidad económica tradicional y priorizar productos del **margen intensivo**.
+- **Análisis de Proximidad Anclada**: identifica oportunidades del **margen extensivo** a partir de productos ancla del Ecuador y sus proximidades más altas.
+- **Mercado Accesible por Producto**: descompone geográficamente el mercado accesible de los productos priorizados y muestra los principales competidores por destino.
 """
     )
 
-    st.markdown("## Página 4: Comparación")
     st.markdown(
         """
-La página de **Comparación** contrasta las recomendaciones producidas por los presets activos de la Página 2 y la Página 3.
+### Cómo leer el tablero
 
-Aquí se puede:
-- Ver cuánto se superponen dos listas de recomendaciones seleccionadas.
-- Identificar productos que aparecen solo en una metodología.
-- Comparar lado a lado rankings, tamaño del mercado accesible, DAI, PCI y COG.
+- **Página 2: Análisis de Oportunidades**  
+  Esta página permite visualizar los resultados del **análisis de complejidad económica tradicional** aplicado al Ecuador. En este tablero, esa lógica se usa principalmente para identificar productos del **margen intensivo**, es decir, productos en los que el país **ya tiene presencia exportadora o capacidades productivas demostradas** y donde la pregunta es cómo profundizar, sofisticar o escalar esa base existente. Aquí el usuario puede cambiar filtros, pesos y presets para producir listas priorizadas dentro de ese universo.
+
+- **Página 3: Análisis de Proximidad Anclada**  
+  Esta página está diseñada para identificar oportunidades del **margen extensivo**, es decir, productos que **Ecuador no exporta hoy de forma significativa o en los que su presencia es todavía débil**, pero que podrían desarrollarse a partir de capacidades ya existentes. Para eso parte de productos **ancla** identificados en la canasta exportadora ecuatoriana y construye una lista de candidatos usando sus proximidades más altas en el espacio de productos.
+
+- **Página 4: Mercado Accesible por Producto**  
+  Baja un nivel más: muestra **dónde** está el mercado accesible de cada producto priorizado y **contra quién** compite Ecuador en esos destinos.
 """
     )
 
-    st.markdown("## Página 5: Mercado Accesible por Producto")
-    st.markdown(
-        """
-La página de **Mercado Accesible por Producto** permite seleccionar cualquier producto incluido en los presets y visualizar cómo se distribuye su mercado accesible entre países de destino.
-
-Aquí se puede:
-- Elegir un preset de la Página 2 o la Página 3 como fuente de productos.
-- Seleccionar un producto específico dentro de esa lista.
-- Visualizar un **treemap** del mercado accesible por país, coloreado por continente.
-- Ver el tamaño total del mercado accesible y la participación de cada destino.
-"""
-    )
-
-    st.markdown("## Cómo se Construyen los Puntajes")
+    st.markdown("### Cómo se construyen los puntajes")
     st.markdown(
         """
 - Las variables componentes se normalizan (z-score) para construir los puntajes.
@@ -76,7 +63,7 @@ Aquí se puede:
 """
     )
 
-    st.markdown("## Glosario de Variables (Página Principal)")
+    st.markdown("### Glosario de variables del tablero")
     st.caption("Definiciones breves y guía de interpretación para las variables técnicas clave.")
     glossary = pd.DataFrame(
         [
@@ -106,20 +93,20 @@ Aquí se puede:
     )
     st.dataframe(glossary, use_container_width=True, hide_index=True)
 
-    st.markdown("## Álgebra e Interpretación")
-    st.markdown("### Percentil de Densidad")
+    st.markdown("### Álgebra e interpretación")
+    st.markdown("#### Percentil de Densidad")
     st.latex(r"\mathrm{DensityPercentile}_{z,i} = \frac{\mathrm{rank}_i(Density_{z,i})-1}{N_i-1}")
     st.markdown("- `z`: país (Ecuador en este tablero), `i`: producto.")
     st.markdown("- `rank_i(Density_{z,i})`: posición de la densidad del Ecuador dentro de la distribución entre países para el producto `i` (rango promedio en caso de empates).")
     st.markdown("- `N_i`: número de países disponibles para el producto `i`.")
     st.markdown("- Interpretación: 0.80 significa que la densidad del Ecuador está por encima de aproximadamente el 80% de los países para ese mismo producto.")
 
-    st.markdown("### Distancia Recorrida (por producto)")
+    st.markdown("#### Distancia Recorrida (por producto)")
     st.latex(r"\mathrm{DistanceTravelled}_i = \sum_y \left( Distance_{x,y} \times \frac{X_{x,y,i}}{\sum_y X_{x,y,i}} \right)")
     st.markdown("- `X_{x,y,i}`: exportaciones bilaterales del producto `i` desde el origen `x` hacia el destino `y`.")
     st.markdown("- Interpretación: distancia promedio ponderada recorrida por el producto, donde el valor exportado bilateral es el ponderador.")
 
-    st.markdown("### Tamaño del Mercado Accesible")
+    st.markdown("#### Tamaño del Mercado Accesible")
     st.latex(
         r"\mathrm{AccessibleMarket}_{z,i} = \sum_{y \in \mathcal{A}_{z,i}} M_{i,y}"
     )
@@ -130,7 +117,7 @@ Aquí se puede:
     st.markdown("- Un mercado es accesible si está dentro del perfil observado de distancia del producto **o** si el exportador ya vende al menos USD 100 millones de ese producto a ese socio.")
     st.markdown("- Interpretación: demanda total en mercados que son geográficamente alcanzables o ya probados comercialmente a escala relevante.")
 
-    st.markdown("### DAI (Índice de Alineación de la Demanda)")
+    st.markdown("#### DAI (Índice de Alineación de la Demanda)")
     st.latex(r"\mathrm{DAI}_{z,i} = \sum_y C_{z,y}\,\omega_{i,y}")
     st.latex(r"C_{z,y} = \frac{X_{z,y}/M_y}{X_z/WT}")
     st.latex(r"\omega_{i,y} = \frac{M_{i,y}}{\sum_{y'} M_{i,y'}}")
@@ -150,7 +137,6 @@ pages = [
     st.Page(render_guide_and_glossary, title="Guía y glosario", icon=":material/menu_book:", default=True),
     st.Page(Path("pages/1_Opportunity_Analysis.py"), title="Análisis de Oportunidades", icon=":material/insights:"),
     st.Page(Path("pages/3_Anchored_Proximity_Analysis.py"), title="Análisis de Proximidad Anclada", icon=":material/account_tree:"),
-    st.Page(Path("pages/4_Comparison.py"), title="Comparación", icon=":material/compare_arrows:"),
     st.Page(Path("pages/5_Mercado_Accesible_por_Producto.py"), title="Mercado Accesible por Producto", icon=":material/grid_view:"),
 ]
 pg = st.navigation(pages, position="sidebar", expanded=True)

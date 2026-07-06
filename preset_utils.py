@@ -30,7 +30,7 @@ PAGE2_PRESETS = {
 }
 
 PAGE3_PRESETS = {
-    "Candidatos seleccionados": {
+    "Margen Extensivo": {
         "trade_min": 0.5,
         "growth_gt": 0.0,
         "candidate_rca_max": 0.5,

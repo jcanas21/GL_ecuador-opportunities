@@ -141,6 +141,20 @@ st.dataframe(
     },
 )
 
+with st.expander("Diccionario de columnas — Tabla comparativa de recomendaciones"):
+    st.markdown(
+        """
+- **Grupo de comparación**: indica si el producto aparece en ambas metodologías o solo en una de ellas.
+- **HS4 / Producto / Sector**: identificación del producto comparado.
+- **Ranking / Puntaje Página 2**: posición y puntaje del producto en el preset seleccionado de Análisis de Oportunidades.
+- **Ranking / Puntaje Página 3**: posición y puntaje del producto en el preset seleccionado de Proximidad Anclada.
+- **Tamaño del mercado accesible**: demanda alcanzable total estimada para Ecuador.
+- **Crecimiento del mercado accesible % (5 años)**: dinamismo reciente de esa demanda accesible.
+- **Percentil DAI / DAI (bruto)**: fuerza y posición relativa de la alineación entre la red comercial del Ecuador y la geografía de la demanda del producto.
+- **PCI / COG**: sofisticación del producto y potencial estratégico de aprendizaje.
+"""
+    )
+
 overlap = comparison[comparison["comparison_group"] == "Superposición"].copy()
 if not overlap.empty:
     overlap["rank_gap"] = overlap["page3_rank"] - overlap["page2_rank"]
@@ -173,5 +187,15 @@ if not overlap.empty:
             "dai_raw": st.column_config.NumberColumn("DAI (bruto)", format="%.3f"),
         },
     )
+    with st.expander("Diccionario de columnas — Diagnóstico de superposición"):
+        st.markdown(
+            """
+- **HS4 / Producto / Sector**: productos que aparecen simultáneamente en ambas listas.
+- **Ranking Página 2 / Ranking Página 3**: posición relativa del mismo producto en cada metodología.
+- **Brecha de ranking**: diferencia entre ambos rankings. Un valor positivo significa que la Página 3 lo prioriza menos que la Página 2; un valor negativo, lo contrario.
+- **Tamaño del mercado accesible**: escala económica de la oportunidad.
+- **Percentil DAI / DAI (bruto)**: métricas de alineación de la demanda que ayudan a interpretar si la coincidencia se sostiene también por la red comercial del Ecuador.
+"""
+        )
 else:
     st.info("No hay productos superpuestos entre las dos listas de recomendaciones seleccionadas.")

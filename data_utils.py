@@ -668,7 +668,7 @@ def load_rankings_countries(year: int = 2024) -> set[str]:
 
 
 @st.cache_data(show_spinner=False)
-def load_hs92_reference() -> pd.DataFrame:
+def _load_hs92_reference_cached(_base_mtime_ns: int, _es_mtime_ns: int) -> pd.DataFrame:
     path = input_dir() / "hs92_4digits.csv"
     df = pd.read_csv(path, encoding="utf-8-sig")
     df["hs4"] = df["product_hs92_code"].astype(str).str.zfill(4)
@@ -710,6 +710,12 @@ def load_hs92_reference() -> pd.DataFrame:
     sector_series = df["sector"] if "sector" in df.columns else pd.Series(["Other"] * len(df), index=df.index)
     df["sector"] = sector_series.map(translate_sector_label_es)
     return df[["hs4", "product_name_short", "product_name", "sector", "green_product"]].drop_duplicates("hs4")
+
+
+def load_hs92_reference() -> pd.DataFrame:
+    path = input_dir() / "hs92_4digits.csv"
+    es_path = input_dir() / "hs92_4digits_master_es.csv"
+    return _load_hs92_reference_cached(_file_mtime_ns(path), _file_mtime_ns(es_path))
 
 
 @st.cache_data(show_spinner=False)

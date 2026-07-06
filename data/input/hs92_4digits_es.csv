@@ -257,7 +257,7 @@ hs4,product_name_short,product_name_short_es
 2704,Coke,Coque
 2705,Non-petroleum gases,Gases no derivados del petróleo
 2706,"Tar distilled from coal, lignite etc.","Alquitrán destilado de carbón, lignito, etc."
-2707,Oils etc. from high temperature coal tar,Aceites etc. from high temperature coal tar
+2707,Oils etc. from high temperature coal tar,Aceites y demás productos de la destilación de alquitranes de hulla de alta temperatura
 2708,Pitch and pitch coke,Pitch y pitch coke
 2709,"Petroleum oils, crude","Aceites de petróleo, crudos"
 2710,"Petroleum oils, refined","Aceites de petróleo, refinados"
@@ -475,15 +475,15 @@ hs4,product_name_short,product_name_short_es
 4004,Scrap of rubber,Chatarra de caucho
 4005,Compounded rubber,Compounded caucho
 4006,Unvulcanized rubber rods,Unvulcanized caucho rods
-4007,Vulcanized rubber thread and cord,Vulcanized caucho thread y cord
+4007,Vulcanized rubber thread and cord,Hilos y cuerdas de caucho vulcanizado
 4008,Vulcanized rubber plates,Vulcanized caucho placas
 4009,Vulcanized rubber tubes,Tubos de caucho vulcanizado
-4010,Conveyor belts of vulcanized rubber,Conveyor belts de vulcanized caucho
+4010,Conveyor belts of vulcanized rubber,Correas transportadoras de caucho vulcanizado
 4011,New pneumatic tires of rubber,Nuevos neumáticos neumáticos de caucho
 4012,Used pneumatic tires of rubber,Neumáticos usados de caucho
 4013,Rubber inner tubes,Cámaras de caucho
 4014,Rubber hygenic or pharmeceutical items,Caucho hygenic o pharmeceutical items
-4015,Vulcanized rubber articles of apparel,Vulcanized caucho artículos de apparel
+4015,Vulcanized rubber articles of apparel,Prendas y complementos de vestir de caucho vulcanizado
 4016,Other articles of vulcanized rubber,Otros artículos de vulcanized caucho
 4017,Hard rubber,Hard caucho
 4101,Raw hides of bovines or equines,Cueros en bruto de bovinos o equinos
@@ -499,7 +499,7 @@ hs4,product_name_short,product_name_short_es
 4111,Composition leather,Composition cuero
 4201,Saddlery and harnesses,Saddlery y harnesses
 4202,Trunks or cases,Trunks o cases
-4203,Leather apparel,Cuero apparel
+4203,Leather apparel,Prendas y complementos de vestir de cuero
 4204,Articles of leather for technical uses,Artículos de cuero para usos técnicos
 4205,Other articles of leather,Otros artículos de cuero
 4206,Articles of gut,Artículos de tripa
@@ -508,7 +508,7 @@ hs4,product_name_short,product_name_short_es
 4303,Furskin apparel,Prendas de peletería
 4304,Artificial fur,Peletería artificial
 4401,Fuel wood,Fuel madera
-4402,Wood charcoal,Madera charcoal
+4402,Wood charcoal,Carbón vegetal
 4403,Wood in the rough,Madera en bruto
 4404,Strips and other pieces of wood,Strips y otros pieces de madera
 4405,Wood wool or flour,Lana o harina de madera
@@ -516,17 +516,17 @@ hs4,product_name_short,product_name_short_es
 4407,Wood sawn lengthwise,Madera aserrada longitudinalmente
 4408,Sheets for veneering for plywood,Hojas para chapado de madera contrachapada
 4409,Wood shaped along its edges,Madera shaped along its edges
-4410,Particle board and similar board,Particle board y similar board
-4411,Fiberboard of wood,Fiberboard de madera
+4410,Particle board and similar board,Tableros de partículas y tableros similares
+4411,Fiberboard of wood,Tableros de fibra de madera
 4412,Plywood,Madera contrachapada
 4413,Densified wood,Densified madera
 4414,Wooden frames,De madera monturas
 4415,Packing boxes,Embalaje boxes
-4416,"Casks, barrels, etc. of wood","Casks, barrels, etc. de madera"
+4416,"Casks, barrels, etc. of wood","Barriles, toneles y demás recipientes de madera"
 4417,Wooden tools,Herramientas de madera
 4418,Wood carpentry for construction,Carpintería de madera para construcción
 4419,Wooden kitchenware,De madera kitchenware
-4420,"Wood marquetry, ornaments, etc.","Madera marquetry, ornaments, etc."
+4420,"Wood marquetry, ornaments, etc.",Marquetería de madera y objetos de adorno de madera
 4421,Other articles of wood,Otros artículos de madera
 4501,"Natural cork, raw",Corcho natural en bruto
 4502,"Natural cork, debacked",Corcho natural descortezado
@@ -552,7 +552,7 @@ hs4,product_name_short,product_name_short_es
 4809,Carbon paper,Carbon papel
 4810,"Paper and paperboard, coated with kaolin","Papel y cartón, coated con kaolin"
 4811,"Cellulose wadding, coated",Guata de celulosa recubierta
-4812,Filter blocks of paper pulp,Filter blocks de papel pulp
+4812,Filter blocks of paper pulp,Bloques filtrantes de pasta de papel
 4813,Cigarette paper,Cigarette papel
 4814,Wallpaper,Papel pintado
 4815,Floor coverings of paper,Floor coverings de papel
@@ -565,7 +565,7 @@ hs4,product_name_short,product_name_short_es
 4822,"Bobbins, spools, cops of paper","Bobbins, spools, cops de papel"
 4823,Other paper cut to size,Otros papel cut to size
 4901,"Books, brochures etc.","Libros, folletos, etc."
-4902,"Newspapers, journals and periodicals","Newspapers, journals y periodicals"
+4902,"Newspapers, journals and periodicals","Periódicos, revistas y publicaciones periódicas"
 4903,Children's books,Libros infantiles
 4904,"Music, printed or in manuscript","Music, printed o in manuscript"
 4905,Maps,Mapas
@@ -598,7 +598,7 @@ hs4,product_name_short,product_name_short_es
 5201,Raw cotton,Algodón en bruto
 5202,Cotton waste,Algodón desechos
 5203,"Cotton, carded or combed","Algodón, carded o combed"
-5204,Cotton sewing thread,Algodón sewing thread
+5204,Cotton sewing thread,Hilo de coser de algodón
 5205,Cotton yarn of > 85%,Algodón hilados de > 85%
 5206,Cotton yarn of < 85%,Algodón hilados de < 85%
 5207,Cotton yarn for retail sale,Hilado de algodón para venta al por menor
@@ -675,8 +675,8 @@ hs4,product_name_short,product_name_short_es
 5906,Rubberized textile fabrics,Rubberized textil tejidos
 5907,"Other textile fabrics impregnated, coated or covered","Otros textil tejidos impregnated, coated o covered"
 5908,Textile wicks,Textil wicks
-5909,Textile hosepiping and similar tubing,Textil hosepiping y similar tubing
-5910,"Transmission belts or belting, of textile material","Transmission belts o belting, de textil material"
+5909,Textile hosepiping and similar tubing,Mangueras y tuberías similares de materia textil
+5910,"Transmission belts or belting, of textile material","Correas de transmisión y bandas similares, de materia textil"
 5911,Textile articles for technical use,Artículos textiles para usos técnicos
 6001,"Pile fabrics, knit","Tejidos de pelo, de punto"
 6002,Other knitted fabrics,Otros knitted tejidos
@@ -759,9 +759,9 @@ hs4,product_name_short,product_name_short_es
 6813,Friction material and articles thereof,Friction material y artículos thereof
 6814,Mica articles,Mica artículos
 6815,Articles of stone or of other mineral substances,Artículos de stone o de otros mineral substances
-6901,"Bricks, blocks, and other ceramic goods","Bricks, blocks, y otros ceramic mercancías"
-6902,"Bricks, tiles and similar refractory ceramic constructional goods","Bricks, tiles y similar refractory ceramic constructional mercancías"
-6903,Other refractory ceramic goods,Otros refractory ceramic mercancías
+6901,"Bricks, blocks, and other ceramic goods","Ladrillos, bloques y otras piezas cerámicas"
+6902,"Bricks, tiles and similar refractory ceramic constructional goods","Ladrillos, tejas y piezas similares de cerámica refractaria para construcción"
+6903,Other refractory ceramic goods,Las demás manufacturas cerámicas refractarias
 6904,Ceramic building bricks,Ladrillos cerámicos de construcción
 6905,Architectural ceramic ornaments,Ornamentos cerámicos arquitectónicos
 6906,Ceramic pipes,Tuberías cerámicas
@@ -771,8 +771,8 @@ hs4,product_name_short,product_name_short_es
 6910,"Ceramic sinks, washbasins, and similar sanitary fixtures","Fregaderos, lavabos y aparatos sanitarios similares de cerámica"
 6911,Porcelain or china household articles,Artículos domésticos de porcelana o loza
 6912,Ceramic household articles,Artículos domésticos de cerámica
-6913,Ornamental ceramic articles,Ornamental ceramic artículos
-6914,Other ceramic articles,Otros ceramic artículos
+6913,Ornamental ceramic articles,Artículos cerámicos ornamentales
+6914,Other ceramic articles,Los demás artículos de cerámica
 7001,Cullet and other scraps of glass,Cascotes y demás desechos de vidrio
 7002,Glass balls,Bolas de vidrio
 7003,"Glass, cast or rolled",Vidrio colado o laminado
@@ -787,7 +787,7 @@ hs4,product_name_short,product_name_short_es
 7012,Glass inners for vacuum flasks,Recipientes interiores de vidrio para termos
 7013,Glassware for interior decorative use,Artículos de vidrio para decoración de interiores
 7014,Signaling glassware,Vidriería para señalización
-7015,Clock or watch glasses and similar glasses,Clock o reloj glasses y similar glasses
+7015,Clock or watch glasses and similar glasses,Cristales para relojes y similares
 7016,Glass paving blocks or other molded products,"Bloques, ladrillos y demás artículos moldeados de vidrio"
 7017,"Laboratory, hygienic or pharmaceutical glassware","Artículos de vidrio para laboratorio, higiene o farmacia"
 7018,Glass beads,Cuentas de vidrio
@@ -848,8 +848,8 @@ hs4,product_name_short,product_name_short_es
 7306,"Other tubes, pipes and hollow profiles of iron or steel","Otros tubos, caños y perfiles huecos de hierro o acero"
 7307,Tube or pipe fittings of iron or steel,Tube o pipe fittings de hierro o acero
 7308,"Structures and their parts, of iron or steel","Estructuras y sus partes, de hierro o acero"
-7309,"Tanks etc. > 300 liters, iron or steel","Tanks etc. > 300 liters, hierro o acero"
-7310,"Tanks etc. < 300 liters, iron or steel","Tanks etc. < 300 liters, hierro o acero"
+7309,"Tanks etc. > 300 liters, iron or steel","Depósitos y recipientes similares > 300 litros, de hierro o acero"
+7310,"Tanks etc. < 300 liters, iron or steel","Depósitos y recipientes similares < 300 litros, de hierro o acero"
 7311,Containers for compressed or liquified gas,Recipientes para gas comprimido o licuado
 7312,"Wire of iron or steel, not insulated","Alambre de hierro o acero, sin aislar"
 7313,Barbed wire of iron or steel,Alambre de púas de hierro o acero
@@ -857,7 +857,7 @@ hs4,product_name_short,product_name_short_es
 7315,Chain of iron or steel,Chain de hierro o acero
 7316,Anchors of iron or steel,Anchors de hierro o acero
 7317,Nails and similar articles of iron or steel,Clavos y artículos similares de hierro o acero
-7318,Screws and similar articles of iron or steel,Screws y similar artículos de hierro o acero
+7318,Screws and similar articles of iron or steel,Tornillos y artículos similares de hierro o acero
 7319,Articles for sewing of iron or steel,Artículos para coser de hierro o acero
 7320,Springs of iron or steel,Springs de hierro o acero
 7321,Stoves and similar non-electric appliances of iron or steel,Estufas y aparatos similares no eléctricos de hierro o acero
@@ -880,7 +880,7 @@ hs4,product_name_short,product_name_short_es
 7412,Copper tube or pipe fittings,Cobre tube o pipe fittings
 7413,"Copper wire, uninsulated",Alambre de cobre sin aislar
 7414,Endless bands of copper wire for machinery,Bandas sin fin de alambre de cobre para maquinaria
-7415,Screws and similar articles of copper,Screws y similar artículos de cobre
+7415,Screws and similar articles of copper,Tornillos y artículos similares de cobre
 7416,Copper springs,Cobre springs
 7417,Copper cooking products,Artículos de cocina de cobre
 7418,Household articles of copper,Artículos domésticos de cobre
@@ -902,7 +902,7 @@ hs4,product_name_short,product_name_short_es
 7607,Aluminum foil < 0.2 mm,Aluminio foil < 0.2 mm
 7608,Aluminum tubes and pipes,Tubos y caños de aluminio
 7609,Aluminum tube or pipe fittings,Aluminio tube o pipe fittings
-7610,"Aluminum structures (bridges, towers etc)","Aluminio structures (bridges, towers etc)"
+7610,"Aluminum structures (bridges, towers etc)","Estructuras de aluminio (puentes, torres, etc.)"
 7611,"Aluminum containers, >300 liters","Recipientes de aluminio, >300 litros"
 7612,"Aluminum containers, <300 liters","Recipientes de aluminio, <300 litros"
 7613,Aluminum containers for compressed or liquefied gas,Recipientes de aluminio para gas comprimido o licuado
@@ -960,13 +960,13 @@ hs4,product_name_short,product_name_short_es
 8301,Padlocks and locks,Candados y cerraduras
 8302,"Base metal mountings, fittings and similar articles","Herrajes, guarniciones y artículos similares de metal común"
 8303,Safes,Cajas de caudales
-8304,"Paper trays and similar office equipment, of base metal","Bandejas para papel y equipos de oficina similares, de metal común"
-8305,"Paper clips and similar office articles, of metal","Clips para papel y artículos de oficina similares, de metal"
+8304,"Paper trays and similar office equipment, of base metal","Bandejas para papel y equipos similares de oficina, de metal común"
+8305,"Paper clips and similar office articles, of metal","Clips para papel y artículos similares de oficina, de metal común"
 8306,"Ornaments, statuettes, etc. of metal","Adornos, estatuillas, etc. de metal"
 8307,Flexible tubing of base metal,Tubos flexibles de metal común
 8308,"Clasps, buckles etc. of metal","Broches, hebillas, etc. de metal"
 8309,"Stoppers, caps and lids of metal","Tapones, cápsulas y tapas de metal"
-8310,Sign plates and similar plates of base metal,Placas indicadoras y similares de metal común
+8310,Sign plates and similar plates of base metal,Placas indicadoras y artículos similares de metal común
 8311,Wire etc. used for welding,"Alambre, etc., utilizado para soldadura"
 8401,Nuclear reactors and related equipment,Reactores nucleares y equipo relacionado
 8402,Steam boilers,Steam calderas
@@ -979,9 +979,9 @@ hs4,product_name_short,product_name_short_es
 8409,Parts suitable for use with spark-ignition engines,Partes adecuadas para uso con motores de encendido por chispa
 8410,"Hydraulic turbines, water wheels and regulators","Hydraulic turbines, water wheels y regulators"
 8411,Gas turbines,Turbinas de gas
-8412,Other engines and motors,Otros engines y motors
+8412,Other engines and motors,Los demás motores y máquinas motrices
 8413,Pumps for liquids,Bombas para líquidos
-8414,"Pumps, compressors, fans, etc.","Bombas, compressors, fans, etc."
+8414,"Pumps, compressors, fans, etc.","Bombas, compresores, ventiladores, etc."
 8415,Air conditioners,Aires acondicionados
 8416,Furnace burners,Quemadores para hornos
 8417,Industrial furnaces,Hornos industriales
@@ -1076,7 +1076,7 @@ hs4,product_name_short,product_name_short_es
 8521,Video recording apparatus,Aparatos de grabación de video
 8522,Parts and accessories for video or sound equipment,Partes y accesorios para equipos de video o sonido
 8523,Sound storage media,Medios de almacenamiento de sonido
-8524,"Tapes, cassettes, records and compact disks","Tapes, cassettes, records y compact disks"
+8524,"Tapes, cassettes, records and compact disks","Cintas, casetes, discos y discos compactos"
 8525,"Transmission apparatus for radio, telephone and TV","Aparatos de transmisión para radio, telefonía y televisión"
 8526,Radar,Radar
 8527,Reception apparatus for radio broadcasting,Aparatos receptores para radiodifusión
@@ -1089,7 +1089,7 @@ hs4,product_name_short,product_name_short_es
 8534,Electronic printed circuits,Circuitos impresos electrónicos
 8535,Electrical apparatus for > 1k volts,Aparatos eléctricos para > 1 kV
 8536,Electrical apparatus for < 1k volts,Aparatos eléctricos para < 1 kV
-8537,Electrical boards,Eléctrico boards
+8537,Electrical boards,Cuadros eléctricos
 8538,Parts for electrical apparatus,Partes para aparatos eléctricos
 8539,Electrical filament,Eléctrico filament
 8540,"Thermionic, cold cathode or photocathode tubes","Tubos termoiónicos, de cátodo frío o fotocátodo"
@@ -1115,15 +1115,15 @@ hs4,product_name_short,product_name_short_es
 8703,Cars,Automóviles
 8704,Motor vehicles for transporting goods,Vehículos automotores para transporte mercancías
 8705,Special purpose motor vehicles,Special purpose vehículos automotores
-8706,Vehicle chassis fitted with engines,Vehicle chassis fitted con engines
+8706,Vehicle chassis fitted with engines,Chasis de vehículos con motor
 8707,Vehicle Bodies,Carrocerías de vehículos
 8708,Parts of motor vehicles,Partes de vehículos automotores
 8709,Work trucks,Vehículos industriales
-8710,Tanks and other armored fighting vehicles,Tanks y otros armored fighting vehículos
+8710,Tanks and other armored fighting vehicles,Tanques y demás vehículos blindados de combate
 8711,Motorcycles,Motocicletas
 8712,Bicycles,Bicicletas
 8713,Wheelchairs,Sillas de ruedas
-8714,Parts of motorcycles or wheelchairs,Partes de motorcycles o wheelchairs
+8714,Parts of motorcycles or wheelchairs,Partes de motocicletas o sillas de ruedas
 8715,Baby carriages,Cochecitos de bebé
 8716,Trailers and semi-trailers,Remolques y semirremolques
 8801,"Gliders, hang gliders",Planeadores y alas delta
@@ -1137,8 +1137,8 @@ hs4,product_name_short,product_name_short_es
 8904,Tugs and pusher craft,Tugs y pusher craft
 8905,"Special function vessels, n.e.c.","Buques para funciones especiales, n.e.p."
 8906,Other vessels,Los demás buques
-8907,Other floating structures,Otros flotantes structures
-8908,Floating structures for scrapping,Flotantes structures para desguace
+8907,Other floating structures,Las demás estructuras flotantes
+8908,Floating structures for scrapping,Estructuras flotantes para desguace
 9001,Optical fibers,Optical fibras
 9002,Lenses and other optical elements,Lentes y otros elementos ópticos
 9003,"Frames for spectacles, goggles",Monturas para gafas o antiparras
@@ -1174,9 +1174,9 @@ hs4,product_name_short,product_name_short_es
 9033,Other parts for machines and appliances,Las demás partes para máquinas y aparatos
 9101,Watches with precious metal,Relojes con metal precioso
 9102,Watches,Relojes
-9103,Clocks with watch movements,Clocks con reloj movements
+9103,Clocks with watch movements,Relojes con mecanismo de relojería
 9104,Instrument panel clocks for vehicles,Relojes de tablero para vehículos
-9105,Other clocks,Otros clocks
+9105,Other clocks,Los demás relojes
 9106,Apparatus for measuring intervals of time,Aparatos para medir intervalos de tiempo
 9107,Time switches,Interruptores horarios
 9108,"Watch movements, complete","Reloj movements, complete"
@@ -1185,7 +1185,7 @@ hs4,product_name_short,product_name_short_es
 9111,Watch cases and parts,Reloj cases y partes
 9112,Clock cases,Cajas para relojes
 9113,Watch straps,Reloj straps
-9114,Other clock or watch parts,Otros clock o reloj partes
+9114,Other clock or watch parts,Las demás partes de relojes
 9201,Pianos,Pianos
 9202,"Musical instruments, string","Musical instrumentos, string"
 9203,"Harmoniums, pipe organs, etc","Armonios, órganos de tubos, etc."
@@ -1197,8 +1197,8 @@ hs4,product_name_short,product_name_short_es
 9209,Parts of musical instruments,Partes de musical instrumentos
 9301,"Military weapons, other than pistols and swords","Military weapons, otros que pistols y swords"
 9302,Revolvers and pistols,Revolvers y pistols
-9303,Other firearms,Otros firearms
-9304,"Other arms (air guns, truncheons, etc.)","Otros arms (air guns, truncheons, etc.)"
+9303,Other firearms,Las demás armas de fuego
+9304,"Other arms (air guns, truncheons, etc.)","Las demás armas (de aire comprimido, porras, etc.)"
 9305,Parts of military weapons,Partes de military weapons
 9306,Munitions of war,Munitions de war
 9307,Swords,Espadas
@@ -1225,7 +1225,7 @@ hs4,product_name_short,product_name_short_es
 9607,Slide fasteners,Cremalleras
 9608,Pens,Bolígrafos y plumas
 9609,"Pencils, crayons, pastels, etc.","Lápices, crayones, pasteles, etc."
-9610,"Slates and boards, with writing or drawing surfaces","Slates y boards, con writing o drawing superficies"
+9610,"Slates and boards, with writing or drawing surfaces","Pizarras y tableros, con superficies para escribir o dibujar"
 9611,Hand-operated stamps,Sellos manuales
 9612,Typewriter ribbons and ink pads,Cintas para máquina de escribir y almohadillas para tinta
 9613,Cigarette lighters,Encendedores

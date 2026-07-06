@@ -232,7 +232,7 @@ def _reset_page3_filters() -> None:
 
 with st.sidebar:
     st.header("Perfiles predefinidos")
-    if st.button("Candidatos seleccionados", use_container_width=True):
+    if st.button("Margen Extensivo", use_container_width=True):
         _apply_page3_profile("top_candidates")
         st.rerun()
 
@@ -497,6 +497,16 @@ st.dataframe(
     },
 )
 
+with st.expander("Diccionario de columnas — Tabla de anclas seleccionadas"):
+    st.markdown(
+        """
+- **HS4 / Producto ancla**: producto desde el cual se rastrean oportunidades cercanas.
+- **Sector**: agrupación sectorial del producto ancla.
+- **Sección HS**: sección arancelaria a la que pertenece el ancla dentro del HS92.
+- **Percentil de densidad del ancla**: posición relativa de la densidad del ancla dentro de la distribución internacional de ese mismo producto. Un valor bajo sugiere que, aun siendo un producto probado, está relativamente aislado en el espacio de productos del país.
+"""
+    )
+
 anchor_search = st.text_input(
     "Buscar anclas (HS4 o nombre)",
     value=st.session_state["p3_anchor_search"],
@@ -641,6 +651,26 @@ st.dataframe(
         "anchors_linked": st.column_config.TextColumn("Anclas vinculadas"),
     },
 )
+
+with st.expander("Diccionario de columnas — Tabla de candidatos"):
+    st.markdown(
+        """
+- **Ranking**: posición del candidato bajo los filtros, pesos y balance vigentes.
+- **HS4 / Producto / Sector**: identificación básica del candidato.
+- **Puntaje Combinado de Oportunidad**: resultado final que mezcla factibilidad y atractivo.
+- **Índice de Atractivo**: potencial económico y estratégico del candidato.
+- **Índice de Factibilidad**: plausibilidad de entrada dadas las anclas seleccionadas, la red comercial y la cercanía productiva.
+- **DAI (bruto)**: nivel del Índice de Alineación de la Demanda para Ecuador en ese producto.
+- **PCI / COG**: sofisticación del producto y potencial de escalamiento.
+- **Percentil DAI**: posición relativa del Ecuador frente a otros exportadores relevantes en ese mismo producto.
+- **RCA del candidato**: ventaja comparativa revelada actual del Ecuador en el producto candidato.
+- **Crecimiento del mercado accesible % (5 años)**: crecimiento anual compuesto del mercado accesible estimado para Ecuador.
+- **Tamaño del mercado accesible (miles de millones USD)**: demanda alcanzable total bajo la definición de mercado accesible.
+- **Proximidad promedio**: cercanía media entre el candidato y las anclas que lo conectan.
+- **Número de anclas**: cantidad de productos ancla que enlazan con el candidato.
+- **Anclas vinculadas**: lista de las anclas específicas que sustentan la candidatura del producto.
+"""
+    )
 
 st.subheader("Candidatos por Proximidad a Anclas")
 treemap_color_label = st.selectbox("Variable de color del treemap", ["Sector", "PCI (bruto)"], key="anchor_treemap_color")

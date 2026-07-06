@@ -32,35 +32,35 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 0408,Egg yolks,Yemas de huevo,pending_manual_validation,rule_based,
 0409,Honey,Miel,pending_manual_validation,rule_based,
 0410,"Edible animal products, n.e.c.","Productos animales comestibles, n.e.p.",pending_manual_validation,rule_based,
-0501,"Human hair, unworked",Cabello humano en bruto,manual_validated,manual_master_review,curated_llm_manual_review
-0502,Brushmaking hair,Pelo para cepillería,manual_validated,manual_master_review,curated_llm_manual_review
-0503,Horsehair,Crin,manual_validated,manual_master_review,curated_llm_manual_review
-0504,"Animal guts, except fish","Tripas de animales, excepto pescado",manual_validated,manual_master_review,curated_llm_manual_review
-0505,Feathers and down,Plumas y plumón,manual_validated,manual_master_review,curated_llm_manual_review
-0506,"Bones, simply prepared",Huesos simplemente preparados,manual_validated,manual_master_review,curated_llm_manual_review
-0507,Whalebone & horns,Barbas de ballena y cuernos,manual_validated,manual_master_review,curated_llm_manual_review
-0508,Coral and shells,Coral y conchas,manual_validated,manual_master_review,curated_llm_manual_review
+0501,"Human hair, unworked",Cabello humano en bruto,pending_manual_validation,manual_master_review,
+0502,Brushmaking hair,Pelo para cepillería,pending_manual_validation,manual_master_review,
+0503,Horsehair,Crin,pending_manual_validation,manual_master_review,
+0504,"Animal guts, except fish","Tripas de animales, excepto pescado",pending_manual_validation,manual_master_review,
+0505,Feathers and down,Plumas y plumón,pending_manual_validation,manual_master_review,
+0506,"Bones, simply prepared",Huesos simplemente preparados,pending_manual_validation,manual_master_review,
+0507,Whalebone & horns,Barbas de ballena y cuernos,pending_manual_validation,manual_master_review,
+0508,Coral and shells,Coral y conchas,pending_manual_validation,manual_master_review,
 0509,Sponges of animal origin,Esponjas de origen animal,pending_manual_validation,rule_based,
 0510,Animal products used in pharmaceuticals,Productos animales utilizados en productos farmacéuticos,pending_manual_validation,rule_based,
 0511,Animal products n.e.c.,Productos animales n.e.p.,pending_manual_validation,rule_based,
-0601,Flower bulbs,Bulbos florales,manual_validated,manual_master_review,curated_llm_manual_review
-0602,Other live plants,Las demás plantas vivas,manual_validated,manual_master_review,curated_llm_manual_review
+0601,Flower bulbs,Bulbos florales,pending_manual_validation,manual_master_review,
+0602,Other live plants,Las demás plantas vivas,pending_manual_validation,manual_master_review,
 0603,Cut flowers,Flores cortadas,pending_manual_validation,rule_based,
-0604,Other parts of plants,Las demás partes de plantas,manual_validated,manual_master_review,curated_llm_manual_review
+0604,Other parts of plants,Las demás partes de plantas,pending_manual_validation,manual_master_review,
 0701,Potatoes,Papas,pending_manual_validation,rule_based,
 0702,Tomatoes,Tomates,pending_manual_validation,rule_based,
-0703,"Onions, shallots, garlic","Cebollas, chalotes y ajos",manual_validated,manual_master_review,curated_llm_manual_review
-0704,"Cabbages, cauliflowers, broccoli","Coles, coliflores y brócoli",manual_validated,manual_master_review,curated_llm_manual_review
-0705,Lettuce,Lechuga,manual_validated,manual_master_review,curated_llm_manual_review
-0706,Carrots & turnips,Zanahorias y nabos,manual_validated,manual_master_review,curated_llm_manual_review
-0707,Cucumbers,Pepinos,manual_validated,manual_master_review,curated_llm_manual_review
+0703,"Onions, shallots, garlic","Cebollas, chalotes y ajos",pending_manual_validation,manual_master_review,
+0704,"Cabbages, cauliflowers, broccoli","Coles, coliflores y brócoli",pending_manual_validation,manual_master_review,
+0705,Lettuce,Lechuga,pending_manual_validation,manual_master_review,
+0706,Carrots & turnips,Zanahorias y nabos,pending_manual_validation,manual_master_review,
+0707,Cucumbers,Pepinos,pending_manual_validation,manual_master_review,
 0708,Legumes,Legumbres,pending_manual_validation,rule_based,
-0709,Other vegetables,Las demás hortalizas,manual_validated,manual_master_review,curated_llm_manual_review
-0710,Frozen vegetables,Hortalizas congeladas,manual_validated,manual_master_review,curated_llm_manual_review
-0711,"Vegetables, provisionally preserved",Hortalizas conservadas provisionalmente,manual_validated,manual_master_review,curated_llm_manual_review
-0712,"Vegetables, dried",Hortalizas secas,manual_validated,manual_master_review,curated_llm_manual_review
-0713,"Legumes, dried",Legumbres secas,manual_validated,manual_master_review,curated_llm_manual_review
-0714,Tubers,Tubérculos,manual_validated,manual_master_review,curated_llm_manual_review
+0709,Other vegetables,Las demás hortalizas,pending_manual_validation,manual_master_review,
+0710,Frozen vegetables,Hortalizas congeladas,pending_manual_validation,manual_master_review,
+0711,"Vegetables, provisionally preserved",Hortalizas conservadas provisionalmente,pending_manual_validation,manual_master_review,
+0712,"Vegetables, dried",Hortalizas secas,pending_manual_validation,manual_master_review,
+0713,"Legumes, dried",Legumbres secas,pending_manual_validation,manual_master_review,
+0714,Tubers,Tubérculos,pending_manual_validation,manual_master_review,
 0801,Cashew nuts & coconuts,Anacardos y cocos,pending_manual_validation,rule_based,
 0802,Other nuts,Otros frutos secos,pending_manual_validation,rule_based,
 0803,Bananas and plantains,Bananas y plátanos,pending_manual_validation,rule_based,
@@ -71,53 +71,53 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 0808,Apples & pears,Manzanas y peras,pending_manual_validation,rule_based,
 0809,Peaches & cherries,Duraznos y cerezas,pending_manual_validation,rule_based,
 0810,Other fresh fruit,Otras frutas frescas,pending_manual_validation,rule_based,
-0811,"Fruits and nuts, frozen",Frutas y frutos secos congelados,manual_validated,manual_master_review,curated_llm_manual_review
-0812,"Fruits and nuts, provisionally preserved",Frutas y frutos secos conservados provisionalmente,manual_validated,manual_master_review,curated_llm_manual_review
+0811,"Fruits and nuts, frozen",Frutas y frutos secos congelados,pending_manual_validation,manual_master_review,
+0812,"Fruits and nuts, provisionally preserved",Frutas y frutos secos conservados provisionalmente,pending_manual_validation,manual_master_review,
 0813,"Fruits, dried",Frutas secas,pending_manual_validation,rule_based,
-0814,Peel of citrus fruit or melons,Cáscaras de agrios o de melones,manual_validated,manual_master_review,curated_llm_manual_review
+0814,Peel of citrus fruit or melons,Cáscaras de agrios o de melones,pending_manual_validation,manual_master_review,
 0901,Coffee,Café,pending_manual_validation,rule_based,
 0902,Tea,Té,pending_manual_validation,rule_based,
-0903,Mate,Mate,manual_validated,manual_master_review,curated_llm_manual_review
+0903,Mate,Mate,pending_manual_validation,manual_master_review,
 0904,Pepper,Pimienta,pending_manual_validation,rule_based,
-0905,Vanilla,Vainilla,manual_validated,manual_master_review,curated_llm_manual_review
-0906,Cinnamon,Canela,manual_validated,manual_master_review,curated_llm_manual_review
-0907,Cloves,Clavo de olor,manual_validated,manual_master_review,curated_llm_manual_review
-0908,Nutmeg,Nuez moscada,manual_validated,manual_master_review,curated_llm_manual_review
-0909,"Anise, fennel, etc.","Anís, hinojo, etc.",manual_validated,manual_master_review,curated_llm_manual_review
+0905,Vanilla,Vainilla,pending_manual_validation,manual_master_review,
+0906,Cinnamon,Canela,pending_manual_validation,manual_master_review,
+0907,Cloves,Clavo de olor,pending_manual_validation,manual_master_review,
+0908,Nutmeg,Nuez moscada,pending_manual_validation,manual_master_review,
+0909,"Anise, fennel, etc.","Anís, hinojo, etc.",pending_manual_validation,manual_master_review,
 0910,Spices,Especias,pending_manual_validation,rule_based,
 1001,Wheat and meslin,Trigo y morcajo,pending_manual_validation,code_override,
-1002,Rye,Centeno,manual_validated,manual_master_review,curated_llm_manual_review
-1003,Barley,Cebada,manual_validated,manual_master_review,curated_llm_manual_review
-1004,Oats,Avena,manual_validated,manual_master_review,curated_llm_manual_review
-1005,Corn,Maíz,manual_validated,manual_master_review,curated_llm_manual_review
+1002,Rye,Centeno,pending_manual_validation,manual_master_review,
+1003,Barley,Cebada,pending_manual_validation,manual_master_review,
+1004,Oats,Avena,pending_manual_validation,manual_master_review,
+1005,Corn,Maíz,pending_manual_validation,manual_master_review,
 1006,Rice,Arroz,pending_manual_validation,rule_based,
-1007,Grain sorghum,Sorgo de grano,manual_validated,manual_master_review,curated_llm_manual_review
-1008,Other cereals,Los demás cereales,manual_validated,manual_master_review,curated_llm_manual_review
+1007,Grain sorghum,Sorgo de grano,pending_manual_validation,manual_master_review,
+1008,Other cereals,Los demás cereales,pending_manual_validation,manual_master_review,
 1101,Wheat or meslin flour,Harina de trigo o morcajo,pending_manual_validation,code_override,
-1102,Cereal flours,Harinas de cereales,manual_validated,manual_master_review,curated_llm_manual_review
+1102,Cereal flours,Harinas de cereales,pending_manual_validation,manual_master_review,
 1103,Cereal meals,Harinas gruesas de cereales,pending_manual_validation,code_override,
-1104,Worked cereal grains,Granos de cereal trabajados,manual_validated,manual_master_review,curated_llm_manual_review
+1104,Worked cereal grains,Granos de cereal trabajados,pending_manual_validation,manual_master_review,
 1105,Potato flour,Harina de papa,pending_manual_validation,code_override,
 1106,Flour of dried legumes,Harina de legumbres secas,pending_manual_validation,code_override,
-1107,Malt,Malta,manual_validated,manual_master_review,curated_llm_manual_review
-1108,Starches,Almidones,manual_validated,manual_master_review,curated_llm_manual_review
-1109,Wheat gluten,Gluten de trigo,manual_validated,manual_master_review,curated_llm_manual_review
-1201,Soya beans,Habas de soja,manual_validated,manual_master_review,curated_llm_manual_review
-1202,Peanuts,Maní,manual_validated,manual_master_review,curated_llm_manual_review
-1203,Copra,Copra,manual_validated,manual_master_review,curated_llm_manual_review
-1204,Linseed,Linaza,manual_validated,manual_master_review,curated_llm_manual_review
+1107,Malt,Malta,pending_manual_validation,manual_master_review,
+1108,Starches,Almidones,pending_manual_validation,manual_master_review,
+1109,Wheat gluten,Gluten de trigo,pending_manual_validation,manual_master_review,
+1201,Soya beans,Habas de soja,pending_manual_validation,manual_master_review,
+1202,Peanuts,Maní,pending_manual_validation,manual_master_review,
+1203,Copra,Copra,pending_manual_validation,manual_master_review,
+1204,Linseed,Linaza,pending_manual_validation,manual_master_review,
 1205,Rape or colza seeds,Semillas de colza o nabina,pending_manual_validation,rule_based,
 1206,Sunflower seeds,Semillas de girasol,pending_manual_validation,rule_based,
 1207,Other oil seeds,Las demás semillas oleaginosas,pending_manual_validation,rule_based,
 1208,Flours of oil seeds,Harinas de semillas oleaginosas,pending_manual_validation,rule_based,
 1209,Seeds used for sowing,Semillas para siembra,pending_manual_validation,rule_based,
-1210,Hop cones,Conos de lúpulo,manual_validated,manual_master_review,curated_llm_manual_review
+1210,Hop cones,Conos de lúpulo,pending_manual_validation,manual_master_review,
 1211,"Plants used in perfumery, pharmacy or insecticide","Plantas utilizadas en perfumería, farmacia o insecticidas",pending_manual_validation,rule_based,
 1212,Seaweeds & edible vegetable products,Algas y productos vegetales comestibles,pending_manual_validation,code_override,
-1213,Cereal straw and husks,Paja y cascarillas de cereales,manual_validated,manual_master_review,curated_llm_manual_review
+1213,Cereal straw and husks,Paja y cascarillas de cereales,pending_manual_validation,manual_master_review,
 1214,Forage products,Productos forrajeros,pending_manual_validation,code_override,
-1301,Lac,Goma laca,manual_validated,manual_master_review,curated_llm_manual_review
-1302,Vegetable saps and extracts,Jugos y extractos vegetales,manual_validated,manual_master_review,curated_llm_manual_review
+1301,Lac,Goma laca,pending_manual_validation,manual_master_review,
+1302,Vegetable saps and extracts,Jugos y extractos vegetales,pending_manual_validation,manual_master_review,
 1401,Vegetable materials used for plaiting,Materias vegetales utilizadas para trenzado,pending_manual_validation,rule_based,
 1402,Vegetable materials used as stuffing,Materias vegetales utilizadas como relleno,pending_manual_validation,rule_based,
 1403,Vegetable materials used for brooms,Materias vegetales utilizadas para escobas,pending_manual_validation,rule_based,
@@ -132,36 +132,36 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 1508,Peanut oil,Peanut aceite,pending_manual_validation,rule_based,
 1509,Olive oil,Olive aceite,pending_manual_validation,rule_based,
 1510,"Olive oil, blended","Olive aceite, blended",pending_manual_validation,rule_based,
-1511,Palm oil,Aceite de palma,manual_validated,manual_master_review,curated_llm_manual_review
+1511,Palm oil,Aceite de palma,pending_manual_validation,manual_master_review,
 1512,Sunflower seed oil,Sunflower semilla aceite,pending_manual_validation,rule_based,
 1513,Coconut & palm kernel oil,Coco y aceite de palmiste,pending_manual_validation,rule_based,
 1514,"Rapeseed, colza or mustard oil,","Rapeseed, colza o mustard aceite",pending_manual_validation,rule_based,
 1515,Other vegetable fats and oils,Otros vegetal fats y aceites,pending_manual_validation,rule_based,
 1516,"Vegetable fats, hydrogenated","Vegetal fats, hydrogenated",pending_manual_validation,rule_based,
-1517,Margarine,Margarina,manual_validated,manual_master_review,curated_llm_manual_review
+1517,Margarine,Margarina,pending_manual_validation,manual_master_review,
 1518,"Animal or vegetable fats and oils, processed","Grasas y aceites animales o vegetales, procesados",pending_manual_validation,rule_based,
-1519,Stearic acid,Ácido esteárico,manual_validated,manual_master_review,curated_llm_manual_review
+1519,Stearic acid,Ácido esteárico,pending_manual_validation,manual_master_review,
 1520,Glycerol,Glicerol,pending_manual_validation,rule_based,
 1521,Vegetable waxes and beeswax,Vegetal waxes y beeswax,pending_manual_validation,rule_based,
 1522,Degras and wax residues,Degras y wax residues,pending_manual_validation,rule_based,
-1601,Sausages,Salchichas y productos similares de carne,manual_validated,manual_master_review,curated_llm_manual_review
+1601,Sausages,Salchichas y productos similares de carne,pending_manual_validation,manual_master_review,
 1602,Other prepared or preserved meat,Otros preparado o conservado meat,pending_manual_validation,rule_based,
 1603,Extracts and juices of meat or fish,Extractos y juices de meat o pescado,pending_manual_validation,rule_based,
 1604,Prepared or preserved fish,Preparado o conservado pescado,pending_manual_validation,rule_based,
 1605,Prepared aquatic invertibrates,Invertebrados acuáticos preparados,pending_manual_validation,code_override,
 1701,Sugarcane & sucrose,Sugarcane y sucrose,pending_manual_validation,rule_based,
 1702,Other sugars,Otros sugars,pending_manual_validation,rule_based,
-1703,Molasses,Melaza,manual_validated,manual_master_review,curated_llm_manual_review
+1703,Molasses,Melaza,pending_manual_validation,manual_master_review,
 1704,Confectionery sugar,Azúcar de confitería,pending_manual_validation,rule_based,
 1801,Cocoa beans,Granos de cacao,pending_manual_validation,rule_based,
 1802,Cocoa residues,Residuos de cacao,pending_manual_validation,rule_based,
 1803,Cocoa paste,Pasta de cacao,pending_manual_validation,rule_based,
 1804,Cocoa butter,Manteca de cacao,pending_manual_validation,rule_based,
 1805,Cocoa powder,Cacao en polvo,pending_manual_validation,rule_based,
-1806,Chocolates,Chocolate y demás preparaciones con cacao,manual_validated,manual_master_review,curated_llm_manual_review
-1901,Malt extract,Extracto de malta,manual_validated,manual_master_review,curated_llm_manual_review
-1902,Pasta,Pastas alimenticias,manual_validated,manual_master_review,curated_llm_manual_review
-1903,Tapioca,Tapioca,manual_validated,manual_master_review,curated_llm_manual_review
+1806,Chocolates,Chocolate y demás preparaciones con cacao,pending_manual_validation,manual_master_review,
+1901,Malt extract,Extracto de malta,pending_manual_validation,manual_master_review,
+1902,Pasta,Pastas alimenticias,pending_manual_validation,manual_master_review,
+1903,Tapioca,Tapioca,pending_manual_validation,manual_master_review,
 1904,Cereal foods,Alimentos a base de cereales,pending_manual_validation,rule_based,
 1905,Bakery products,Productos de panadería,pending_manual_validation,code_override,
 2001,Pickled fruits and vegetables,Pickled frutas y hortalizas,pending_manual_validation,rule_based,
@@ -170,68 +170,68 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2004,"Other vegetables, frozen","Otros hortalizas, congelado",pending_manual_validation,rule_based,
 2005,"Other vegetables, prepared or preserved","Las demás hortalizas, preparadas o conservadas",pending_manual_validation,code_override,
 2006,"Vegetables, fruits and nuts, preserved by sugar","Hortalizas, frutas y frutos secos, conservado by sugar",pending_manual_validation,rule_based,
-2007,"Jams, jellies and marmalades",Mermeladas y jaleas de frutas,manual_validated,manual_master_review,curated_llm_manual_review
+2007,"Jams, jellies and marmalades",Mermeladas y jaleas de frutas,pending_manual_validation,manual_master_review,
 2008,"Fruits and nuts, otherwise prepared","Frutas y frutos secos, preparadas de otro modo",pending_manual_validation,rule_based,
 2009,Fruit juices,Jugos de fruta,pending_manual_validation,rule_based,
 2101,Coffee extracts,Extractos de café,pending_manual_validation,rule_based,
-2102,Yeasts,Levaduras,manual_validated,manual_master_review,curated_llm_manual_review
+2102,Yeasts,Levaduras,pending_manual_validation,manual_master_review,
 2103,Sauces and seasonings,Sauces y seasonings,pending_manual_validation,rule_based,
 2104,Soups and broths,Soups y broths,pending_manual_validation,rule_based,
-2105,Ice cream,Helados,manual_validated,manual_master_review,curated_llm_manual_review
+2105,Ice cream,Helados,pending_manual_validation,manual_master_review,
 2106,Food preparations n.e.c.,Preparaciones alimenticias n.e.p.,pending_manual_validation,rule_based,
-2201,Waters,Aguas,manual_validated,manual_master_review,curated_llm_manual_review
+2201,Waters,Aguas,pending_manual_validation,manual_master_review,
 2202,"Waters, flavored or sweetened","Waters, flavored o sweetened",pending_manual_validation,rule_based,
-2203,Beer,Cerveza,manual_validated,manual_master_review,curated_llm_manual_review
-2204,Wine,Vino,manual_validated,manual_master_review,curated_llm_manual_review
+2203,Beer,Cerveza,pending_manual_validation,manual_master_review,
+2204,Wine,Vino,pending_manual_validation,manual_master_review,
 2205,"Wine, flavored",Vino aromatizado,pending_manual_validation,rule_based,
 2206,Other fermented beverages,Otros fermented beverages,pending_manual_validation,rule_based,
-2207,Ethyl alcohol > 80%,Alcohol etílico > 80%,manual_validated,manual_master_review,curated_llm_manual_review
-2208,Spirits < 80% alcohol,Bebidas espirituosas < 80% de alcohol,manual_validated,manual_master_review,curated_llm_manual_review
-2209,Vinegars,Vinagre,manual_validated,manual_master_review,curated_llm_manual_review
+2207,Ethyl alcohol > 80%,Alcohol etílico > 80%,pending_manual_validation,manual_master_review,
+2208,Spirits < 80% alcohol,Bebidas espirituosas < 80% de alcohol,pending_manual_validation,manual_master_review,
+2209,Vinegars,Vinagre,pending_manual_validation,manual_master_review,
 2301,"Flours of fish, for animal feed",Harinas de pescado para alimentos para animales,pending_manual_validation,rule_based,
-2302,Cereal residues,Residuos de cereales,manual_validated,manual_master_review,curated_llm_manual_review
-2303,Starch residues,Residuos de la industria del almidón,manual_validated,manual_master_review,curated_llm_manual_review
-2304,Solid soybean residues,Residuos sólidos de soja,manual_validated,manual_master_review,curated_llm_manual_review
-2305,Solid peanut residues,Residuos sólidos de maní,manual_validated,manual_master_review,curated_llm_manual_review
+2302,Cereal residues,Residuos de cereales,pending_manual_validation,manual_master_review,
+2303,Starch residues,Residuos de la industria del almidón,pending_manual_validation,manual_master_review,
+2304,Solid soybean residues,Residuos sólidos de soja,pending_manual_validation,manual_master_review,
+2305,Solid peanut residues,Residuos sólidos de maní,pending_manual_validation,manual_master_review,
 2306,Solid vegetable oil and fat residues,Residuos sólidos de aceites y grasas vegetales,pending_manual_validation,rule_based,
-2307,Wine lees,Lías de vino,manual_validated,manual_master_review,curated_llm_manual_review
+2307,Wine lees,Lías de vino,pending_manual_validation,manual_master_review,
 2308,Vegetable materials for animal feeding,Materiales vegetales para alimentación animal,pending_manual_validation,rule_based,
 2309,Animal feed,Alimentos para animales,pending_manual_validation,rule_based,
 2401,Unmanufactured tobacco,Tabaco sin manufacturar,pending_manual_validation,rule_based,
 2402,Cigars and cigarettes,Cigars y cigarettes,pending_manual_validation,rule_based,
 2403,Other manufactured tobacco,Otros manufactured tabaco,pending_manual_validation,rule_based,
-2501,Salt,Sal,manual_validated,manual_master_review,curated_llm_manual_review
+2501,Salt,Sal,pending_manual_validation,manual_master_review,
 2502,Unroasted iron pyrites,Unroasted hierro pyrites,pending_manual_validation,rule_based,
-2503,"Sulphur, crude",Azufre en bruto,manual_validated,manual_master_review,curated_llm_manual_review
+2503,"Sulphur, crude",Azufre en bruto,pending_manual_validation,manual_master_review,
 2504,Natural graphite,Grafito natural,pending_manual_validation,rule_based,
 2505,Natural sands,Arenas naturales,pending_manual_validation,rule_based,
-2506,Quartz,Cuarzo,manual_validated,manual_master_review,curated_llm_manual_review
-2507,Kaolin,Caolín,manual_validated,manual_master_review,curated_llm_manual_review
-2508,Clays,Arcillas,manual_validated,manual_master_review,curated_llm_manual_review
-2509,Chalk,Creta,manual_validated,manual_master_review,curated_llm_manual_review
+2506,Quartz,Cuarzo,pending_manual_validation,manual_master_review,
+2507,Kaolin,Caolín,pending_manual_validation,manual_master_review,
+2508,Clays,Arcillas,pending_manual_validation,manual_master_review,
+2509,Chalk,Creta,pending_manual_validation,manual_master_review,
 2510,Natural calcium phosphates,Fosfatos de calcio naturales,pending_manual_validation,rule_based,
 2511,Natural barium sulfate,Sulfato de bario natural,pending_manual_validation,rule_based,
 2512,Siliceous fossil meals and earths,Harinas silíceas fósiles y tierras silíceas,pending_manual_validation,code_override,
 2513,Natural abrasives,Abrasivos naturales,pending_manual_validation,rule_based,
-2514,Slate,Pizarra,manual_validated,manual_master_review,curated_llm_manual_review
-2515,Marble,Mármol,manual_validated,manual_master_review,curated_llm_manual_review
-2516,Granite,Granito,manual_validated,manual_master_review,curated_llm_manual_review
-2517,Gravel,Grava y piedra triturada,manual_validated,manual_master_review,curated_llm_manual_review
-2518,Dolomite,Dolomita,manual_validated,manual_master_review,curated_llm_manual_review
+2514,Slate,Pizarra,pending_manual_validation,manual_master_review,
+2515,Marble,Mármol,pending_manual_validation,manual_master_review,
+2516,Granite,Granito,pending_manual_validation,manual_master_review,
+2517,Gravel,Grava y piedra triturada,pending_manual_validation,manual_master_review,
+2518,Dolomite,Dolomita,pending_manual_validation,manual_master_review,
 2519,Natural magnesia,Magnesia natural,pending_manual_validation,rule_based,
-2520,Gypsum,Yeso,manual_validated,manual_master_review,curated_llm_manual_review
-2521,Limstone,Caliza,manual_validated,manual_master_review,curated_llm_manual_review
-2522,Quicklime,Cal viva,manual_validated,manual_master_review,curated_llm_manual_review
-2523,Cements,Cementos,manual_validated,manual_master_review,curated_llm_manual_review
-2524,Asbestos,Asbesto,manual_validated,manual_master_review,curated_llm_manual_review
-2525,Mica,Mica,manual_validated,manual_master_review,curated_llm_manual_review
+2520,Gypsum,Yeso,pending_manual_validation,manual_master_review,
+2521,Limstone,Caliza,pending_manual_validation,manual_master_review,
+2522,Quicklime,Cal viva,pending_manual_validation,manual_master_review,
+2523,Cements,Cementos,pending_manual_validation,manual_master_review,
+2524,Asbestos,Asbesto,pending_manual_validation,manual_master_review,
+2525,Mica,Mica,pending_manual_validation,manual_master_review,
 2526,Natural steatite,Esteatita natural,pending_manual_validation,rule_based,
 2527,Natural cryolite,Criolita natural,pending_manual_validation,rule_based,
 2528,Natural borates,Boratos naturales,pending_manual_validation,rule_based,
-2529,Feldspar,Feldespato,manual_validated,manual_master_review,curated_llm_manual_review
-2530,Mineral substances n.e.c.,Sustancias minerales n.e.p.,manual_validated,manual_master_review,curated_llm_manual_review
+2529,Feldspar,Feldespato,pending_manual_validation,manual_master_review,
+2530,Mineral substances n.e.c.,Sustancias minerales n.e.p.,pending_manual_validation,manual_master_review,
 2601,Iron ores and concentrates,Hierro minerales y concentrates,pending_manual_validation,rule_based,
-2602,Manganese > 47% by weight,Minerales de manganeso > 47% en peso,manual_validated,manual_master_review,curated_llm_manual_review
+2602,Manganese > 47% by weight,Minerales de manganeso > 47% en peso,pending_manual_validation,manual_master_review,
 2603,Copper ore,Mineral de cobre,pending_manual_validation,rule_based,
 2604,Nickel ore,Mineral de níquel,pending_manual_validation,rule_based,
 2605,Cobalt ore,Cobalt mineral,pending_manual_validation,rule_based,
@@ -251,92 +251,92 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2619,Iron or steel slag,Hierro o acero slag,pending_manual_validation,rule_based,
 2620,"Slag, ash and residues containing metals","Slag, ash y residues containing metales",pending_manual_validation,rule_based,
 2621,Other slag and ash,Las demás escorias y cenizas,pending_manual_validation,rule_based,
-2701,Coal,Carbón,manual_validated,manual_master_review,curated_llm_manual_review
-2702,Lignite,Lignito,manual_validated,manual_master_review,curated_llm_manual_review
-2703,Peat,Turba,manual_validated,manual_master_review,curated_llm_manual_review
-2704,Coke,Coque,manual_validated,manual_master_review,curated_llm_manual_review
-2705,Non-petroleum gases,Gases no derivados del petróleo,manual_validated,manual_master_review,curated_llm_manual_review
-2706,"Tar distilled from coal, lignite etc.","Alquitrán destilado de carbón, lignito, etc.",manual_validated,manual_master_review,curated_llm_manual_review
-2707,Oils etc. from high temperature coal tar,Aceites etc. from high temperature coal tar,pending_manual_validation,rule_based,
+2701,Coal,Carbón,pending_manual_validation,manual_master_review,
+2702,Lignite,Lignito,pending_manual_validation,manual_master_review,
+2703,Peat,Turba,pending_manual_validation,manual_master_review,
+2704,Coke,Coque,pending_manual_validation,manual_master_review,
+2705,Non-petroleum gases,Gases no derivados del petróleo,pending_manual_validation,manual_master_review,
+2706,"Tar distilled from coal, lignite etc.","Alquitrán destilado de carbón, lignito, etc.",pending_manual_validation,manual_master_review,
+2707,Oils etc. from high temperature coal tar,Aceites y demás productos de la destilación de alquitranes de hulla de alta temperatura,pending_manual_validation,manual_master_review,
 2708,Pitch and pitch coke,Pitch y pitch coke,pending_manual_validation,rule_based,
 2709,"Petroleum oils, crude","Aceites de petróleo, crudos",pending_manual_validation,rule_based,
 2710,"Petroleum oils, refined","Aceites de petróleo, refinados",pending_manual_validation,rule_based,
 2711,Petroleum gases,Gases de petróleo,pending_manual_validation,rule_based,
-2712,Petroleum jelly,Vaselina,manual_validated,manual_master_review,curated_llm_manual_review
+2712,Petroleum jelly,Vaselina,pending_manual_validation,manual_master_review,
 2713,Petroleum coke,Coque de petróleo,pending_manual_validation,rule_based,
 2714,"Bitumen and asphalt, natural",Betún y asfalto naturales,pending_manual_validation,rule_based,
-2715,Bituminous mixtures,Mezclas bituminosas,manual_validated,manual_master_review,curated_llm_manual_review
+2715,Bituminous mixtures,Mezclas bituminosas,pending_manual_validation,manual_master_review,
 2716,Electrical energy,Energía eléctrica,pending_manual_validation,rule_based,
-2801,Iodine,Yodo,manual_validated,manual_master_review,curated_llm_manual_review
+2801,Iodine,Yodo,pending_manual_validation,manual_master_review,
 2802,"Sulfur, sublimed or precipitated","Sulfur, sublimed o precipitated",pending_manual_validation,rule_based,
-2803,Carbon,Carbono,manual_validated,manual_master_review,curated_llm_manual_review
+2803,Carbon,Carbono,pending_manual_validation,manual_master_review,
 2804,Silicon & rare gases,Silicon y rare gases,pending_manual_validation,rule_based,
 2805,Rare-earth metals,Rare-earth metales,pending_manual_validation,rule_based,
-2806,Hydrochloric acid,Ácido clorhídrico,manual_validated,manual_master_review,curated_llm_manual_review
-2807,"Sulfiric acid, oleum",Ácido sulfúrico y oleum,manual_validated,manual_master_review,curated_llm_manual_review
+2806,Hydrochloric acid,Ácido clorhídrico,pending_manual_validation,manual_master_review,
+2807,"Sulfiric acid, oleum",Ácido sulfúrico y oleum,pending_manual_validation,manual_master_review,
 2808,Sulfonitric acids,Ácidos sulfonítricos,pending_manual_validation,code_override,
 2809,Phosphoric acid etc.,"Ácido fosfórico, etc.",pending_manual_validation,rule_based,
 2810,Oxides of boron; boric acids,Óxidos de boro; ácidos bóricos,pending_manual_validation,code_override,
 2811,Other inorganic acids,Los demás ácidos inorgánicos,pending_manual_validation,code_override,
 2812,Halides of nonmetals,Halides de nonmetals,pending_manual_validation,rule_based,
 2813,Sulfides of nonmetals,Sulfides de nonmetals,pending_manual_validation,rule_based,
-2814,Ammonia,Amoníaco,manual_validated,manual_master_review,curated_llm_manual_review
-2815,Sodium hydroxide,Hidróxido de sodio,manual_validated,manual_master_review,curated_llm_manual_review
+2814,Ammonia,Amoníaco,pending_manual_validation,manual_master_review,
+2815,Sodium hydroxide,Hidróxido de sodio,pending_manual_validation,manual_master_review,
 2816,Hydroxides or peroxides of magnesium,Hidróxidos o peróxidos de magnesio,pending_manual_validation,code_override,
 2817,Zinc oxide or peroxide,Óxido o peróxido de zinc,pending_manual_validation,rule_based,
 2818,Aluminum oxide,Óxido de aluminio,pending_manual_validation,code_override,
 2819,Chromium oxides and hydroxides,Óxidos e hidróxidos de cromo,pending_manual_validation,code_override,
-2820,Manganese oxides,Óxidos de manganeso,manual_validated,manual_master_review,curated_llm_manual_review
+2820,Manganese oxides,Óxidos de manganeso,pending_manual_validation,manual_master_review,
 2821,Iron oxides and hydroxides,Óxidos e hidróxidos de hierro,pending_manual_validation,code_override,
 2822,Cobalt oxides and hydroxides,Óxidos e hidróxidos de cobalto,pending_manual_validation,code_override,
-2823,Titanium oxides,Óxidos de titanio,manual_validated,manual_master_review,curated_llm_manual_review
+2823,Titanium oxides,Óxidos de titanio,pending_manual_validation,manual_master_review,
 2824,Lead oxides,Plomo oxides,pending_manual_validation,rule_based,
 2825,"Metal base oxides, n.e.c.","Óxidos metálicos básicos, n.e.p.",pending_manual_validation,rule_based,
-2826,Flourides,Fluoruros,manual_validated,manual_master_review,curated_llm_manual_review
-2827,"Chlorides, bromides, iodides etc.","Cloruros, bromuros, yoduros, etc.",manual_validated,manual_master_review,curated_llm_manual_review
-2828,Hyopchlorites,Hipocloritos,manual_validated,manual_master_review,curated_llm_manual_review
-2829,Sodium chlorate,Clorato de sodio,manual_validated,manual_master_review,curated_llm_manual_review
-2830,Sulfides; polysulfides,Sulfuros y polisulfuros,manual_validated,manual_master_review,curated_llm_manual_review
+2826,Flourides,Fluoruros,pending_manual_validation,manual_master_review,
+2827,"Chlorides, bromides, iodides etc.","Cloruros, bromuros, yoduros, etc.",pending_manual_validation,manual_master_review,
+2828,Hyopchlorites,Hipocloritos,pending_manual_validation,manual_master_review,
+2829,Sodium chlorate,Clorato de sodio,pending_manual_validation,manual_master_review,
+2830,Sulfides; polysulfides,Sulfuros y polisulfuros,pending_manual_validation,manual_master_review,
 2831,Dithionites and sulfoxylates,Dithionites y sulfoxylates,pending_manual_validation,rule_based,
-2832,Sulfites,Sulfitos,manual_validated,manual_master_review,curated_llm_manual_review
-2833,Sulfates,Sulfatos,manual_validated,manual_master_review,curated_llm_manual_review
-2834,"Nitrites, nitrates",Nitritos y nitratos,manual_validated,manual_master_review,curated_llm_manual_review
+2832,Sulfites,Sulfitos,pending_manual_validation,manual_master_review,
+2833,Sulfates,Sulfatos,pending_manual_validation,manual_master_review,
+2834,"Nitrites, nitrates",Nitritos y nitratos,pending_manual_validation,manual_master_review,
 2835,Phosphates,Fosfatos,pending_manual_validation,rule_based,
-2836,Carbonates,Carbonatos,manual_validated,manual_master_review,curated_llm_manual_review
-2837,Cyanides,Cianuros,manual_validated,manual_master_review,curated_llm_manual_review
+2836,Carbonates,Carbonatos,pending_manual_validation,manual_master_review,
+2837,Cyanides,Cianuros,pending_manual_validation,manual_master_review,
 2838,"Fulminates, cyanates and thiocyanates","Fulminates, cyanates y thiocyanates",pending_manual_validation,rule_based,
-2839,Silicates,Silicatos,manual_validated,manual_master_review,curated_llm_manual_review
+2839,Silicates,Silicatos,pending_manual_validation,manual_master_review,
 2840,Borates,Boratos,pending_manual_validation,rule_based,
 2841,Salts of oxometallic acids,Sales de ácidos oxometálicos,pending_manual_validation,rule_based,
 2842,Other salts of acids,Las demás sales de ácidos,pending_manual_validation,code_override,
 2843,Compounds of precious metals,Compounds de preciosos metales,pending_manual_validation,rule_based,
-2844,Uranium,Uranio,manual_validated,manual_master_review,curated_llm_manual_review
-2845,Non-radioactive isotopes,Isótopos no radiactivos,manual_validated,manual_master_review,curated_llm_manual_review
+2844,Uranium,Uranio,pending_manual_validation,manual_master_review,
+2845,Non-radioactive isotopes,Isótopos no radiactivos,pending_manual_validation,manual_master_review,
 2846,Compounds of rare-earth metals,Compuestos de metales de tierras raras,pending_manual_validation,rule_based,
-2847,Hydrogen peroxide,Peróxido de hidrógeno,manual_validated,manual_master_review,curated_llm_manual_review
+2847,Hydrogen peroxide,Peróxido de hidrógeno,pending_manual_validation,manual_master_review,
 2848,Phosphides,Fosfuros,pending_manual_validation,rule_based,
-2849,Carbides,Carburos,manual_validated,manual_master_review,curated_llm_manual_review
+2849,Carbides,Carburos,pending_manual_validation,manual_master_review,
 2850,"Hydrides, nitrides, azides, silicides and borides","Hydrides, nitrides, azides, silicides y borides",pending_manual_validation,rule_based,
 2851,"Inorganic compounds, liquid or compressed air","Inorganic compounds, liquid o comprimido air",pending_manual_validation,rule_based,
-2901,Acyclic hydrocarbons,Hidrocarburos acíclicos,manual_validated,manual_master_review,curated_llm_manual_review
-2902,Cyclic hydrocarbons,Hidrocarburos cíclicos,manual_validated,manual_master_review,curated_llm_manual_review
+2901,Acyclic hydrocarbons,Hidrocarburos acíclicos,pending_manual_validation,manual_master_review,
+2902,Cyclic hydrocarbons,Hidrocarburos cíclicos,pending_manual_validation,manual_master_review,
 2903,Halogenated derivatives of hydrocarbons,Derivados halogenados de hidrocarburos,pending_manual_validation,code_override,
 2904,"Sulfonated, nitrated derivatives of hydrocarbons",Derivados sulfonados o nitrados de hidrocarburos,pending_manual_validation,code_override,
-2905,Acyclic alcohols,Alcoholes acíclicos,manual_validated,manual_master_review,curated_llm_manual_review
-2906,Cyclic alcohols,Alcoholes cíclicos,manual_validated,manual_master_review,curated_llm_manual_review
-2907,"Phenols, phenol-alcohols",Fenoles y fenol-alcoholes,manual_validated,manual_master_review,curated_llm_manual_review
+2905,Acyclic alcohols,Alcoholes acíclicos,pending_manual_validation,manual_master_review,
+2906,Cyclic alcohols,Alcoholes cíclicos,pending_manual_validation,manual_master_review,
+2907,"Phenols, phenol-alcohols",Fenoles y fenol-alcoholes,pending_manual_validation,manual_master_review,
 2908,Derivatives of phenols,Derivados de fenoles,pending_manual_validation,code_override,
-2909,Ethers,Éteres,manual_validated,manual_master_review,curated_llm_manual_review
-2910,Epoxides,Epóxidos,manual_validated,manual_master_review,curated_llm_manual_review
+2909,Ethers,Éteres,pending_manual_validation,manual_master_review,
+2910,Epoxides,Epóxidos,pending_manual_validation,manual_master_review,
 2911,Acetals and hemiacetals,Acetals y hemiacetals,pending_manual_validation,rule_based,
-2912,Aldehydes,Aldehídos,manual_validated,manual_master_review,curated_llm_manual_review
+2912,Aldehydes,Aldehídos,pending_manual_validation,manual_master_review,
 2913,Derivatives of aldehydes,Derivados de aldehídos,pending_manual_validation,code_override,
 2914,Ketones and quinones,Ketones y quinones,pending_manual_validation,rule_based,
 2915,Saturated acyclic monocarboxylic acids,Ácidos monocarboxílicos acíclicos saturados,pending_manual_validation,code_override,
 2916,Unsaturated acyclic monocarboxylic acids,Ácidos monocarboxílicos acíclicos insaturados,pending_manual_validation,code_override,
 2917,Polycarboxylic acids,Ácidos policarboxílicos,pending_manual_validation,code_override,
 2918,Carboxylic acids with additional oxygen function,Ácidos carboxílicos con función oxigenada adicional,pending_manual_validation,code_override,
-2919,Phosporic esters,Ésteres fosfóricos,manual_validated,manual_master_review,curated_llm_manual_review
+2919,Phosporic esters,Ésteres fosfóricos,pending_manual_validation,manual_master_review,
 2920,Esters of other inorganic acids of nonmetals,Ésteres de otros ácidos inorgánicos de no metales,pending_manual_validation,code_override,
 2921,Amine-function compounds,Compuestos con función amina,pending_manual_validation,rule_based,
 2922,Oxygen-function amino-compounds,Aminocompuestos con función oxigenada,pending_manual_validation,rule_based,
@@ -346,19 +346,19 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2926,Nitrile-function compounds,Compuestos con función nitrilo,pending_manual_validation,code_override,
 2927,"Diazo-, azo-, or azoxy-compounds","Compuestos diazo-, azo- o azoxi-",pending_manual_validation,rule_based,
 2928,Organix derivatives of hydrazine,Derivados orgánicos de la hidrazina,pending_manual_validation,code_override,
-2929,Isocyanates,Isocianatos,manual_validated,manual_master_review,curated_llm_manual_review
-2930,Organo-sulfur compounds,Compuestos organosulfurados,manual_validated,manual_master_review,curated_llm_manual_review
+2929,Isocyanates,Isocianatos,pending_manual_validation,manual_master_review,
+2930,Organo-sulfur compounds,Compuestos organosulfurados,pending_manual_validation,manual_master_review,
 2931,Other organo-inorganic compounds,Otros organo-inorganic compounds,pending_manual_validation,rule_based,
 2932,Heterocyclic compounds with oxygen hetero-atom(s) only,Compuestos heterocíclicos solo con heteroátomos de oxígeno,pending_manual_validation,rule_based,
 2933,Heterocyclic compounds with nitrogen hetero-atom(s) only,Compuestos heterocíclicos solo con heteroátomos de nitrógeno,pending_manual_validation,rule_based,
 2934,Nucleic acids and their salts,Ácidos nucleicos y sus sales,pending_manual_validation,code_override,
-2935,Sulfonamides,Sulfonamidas,manual_validated,manual_master_review,curated_llm_manual_review
-2936,Vitamins,Vitaminas,manual_validated,manual_master_review,curated_llm_manual_review
-2937,Hormones,Hormonas,manual_validated,manual_master_review,curated_llm_manual_review
+2935,Sulfonamides,Sulfonamidas,pending_manual_validation,manual_master_review,
+2936,Vitamins,Vitaminas,pending_manual_validation,manual_master_review,
+2937,Hormones,Hormonas,pending_manual_validation,manual_master_review,
 2938,Glycosides,Glucósidos,pending_manual_validation,rule_based,
 2939,Vegetable alkaloids,Vegetal alkaloids,pending_manual_validation,rule_based,
 2940,"Other sugars, chemically pure","Otros sugars, chemically pure",pending_manual_validation,rule_based,
-2941,Antibiotics,Antibióticos,manual_validated,manual_master_review,curated_llm_manual_review
+2941,Antibiotics,Antibióticos,pending_manual_validation,manual_master_review,
 2942,Other organic compounds,Otros organic compounds,pending_manual_validation,rule_based,
 3001,Heparin for therapeutic use,Heparina para uso terapéutico,pending_manual_validation,rule_based,
 3002,Serums and vaccines,Serums y vaccines,pending_manual_validation,rule_based,
@@ -375,7 +375,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 3202,Synthetic tanning substances,Sustancias curtientes sintéticas,pending_manual_validation,code_override,
 3203,Coloring matter of animal or vegetable origin,Materias colorantes de origen animal o vegetal,pending_manual_validation,rule_based,
 3204,Synthetic organic coloring matter,Materias colorantes orgánicas sintéticas,pending_manual_validation,code_override,
-3205,Color lakes,Lacas colorantes,manual_validated,manual_master_review,curated_llm_manual_review
+3205,Color lakes,Lacas colorantes,pending_manual_validation,manual_master_review,
 3206,Other coloring matter,Otros materias colorantes,pending_manual_validation,rule_based,
 3207,Prepared pigments,Preparado pigments,pending_manual_validation,rule_based,
 3208,"Paints and varnishes, nonaqueous","Paints y varnishes, nonaqueous",pending_manual_validation,rule_based,
@@ -383,35 +383,35 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 3210,Other paints and varnishes,Otros paints y varnishes,pending_manual_validation,rule_based,
 3211,Prepared driers,Preparado driers,pending_manual_validation,rule_based,
 3212,"Pigments, nonaqueous",Pigmentos no acuosos,pending_manual_validation,rule_based,
-3213,Artists' colors,Colores para artistas,manual_validated,manual_master_review,curated_llm_manual_review
-3214,Glaziers' putty,Masillas de vidriero,manual_validated,manual_master_review,curated_llm_manual_review
-3215,Ink,Tintas,manual_validated,manual_master_review,curated_llm_manual_review
+3213,Artists' colors,Colores para artistas,pending_manual_validation,manual_master_review,
+3214,Glaziers' putty,Masillas de vidriero,pending_manual_validation,manual_master_review,
+3215,Ink,Tintas,pending_manual_validation,manual_master_review,
 3301,Essential oils,Essential aceites,pending_manual_validation,rule_based,
 3302,Mixtures of odoriferous subtances,Mixtures de odoriferous subtances,pending_manual_validation,rule_based,
-3303,Perfumes,Perfumes,manual_validated,manual_master_review,curated_llm_manual_review
+3303,Perfumes,Perfumes,pending_manual_validation,manual_master_review,
 3304,Make-up preparations,Make-up preparaciones,pending_manual_validation,rule_based,
 3305,Hair products,Productos capilares,pending_manual_validation,code_override,
 3306,Dental hygiene products,Productos de higiene dental,pending_manual_validation,code_override,
-3307,Toiletries,Artículos de tocador,manual_validated,manual_master_review,curated_llm_manual_review
+3307,Toiletries,Artículos de tocador,pending_manual_validation,manual_master_review,
 3401,Soap,Jabón,pending_manual_validation,code_override,
 3402,Cleaning products,Productos de limpieza,pending_manual_validation,code_override,
-3403,Lubricants,Lubricantes,manual_validated,manual_master_review,curated_llm_manual_review
+3403,Lubricants,Lubricantes,pending_manual_validation,manual_master_review,
 3404,Artificial and prepared waxes,Artificial y preparado waxes,pending_manual_validation,rule_based,
 3405,Polishes and creams,Polishes y creams,pending_manual_validation,rule_based,
-3406,Candles,Velas,manual_validated,manual_master_review,curated_llm_manual_review
-3407,Modeling pastes,Pastas para modelar,manual_validated,manual_master_review,curated_llm_manual_review
-3501,Casein,Caseína,manual_validated,manual_master_review,curated_llm_manual_review
-3502,Albumins,Albúminas,manual_validated,manual_master_review,curated_llm_manual_review
+3406,Candles,Velas,pending_manual_validation,manual_master_review,
+3407,Modeling pastes,Pastas para modelar,pending_manual_validation,manual_master_review,
+3501,Casein,Caseína,pending_manual_validation,manual_master_review,
+3502,Albumins,Albúminas,pending_manual_validation,manual_master_review,
 3503,Gelatin,Gelatina,pending_manual_validation,rule_based,
-3504,Peptones,Peptonas,manual_validated,manual_master_review,curated_llm_manual_review
+3504,Peptones,Peptonas,pending_manual_validation,manual_master_review,
 3505,Dextrins and other modified starches,Dextrins y otros modified starches,pending_manual_validation,rule_based,
 3506,Glues and adhesives,Glues y adhesives,pending_manual_validation,rule_based,
-3507,Enzymes,Enzimas,manual_validated,manual_master_review,curated_llm_manual_review
+3507,Enzymes,Enzimas,pending_manual_validation,manual_master_review,
 3601,Propellant powders,Pólvoras propulsoras,pending_manual_validation,code_override,
 3602,"Prepared explosives, except gunpowder","Preparado explosives, except gunpowder",pending_manual_validation,rule_based,
-3603,Detonators,Detonadores,manual_validated,manual_master_review,curated_llm_manual_review
-3604,Fireworks,Fuegos artificiales,manual_validated,manual_master_review,curated_llm_manual_review
-3605,Matches,Fósforos,manual_validated,manual_master_review,curated_llm_manual_review
+3603,Detonators,Detonadores,pending_manual_validation,manual_master_review,
+3604,Fireworks,Fuegos artificiales,pending_manual_validation,manual_master_review,
+3605,Matches,Fósforos,pending_manual_validation,manual_master_review,
 3606,Ferrocerium and other pyrophoric alloys,Ferrocerium y otros pyrophoric alloys,pending_manual_validation,rule_based,
 3701,Photographic plates,Placas fotográficas,pending_manual_validation,rule_based,
 3702,Photographic film in rolls,Película fotográfica en rollos,pending_manual_validation,rule_based,
@@ -421,50 +421,50 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 3706,Motion-picture film,Motion-picture película,pending_manual_validation,rule_based,
 3707,Chemical preparations for photographic uses,Preparaciones químicas para usos fotográficos,pending_manual_validation,rule_based,
 3801,Artificial graphite,Grafito artificial,pending_manual_validation,rule_based,
-3802,Activated carbon,Carbón activado,manual_validated,manual_master_review,curated_llm_manual_review
+3802,Activated carbon,Carbón activado,pending_manual_validation,manual_master_review,
 3803,Tall oil,Tall aceite,pending_manual_validation,rule_based,
-3804,Residual lyes,Lejías residuales,manual_validated,manual_master_review,curated_llm_manual_review
-3805,Turpentines,Trementinas,manual_validated,manual_master_review,curated_llm_manual_review
+3804,Residual lyes,Lejías residuales,pending_manual_validation,manual_master_review,
+3805,Turpentines,Trementinas,pending_manual_validation,manual_master_review,
 3806,Rosin and resin acids,Colofonia y ácidos resínicos,pending_manual_validation,code_override,
 3807,Wood tar and oils,Madera tar y aceites,pending_manual_validation,rule_based,
-3808,"Insecticides, rodenticides, fungicides, etc.","Insecticidas, rodenticidas, fungicidas, etc.",manual_validated,manual_master_review,curated_llm_manual_review
-3809,Finishing agents,Aprestos y productos de acabado,manual_validated,manual_master_review,curated_llm_manual_review
+3808,"Insecticides, rodenticides, fungicides, etc.","Insecticidas, rodenticidas, fungicidas, etc.",pending_manual_validation,manual_master_review,
+3809,Finishing agents,Aprestos y productos de acabado,pending_manual_validation,manual_master_review,
 3810,Pickling preparations for metal surfaces,Preparaciones para el decapado de superficies metálicas,pending_manual_validation,rule_based,
-3811,Anti-knock,Preparaciones antidetonantes,manual_validated,manual_master_review,curated_llm_manual_review
+3811,Anti-knock,Preparaciones antidetonantes,pending_manual_validation,manual_master_review,
 3812,Stabilizers for rubber or plastic,Estabilizantes para caucho o plástico,pending_manual_validation,rule_based,
 3813,Preparations for fire extinguishers,Preparaciones para extintores de incendios,pending_manual_validation,rule_based,
 3814,Organic composite solvents and thinners,Organic composite solvents y thinners,pending_manual_validation,rule_based,
 3815,Catalytic preparations,Catalytic preparaciones,pending_manual_validation,rule_based,
-3816,Refractory cements,Cementos refractarios,manual_validated,manual_master_review,curated_llm_manual_review
-3817,Mixed alkylbenzenes,Alquilbencenos mezclados,manual_validated,manual_master_review,curated_llm_manual_review
+3816,Refractory cements,Cementos refractarios,pending_manual_validation,manual_master_review,
+3817,Mixed alkylbenzenes,Alquilbencenos mezclados,pending_manual_validation,manual_master_review,
 3818,Chemical elements for electronics,Elementos químicos para electrónica,pending_manual_validation,rule_based,
-3819,Hydraulic fluids,Fluidos hidráulicos,manual_validated,manual_master_review,curated_llm_manual_review
+3819,Hydraulic fluids,Fluidos hidráulicos,pending_manual_validation,manual_master_review,
 3820,Antifreezing preparation,Antifreezing preparación,pending_manual_validation,rule_based,
 3821,Prepared culture media for micro-organisms,Medios de cultivo preparados para microorganismos,pending_manual_validation,rule_based,
 3822,Diagnostic or laboratory reagents,Diagnostic o laboratory reagents,pending_manual_validation,rule_based,
 3823,Industrial monocarboxylic fatty acids,Ácidos grasos monocarboxílicos industriales,pending_manual_validation,code_override,
-3901,Polymers of ethylene,Polímeros de etileno,manual_validated,manual_master_review,curated_llm_manual_review
-3902,Polymers of propylene,Polímeros de propileno,manual_validated,manual_master_review,curated_llm_manual_review
+3901,Polymers of ethylene,Polímeros de etileno,pending_manual_validation,manual_master_review,
+3902,Polymers of propylene,Polímeros de propileno,pending_manual_validation,manual_master_review,
 3903,Polymers of styrene,Polymers de styrene,pending_manual_validation,rule_based,
 3904,Polymers of vinyl chloride,Polymers de vinyl chloride,pending_manual_validation,rule_based,
 3905,Polymers of vinyl acetate,Polymers de vinyl acetate,pending_manual_validation,rule_based,
-3906,Acrylic polymers,Polímeros acrílicos,manual_validated,manual_master_review,curated_llm_manual_review
-3907,Polyacetals,Poliacetales,manual_validated,manual_master_review,curated_llm_manual_review
-3908,Polyamides,Poliamidas,manual_validated,manual_master_review,curated_llm_manual_review
-3909,Amino-resins,Aminorresinas,manual_validated,manual_master_review,curated_llm_manual_review
-3910,Silicones in primary forms,Siliconas en formas primarias,manual_validated,manual_master_review,curated_llm_manual_review
-3911,Petroleum resins,Resinas de petróleo,manual_validated,manual_master_review,curated_llm_manual_review
-3912,Cellulose n.e.c.,Celulosa n.e.p.,manual_validated,manual_master_review,curated_llm_manual_review
+3906,Acrylic polymers,Polímeros acrílicos,pending_manual_validation,manual_master_review,
+3907,Polyacetals,Poliacetales,pending_manual_validation,manual_master_review,
+3908,Polyamides,Poliamidas,pending_manual_validation,manual_master_review,
+3909,Amino-resins,Aminorresinas,pending_manual_validation,manual_master_review,
+3910,Silicones in primary forms,Siliconas en formas primarias,pending_manual_validation,manual_master_review,
+3911,Petroleum resins,Resinas de petróleo,pending_manual_validation,manual_master_review,
+3912,Cellulose n.e.c.,Celulosa n.e.p.,pending_manual_validation,manual_master_review,
 3913,Natural polymers,Polímeros naturales,pending_manual_validation,rule_based,
-3914,Ion-exchangers based on polymers,Intercambiadores de iones a base de polímeros,manual_validated,manual_master_review,curated_llm_manual_review
+3914,Ion-exchangers based on polymers,Intercambiadores de iones a base de polímeros,pending_manual_validation,manual_master_review,
 3915,Plastic waste,Plástico desechos,pending_manual_validation,rule_based,
 3916,Monofilament,Monofilamentos,pending_manual_validation,rule_based,
 3917,Plastic tubes and fittings,Tubos y accesorios de plástico,pending_manual_validation,code_override,
 3918,Plastic floor coverings,Plástico floor coverings,pending_manual_validation,rule_based,
 3919,Self-adhesive plastic sheets,Self-adhesive plástico hojas,pending_manual_validation,rule_based,
 3920,"Other plates of plastics, noncellular and not reinforced","Las demás placas de plástico, no celulares ni reforzadas",pending_manual_validation,rule_based,
-3921,"Other plastic plates, sheets etc.","Las demás placas, hojas y láminas de plástico",manual_validated,manual_master_review,curated_llm_manual_review
-3922,"Baths, sinks etc.","Bañeras, lavabos, etc.",manual_validated,manual_master_review,curated_llm_manual_review
+3921,"Other plastic plates, sheets etc.","Las demás placas, hojas y láminas de plástico",pending_manual_validation,manual_master_review,
+3922,"Baths, sinks etc.","Bañeras, lavabos, etc.",pending_manual_validation,manual_master_review,
 3923,Packing lids,Tapas para envases,pending_manual_validation,rule_based,
 3924,Plastic household articles,Artículos domésticos de plástico,pending_manual_validation,code_override,
 3925,Plastic builders' ware,Artículos de plástico para construcción,pending_manual_validation,rule_based,
@@ -475,23 +475,23 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 4004,Scrap of rubber,Chatarra de caucho,pending_manual_validation,rule_based,
 4005,Compounded rubber,Compounded caucho,pending_manual_validation,rule_based,
 4006,Unvulcanized rubber rods,Unvulcanized caucho rods,pending_manual_validation,rule_based,
-4007,Vulcanized rubber thread and cord,Vulcanized caucho thread y cord,pending_manual_validation,rule_based,
+4007,Vulcanized rubber thread and cord,Hilos y cuerdas de caucho vulcanizado,pending_manual_validation,manual_master_review,
 4008,Vulcanized rubber plates,Vulcanized caucho placas,pending_manual_validation,rule_based,
 4009,Vulcanized rubber tubes,Tubos de caucho vulcanizado,pending_manual_validation,code_override,
-4010,Conveyor belts of vulcanized rubber,Conveyor belts de vulcanized caucho,pending_manual_validation,rule_based,
+4010,Conveyor belts of vulcanized rubber,Correas transportadoras de caucho vulcanizado,pending_manual_validation,manual_master_review,
 4011,New pneumatic tires of rubber,Nuevos neumáticos neumáticos de caucho,pending_manual_validation,rule_based,
 4012,Used pneumatic tires of rubber,Neumáticos usados de caucho,pending_manual_validation,rule_based,
 4013,Rubber inner tubes,Cámaras de caucho,pending_manual_validation,code_override,
 4014,Rubber hygenic or pharmeceutical items,Caucho hygenic o pharmeceutical items,pending_manual_validation,rule_based,
-4015,Vulcanized rubber articles of apparel,Vulcanized caucho artículos de apparel,pending_manual_validation,rule_based,
+4015,Vulcanized rubber articles of apparel,Prendas y complementos de vestir de caucho vulcanizado,pending_manual_validation,manual_master_review,
 4016,Other articles of vulcanized rubber,Otros artículos de vulcanized caucho,pending_manual_validation,rule_based,
 4017,Hard rubber,Hard caucho,pending_manual_validation,rule_based,
-4101,Raw hides of bovines or equines,Cueros en bruto de bovinos o equinos,manual_validated,manual_master_review,curated_llm_manual_review
+4101,Raw hides of bovines or equines,Cueros en bruto de bovinos o equinos,pending_manual_validation,manual_master_review,
 4102,Raw skins of sheep or lambs,Pieles en bruto de ovinos o corderos,pending_manual_validation,rule_based,
 4103,Other raw hides and skins,Otros cueros en bruto y pieles,pending_manual_validation,rule_based,
-4104,Tanned hides of bovines or equines,Cueros curtidos de bovinos o equinos,manual_validated,manual_master_review,curated_llm_manual_review
-4105,Tanned sheepskins,Pieles curtidas de ovino,manual_validated,manual_master_review,curated_llm_manual_review
-4106,Tanned skins of other animals,Pieles curtidas de los demás animales,manual_validated,manual_master_review,curated_llm_manual_review
+4104,Tanned hides of bovines or equines,Cueros curtidos de bovinos o equinos,pending_manual_validation,manual_master_review,
+4105,Tanned sheepskins,Pieles curtidas de ovino,pending_manual_validation,manual_master_review,
+4106,Tanned skins of other animals,Pieles curtidas de los demás animales,pending_manual_validation,manual_master_review,
 4107,Bovine leather further prepared,Bovinos cuero further preparado,pending_manual_validation,rule_based,
 4108,Chamois leather,Chamois cuero,pending_manual_validation,rule_based,
 4109,Patent leather,Patent cuero,pending_manual_validation,rule_based,
@@ -499,16 +499,16 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 4111,Composition leather,Composition cuero,pending_manual_validation,rule_based,
 4201,Saddlery and harnesses,Saddlery y harnesses,pending_manual_validation,rule_based,
 4202,Trunks or cases,Trunks o cases,pending_manual_validation,rule_based,
-4203,Leather apparel,Cuero apparel,pending_manual_validation,rule_based,
+4203,Leather apparel,Prendas y complementos de vestir de cuero,pending_manual_validation,manual_master_review,
 4204,Articles of leather for technical uses,Artículos de cuero para usos técnicos,pending_manual_validation,rule_based,
 4205,Other articles of leather,Otros artículos de cuero,pending_manual_validation,rule_based,
 4206,Articles of gut,Artículos de tripa,pending_manual_validation,rule_based,
 4301,Other raw furskins,Las demás pieles finas en bruto,pending_manual_validation,rule_based,
-4302,Other tanned furskins,Las demás pieles finas curtidas o adobadas,manual_validated,manual_master_review,curated_llm_manual_review
-4303,Furskin apparel,Prendas de peletería,manual_validated,manual_master_review,curated_llm_manual_review
-4304,Artificial fur,Peletería artificial,manual_validated,manual_master_review,curated_llm_manual_review
+4302,Other tanned furskins,Las demás pieles finas curtidas o adobadas,pending_manual_validation,manual_master_review,
+4303,Furskin apparel,Prendas de peletería,pending_manual_validation,manual_master_review,
+4304,Artificial fur,Peletería artificial,pending_manual_validation,manual_master_review,
 4401,Fuel wood,Fuel madera,pending_manual_validation,rule_based,
-4402,Wood charcoal,Madera charcoal,pending_manual_validation,rule_based,
+4402,Wood charcoal,Carbón vegetal,pending_manual_validation,manual_master_review,
 4403,Wood in the rough,Madera en bruto,pending_manual_validation,code_override,
 4404,Strips and other pieces of wood,Strips y otros pieces de madera,pending_manual_validation,rule_based,
 4405,Wood wool or flour,Lana o harina de madera,pending_manual_validation,code_override,
@@ -516,34 +516,34 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 4407,Wood sawn lengthwise,Madera aserrada longitudinalmente,pending_manual_validation,rule_based,
 4408,Sheets for veneering for plywood,Hojas para chapado de madera contrachapada,pending_manual_validation,rule_based,
 4409,Wood shaped along its edges,Madera shaped along its edges,pending_manual_validation,rule_based,
-4410,Particle board and similar board,Particle board y similar board,pending_manual_validation,rule_based,
-4411,Fiberboard of wood,Fiberboard de madera,pending_manual_validation,rule_based,
+4410,Particle board and similar board,Tableros de partículas y tableros similares,pending_manual_validation,manual_master_review,
+4411,Fiberboard of wood,Tableros de fibra de madera,pending_manual_validation,manual_master_review,
 4412,Plywood,Madera contrachapada,pending_manual_validation,rule_based,
 4413,Densified wood,Densified madera,pending_manual_validation,rule_based,
 4414,Wooden frames,De madera monturas,pending_manual_validation,rule_based,
 4415,Packing boxes,Embalaje boxes,pending_manual_validation,rule_based,
-4416,"Casks, barrels, etc. of wood","Casks, barrels, etc. de madera",pending_manual_validation,rule_based,
+4416,"Casks, barrels, etc. of wood","Barriles, toneles y demás recipientes de madera",pending_manual_validation,manual_master_review,
 4417,Wooden tools,Herramientas de madera,pending_manual_validation,rule_based,
 4418,Wood carpentry for construction,Carpintería de madera para construcción,pending_manual_validation,rule_based,
 4419,Wooden kitchenware,De madera kitchenware,pending_manual_validation,rule_based,
-4420,"Wood marquetry, ornaments, etc.","Madera marquetry, ornaments, etc.",pending_manual_validation,rule_based,
+4420,"Wood marquetry, ornaments, etc.",Marquetería de madera y objetos de adorno de madera,pending_manual_validation,manual_master_review,
 4421,Other articles of wood,Otros artículos de madera,pending_manual_validation,rule_based,
 4501,"Natural cork, raw",Corcho natural en bruto,pending_manual_validation,rule_based,
 4502,"Natural cork, debacked",Corcho natural descortezado,pending_manual_validation,rule_based,
 4503,Articles of natural cork,Artículos de corcho natural,pending_manual_validation,rule_based,
 4504,Agglomerated cork,Corcho aglomerado,pending_manual_validation,rule_based,
 4601,Products of plaiting materials,Productos de materias trenzables,pending_manual_validation,code_override,
-4602,Basketwork,Cestería,manual_validated,manual_master_review,curated_llm_manual_review
-4701,Mechanical woodpulp,Pasta mecánica de madera,manual_validated,manual_master_review,curated_llm_manual_review
+4602,Basketwork,Cestería,pending_manual_validation,manual_master_review,
+4701,Mechanical woodpulp,Pasta mecánica de madera,pending_manual_validation,manual_master_review,
 4702,"Chemical woodpulp, dissolving grade","Químico woodpulp, dissolving grade",pending_manual_validation,rule_based,
 4703,"Chemical woodpulp, soda or sulfate","Químico woodpulp, soda o sulfato",pending_manual_validation,rule_based,
 4704,"Chemical woodpulp, sulfite","Químico woodpulp, sulfite",pending_manual_validation,rule_based,
 4705,Semichemical woodpulp,Pasta semiquímica de madera,pending_manual_validation,rule_based,
 4706,Pulps of recovered paper fibers,Pulps de recovered papel fibras,pending_manual_validation,rule_based,
 4707,Paper waste,Desechos de papel,pending_manual_validation,rule_based,
-4801,Newsprint,Papel prensa,manual_validated,manual_master_review,curated_llm_manual_review
+4801,Newsprint,Papel prensa,pending_manual_validation,manual_master_review,
 4802,Paper used for graphic purposes,Papel para usos gráficos,pending_manual_validation,rule_based,
-4803,Tissue,Papel tisú,manual_validated,manual_master_review,curated_llm_manual_review
+4803,Tissue,Papel tisú,pending_manual_validation,manual_master_review,
 4804,Uncoated kraft paper and paperboard,Uncoated kraft papel y cartón,pending_manual_validation,rule_based,
 4805,Other uncoated paper and paperboard,Los demás papeles y cartones sin estucar,pending_manual_validation,code_override,
 4806,Transparent paper,Transparent papel,pending_manual_validation,rule_based,
@@ -551,31 +551,31 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 4808,Corrugated paper and paperboard,Corrugated papel y cartón,pending_manual_validation,rule_based,
 4809,Carbon paper,Carbon papel,pending_manual_validation,rule_based,
 4810,"Paper and paperboard, coated with kaolin","Papel y cartón, coated con kaolin",pending_manual_validation,rule_based,
-4811,"Cellulose wadding, coated",Guata de celulosa recubierta,manual_validated,manual_master_review,curated_llm_manual_review
-4812,Filter blocks of paper pulp,Filter blocks de papel pulp,pending_manual_validation,rule_based,
+4811,"Cellulose wadding, coated",Guata de celulosa recubierta,pending_manual_validation,manual_master_review,
+4812,Filter blocks of paper pulp,Bloques filtrantes de pasta de papel,pending_manual_validation,manual_master_review,
 4813,Cigarette paper,Cigarette papel,pending_manual_validation,rule_based,
-4814,Wallpaper,Papel pintado,manual_validated,manual_master_review,curated_llm_manual_review
+4814,Wallpaper,Papel pintado,pending_manual_validation,manual_master_review,
 4815,Floor coverings of paper,Floor coverings de papel,pending_manual_validation,rule_based,
 4816,Other carbon paper,Los demás papeles carbón,pending_manual_validation,rule_based,
-4817,Letterstock,Artículos de correspondencia,manual_validated,manual_master_review,curated_llm_manual_review
-4818,Toilet paper,Papel higiénico,manual_validated,manual_master_review,curated_llm_manual_review
+4817,Letterstock,Artículos de correspondencia,pending_manual_validation,manual_master_review,
+4818,Toilet paper,Papel higiénico,pending_manual_validation,manual_master_review,
 4819,Cardboard packing containers,Envases de cartón para embalaje,pending_manual_validation,rule_based,
 4820,Notebooks,Cuadernos,pending_manual_validation,rule_based,
 4821,Paper labels,Papel labels,pending_manual_validation,rule_based,
 4822,"Bobbins, spools, cops of paper","Bobbins, spools, cops de papel",pending_manual_validation,rule_based,
 4823,Other paper cut to size,Otros papel cut to size,pending_manual_validation,rule_based,
-4901,"Books, brochures etc.","Libros, folletos, etc.",manual_validated,manual_master_review,curated_llm_manual_review
-4902,"Newspapers, journals and periodicals","Newspapers, journals y periodicals",pending_manual_validation,rule_based,
-4903,Children's books,Libros infantiles,manual_validated,manual_master_review,curated_llm_manual_review
+4901,"Books, brochures etc.","Libros, folletos, etc.",pending_manual_validation,manual_master_review,
+4902,"Newspapers, journals and periodicals","Periódicos, revistas y publicaciones periódicas",pending_manual_validation,manual_master_review,
+4903,Children's books,Libros infantiles,pending_manual_validation,manual_master_review,
 4904,"Music, printed or in manuscript","Music, printed o in manuscript",pending_manual_validation,rule_based,
-4905,Maps,Mapas,manual_validated,manual_master_review,curated_llm_manual_review
-4906,"Architectural, engineering, etc. drawings","Planos y dibujos de arquitectura, ingeniería, etc.",manual_validated,manual_master_review,curated_llm_manual_review
-4907,Unused stamps,Sellos sin usar,manual_validated,manual_master_review,curated_llm_manual_review
-4908,Transfers (decalcomanias),Calcomanías,manual_validated,manual_master_review,curated_llm_manual_review
+4905,Maps,Mapas,pending_manual_validation,manual_master_review,
+4906,"Architectural, engineering, etc. drawings","Planos y dibujos de arquitectura, ingeniería, etc.",pending_manual_validation,manual_master_review,
+4907,Unused stamps,Sellos sin usar,pending_manual_validation,manual_master_review,
+4908,Transfers (decalcomanias),Calcomanías,pending_manual_validation,manual_master_review,
 4909,Printed or illustrated postcards,Printed o illustrated postcards,pending_manual_validation,rule_based,
-4910,Calendars,Calendarios,manual_validated,manual_master_review,curated_llm_manual_review
+4910,Calendars,Calendarios,pending_manual_validation,manual_master_review,
 4911,Other printed matter,Otros printed matter,pending_manual_validation,rule_based,
-5001,Silkworm cocoons,Capullos de seda,manual_validated,manual_master_review,curated_llm_manual_review
+5001,Silkworm cocoons,Capullos de seda,pending_manual_validation,manual_master_review,
 5002,Raw silk,Seda en bruto,pending_manual_validation,rule_based,
 5003,Silk waste,Desechos de seda,pending_manual_validation,rule_based,
 5004,Silk yarn,Hilado de seda,pending_manual_validation,rule_based,
@@ -598,7 +598,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 5201,Raw cotton,Algodón en bruto,pending_manual_validation,rule_based,
 5202,Cotton waste,Algodón desechos,pending_manual_validation,rule_based,
 5203,"Cotton, carded or combed","Algodón, carded o combed",pending_manual_validation,rule_based,
-5204,Cotton sewing thread,Algodón sewing thread,pending_manual_validation,rule_based,
+5204,Cotton sewing thread,Hilo de coser de algodón,pending_manual_validation,manual_master_review,
 5205,Cotton yarn of > 85%,Algodón hilados de > 85%,pending_manual_validation,rule_based,
 5206,Cotton yarn of < 85%,Algodón hilados de < 85%,pending_manual_validation,rule_based,
 5207,Cotton yarn for retail sale,Hilado de algodón para venta al por menor,pending_manual_validation,rule_based,
@@ -643,40 +643,40 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 5515,Other woven fabrics of synthetic staple fibers,Los demás tejidos de fibras sintéticas discontinuas,pending_manual_validation,code_override,
 5516,Woven fabrics of artificial staple fibers,Tejidos de fibras artificiales discontinuas,pending_manual_validation,rule_based,
 5601,Wadding of textile materials,Wadding de textil materiales,pending_manual_validation,rule_based,
-5602,Felt,Fieltro,manual_validated,manual_master_review,curated_llm_manual_review
-5603,Nonwoven textiles,Telas no tejidas,manual_validated,manual_master_review,curated_llm_manual_review
+5602,Felt,Fieltro,pending_manual_validation,manual_master_review,
+5603,Nonwoven textiles,Telas no tejidas,pending_manual_validation,manual_master_review,
 5604,Rubber textiles,Caucho textiles,pending_manual_validation,rule_based,
 5605,Metallised yarn,Metallised hilados,pending_manual_validation,rule_based,
 5606,Gimp yarn,Hilados entorchados,pending_manual_validation,rule_based,
 5607,Twine and ropes of baste fibers,Twine y ropes de baste fibras,pending_manual_validation,rule_based,
-5608,Nets,Redes,manual_validated,manual_master_review,curated_llm_manual_review
+5608,Nets,Redes,pending_manual_validation,manual_master_review,
 5609,"Articles of yarn, rope etc not elsewhere clasified","Artículos de hilados, cuerdas, etc., no clasificados en otra parte",pending_manual_validation,rule_based,
-5701,"Carpets, knotted",Alfombras anudadas,manual_validated,manual_master_review,curated_llm_manual_review
+5701,"Carpets, knotted",Alfombras anudadas,pending_manual_validation,manual_master_review,
 5702,Woven carpets and rugs,Tejidos carpets y rugs,pending_manual_validation,rule_based,
-5703,"Carpets, tufted",Alfombras de mechón insertado,manual_validated,manual_master_review,curated_llm_manual_review
+5703,"Carpets, tufted",Alfombras de mechón insertado,pending_manual_validation,manual_master_review,
 5704,Carpets of felt,Carpets de felt,pending_manual_validation,rule_based,
 5705,Other carpets,Otros carpets,pending_manual_validation,rule_based,
 5801,Woven pile fabrics,Tejidos de pelo,pending_manual_validation,rule_based,
 5802,Terry cloth,Terry telas,pending_manual_validation,rule_based,
-5803,Gauze,Gasas,manual_validated,manual_master_review,curated_llm_manual_review
+5803,Gauze,Gasas,pending_manual_validation,manual_master_review,
 5804,Lace and net fabrics,Lace y net tejidos,pending_manual_validation,rule_based,
 5805,Hand-woven tapestries,Hand-tejidos tapestries,pending_manual_validation,rule_based,
 5806,Narrow woven fabrics,Narrow tejidos,pending_manual_validation,rule_based,
 5807,Labels and badges of textiles,Labels y badges de textiles,pending_manual_validation,rule_based,
-5808,Braids in piece,Trenzas en pieza,manual_validated,manual_master_review,curated_llm_manual_review
+5808,Braids in piece,Trenzas en pieza,pending_manual_validation,manual_master_review,
 5809,Woven fabric incorporating metal threads,Tejidos con hilos metálicos incorporados,pending_manual_validation,rule_based,
-5810,Embroidery in the piece,Bordados en pieza,manual_validated,manual_master_review,curated_llm_manual_review
+5810,Embroidery in the piece,Bordados en pieza,pending_manual_validation,manual_master_review,
 5811,Quilted textile products,Productos textiles acolchados,pending_manual_validation,code_override,
-5901,Stiffened textiles,Textiles endurecidos,manual_validated,manual_master_review,curated_llm_manual_review
+5901,Stiffened textiles,Textiles endurecidos,pending_manual_validation,manual_master_review,
 5902,Tire cord fabric,Tejido para cordones de neumáticos,pending_manual_validation,rule_based,
 5903,Textile fabrics impregnated with plastics,Textil tejidos impregnated con plásticos,pending_manual_validation,rule_based,
-5904,Linoleum,Linóleo,manual_validated,manual_master_review,curated_llm_manual_review
+5904,Linoleum,Linóleo,pending_manual_validation,manual_master_review,
 5905,Textile wall coverings,Textil wall coverings,pending_manual_validation,rule_based,
 5906,Rubberized textile fabrics,Rubberized textil tejidos,pending_manual_validation,rule_based,
 5907,"Other textile fabrics impregnated, coated or covered","Otros textil tejidos impregnated, coated o covered",pending_manual_validation,rule_based,
 5908,Textile wicks,Textil wicks,pending_manual_validation,rule_based,
-5909,Textile hosepiping and similar tubing,Textil hosepiping y similar tubing,pending_manual_validation,rule_based,
-5910,"Transmission belts or belting, of textile material","Transmission belts o belting, de textil material",pending_manual_validation,rule_based,
+5909,Textile hosepiping and similar tubing,Mangueras y tuberías similares de materia textil,pending_manual_validation,manual_master_review,
+5910,"Transmission belts or belting, of textile material","Correas de transmisión y bandas similares, de materia textil",pending_manual_validation,manual_master_review,
 5911,Textile articles for technical use,Artículos textiles para usos técnicos,pending_manual_validation,rule_based,
 6001,"Pile fabrics, knit","Tejidos de pelo, de punto",pending_manual_validation,rule_based,
 6002,Other knitted fabrics,Otros knitted tejidos,pending_manual_validation,rule_based,
@@ -705,74 +705,74 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 6206,Women's shirts,Camisas para mujer,pending_manual_validation,code_override,
 6207,Men's undergarments,Ropa interior para hombre,pending_manual_validation,code_override,
 6208,Women's undergarments,Ropa interior femenina,pending_manual_validation,rule_based,
-6209,Babies' garments,Prendas para bebé,manual_validated,manual_master_review,curated_llm_manual_review
+6209,Babies' garments,Prendas para bebé,pending_manual_validation,manual_master_review,
 6210,Garments made of textile felts and nonwoven fabric,Prendas confeccionadas con fieltros textiles y telas sin tejer,pending_manual_validation,rule_based,
-6211,Activewear,Prendas deportivas y otras prendas de vestir,manual_validated,manual_master_review,curated_llm_manual_review
-6212,Brassieres,Sostenes y prendas similares,manual_validated,manual_master_review,curated_llm_manual_review
-6213,Handkerchiefs,Pañuelos,manual_validated,manual_master_review,curated_llm_manual_review
+6211,Activewear,Prendas deportivas y otras prendas de vestir,pending_manual_validation,manual_master_review,
+6212,Brassieres,Sostenes y prendas similares,pending_manual_validation,manual_master_review,
+6213,Handkerchiefs,Pañuelos,pending_manual_validation,manual_master_review,
 6214,"Shawls, scarves, etc.","Chales, bufandas, etc.",pending_manual_validation,rule_based,
 6215,"Ties, bow ties and cravats","Ties, bow ties y cravats",pending_manual_validation,rule_based,
-6216,Gloves,Guantes,manual_validated,manual_master_review,curated_llm_manual_review
+6216,Gloves,Guantes,pending_manual_validation,manual_master_review,
 6217,Other clothing accesories,Otros clothing accesories,pending_manual_validation,rule_based,
-6301,Blankets,Mantas,manual_validated,manual_master_review,curated_llm_manual_review
-6302,House linen,Ropa de hogar,manual_validated,manual_master_review,curated_llm_manual_review
-6303,Curtains,Cortinas,manual_validated,manual_master_review,curated_llm_manual_review
+6301,Blankets,Mantas,pending_manual_validation,manual_master_review,
+6302,House linen,Ropa de hogar,pending_manual_validation,manual_master_review,
+6303,Curtains,Cortinas,pending_manual_validation,manual_master_review,
 6304,Other furnishing articles,Otros furnishing artículos,pending_manual_validation,rule_based,
 6305,Bags for packing goods,Sacos para envasar mercancías,pending_manual_validation,rule_based,
-6306,"Tents, tarpaulins, etc.","Tiendas de campaña, lonas, etc.",manual_validated,manual_master_review,curated_llm_manual_review
+6306,"Tents, tarpaulins, etc.","Tiendas de campaña, lonas, etc.",pending_manual_validation,manual_master_review,
 6307,Other made up articles,Otros made up artículos,pending_manual_validation,rule_based,
 6308,Needlecraft sets of woven fabric and yarn,Needlecraft sets de tejidos tejido y hilados,pending_manual_validation,rule_based,
 6309,Used clothes and textiles,Ropa y textiles usados,pending_manual_validation,rule_based,
 6310,Used or new rags textile scraps,Trapos usados o nuevos y desechos textiles,pending_manual_validation,rule_based,
-6401,Waterproof footwear,Calzado impermeable,manual_validated,manual_master_review,curated_llm_manual_review
+6401,Waterproof footwear,Calzado impermeable,pending_manual_validation,manual_master_review,
 6402,Other footwear of rubber or plastics,Los demás calzados de caucho o plástico,pending_manual_validation,rule_based,
 6403,Leather footwear,Cuero footwear,pending_manual_validation,rule_based,
 6404,Textile footwear,Textil footwear,pending_manual_validation,rule_based,
 6405,Other footwear,Otros footwear,pending_manual_validation,rule_based,
 6406,Parts of footwear,Partes de footwear,pending_manual_validation,rule_based,
-6501,Hat forms,Cascos y formas para sombreros,manual_validated,manual_master_review,curated_llm_manual_review
-6502,Hat shapes,Formas para sombreros,manual_validated,manual_master_review,curated_llm_manual_review
-6503,Felt hats,Sombreros de fieltro,manual_validated,manual_master_review,curated_llm_manual_review
-6504,Hats,Sombreros,manual_validated,manual_master_review,curated_llm_manual_review
+6501,Hat forms,Cascos y formas para sombreros,pending_manual_validation,manual_master_review,
+6502,Hat shapes,Formas para sombreros,pending_manual_validation,manual_master_review,
+6503,Felt hats,Sombreros de fieltro,pending_manual_validation,manual_master_review,
+6504,Hats,Sombreros,pending_manual_validation,manual_master_review,
 6505,"Hats, knit","Sombreros, de punto",pending_manual_validation,rule_based,
 6506,Other headgear,Otros headgear,pending_manual_validation,rule_based,
 6507,Headbands,Cintas para la cabeza,pending_manual_validation,rule_based,
-6601,Umbrellas,Paraguas,manual_validated,manual_master_review,curated_llm_manual_review
-6602,Walking sticks,Bastones,manual_validated,manual_master_review,curated_llm_manual_review
+6601,Umbrellas,Paraguas,pending_manual_validation,manual_master_review,
+6602,Walking sticks,Bastones,pending_manual_validation,manual_master_review,
 6603,Parts of umbrellas or walking sticks,Partes de paraguas o bastones,pending_manual_validation,rule_based,
 6701,Feathers or down,Feathers o down,pending_manual_validation,rule_based,
-6702,Artificial flowers,Flores artificiales,manual_validated,manual_master_review,curated_llm_manual_review
+6702,Artificial flowers,Flores artificiales,pending_manual_validation,manual_master_review,
 6703,Human animal hair prepared for use in wigs,Pelo animal humano preparado para uso en pelucas,pending_manual_validation,rule_based,
-6704,Wigs,Pelucas,manual_validated,manual_master_review,curated_llm_manual_review
+6704,Wigs,Pelucas,pending_manual_validation,manual_master_review,
 6801,"Flagstones, of natural stone",Losas de piedra natural,pending_manual_validation,rule_based,
 6802,Worked building stone,Trabajado building stone,pending_manual_validation,rule_based,
 6803,Worked slate,Trabajado slate,pending_manual_validation,rule_based,
-6804,Grindstones,Muelas y piedras de amolar,manual_validated,manual_master_review,curated_llm_manual_review
+6804,Grindstones,Muelas y piedras de amolar,pending_manual_validation,manual_master_review,
 6805,Natural or artificial abrasive powder,Polvos abrasivos naturales o artificiales,pending_manual_validation,rule_based,
 6806,Mineral wools and insulating materials,Mineral wools y insulating materiales,pending_manual_validation,rule_based,
-6807,Asphalt,Productos de asfalto,manual_validated,manual_master_review,curated_llm_manual_review
+6807,Asphalt,Productos de asfalto,pending_manual_validation,manual_master_review,
 6808,Panels of vegetable fibers,Panels de vegetal fibras,pending_manual_validation,rule_based,
 6809,Plaster articles,Plaster artículos,pending_manual_validation,rule_based,
 6810,"Articles of cement, of concrete or of artificial stone","Artículos de cement, de concrete o de artificial stone",pending_manual_validation,rule_based,
 6811,Asbestos-cement or cellulose fiber-cement,Asbestos-cement o cellulose fibra-cement,pending_manual_validation,rule_based,
-6812,Asbestos fibres,Fibras de asbesto,manual_validated,manual_master_review,curated_llm_manual_review
+6812,Asbestos fibres,Fibras de asbesto,pending_manual_validation,manual_master_review,
 6813,Friction material and articles thereof,Friction material y artículos thereof,pending_manual_validation,rule_based,
 6814,Mica articles,Mica artículos,pending_manual_validation,rule_based,
 6815,Articles of stone or of other mineral substances,Artículos de stone o de otros mineral substances,pending_manual_validation,rule_based,
-6901,"Bricks, blocks, and other ceramic goods","Bricks, blocks, y otros ceramic mercancías",pending_manual_validation,rule_based,
-6902,"Bricks, tiles and similar refractory ceramic constructional goods","Bricks, tiles y similar refractory ceramic constructional mercancías",pending_manual_validation,rule_based,
-6903,Other refractory ceramic goods,Otros refractory ceramic mercancías,pending_manual_validation,rule_based,
-6904,Ceramic building bricks,Ladrillos cerámicos de construcción,manual_validated,manual_master_review,curated_llm_manual_review
-6905,Architectural ceramic ornaments,Ornamentos cerámicos arquitectónicos,manual_validated,manual_master_review,curated_llm_manual_review
-6906,Ceramic pipes,Tuberías cerámicas,manual_validated,manual_master_review,curated_llm_manual_review
+6901,"Bricks, blocks, and other ceramic goods","Ladrillos, bloques y otras piezas cerámicas",pending_manual_validation,manual_master_review,
+6902,"Bricks, tiles and similar refractory ceramic constructional goods","Ladrillos, tejas y piezas similares de cerámica refractaria para construcción",pending_manual_validation,manual_master_review,
+6903,Other refractory ceramic goods,Las demás manufacturas cerámicas refractarias,pending_manual_validation,manual_master_review,
+6904,Ceramic building bricks,Ladrillos cerámicos de construcción,pending_manual_validation,manual_master_review,
+6905,Architectural ceramic ornaments,Ornamentos cerámicos arquitectónicos,pending_manual_validation,manual_master_review,
+6906,Ceramic pipes,Tuberías cerámicas,pending_manual_validation,manual_master_review,
 6907,Unglazed ceramic flags and pavers,Baldosas y adoquines cerámicos sin esmaltar,pending_manual_validation,rule_based,
 6908,Glazed ceramic flags and pavers,Baldosas y adoquines cerámicos esmaltados,pending_manual_validation,rule_based,
 6909,Ceramic wares for technical ware,Artículos cerámicos para usos técnicos,pending_manual_validation,rule_based,
 6910,"Ceramic sinks, washbasins, and similar sanitary fixtures","Fregaderos, lavabos y aparatos sanitarios similares de cerámica",pending_manual_validation,code_override,
 6911,Porcelain or china household articles,Artículos domésticos de porcelana o loza,pending_manual_validation,code_override,
 6912,Ceramic household articles,Artículos domésticos de cerámica,pending_manual_validation,code_override,
-6913,Ornamental ceramic articles,Ornamental ceramic artículos,pending_manual_validation,rule_based,
-6914,Other ceramic articles,Otros ceramic artículos,pending_manual_validation,rule_based,
+6913,Ornamental ceramic articles,Artículos cerámicos ornamentales,pending_manual_validation,manual_master_review,
+6914,Other ceramic articles,Los demás artículos de cerámica,pending_manual_validation,manual_master_review,
 7001,Cullet and other scraps of glass,Cascotes y demás desechos de vidrio,pending_manual_validation,rule_based,
 7002,Glass balls,Bolas de vidrio,pending_manual_validation,rule_based,
 7003,"Glass, cast or rolled",Vidrio colado o laminado,pending_manual_validation,rule_based,
@@ -786,23 +786,23 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 7011,Glass envelopes,Ampollas de vidrio,pending_manual_validation,rule_based,
 7012,Glass inners for vacuum flasks,Recipientes interiores de vidrio para termos,pending_manual_validation,rule_based,
 7013,Glassware for interior decorative use,Artículos de vidrio para decoración de interiores,pending_manual_validation,rule_based,
-7014,Signaling glassware,Vidriería para señalización,manual_validated,manual_master_review,curated_llm_manual_review
-7015,Clock or watch glasses and similar glasses,Clock o reloj glasses y similar glasses,pending_manual_validation,rule_based,
+7014,Signaling glassware,Vidriería para señalización,pending_manual_validation,manual_master_review,
+7015,Clock or watch glasses and similar glasses,Cristales para relojes y similares,pending_manual_validation,manual_master_review,
 7016,Glass paving blocks or other molded products,"Bloques, ladrillos y demás artículos moldeados de vidrio",pending_manual_validation,rule_based,
 7017,"Laboratory, hygienic or pharmaceutical glassware","Artículos de vidrio para laboratorio, higiene o farmacia",pending_manual_validation,code_override,
 7018,Glass beads,Cuentas de vidrio,pending_manual_validation,rule_based,
 7019,Glass fibers,Fibras de vidrio,pending_manual_validation,rule_based,
 7020,Other articles of glass,Los demás artículos de vidrio,pending_manual_validation,rule_based,
-7101,Pearls,Perlas,manual_validated,manual_master_review,curated_llm_manual_review
-7102,Diamonds,Diamantes,manual_validated,manual_master_review,curated_llm_manual_review
+7101,Pearls,Perlas,pending_manual_validation,manual_master_review,
+7102,Diamonds,Diamantes,pending_manual_validation,manual_master_review,
 7103,Precious stones,Preciosos stones,pending_manual_validation,rule_based,
 7104,Synthetic precious stones,Piedras preciosas sintéticas,pending_manual_validation,code_override,
-7105,Diamond dust,Polvo de diamante,manual_validated,manual_master_review,curated_llm_manual_review
-7106,Silver,Plata,manual_validated,manual_master_review,curated_llm_manual_review
+7105,Diamond dust,Polvo de diamante,pending_manual_validation,manual_master_review,
+7106,Silver,Plata,pending_manual_validation,manual_master_review,
 7107,Silver clad metals,Silver revestidos metales,pending_manual_validation,rule_based,
 7108,Gold,Oro,pending_manual_validation,rule_based,
 7109,Gold clad metals,Gold revestidos metales,pending_manual_validation,rule_based,
-7110,Platinum,Platino,manual_validated,manual_master_review,curated_llm_manual_review
+7110,Platinum,Platino,pending_manual_validation,manual_master_review,
 7111,Platinum clad metals,Metales chapados con platino,pending_manual_validation,rule_based,
 7112,Scrap of precious metal,Desechos de metal precioso,pending_manual_validation,rule_based,
 7113,Jewelry of precious metal,Joyería de metal precioso,pending_manual_validation,rule_based,
@@ -810,9 +810,9 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 7115,Other articles of precious metals,Otros artículos de preciosos metales,pending_manual_validation,rule_based,
 7116,Articles of precious stones,Artículos de preciosos stones,pending_manual_validation,rule_based,
 7117,Imitation jewelry,Bisutería,pending_manual_validation,rule_based,
-7118,Coin,Monedas,manual_validated,manual_master_review,curated_llm_manual_review
+7118,Coin,Monedas,pending_manual_validation,manual_master_review,
 7201,Pig iron,Pig hierro,pending_manual_validation,rule_based,
-7202,Ferroalloys,Ferroaleaciones,manual_validated,manual_master_review,curated_llm_manual_review
+7202,Ferroalloys,Ferroaleaciones,pending_manual_validation,manual_master_review,
 7203,Ferrous products from the reduction of iron ore,Productos ferrosos obtenidos por reducción de mineral de hierro,pending_manual_validation,code_override,
 7204,Ferrous waste and scrap,Ferrous desechos y chatarra,pending_manual_validation,rule_based,
 7205,Powders of iron or steel,Polvos de hierro o acero,pending_manual_validation,code_override,
@@ -847,17 +847,17 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 7305,"Other tubes and pipes, diameter > 406.4 mm, of iron or steel","Los demás tubos y caños, diámetro > 406.4 mm, de hierro o acero",pending_manual_validation,code_override,
 7306,"Other tubes, pipes and hollow profiles of iron or steel","Otros tubos, caños y perfiles huecos de hierro o acero",pending_manual_validation,rule_based,
 7307,Tube or pipe fittings of iron or steel,Tube o pipe fittings de hierro o acero,pending_manual_validation,rule_based,
-7308,"Structures and their parts, of iron or steel","Estructuras y sus partes, de hierro o acero",manual_validated,manual_master_review,curated_llm_manual_review
-7309,"Tanks etc. > 300 liters, iron or steel","Tanks etc. > 300 liters, hierro o acero",pending_manual_validation,rule_based,
-7310,"Tanks etc. < 300 liters, iron or steel","Tanks etc. < 300 liters, hierro o acero",pending_manual_validation,rule_based,
+7308,"Structures and their parts, of iron or steel","Estructuras y sus partes, de hierro o acero",pending_manual_validation,manual_master_review,
+7309,"Tanks etc. > 300 liters, iron or steel","Depósitos y recipientes similares > 300 litros, de hierro o acero",pending_manual_validation,manual_master_review,
+7310,"Tanks etc. < 300 liters, iron or steel","Depósitos y recipientes similares < 300 litros, de hierro o acero",pending_manual_validation,manual_master_review,
 7311,Containers for compressed or liquified gas,Recipientes para gas comprimido o licuado,pending_manual_validation,rule_based,
 7312,"Wire of iron or steel, not insulated","Alambre de hierro o acero, sin aislar",pending_manual_validation,rule_based,
 7313,Barbed wire of iron or steel,Alambre de púas de hierro o acero,pending_manual_validation,rule_based,
 7314,Cloth of iron or steel wire,Telas metálicas de alambre de hierro o acero,pending_manual_validation,rule_based,
 7315,Chain of iron or steel,Chain de hierro o acero,pending_manual_validation,rule_based,
 7316,Anchors of iron or steel,Anchors de hierro o acero,pending_manual_validation,rule_based,
-7317,Nails and similar articles of iron or steel,Clavos y artículos similares de hierro o acero,manual_validated,manual_master_review,curated_llm_manual_review
-7318,Screws and similar articles of iron or steel,Screws y similar artículos de hierro o acero,pending_manual_validation,rule_based,
+7317,Nails and similar articles of iron or steel,Clavos y artículos similares de hierro o acero,pending_manual_validation,manual_master_review,
+7318,Screws and similar articles of iron or steel,Tornillos y artículos similares de hierro o acero,pending_manual_validation,manual_master_review,
 7319,Articles for sewing of iron or steel,Artículos para coser de hierro o acero,pending_manual_validation,rule_based,
 7320,Springs of iron or steel,Springs de hierro o acero,pending_manual_validation,rule_based,
 7321,Stoves and similar non-electric appliances of iron or steel,Estufas y aparatos similares no eléctricos de hierro o acero,pending_manual_validation,code_override,
@@ -872,7 +872,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 7404,Copper waste and scrap,Cobre desechos y chatarra,pending_manual_validation,rule_based,
 7405,Master alloys of copper,Master alloys de cobre,pending_manual_validation,rule_based,
 7406,Copper powders and flakes,Polvos y escamas de cobre,pending_manual_validation,code_override,
-7407,"Copper bars, rods and profiles","Barras, varillas y perfiles de cobre",manual_validated,manual_master_review,curated_llm_manual_review
+7407,"Copper bars, rods and profiles","Barras, varillas y perfiles de cobre",pending_manual_validation,manual_master_review,
 7408,Copper wire,Alambre de cobre,pending_manual_validation,rule_based,
 7409,"Copper plates, sheets and strip > 0.15 mm","Cobre placas, hojas y strip > 0.15 mm",pending_manual_validation,rule_based,
 7410,Copper foil < 0.15 mm thick,Cobre foil < 0.15 mm thick,pending_manual_validation,rule_based,
@@ -880,12 +880,12 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 7412,Copper tube or pipe fittings,Cobre tube o pipe fittings,pending_manual_validation,rule_based,
 7413,"Copper wire, uninsulated",Alambre de cobre sin aislar,pending_manual_validation,rule_based,
 7414,Endless bands of copper wire for machinery,Bandas sin fin de alambre de cobre para maquinaria,pending_manual_validation,rule_based,
-7415,Screws and similar articles of copper,Screws y similar artículos de cobre,pending_manual_validation,rule_based,
+7415,Screws and similar articles of copper,Tornillos y artículos similares de cobre,pending_manual_validation,manual_master_review,
 7416,Copper springs,Cobre springs,pending_manual_validation,rule_based,
 7417,Copper cooking products,Artículos de cocina de cobre,pending_manual_validation,code_override,
 7418,Household articles of copper,Artículos domésticos de cobre,pending_manual_validation,code_override,
 7419,Other articles of copper,Otros artículos de cobre,pending_manual_validation,rule_based,
-7501,Nickel mattes,Matas de níquel,manual_validated,manual_master_review,curated_llm_manual_review
+7501,Nickel mattes,Matas de níquel,pending_manual_validation,manual_master_review,
 7502,Nickel unwrought,Níquel en bruto,pending_manual_validation,rule_based,
 7503,Nickel waste and scrap,Nickel desechos y chatarra,pending_manual_validation,rule_based,
 7504,Nickel powders,Polvos de níquel,pending_manual_validation,code_override,
@@ -894,15 +894,15 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 7507,Nickel tubes and pipes,Tubos y caños de níquel,pending_manual_validation,code_override,
 7508,Other articles of nickel,Otros artículos de nickel,pending_manual_validation,rule_based,
 7601,Unwrought aluminum,Unwrought aluminio,pending_manual_validation,rule_based,
-7602,"Waste or scrap, aluminium",Desechos y chatarra de aluminio,manual_validated,manual_master_review,curated_llm_manual_review
+7602,"Waste or scrap, aluminium",Desechos y chatarra de aluminio,pending_manual_validation,manual_master_review,
 7603,Aluminum powders,Polvos de aluminio,pending_manual_validation,code_override,
-7604,Aluminum bars,Barras y perfiles de aluminio,manual_validated,manual_master_review,curated_llm_manual_review
+7604,Aluminum bars,Barras y perfiles de aluminio,pending_manual_validation,manual_master_review,
 7605,Aluminum wire,Alambre de aluminio,pending_manual_validation,rule_based,
 7606,Aluminum plates > 0.2 mm,Aluminio placas > 0.2 mm,pending_manual_validation,rule_based,
 7607,Aluminum foil < 0.2 mm,Aluminio foil < 0.2 mm,pending_manual_validation,rule_based,
 7608,Aluminum tubes and pipes,Tubos y caños de aluminio,pending_manual_validation,code_override,
 7609,Aluminum tube or pipe fittings,Aluminio tube o pipe fittings,pending_manual_validation,rule_based,
-7610,"Aluminum structures (bridges, towers etc)","Aluminio structures (bridges, towers etc)",pending_manual_validation,rule_based,
+7610,"Aluminum structures (bridges, towers etc)","Estructuras de aluminio (puentes, torres, etc.)",pending_manual_validation,manual_master_review,
 7611,"Aluminum containers, >300 liters","Recipientes de aluminio, >300 litros",pending_manual_validation,rule_based,
 7612,"Aluminum containers, <300 liters","Recipientes de aluminio, <300 litros",pending_manual_validation,rule_based,
 7613,Aluminum containers for compressed or liquefied gas,Recipientes de aluminio para gas comprimido o licuado,pending_manual_validation,rule_based,
@@ -922,88 +922,88 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 7905,Zinc plates and foil,Placas y hojas de zinc,pending_manual_validation,rule_based,
 7906,"Zinc tubes, pipes and tube or pipe fittings",Tubos y accesorios de tubería de zinc,pending_manual_validation,rule_based,
 7907,Other articles of zinc,Otros artículos de zinc,pending_manual_validation,rule_based,
-8001,Unwrought tin,Estaño en bruto,manual_validated,manual_master_review,curated_llm_manual_review
+8001,Unwrought tin,Estaño en bruto,pending_manual_validation,manual_master_review,
 8002,Tin waste and scrap,Tin desechos y chatarra,pending_manual_validation,rule_based,
 8003,Tin bars and wire,Barras y alambre de estaño,pending_manual_validation,rule_based,
 8004,"Tin plates, sheets and strips, thickness > 0.2 mm","Tin placas, hojas y strips, thickness > 0.2 mm",pending_manual_validation,rule_based,
-8005,"Tin foil, thickness < 0.2 mm","Hojas de estaño de espesor < 0,2 mm",manual_validated,manual_master_review,curated_llm_manual_review
+8005,"Tin foil, thickness < 0.2 mm","Hojas de estaño de espesor < 0,2 mm",pending_manual_validation,manual_master_review,
 8006,Tin pipes or tubes and pipe fittings,Tubos o caños y accesorios de estaño,pending_manual_validation,code_override,
 8007,Other articles of tin,Otros artículos de tin,pending_manual_validation,rule_based,
-8101,Tungsten (wolfram),Tungsteno (wolframio),manual_validated,manual_master_review,curated_llm_manual_review
-8102,Molybdenum,Molibdeno,manual_validated,manual_master_review,curated_llm_manual_review
-8103,Tantalum,Tantalio,manual_validated,manual_master_review,curated_llm_manual_review
-8104,Magnesium,Magnesio,manual_validated,manual_master_review,curated_llm_manual_review
-8105,Cobalt,Cobalto,manual_validated,manual_master_review,curated_llm_manual_review
-8106,Bismuth,Bismuto,manual_validated,manual_master_review,curated_llm_manual_review
-8107,Cadmium,Cadmio,manual_validated,manual_master_review,curated_llm_manual_review
-8108,Titanium,Titanio,manual_validated,manual_master_review,curated_llm_manual_review
-8109,Zirconium,Circonio,manual_validated,manual_master_review,curated_llm_manual_review
-8110,Antimony,Antimonio,manual_validated,manual_master_review,curated_llm_manual_review
-8111,Manganese,Manganeso,manual_validated,manual_master_review,curated_llm_manual_review
+8101,Tungsten (wolfram),Tungsteno (wolframio),pending_manual_validation,manual_master_review,
+8102,Molybdenum,Molibdeno,pending_manual_validation,manual_master_review,
+8103,Tantalum,Tantalio,pending_manual_validation,manual_master_review,
+8104,Magnesium,Magnesio,pending_manual_validation,manual_master_review,
+8105,Cobalt,Cobalto,pending_manual_validation,manual_master_review,
+8106,Bismuth,Bismuto,pending_manual_validation,manual_master_review,
+8107,Cadmium,Cadmio,pending_manual_validation,manual_master_review,
+8108,Titanium,Titanio,pending_manual_validation,manual_master_review,
+8109,Zirconium,Circonio,pending_manual_validation,manual_master_review,
+8110,Antimony,Antimonio,pending_manual_validation,manual_master_review,
+8111,Manganese,Manganeso,pending_manual_validation,manual_master_review,
 8112,Other metals,Otros metales,pending_manual_validation,rule_based,
-8113,Cermets,Cermets,manual_validated,manual_master_review,curated_llm_manual_review
+8113,Cermets,Cermets,pending_manual_validation,manual_master_review,
 8201,Handtools for gardening,Herramientas de mano para jardinería,pending_manual_validation,rule_based,
-8202,Handsaws,Sierras de mano,manual_validated,manual_master_review,curated_llm_manual_review
+8202,Handsaws,Sierras de mano,pending_manual_validation,manual_master_review,
 8203,"Pliers, pincers and other metal handtools","Alicates, tenazas y otras herramientas de mano de metal",pending_manual_validation,rule_based,
-8204,Wrenches,Llaves de ajuste,manual_validated,manual_master_review,curated_llm_manual_review
+8204,Wrenches,Llaves de ajuste,pending_manual_validation,manual_master_review,
 8205,Hand tools n.e.c.,"Herramientas de mano, n.e.p.",pending_manual_validation,rule_based,
-8206,Retail tool sets,Juegos de herramientas para venta al por menor,manual_validated,manual_master_review,curated_llm_manual_review
+8206,Retail tool sets,Juegos de herramientas para venta al por menor,pending_manual_validation,manual_master_review,
 8207,Interchangeable tools for hand tools,Herramientas intercambiables para herramientas de mano,pending_manual_validation,rule_based,
 8208,Knives and blades for machines,Cuchillas y hojas para máquinas,pending_manual_validation,rule_based,
 8209,"Articles for utensils, of cermet","Artículos para utensilios, de cermet",pending_manual_validation,rule_based,
 8210,"Hand-operated appliances, food preparation, <10kg","Aparatos accionados a mano para preparar alimentos, <10 kg",pending_manual_validation,code_override,
-8211,Knife sets,Cuchillos y juegos de cuchillos,manual_validated,manual_master_review,curated_llm_manual_review
-8212,Razors,Navajas y maquinillas de afeitar,manual_validated,manual_master_review,curated_llm_manual_review
-8213,Scissors,Tijeras,manual_validated,manual_master_review,curated_llm_manual_review
+8211,Knife sets,Cuchillos y juegos de cuchillos,pending_manual_validation,manual_master_review,
+8212,Razors,Navajas y maquinillas de afeitar,pending_manual_validation,manual_master_review,
+8213,Scissors,Tijeras,pending_manual_validation,manual_master_review,
 8214,Other cutlery,Otros cutlery,pending_manual_validation,rule_based,
-8215,Cutlery,Cubiertos,manual_validated,manual_master_review,curated_llm_manual_review
-8301,Padlocks and locks,Candados y cerraduras,manual_validated,manual_master_review,curated_llm_manual_review
+8215,Cutlery,Cubiertos,pending_manual_validation,manual_master_review,
+8301,Padlocks and locks,Candados y cerraduras,pending_manual_validation,manual_master_review,
 8302,"Base metal mountings, fittings and similar articles","Herrajes, guarniciones y artículos similares de metal común",pending_manual_validation,rule_based,
-8303,Safes,Cajas de caudales,manual_validated,manual_master_review,curated_llm_manual_review
-8304,"Paper trays and similar office equipment, of base metal","Bandejas para papel y equipos de oficina similares, de metal común",pending_manual_validation,rule_based,
-8305,"Paper clips and similar office articles, of metal","Clips para papel y artículos de oficina similares, de metal",pending_manual_validation,rule_based,
+8303,Safes,Cajas de caudales,pending_manual_validation,manual_master_review,
+8304,"Paper trays and similar office equipment, of base metal","Bandejas para papel y equipos similares de oficina, de metal común",pending_manual_validation,manual_master_review,
+8305,"Paper clips and similar office articles, of metal","Clips para papel y artículos similares de oficina, de metal común",pending_manual_validation,manual_master_review,
 8306,"Ornaments, statuettes, etc. of metal","Adornos, estatuillas, etc. de metal",pending_manual_validation,rule_based,
 8307,Flexible tubing of base metal,Tubos flexibles de metal común,pending_manual_validation,rule_based,
 8308,"Clasps, buckles etc. of metal","Broches, hebillas, etc. de metal",pending_manual_validation,rule_based,
 8309,"Stoppers, caps and lids of metal","Tapones, cápsulas y tapas de metal",pending_manual_validation,rule_based,
-8310,Sign plates and similar plates of base metal,Placas indicadoras y similares de metal común,pending_manual_validation,rule_based,
+8310,Sign plates and similar plates of base metal,Placas indicadoras y artículos similares de metal común,pending_manual_validation,manual_master_review,
 8311,Wire etc. used for welding,"Alambre, etc., utilizado para soldadura",pending_manual_validation,rule_based,
 8401,Nuclear reactors and related equipment,Reactores nucleares y equipo relacionado,pending_manual_validation,rule_based,
 8402,Steam boilers,Steam calderas,pending_manual_validation,rule_based,
 8403,Central heating boilers,Central calefacción calderas,pending_manual_validation,rule_based,
 8404,Auxiliary parts for use with boilers,Partes auxiliares para uso con calderas,pending_manual_validation,rule_based,
-8405,Water gas generators,Generadores de gas de agua,manual_validated,manual_master_review,curated_llm_manual_review
-8406,Steam turbines,Turbinas de vapor,manual_validated,manual_master_review,curated_llm_manual_review
+8405,Water gas generators,Generadores de gas de agua,pending_manual_validation,manual_master_review,
+8406,Steam turbines,Turbinas de vapor,pending_manual_validation,manual_master_review,
 8407,Spark-ignition reciprocating internal combustion piston engines,Motores de pistón de encendido por chispa,pending_manual_validation,rule_based,
-8408,Compression-ignition internal combustion piston engines,Motores de encendido por compresión,manual_validated,manual_master_review,curated_llm_manual_review
+8408,Compression-ignition internal combustion piston engines,Motores de encendido por compresión,pending_manual_validation,manual_master_review,
 8409,Parts suitable for use with spark-ignition engines,Partes adecuadas para uso con motores de encendido por chispa,pending_manual_validation,rule_based,
 8410,"Hydraulic turbines, water wheels and regulators","Hydraulic turbines, water wheels y regulators",pending_manual_validation,rule_based,
-8411,Gas turbines,Turbinas de gas,manual_validated,manual_master_review,curated_llm_manual_review
-8412,Other engines and motors,Otros engines y motors,pending_manual_validation,rule_based,
+8411,Gas turbines,Turbinas de gas,pending_manual_validation,manual_master_review,
+8412,Other engines and motors,Los demás motores y máquinas motrices,pending_manual_validation,manual_master_review,
 8413,Pumps for liquids,Bombas para líquidos,pending_manual_validation,rule_based,
-8414,"Pumps, compressors, fans, etc.","Bombas, compressors, fans, etc.",pending_manual_validation,rule_based,
-8415,Air conditioners,Aires acondicionados,manual_validated,manual_master_review,curated_llm_manual_review
-8416,Furnace burners,Quemadores para hornos,manual_validated,manual_master_review,curated_llm_manual_review
-8417,Industrial furnaces,Hornos industriales,manual_validated,manual_master_review,curated_llm_manual_review
-8418,"Refrigerators, freezers",Refrigeradores y congeladores,manual_validated,manual_master_review,curated_llm_manual_review
+8414,"Pumps, compressors, fans, etc.","Bombas, compresores, ventiladores, etc.",pending_manual_validation,manual_master_review,
+8415,Air conditioners,Aires acondicionados,pending_manual_validation,manual_master_review,
+8416,Furnace burners,Quemadores para hornos,pending_manual_validation,manual_master_review,
+8417,Industrial furnaces,Hornos industriales,pending_manual_validation,manual_master_review,
+8418,"Refrigerators, freezers",Refrigeradores y congeladores,pending_manual_validation,manual_master_review,
 8419,Equipment for temperature change of materials,Equipos para cambio de temperatura de materiales,pending_manual_validation,rule_based,
 8420,"Calendering or other rolling machines, other than for metals or glass","Calandrias y otras máquinas laminadoras, excepto para metales o vidrio",pending_manual_validation,rule_based,
-8421,Centrifuges,Centrífugas,manual_validated,manual_master_review,curated_llm_manual_review
+8421,Centrifuges,Centrífugas,pending_manual_validation,manual_master_review,
 8422,Dish washing machines,Dish washing máquinas,pending_manual_validation,rule_based,
 8423,Weighing machinery,Weighing maquinaria,pending_manual_validation,rule_based,
 8424,Sprays and powder dispersers,Pulverizadores y dispersores de polvo,pending_manual_validation,rule_based,
 8425,Pulleys and winches,Pulleys y winches,pending_manual_validation,rule_based,
-8426,Ships' derricks; cranes,Plumas de buque y grúas,manual_validated,manual_master_review,curated_llm_manual_review
-8427,Fork-lift trucks,Montacargas,manual_validated,manual_master_review,curated_llm_manual_review
+8426,Ships' derricks; cranes,Plumas de buque y grúas,pending_manual_validation,manual_master_review,
+8427,Fork-lift trucks,Montacargas,pending_manual_validation,manual_master_review,
 8428,Other lifting machinery,Otros lifting maquinaria,pending_manual_validation,rule_based,
 8429,"Self-propelled bulldozers, excavators and road rollers","Self-propelled bulldozers, excavators y road rollers",pending_manual_validation,rule_based,
 8430,"Other moving, excavating or boring machinery","Otros moving, excavating o boring maquinaria",pending_manual_validation,rule_based,
 8431,Parts for use with hoists and excavation machinery,Partes para uso con polipastos y maquinaria de excavación,pending_manual_validation,rule_based,
 8432,Machinery for soil preparation or cultivation,Maquinaria para preparación o cultivo del suelo,pending_manual_validation,rule_based,
-8433,Harvesting or agricultural machinery,Maquinaria de cosecha y otras máquinas agrícolas,manual_validated,manual_master_review,curated_llm_manual_review
+8433,Harvesting or agricultural machinery,Maquinaria de cosecha y otras máquinas agrícolas,pending_manual_validation,manual_master_review,
 8434,Dairy machinery,Dairy maquinaria,pending_manual_validation,rule_based,
 8435,Machines for wine and juice production,Máquinas para producción de vino y jugos,pending_manual_validation,rule_based,
-8436,Other agricultural machinery,Las demás máquinas agrícolas,manual_validated,manual_master_review,curated_llm_manual_review
+8436,Other agricultural machinery,Las demás máquinas agrícolas,pending_manual_validation,manual_master_review,
 8437,Machinery for processing grain,Maquinaria para procesar granos,pending_manual_validation,rule_based,
 8438,Machinery for the industrial preparation of food or drink,Maquinaria para la preparación industrial de alimentos o bebidas,pending_manual_validation,rule_based,
 8439,Machinery for making paper,Maquinaria para fabricar papel,pending_manual_validation,rule_based,
@@ -1013,13 +1013,13 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8443,Printers and copiers,Printers y copiers,pending_manual_validation,rule_based,
 8444,"Machines to extrude, cut manmade textile fibres","Máquinas to extrude, cut manmade textil fibres",pending_manual_validation,rule_based,
 8445,Machines for preparing textile fibers,Máquinas para preparar fibras textiles,pending_manual_validation,rule_based,
-8446,Looms,Telares,manual_validated,manual_master_review,curated_llm_manual_review
+8446,Looms,Telares,pending_manual_validation,manual_master_review,
 8447,Knitting machines,Knitting máquinas,pending_manual_validation,rule_based,
 8448,Auxiliary machinery for use with knitting and textile machines,Maquinaria auxiliar para uso con máquinas de tejer y textiles,pending_manual_validation,rule_based,
 8449,Machinery to manufacture felt,Maquinaria to manufacture felt,pending_manual_validation,rule_based,
 8450,Household- or laundry-type washing machines,Máquinas lavadoras domésticas o de lavandería,pending_manual_validation,code_override,
 8451,Machinery for processing fabrics,Maquinaria para procesar tejidos,pending_manual_validation,rule_based,
-8452,Sewing machines,Máquinas de coser,manual_validated,manual_master_review,curated_llm_manual_review
+8452,Sewing machines,Máquinas de coser,pending_manual_validation,manual_master_review,
 8453,Machinery for preparing leather,Maquinaria para preparar cuero,pending_manual_validation,rule_based,
 8454,Machines used in metallurgy,Máquinas utilizadas en metalurgia,pending_manual_validation,rule_based,
 8455,Metal-rolling mills,Trenes de laminación de metal,pending_manual_validation,rule_based,
@@ -1037,8 +1037,8 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8467,"Tools for hand working, pneumatic, hydraulic motors","Herramientas de mano, neumáticas o con motor hidráulico",pending_manual_validation,rule_based,
 8468,Machinery for soldering,Maquinaria para soldadura,pending_manual_validation,rule_based,
 8469,Word processing machines,Word procesamiento máquinas,pending_manual_validation,rule_based,
-8470,"Cash registers, calculators, etc.","Cajas registradoras, calculadoras, etc.",manual_validated,manual_master_review,curated_llm_manual_review
-8471,Computers,Computadoras,manual_validated,manual_master_review,curated_llm_manual_review
+8470,"Cash registers, calculators, etc.","Cajas registradoras, calculadoras, etc.",pending_manual_validation,manual_master_review,
+8471,Computers,Computadoras,pending_manual_validation,manual_master_review,
 8472,Other office machines,Otros oficina máquinas,pending_manual_validation,rule_based,
 8473,Parts and accessories for office machines,Partes y accesorios para máquinas de oficina,pending_manual_validation,rule_based,
 8474,Machinery for working minerals,Maquinaria para trabajar minerales,pending_manual_validation,rule_based,
@@ -1050,16 +1050,16 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8480,Molding boxes for metal foundry,Cajas de moldeo para fundición de metal,pending_manual_validation,rule_based,
 8481,Appliances for thermostatically controlled valves,Aparatos para válvulas controladas termostáticamente,pending_manual_validation,rule_based,
 8482,Ball or roller bearings,Ball o roller bearings,pending_manual_validation,rule_based,
-8483,Transmission shafts,Árboles de transmisión,manual_validated,manual_master_review,curated_llm_manual_review
-8484,Gaskets and similar joints of metal sheeting,Juntas y empaques similares de chapas metálicas,pending_manual_validation,rule_based,
+8483,Transmission shafts,Árboles de transmisión,pending_manual_validation,manual_master_review,
+8484,Gaskets and similar joints of metal sheeting,Juntas y empaques similares de chapas metálicas,pending_manual_validation,manual_master_review,
 8485,"Machinery parts, not containing electrical features, n.e.c.","Partes de maquinaria, sin componentes eléctricos, n.e.p.",pending_manual_validation,rule_based,
 8501,Electric motors and generators,Motores y generadores eléctricos,pending_manual_validation,code_override,
 8502,Electric generating sets and rotary converters,Grupos electrógenos y convertidores rotativos,pending_manual_validation,code_override,
 8503,Parts for use with electric generators,Partes para uso con generadores eléctricos,pending_manual_validation,rule_based,
 8504,Electrical transformers,Eléctrico transformers,pending_manual_validation,rule_based,
-8505,Electromagnets,Electroimanes,manual_validated,manual_master_review,curated_llm_manual_review
+8505,Electromagnets,Electroimanes,pending_manual_validation,manual_master_review,
 8506,Primary cells and primary batteries,Primary cells y primary batteries,pending_manual_validation,rule_based,
-8507,Batteries,Baterías,manual_validated,manual_master_review,curated_llm_manual_review
+8507,Batteries,Baterías,pending_manual_validation,manual_master_review,
 8508,Vacuum cleaners,Aspiradoras,pending_manual_validation,rule_based,
 8509,Electromechanical domestic appliances,Aparatos electrodomésticos electromecánicos,pending_manual_validation,code_override,
 8510,Electric shavers and hair clippers,Afeitadoras eléctricas y cortadoras de cabello,pending_manual_validation,code_override,
@@ -1069,16 +1069,16 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8514,Industrial electric furnaces,Hornos eléctricos industriales,pending_manual_validation,code_override,
 8515,Electric soldering machines,Máquinas eléctricas de soldadura,pending_manual_validation,code_override,
 8516,Electric heaters,Calentadores eléctricos,pending_manual_validation,code_override,
-8517,Telephones,Teléfonos,manual_validated,manual_master_review,curated_llm_manual_review
+8517,Telephones,Teléfonos,pending_manual_validation,manual_master_review,
 8518,Microphones,Micrófonos,pending_manual_validation,rule_based,
 8519,Sound reproducing apparatus,Aparatos de reproducción de sonido,pending_manual_validation,rule_based,
-8520,Magnetic tape recorders,Grabadoras de cinta magnética,manual_validated,manual_master_review,curated_llm_manual_review
+8520,Magnetic tape recorders,Grabadoras de cinta magnética,pending_manual_validation,manual_master_review,
 8521,Video recording apparatus,Aparatos de grabación de video,pending_manual_validation,code_override,
 8522,Parts and accessories for video or sound equipment,Partes y accesorios para equipos de video o sonido,pending_manual_validation,code_override,
 8523,Sound storage media,Medios de almacenamiento de sonido,pending_manual_validation,rule_based,
-8524,"Tapes, cassettes, records and compact disks","Tapes, cassettes, records y compact disks",pending_manual_validation,rule_based,
+8524,"Tapes, cassettes, records and compact disks","Cintas, casetes, discos y discos compactos",pending_manual_validation,manual_master_review,
 8525,"Transmission apparatus for radio, telephone and TV","Aparatos de transmisión para radio, telefonía y televisión",pending_manual_validation,rule_based,
-8526,Radar,Radar,manual_validated,manual_master_review,curated_llm_manual_review
+8526,Radar,Radar,pending_manual_validation,manual_master_review,
 8527,Reception apparatus for radio broadcasting,Aparatos receptores para radiodifusión,pending_manual_validation,rule_based,
 8528,Monitors and projectors,Monitors y projectors,pending_manual_validation,rule_based,
 8529,"Parts of radios, telephones, and T.V.s","Partes de radios, telephones, y T.V.s",pending_manual_validation,rule_based,
@@ -1086,15 +1086,15 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8531,Electric sound or visual signaling apparatus,Aparatos eléctricos de señalización sonora o visual,pending_manual_validation,rule_based,
 8532,Electrical capacitors,Eléctrico capacitors,pending_manual_validation,rule_based,
 8533,Electrical resistors,Eléctrico resistors,pending_manual_validation,rule_based,
-8534,Electronic printed circuits,Circuitos impresos electrónicos,manual_validated,manual_master_review,curated_llm_manual_review
+8534,Electronic printed circuits,Circuitos impresos electrónicos,pending_manual_validation,manual_master_review,
 8535,Electrical apparatus for > 1k volts,Aparatos eléctricos para > 1 kV,pending_manual_validation,rule_based,
 8536,Electrical apparatus for < 1k volts,Aparatos eléctricos para < 1 kV,pending_manual_validation,rule_based,
-8537,Electrical boards,Eléctrico boards,pending_manual_validation,rule_based,
+8537,Electrical boards,Cuadros eléctricos,pending_manual_validation,manual_master_review,
 8538,Parts for electrical apparatus,Partes para aparatos eléctricos,pending_manual_validation,rule_based,
 8539,Electrical filament,Eléctrico filament,pending_manual_validation,rule_based,
 8540,"Thermionic, cold cathode or photocathode tubes","Tubos termoiónicos, de cátodo frío o fotocátodo",pending_manual_validation,rule_based,
-8541,Semiconductor devices,Dispositivos semiconductores,manual_validated,manual_master_review,curated_llm_manual_review
-8542,Electronic integrated circuits,Circuitos integrados electrónicos,manual_validated,manual_master_review,curated_llm_manual_review
+8541,Semiconductor devices,Dispositivos semiconductores,pending_manual_validation,manual_master_review,
+8542,Electronic integrated circuits,Circuitos integrados electrónicos,pending_manual_validation,manual_master_review,
 8543,Electrical machines with individual functions n.e.c.,Eléctrico máquinas con individual functions n.e.c.,pending_manual_validation,rule_based,
 8544,Insulated electrical wire,Alambre eléctrico aislado,pending_manual_validation,rule_based,
 8545,Carbon articles for eletrical purposes,Artículos de carbono para usos eléctricos,pending_manual_validation,rule_based,
@@ -1108,87 +1108,87 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8605,"Railway coaches, not self-propelled","Coches ferroviarios, no autopropulsados",pending_manual_validation,rule_based,
 8606,"Railway cars, not self-propelled","Vagones ferroviarios, no autopropulsados",pending_manual_validation,rule_based,
 8607,Parts of railway locomotives,Partes de locomotoras o material rodante ferroviario,pending_manual_validation,rule_based,
-8608,Railway track fixtures,Accesorios para vías férreas,manual_validated,manual_master_review,curated_llm_manual_review
+8608,Railway track fixtures,Accesorios para vías férreas,pending_manual_validation,manual_master_review,
 8609,Containers for multimodal transportation,Contenedores para transporte multimodal,pending_manual_validation,rule_based,
-8701,Tractors,Tractores,manual_validated,manual_master_review,curated_llm_manual_review
-8702,Buses,Autobuses,manual_validated,manual_master_review,curated_llm_manual_review
+8701,Tractors,Tractores,pending_manual_validation,manual_master_review,
+8702,Buses,Autobuses,pending_manual_validation,manual_master_review,
 8703,Cars,Automóviles,pending_manual_validation,rule_based,
 8704,Motor vehicles for transporting goods,Vehículos automotores para transporte mercancías,pending_manual_validation,rule_based,
 8705,Special purpose motor vehicles,Special purpose vehículos automotores,pending_manual_validation,rule_based,
-8706,Vehicle chassis fitted with engines,Vehicle chassis fitted con engines,pending_manual_validation,rule_based,
-8707,Vehicle Bodies,Carrocerías de vehículos,manual_validated,manual_master_review,curated_llm_manual_review
+8706,Vehicle chassis fitted with engines,Chasis de vehículos con motor,pending_manual_validation,manual_master_review,
+8707,Vehicle Bodies,Carrocerías de vehículos,pending_manual_validation,manual_master_review,
 8708,Parts of motor vehicles,Partes de vehículos automotores,pending_manual_validation,rule_based,
-8709,Work trucks,Vehículos industriales,manual_validated,manual_master_review,curated_llm_manual_review
-8710,Tanks and other armored fighting vehicles,Tanks y otros armored fighting vehículos,pending_manual_validation,rule_based,
-8711,Motorcycles,Motocicletas,manual_validated,manual_master_review,curated_llm_manual_review
-8712,Bicycles,Bicicletas,manual_validated,manual_master_review,curated_llm_manual_review
-8713,Wheelchairs,Sillas de ruedas,manual_validated,manual_master_review,curated_llm_manual_review
-8714,Parts of motorcycles or wheelchairs,Partes de motorcycles o wheelchairs,pending_manual_validation,rule_based,
-8715,Baby carriages,Cochecitos de bebé,manual_validated,manual_master_review,curated_llm_manual_review
-8716,Trailers and semi-trailers,Remolques y semirremolques,manual_validated,manual_master_review,curated_llm_manual_review
-8801,"Gliders, hang gliders",Planeadores y alas delta,manual_validated,manual_master_review,curated_llm_manual_review
-8802,Other aircraft and spacecraft,Las demás aeronaves y vehículos espaciales,manual_validated,manual_master_review,curated_llm_manual_review
-8803,Parts of other aircraft,Partes de las demás aeronaves,manual_validated,manual_master_review,curated_llm_manual_review
-8804,Parachutes,Paracaídas,manual_validated,manual_master_review,curated_llm_manual_review
-8805,Aircraft launching gear,Equipos de lanzamiento para aeronaves,manual_validated,manual_master_review,curated_llm_manual_review
+8709,Work trucks,Vehículos industriales,pending_manual_validation,manual_master_review,
+8710,Tanks and other armored fighting vehicles,Tanques y demás vehículos blindados de combate,pending_manual_validation,manual_master_review,
+8711,Motorcycles,Motocicletas,pending_manual_validation,manual_master_review,
+8712,Bicycles,Bicicletas,pending_manual_validation,manual_master_review,
+8713,Wheelchairs,Sillas de ruedas,pending_manual_validation,manual_master_review,
+8714,Parts of motorcycles or wheelchairs,Partes de motocicletas o sillas de ruedas,pending_manual_validation,manual_master_review,
+8715,Baby carriages,Cochecitos de bebé,pending_manual_validation,manual_master_review,
+8716,Trailers and semi-trailers,Remolques y semirremolques,pending_manual_validation,manual_master_review,
+8801,"Gliders, hang gliders",Planeadores y alas delta,pending_manual_validation,manual_master_review,
+8802,Other aircraft and spacecraft,Las demás aeronaves y vehículos espaciales,pending_manual_validation,manual_master_review,
+8803,Parts of other aircraft,Partes de las demás aeronaves,pending_manual_validation,manual_master_review,
+8804,Parachutes,Paracaídas,pending_manual_validation,manual_master_review,
+8805,Aircraft launching gear,Equipos de lanzamiento para aeronaves,pending_manual_validation,manual_master_review,
 8901,Cargo ships and similar vessels,Buques de carga y embarcaciones similares,pending_manual_validation,code_override,
 8902,Fishing vessels,Barcos de pesca,pending_manual_validation,code_override,
 8903,Pleasure or sport boats,Pleasure o sport boats,pending_manual_validation,rule_based,
 8904,Tugs and pusher craft,Tugs y pusher craft,pending_manual_validation,rule_based,
 8905,"Special function vessels, n.e.c.","Buques para funciones especiales, n.e.p.",pending_manual_validation,code_override,
 8906,Other vessels,Los demás buques,pending_manual_validation,code_override,
-8907,Other floating structures,Otros flotantes structures,pending_manual_validation,rule_based,
-8908,Floating structures for scrapping,Flotantes structures para desguace,pending_manual_validation,rule_based,
+8907,Other floating structures,Las demás estructuras flotantes,pending_manual_validation,manual_master_review,
+8908,Floating structures for scrapping,Estructuras flotantes para desguace,pending_manual_validation,manual_master_review,
 9001,Optical fibers,Optical fibras,pending_manual_validation,rule_based,
 9002,Lenses and other optical elements,Lentes y otros elementos ópticos,pending_manual_validation,rule_based,
 9003,"Frames for spectacles, goggles",Monturas para gafas o antiparras,pending_manual_validation,rule_based,
-9004,Glasses,Gafas,manual_validated,manual_master_review,curated_llm_manual_review
+9004,Glasses,Gafas,pending_manual_validation,manual_master_review,
 9005,Binoculars and telescopes,Binoculares y telescopios,pending_manual_validation,rule_based,
 9006,Photographic cameras,Cámaras fotográficas,pending_manual_validation,rule_based,
 9007,Cinematographic cameras and projectors,Cinematographic cámaras y projectors,pending_manual_validation,rule_based,
-9008,Still image projectors,Proyectores de imagen fija,manual_validated,manual_master_review,curated_llm_manual_review
-9009,Electrostatic photo-copyers,Fotocopiadoras electrostáticas,manual_validated,manual_master_review,curated_llm_manual_review
+9008,Still image projectors,Proyectores de imagen fija,pending_manual_validation,manual_master_review,
+9009,Electrostatic photo-copyers,Fotocopiadoras electrostáticas,pending_manual_validation,manual_master_review,
 9010,"Apparatus and equipment for photographic laboratories, n.e.c.","Aparatos y equipos para laboratorios fotográficos, n.e.p.",pending_manual_validation,rule_based,
-9011,Optical microscopes,Microscopios ópticos,manual_validated,manual_master_review,curated_llm_manual_review
+9011,Optical microscopes,Microscopios ópticos,pending_manual_validation,manual_master_review,
 9012,"Microscopes, other than optical","Microscopes, otros que optical",pending_manual_validation,rule_based,
-9013,Liquid crystal devices,Dispositivos de cristal líquido,manual_validated,manual_master_review,curated_llm_manual_review
+9013,Liquid crystal devices,Dispositivos de cristal líquido,pending_manual_validation,manual_master_review,
 9014,Navigational instruments,Navigational instrumentos,pending_manual_validation,rule_based,
 9015,Surveying instruments,Instrumentos topográficos,pending_manual_validation,rule_based,
 9016,Balances of a sensitivity < 50 milligram,Balances de a sensitivity < 50 milligram,pending_manual_validation,rule_based,
 9017,Drafting tables and machines,Drafting tables y máquinas,pending_manual_validation,rule_based,
 9018,Medical instruments,Instrumentos médicos,pending_manual_validation,rule_based,
-9019,Therapy applicances,Aparatos de terapia,manual_validated,manual_master_review,curated_llm_manual_review
+9019,Therapy applicances,Aparatos de terapia,pending_manual_validation,manual_master_review,
 9020,Other breathing appliances and gas masks,Los demás aparatos respiratorios y máscaras de gas,pending_manual_validation,code_override,
 9021,Orthopedic appliances,Aparatos ortopédicos,pending_manual_validation,code_override,
 9022,X-ray machines,X-ray máquinas,pending_manual_validation,rule_based,
 9023,Instruments designed for demonstrational purposes,Instrumentos diseñados para demostración,pending_manual_validation,rule_based,
 9024,Machines for testing the mechanical properties of materials,Máquinas para ensayar las propiedades mecánicas de los materiales,pending_manual_validation,rule_based,
-9025,"Thermometers, hydrometers etc.","Termómetros, hidrómetros, etc.",manual_validated,manual_master_review,curated_llm_manual_review
+9025,"Thermometers, hydrometers etc.","Termómetros, hidrómetros, etc.",pending_manual_validation,manual_master_review,
 9026,Instruments for measuring properties of liquids or gases,Instrumentos para medir propiedades de líquidos o gases,pending_manual_validation,rule_based,
 9027,Instruments for physical or chemical analysis,Instrumentos para análisis físico o químico,pending_manual_validation,rule_based,
 9028,"Gas, liquid or electricity meters","Gas, liquid o electricity meters",pending_manual_validation,rule_based,
-9029,Meters,Contadores y medidores,manual_validated,manual_master_review,curated_llm_manual_review
+9029,Meters,Contadores y medidores,pending_manual_validation,manual_master_review,
 9030,Instruments for measuring electricity,Instrumentos para medir electricidad,pending_manual_validation,rule_based,
 9031,Measuring instruments,Measuring instrumentos,pending_manual_validation,rule_based,
 9032,Automatic regulating instruments,Automatic regulating instrumentos,pending_manual_validation,rule_based,
 9033,Other parts for machines and appliances,Las demás partes para máquinas y aparatos,pending_manual_validation,rule_based,
 9101,Watches with precious metal,Relojes con metal precioso,pending_manual_validation,rule_based,
 9102,Watches,Relojes,pending_manual_validation,rule_based,
-9103,Clocks with watch movements,Clocks con reloj movements,pending_manual_validation,rule_based,
+9103,Clocks with watch movements,Relojes con mecanismo de relojería,pending_manual_validation,manual_master_review,
 9104,Instrument panel clocks for vehicles,Relojes de tablero para vehículos,pending_manual_validation,rule_based,
-9105,Other clocks,Otros clocks,pending_manual_validation,rule_based,
+9105,Other clocks,Los demás relojes,pending_manual_validation,manual_master_review,
 9106,Apparatus for measuring intervals of time,Aparatos para medir intervalos de tiempo,pending_manual_validation,rule_based,
-9107,Time switches,Interruptores horarios,manual_validated,manual_master_review,curated_llm_manual_review
+9107,Time switches,Interruptores horarios,pending_manual_validation,manual_master_review,
 9108,"Watch movements, complete","Reloj movements, complete",pending_manual_validation,rule_based,
-9109,"Clock movements, complete",Mecanismos de relojería completos,manual_validated,manual_master_review,curated_llm_manual_review
-9110,"Clock movements, complete, unassembled","Mecanismos de relojería completos, sin ensamblar",manual_validated,manual_master_review,curated_llm_manual_review
+9109,"Clock movements, complete",Mecanismos de relojería completos,pending_manual_validation,manual_master_review,
+9110,"Clock movements, complete, unassembled","Mecanismos de relojería completos, sin ensamblar",pending_manual_validation,manual_master_review,
 9111,Watch cases and parts,Reloj cases y partes,pending_manual_validation,rule_based,
-9112,Clock cases,Cajas para relojes,manual_validated,manual_master_review,curated_llm_manual_review
+9112,Clock cases,Cajas para relojes,pending_manual_validation,manual_master_review,
 9113,Watch straps,Reloj straps,pending_manual_validation,rule_based,
-9114,Other clock or watch parts,Otros clock o reloj partes,pending_manual_validation,rule_based,
-9201,Pianos,Pianos,manual_validated,manual_master_review,curated_llm_manual_review
+9114,Other clock or watch parts,Las demás partes de relojes,pending_manual_validation,manual_master_review,
+9201,Pianos,Pianos,pending_manual_validation,manual_master_review,
 9202,"Musical instruments, string","Musical instrumentos, string",pending_manual_validation,rule_based,
-9203,"Harmoniums, pipe organs, etc","Armonios, órganos de tubos, etc.",manual_validated,manual_master_review,curated_llm_manual_review
+9203,"Harmoniums, pipe organs, etc","Armonios, órganos de tubos, etc.",pending_manual_validation,manual_master_review,
 9204,Accordions and similar instruments,Acordeones e instrumentos similares,pending_manual_validation,rule_based,
 9205,"Musical instruments, wind",Instrumentos musicales de viento,pending_manual_validation,rule_based,
 9206,"Musical instruments, percussion",Instrumentos musicales de percusión,pending_manual_validation,rule_based,
@@ -1197,46 +1197,46 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 9209,Parts of musical instruments,Partes de musical instrumentos,pending_manual_validation,rule_based,
 9301,"Military weapons, other than pistols and swords","Military weapons, otros que pistols y swords",pending_manual_validation,rule_based,
 9302,Revolvers and pistols,Revolvers y pistols,pending_manual_validation,rule_based,
-9303,Other firearms,Otros firearms,pending_manual_validation,rule_based,
-9304,"Other arms (air guns, truncheons, etc.)","Otros arms (air guns, truncheons, etc.)",pending_manual_validation,rule_based,
+9303,Other firearms,Las demás armas de fuego,pending_manual_validation,manual_master_review,
+9304,"Other arms (air guns, truncheons, etc.)","Las demás armas (de aire comprimido, porras, etc.)",pending_manual_validation,manual_master_review,
 9305,Parts of military weapons,Partes de military weapons,pending_manual_validation,rule_based,
 9306,Munitions of war,Munitions de war,pending_manual_validation,rule_based,
-9307,Swords,Espadas,manual_validated,manual_master_review,curated_llm_manual_review
-9401,Seats,Asientos,manual_validated,manual_master_review,curated_llm_manual_review
+9307,Swords,Espadas,pending_manual_validation,manual_master_review,
+9401,Seats,Asientos,pending_manual_validation,manual_master_review,
 9402,"Medical, dental or veterinary furniture","Medical, dental o veterinary furniture",pending_manual_validation,rule_based,
-9403,Other furniture and parts,Los demás muebles y sus partes,manual_validated,manual_master_review,curated_llm_manual_review
+9403,Other furniture and parts,Los demás muebles y sus partes,pending_manual_validation,manual_master_review,
 9404,Mattresses and bedding,Mattresses y bedding,pending_manual_validation,rule_based,
 9405,Lamps,Lámparas,pending_manual_validation,rule_based,
-9406,Prefabricated buildings,Construcciones prefabricadas,manual_validated,manual_master_review,curated_llm_manual_review
-9501,"Rideable wheeled toys, dolls carriages",Juguetes con ruedas para montar y cochecitos de muñecas,manual_validated,manual_master_review,curated_llm_manual_review
-9502,Dolls,Muñecas,manual_validated,manual_master_review,curated_llm_manual_review
-9503,Toys,Juguetes,manual_validated,manual_master_review,curated_llm_manual_review
-9504,Games,Juegos,manual_validated,manual_master_review,curated_llm_manual_review
+9406,Prefabricated buildings,Construcciones prefabricadas,pending_manual_validation,manual_master_review,
+9501,"Rideable wheeled toys, dolls carriages",Juguetes con ruedas para montar y cochecitos de muñecas,pending_manual_validation,manual_master_review,
+9502,Dolls,Muñecas,pending_manual_validation,manual_master_review,
+9503,Toys,Juguetes,pending_manual_validation,manual_master_review,
+9504,Games,Juegos,pending_manual_validation,manual_master_review,
 9505,Christmas and other festivity articles,Christmas y otros festivity artículos,pending_manual_validation,rule_based,
 9506,Sports equipment,Equipos deportivos,pending_manual_validation,rule_based,
 9507,Fishing and hunting equipment,Equipos de pesca y caza,pending_manual_validation,rule_based,
-9508,Fairground amusements,Atracciones de feria,manual_validated,manual_master_review,curated_llm_manual_review
-9601,Worked animal carving material,Material de talla animal trabajado,manual_validated,manual_master_review,curated_llm_manual_review
+9508,Fairground amusements,Atracciones de feria,pending_manual_validation,manual_master_review,
+9601,Worked animal carving material,Material de talla animal trabajado,pending_manual_validation,manual_master_review,
 9602,Worked vegetable or mineral carving material,Trabajado vegetal o mineral material de talla,pending_manual_validation,rule_based,
 9603,Brooms and mops,Escobas y mops,pending_manual_validation,rule_based,
 9604,Hand sieves and riddles,Hand sieves y riddles,pending_manual_validation,rule_based,
-9605,Travel sets,Juegos de viaje,manual_validated,manual_master_review,curated_llm_manual_review
-9606,Buttons,Botones,manual_validated,manual_master_review,curated_llm_manual_review
+9605,Travel sets,Juegos de viaje,pending_manual_validation,manual_master_review,
+9606,Buttons,Botones,pending_manual_validation,manual_master_review,
 9607,Slide fasteners,Cremalleras,pending_manual_validation,rule_based,
-9608,Pens,Bolígrafos y plumas,manual_validated,manual_master_review,curated_llm_manual_review
-9609,"Pencils, crayons, pastels, etc.","Lápices, crayones, pasteles, etc.",manual_validated,manual_master_review,curated_llm_manual_review
-9610,"Slates and boards, with writing or drawing surfaces","Slates y boards, con writing o drawing superficies",pending_manual_validation,rule_based,
-9611,Hand-operated stamps,Sellos manuales,manual_validated,manual_master_review,curated_llm_manual_review
+9608,Pens,Bolígrafos y plumas,pending_manual_validation,manual_master_review,
+9609,"Pencils, crayons, pastels, etc.","Lápices, crayones, pasteles, etc.",pending_manual_validation,manual_master_review,
+9610,"Slates and boards, with writing or drawing surfaces","Pizarras y tableros, con superficies para escribir o dibujar",pending_manual_validation,manual_master_review,
+9611,Hand-operated stamps,Sellos manuales,pending_manual_validation,manual_master_review,
 9612,Typewriter ribbons and ink pads,Cintas para máquina de escribir y almohadillas para tinta,pending_manual_validation,rule_based,
-9613,Cigarette lighters,Encendedores,manual_validated,manual_master_review,curated_llm_manual_review
-9614,Smoking pipes,Pipas,manual_validated,manual_master_review,curated_llm_manual_review
-9615,"Combs, hair-slides etc.","Peines, pasadores, etc.",manual_validated,manual_master_review,curated_llm_manual_review
+9613,Cigarette lighters,Encendedores,pending_manual_validation,manual_master_review,
+9614,Smoking pipes,Pipas,pending_manual_validation,manual_master_review,
+9615,"Combs, hair-slides etc.","Peines, pasadores, etc.",pending_manual_validation,manual_master_review,
 9616,Scent sprays,Scent pulverizadores,pending_manual_validation,rule_based,
 9617,Vacuum vessels,Recipientes al vacío,pending_manual_validation,rule_based,
-9618,Mannequins,Maniquíes,manual_validated,manual_master_review,curated_llm_manual_review
+9618,Mannequins,Maniquíes,pending_manual_validation,manual_master_review,
 9701,Paintings and drawings,Paintings y drawings,pending_manual_validation,rule_based,
-9702,Original engravings,Grabados originales,manual_validated,manual_master_review,curated_llm_manual_review
-9703,Sculptures,Esculturas,manual_validated,manual_master_review,curated_llm_manual_review
+9702,Original engravings,Grabados originales,pending_manual_validation,manual_master_review,
+9703,Sculptures,Esculturas,pending_manual_validation,manual_master_review,
 9704,Postage or revenue stamps,Postage o revenue stamps,pending_manual_validation,rule_based,
-9705,Collectors pieces,Piezas de colección,manual_validated,manual_master_review,curated_llm_manual_review
-9706,Antiques >100 years,Antigüedades > 100 años,manual_validated,manual_master_review,curated_llm_manual_review
+9705,Collectors pieces,Piezas de colección,pending_manual_validation,manual_master_review,
+9706,Antiques >100 years,Antigüedades > 100 años,pending_manual_validation,manual_master_review,
