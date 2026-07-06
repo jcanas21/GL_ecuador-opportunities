@@ -9,21 +9,29 @@ from branding import render_dashboard_header
 def render_guide_and_glossary() -> None:
     render_dashboard_header(
         "Tablero de Oportunidades de Exportación del Ecuador",
-        "Guía y glosario de las páginas del tablero V1 (HS92 a 4 dígitos).",
+        "Herramienta para explorar oportunidades de diversificación exportadora y entender, de forma clara, los criterios que usa el análisis.",
     )
 
     st.markdown(
         """
 ### Qué hace este tablero
 
-Este tablero ayuda a **priorizar oportunidades de diversificación exportadora para el Ecuador** a nivel **HS92 de 4 dígitos**, combinando dos preguntas complementarias:
+Este tablero es una herramienta para **identificar y priorizar oportunidades de diversificación productiva y exportadora para el Ecuador** a nivel **HS92 de 4 dígitos**.
 
-- **¿Qué productos son atractivos?**  
-  Porque tienen mercados grandes o crecientes, o porque aportan sofisticación productiva.
-- **¿Qué productos son factibles?**  
-  Porque están más cerca de las capacidades actuales del país o porque la red comercial del Ecuador ya está relativamente bien alineada con la demanda global de ese producto.
+El objetivo es ayudar a responder, de forma simple y basada en evidencia, dos preguntas clave para la política productiva:
 
-La lógica del tablero no busca identificar “el producto más complejo” en abstracto, sino **productos que puedan convertirse en oportunidades plausibles y accionables** para la agenda exportadora del país.
+1. **¿En qué productos ya tiene sentido profundizar?**  
+   Es decir, en qué actividades Ecuador ya muestra capacidades, presencia exportadora o una posición desde la cual puede crecer con mayor rapidez.
+
+2. **¿En qué productos podría incursionar a futuro?**  
+   Es decir, en qué nuevas actividades el país podría avanzar aprovechando capacidades cercanas a las que ya existen.
+
+Por eso el tablero distingue entre:
+
+- **Margen intensivo**: productos donde Ecuador **ya exporta o ya tiene una base productiva demostrada**, y donde la tarea es consolidar, sofisticar o escalar.
+- **Margen extensivo**: productos donde Ecuador **todavía tiene una presencia limitada**, pero que podrían desarrollarse a partir de capacidades, conexiones y aprendizajes cercanos.
+
+La lógica del tablero no busca señalar “el producto más complejo” en abstracto, sino **oportunidades plausibles, útiles y accionables** para apoyar decisiones de política pública, promoción productiva e inversión.
 """
     )
 
@@ -43,13 +51,13 @@ La lógica del tablero no busca identificar “el producto más complejo” en a
 ### Cómo leer el tablero
 
 - **Página 2: Análisis de Oportunidades**  
-  Esta página permite visualizar los resultados del **análisis de complejidad económica tradicional** aplicado al Ecuador. En este tablero, esa lógica se usa principalmente para identificar productos del **margen intensivo**, es decir, productos en los que el país **ya tiene presencia exportadora o capacidades productivas demostradas** y donde la pregunta es cómo profundizar, sofisticar o escalar esa base existente. Aquí el usuario puede cambiar filtros, pesos y presets para producir listas priorizadas dentro de ese universo.
+  Esta página presenta el **análisis de complejidad económica tradicional** aplicado al Ecuador. Aquí se priorizan sobre todo productos del **margen intensivo**: actividades donde el país ya tiene una base exportadora o capacidades observables. La pregunta central es: **¿dónde conviene profundizar, sofisticar o escalar lo que Ecuador ya hace?** El usuario puede ajustar filtros, pesos y criterios para obtener listas priorizadas según distintos objetivos de política.
 
 - **Página 3: Análisis de Proximidad Anclada**  
-  Esta página está diseñada para identificar oportunidades del **margen extensivo**, es decir, productos que **Ecuador no exporta hoy de forma significativa o en los que su presencia es todavía débil**, pero que podrían desarrollarse a partir de capacidades ya existentes. Para eso parte de productos **ancla** identificados en la canasta exportadora ecuatoriana y construye una lista de candidatos usando sus proximidades más altas en el espacio de productos.
+  Esta página está orientada al **margen extensivo**: productos en los que Ecuador hoy exporta poco o nada, pero que podrían desarrollarse con mayor realismo porque están conectados a capacidades ya existentes. Para eso parte de productos **ancla** de la canasta exportadora ecuatoriana y, desde ellos, identifica candidatos cercanos en el espacio de productos. La pregunta central es: **¿hacia dónde puede diversificarse Ecuador sin dar saltos imposibles?**
 
 - **Página 4: Mercado Accesible por Producto**  
-  Baja un nivel más: muestra **dónde** está el mercado accesible de cada producto priorizado y **contra quién** compite Ecuador en esos destinos.
+  Esta página baja un nivel adicional y muestra **dónde está la demanda accesible** de cada producto priorizado y **contra quién compite Ecuador** en esos mercados. Sirve para pasar de la priorización general a una lectura más operativa de destinos y competencia.
 """
     )
 
@@ -60,6 +68,8 @@ La lógica del tablero no busca identificar “el producto más complejo” en a
 - El **Índice de Factibilidad** combina: RCA continuo, densidad, exportadores efectivos y percentil DAI.
 - El **Índice de Atractivo** combina: PCI, COG, crecimiento del mercado accesible (5 años) y tamaño del mercado accesible.
 - El **Puntaje Combinado de Oportunidad** rebalancea factibilidad y atractivo según el control estratégico y luego se reescala entre 0 y 1 para ordenar.
+
+Estos puntajes no sustituyen el juicio de política pública: su función es **ordenar y hacer comparables** distintas oportunidades bajo criterios explícitos y transparentes.
 """
     )
 
