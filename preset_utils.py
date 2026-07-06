@@ -42,7 +42,7 @@ PAGE3_PRESETS = {
         "strategic_balance": 0.50,
         "w_dai": 0.5,
         "w_anchor_count": 0.5,
-        "attr_weights": [0.50, 0.00, 0.25, 0.25],
+        "attr_weights": [0.35, 0.35, 0.15, 0.15],
         "top_n": 30,
         "exclude_mode": "natural_resources",
     }
