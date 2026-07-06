@@ -207,37 +207,8 @@ def _apply_profile(profile_name: str) -> None:
         st.session_state["w_market_size"] = 0.25
         st.session_state["rows_to_display"] = 20
 
-    elif profile_name == "extensive_strategic":
-        # Apuestas Estrategicas (legacy)
-        st.session_state["trade_min"] = 1.0
-        st.session_state["ecu_export_min_m"] = 0.0
-        st.session_state["above_accessible_growth_only"] = True
-        st.session_state["selected_sectors"] = sector_options
-        st.session_state["excluded_product_labels"] = excluded_labels_by_code
-        st.session_state["rca_min_filter"] = 0.00
-        st.session_state["rca_max_filter"] = 0.29
-        st.session_state["density_pct_range"] = (
-            max(0.30, float(density_pct_min_data)),
-            min(0.40, float(density_pct_upper_bound)),
-        )
-        st.session_state["ignore_density_filter"] = False
-        st.session_state["strategic_balance"] = 0.70
-        st.session_state["w_rca"] = 0.00
-        st.session_state["w_density"] = 0.70
-        st.session_state["w_eff_num_exp"] = 0.00
-        st.session_state["w_alignment_hv"] = 0.30
-        st.session_state["w_pci"] = 0.30
-        st.session_state["w_cog"] = 0.35
-        st.session_state["w_growth"] = 0.15
-        st.session_state["w_market_size"] = 0.15
-        st.session_state["rows_to_display"] = 20
-
-
-if st.sidebar.button("Intensivo", use_container_width=True):
+if st.sidebar.button("Margen Intensivo", use_container_width=True):
     _apply_profile("intensive")
-    st.rerun()
-if st.sidebar.button("Apuestas Estratégicas (legacy)", use_container_width=True):
-    _apply_profile("extensive_strategic")
     st.rerun()
 
 st.sidebar.header("Filtros")
@@ -634,6 +605,31 @@ st.dataframe(
         "total_trade_b": st.column_config.NumberColumn("Comercio total (miles de millones USD)", format="%.3f"),
     },
 )
+
+with st.expander("Diccionario de columnas — Ranking principal de productos"):
+    st.markdown(
+        """
+- **Ranking**: posición del producto dentro de la lista ordenada bajo los filtros y pesos actuales.
+- **HS4 / Producto / Sector**: identificación básica del producto y su agrupación sectorial.
+- **Puntaje Combinado de Oportunidad**: resultado final que combina factibilidad y atractivo según el balance estratégico seleccionado.
+- **Índice de Atractivo**: resume sofisticación, ganancia estratégica, crecimiento del mercado accesible y tamaño del mercado accesible.
+- **Índice de Factibilidad**: resume qué tan plausible es que Ecuador compita en el producto dadas sus capacidades y su red comercial.
+- **RCA**: ventaja comparativa revelada bruta del Ecuador en el producto.
+- **PCI / COG**: sofisticación del producto y potencial estratégico de aprendizaje.
+- **Exportadores Efectivos**: amplitud efectiva de la competencia internacional en ese producto.
+- **Ranking del país exportador (2024)**: puesto del Ecuador entre los exportadores mundiales del producto.
+- **DAI (bruto) / Percentil DAI / Ventaja DAI**: nivel, posición relativa y brecha del Índice de Alineación de la Demanda frente a los principales competidores.
+- **Densidad (bruta) / Percentil de densidad**: cercanía del producto a las capacidades actuales del Ecuador y posición relativa frente a otros países en ese mismo producto.
+- **Distancia recorrida**: distancia promedio ponderada que recorre globalmente el producto en el comercio bilateral.
+- **Crecimiento del mercado global % (5 años)**: CAGR del comercio mundial total del producto.
+- **Crecimiento del mercado accesible % (5 años)**: CAGR del mercado accesible calculado para Ecuador.
+- **Crecimiento de las exportaciones del país % (5 años)**: CAGR de las exportaciones ecuatorianas del producto.
+- **Exportaciones actuales del país (M USD)**: valor exportado por Ecuador en 2024.
+- **Cambio absoluto de cuota de mercado (pp)**: cambio en la participación mundial del Ecuador entre 2020 y 2024.
+- **Cuota de mercado global**: participación del Ecuador en el comercio mundial del producto.
+- **Tamaño del mercado accesible / Relación mercado accesible / Comercio total**: tamaño de la demanda estructuralmente alcanzable, su peso relativo dentro del mercado global y el tamaño total del mercado mundial.
+"""
+    )
 
 st.subheader("Resumen de Oportunidades por Sector")
 treemap_size_options = {

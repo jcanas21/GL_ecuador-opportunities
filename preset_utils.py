@@ -15,7 +15,7 @@ ATTR_COLS = ["pci_z", "cog_z", "accessible_market_growth_5y_z", "accessible_mark
 MANUAL_PRESET_EXCLUDED_HS4 = {"2711", "2710", "7108", "2709", "2713", "2701", "2603", "2616", "8803", "7602", "7404"}
 
 PAGE2_PRESETS = {
-    "Intensivo": {
+    "Margen Intensivo": {
         "trade_min": 0.5,
         "growth_gt": 0.0,
         "rca_min": 0.50,
@@ -26,18 +26,6 @@ PAGE2_PRESETS = {
         "attr_weights": [0.50, 0.00, 0.25, 0.25],
         "top_n": 20,
         "exclude_mode": "natural_resources_plus_manual",
-    },
-    "Apuestas Estratégicas (legacy)": {
-        "trade_min": 1.0,
-        "growth_gt": 0.0,
-        "rca_min": 0.00,
-        "rca_max": 0.29,
-        "density_range": (0.30, 0.40),
-        "strategic_balance": 0.70,
-        "feas_weights": [0.00, 0.70, 0.00, 0.30],
-        "attr_weights": [0.30, 0.35, 0.15, 0.15],
-        "top_n": 20,
-        "exclude_mode": "manual_only",
     },
 }
 
