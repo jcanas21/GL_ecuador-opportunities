@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+from branding import render_dashboard_header
 
 from data_utils import (
     load_opportunity_dataset,
@@ -11,8 +12,10 @@ from data_utils import (
 )
 
 
-st.title("Análisis de Oportunidades")
-st.caption("Calibre los componentes del índice, rebalancee factibilidad versus atractivo y explore oportunidades de producto.")
+render_dashboard_header(
+    "Análisis de Oportunidades",
+    "Calibre los componentes del índice, rebalancee factibilidad versus atractivo y explore oportunidades de producto.",
+)
 
 df = load_opportunity_dataset()
 if df.empty:
@@ -168,7 +171,7 @@ if "rows_to_display" not in st.session_state:
 if "ignore_density_filter" not in st.session_state:
     st.session_state["ignore_density_filter"] = False
 st.sidebar.header("Perfiles predefinidos")
-excluded_hs4_preset_codes = {"2711", "2710", "7108", "2709", "2713", "2701", "2603", "2616"}
+excluded_hs4_preset_codes = {"2711", "2710", "7108", "2709", "2713", "2701", "2603", "2616", "8803", "7602", "7404"}
 excluded_labels_by_code = (
     product_options_df[product_options_df["hs4_code"].isin(excluded_hs4_preset_codes)]
     .sort_values("hs4_code")["hs4_label"]
@@ -181,54 +184,43 @@ natural_resource_exclusion_labels = [
 
 
 def _apply_profile(profile_name: str) -> None:
-    # Common rules across all profiles
-    st.session_state["trade_min"] = 1.0
-    st.session_state["ecu_export_min_m"] = 0.0
-    st.session_state["above_accessible_growth_only"] = True
-    st.session_state["selected_sectors"] = sector_options
-    st.session_state["excluded_product_labels"] = excluded_labels_by_code
-    st.session_state["density_pct_range"] = (float(density_pct_min_data), float(density_pct_upper_bound))
-    st.session_state["ignore_density_filter"] = False
-
     if profile_name == "intensive":
-        # Consolidadas
-        st.session_state["rca_min_filter"] = 1.00
-        st.session_state["rca_max_filter"] = float(rca_upper_bound)
-        st.session_state["ignore_density_filter"] = True
-        st.session_state["strategic_balance"] = 0.80
+        st.session_state["trade_min"] = 0.5
+        st.session_state["ecu_export_min_m"] = 0.0
+        st.session_state["above_accessible_growth_only"] = True
+        st.session_state["selected_sectors"] = sector_options
+        st.session_state["excluded_product_labels"] = natural_resource_exclusion_labels + [
+            label for label in excluded_labels_by_code if label not in natural_resource_exclusion_labels
+        ]
+        st.session_state["density_pct_range"] = (float(density_pct_min_data), float(density_pct_upper_bound))
+        st.session_state["ignore_density_filter"] = False
+        st.session_state["rca_min_filter"] = 0.50
+        st.session_state["rca_max_filter"] = 5.00
+        st.session_state["strategic_balance"] = 0.50
         st.session_state["w_rca"] = 0.00
-        st.session_state["w_density"] = 0.00
+        st.session_state["w_density"] = 0.50
         st.session_state["w_eff_num_exp"] = 0.00
-        st.session_state["w_alignment_hv"] = 1.00
+        st.session_state["w_alignment_hv"] = 0.50
         st.session_state["w_pci"] = 0.50
         st.session_state["w_cog"] = 0.00
         st.session_state["w_growth"] = 0.25
         st.session_state["w_market_size"] = 0.25
         st.session_state["rows_to_display"] = 20
 
-    elif profile_name == "extensive_low_hanging":
-        # Emergentes
-        st.session_state["rca_min_filter"] = 0.30
-        st.session_state["rca_max_filter"] = 0.99
-        st.session_state["strategic_balance"] = 0.50
-        st.session_state["w_rca"] = 0.35
-        st.session_state["w_density"] = 0.35
-        st.session_state["w_eff_num_exp"] = 0.00
-        st.session_state["w_alignment_hv"] = 0.30
-        st.session_state["w_pci"] = 0.35
-        st.session_state["w_cog"] = 0.35
-        st.session_state["w_growth"] = 0.15
-        st.session_state["w_market_size"] = 0.15
-        st.session_state["rows_to_display"] = 20
-
     elif profile_name == "extensive_strategic":
-        # Apuestas Estrategicas
+        # Apuestas Estrategicas (legacy)
+        st.session_state["trade_min"] = 1.0
+        st.session_state["ecu_export_min_m"] = 0.0
+        st.session_state["above_accessible_growth_only"] = True
+        st.session_state["selected_sectors"] = sector_options
+        st.session_state["excluded_product_labels"] = excluded_labels_by_code
         st.session_state["rca_min_filter"] = 0.00
         st.session_state["rca_max_filter"] = 0.29
         st.session_state["density_pct_range"] = (
             max(0.30, float(density_pct_min_data)),
             min(0.40, float(density_pct_upper_bound)),
         )
+        st.session_state["ignore_density_filter"] = False
         st.session_state["strategic_balance"] = 0.70
         st.session_state["w_rca"] = 0.00
         st.session_state["w_density"] = 0.70
@@ -240,37 +232,12 @@ def _apply_profile(profile_name: str) -> None:
         st.session_state["w_market_size"] = 0.15
         st.session_state["rows_to_display"] = 20
 
-    elif profile_name == "extensive_balanced":
-        # Balanceado
-        st.session_state["rca_min_filter"] = 0.00
-        st.session_state["rca_max_filter"] = 0.99
-        st.session_state["density_pct_range"] = (
-            max(0.30, float(density_pct_min_data)),
-            min(0.40, float(density_pct_upper_bound)),
-        )
-        st.session_state["strategic_balance"] = 0.50
-        st.session_state["w_rca"] = 0.20
-        st.session_state["w_density"] = 0.30
-        st.session_state["w_eff_num_exp"] = 0.00
-        st.session_state["w_alignment_hv"] = 0.30
-        st.session_state["w_pci"] = 0.30
-        st.session_state["w_cog"] = 0.35
-        st.session_state["w_growth"] = 0.15
-        st.session_state["w_market_size"] = 0.15
-        st.session_state["rows_to_display"] = 40
 
-
-if st.sidebar.button("Consolidadas", use_container_width=True):
+if st.sidebar.button("Intensivo", use_container_width=True):
     _apply_profile("intensive")
     st.rerun()
-if st.sidebar.button("Emergentes", use_container_width=True):
-    _apply_profile("extensive_low_hanging")
-    st.rerun()
-if st.sidebar.button("Apuestas Estrategicas", use_container_width=True):
+if st.sidebar.button("Apuestas Estratégicas (legacy)", use_container_width=True):
     _apply_profile("extensive_strategic")
-    st.rerun()
-if st.sidebar.button("Balanceado", use_container_width=True):
-    _apply_profile("extensive_balanced")
     st.rerun()
 
 st.sidebar.header("Filtros")
@@ -803,6 +770,7 @@ else:
     )
     treemap.update_layout(
         margin=dict(t=60, l=10, r=10, b=95),
+        height=880,
     )
     if treemap_color_col == "sector":
         treemap.update_layout(

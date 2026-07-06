@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title desc">
+  <title id="title">Bandera del Ecuador</title>
+  <desc id="desc">Bandera del Ecuador con franjas amarilla, azul y roja y un escudo simplificado al centro.</desc>
+  <rect width="900" height="300" fill="#F7D116"/>
+  <rect y="300" width="900" height="150" fill="#003893"/>
+  <rect y="450" width="900" height="150" fill="#CE1126"/>
+
+  <g transform="translate(450 300)">
+    <ellipse rx="78" ry="108" fill="#c79a52" opacity="0.28"/>
+    <path d="M0-92 C52-92 66-58 66-26 C66 34 36 84 0 102 C-36 84 -66 34 -66 -26 C-66 -58 -52 -92 0-92Z" fill="#c8a25a" stroke="#8a6a31" stroke-width="6"/>
+    <ellipse cx="0" cy="-18" rx="38" ry="52" fill="#8ed1f0" stroke="#5d91b0" stroke-width="4"/>
+    <path d="M-28 -2 Q0 -30 28 -2" fill="none" stroke="#6d4c2f" stroke-width="5"/>
+    <path d="M-30 10 Q0 34 30 10" fill="none" stroke="#4f8f42" stroke-width="7"/>
+    <path d="M-10 34 L0 4 L10 34 Z" fill="#ffffff" stroke="#7f8c8d" stroke-width="2"/>
+    <rect x="-3" y="-62" width="6" height="34" fill="#6b4b2a"/>
+    <path d="M0-88 L18-62 L0-70 L-18-62 Z" fill="#5fa8dd" stroke="#467aa6" stroke-width="3"/>
+    <path d="M-52 -10 C-74 -18 -78 -46 -68 -62 C-50 -52 -42 -30 -40 -12" fill="#2f8f46"/>
+    <path d="M52 -10 C74 -18 78 -46 68 -62 C50 -52 42 -30 40 -12" fill="#2f8f46"/>
+    <path d="M-58 30 C-80 22 -90 0 -84 -18 C-62 -12 -50 8 -44 28" fill="#2f8f46"/>
+    <path d="M58 30 C80 22 90 0 84 -18 C62 -12 50 8 44 28" fill="#2f8f46"/>
+    <path d="M-44 88 Q0 116 44 88" fill="none" stroke="#8a6a31" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="0" cy="-18" r="6" fill="#ffffff"/>
+  </g>
+</svg>

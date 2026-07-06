@@ -4,6 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 import re
+from branding import render_dashboard_header
 
 from data_utils import load_anchor_proximity_dataset, load_natural_resource_exclusion_labels, normalize_0_1
 
@@ -57,8 +58,10 @@ def _section_sort_key(label: str) -> tuple[int, str]:
     return (10_000, text.lower())
 
 
-st.title("Análisis de Proximidad Anclada")
-st.caption("Explore productos candidatos conectados con productos ancla a través de vínculos de proximidad.")
+render_dashboard_header(
+    "Análisis de Proximidad Anclada",
+    "Explore productos candidatos conectados con productos ancla a través de vínculos de proximidad.",
+)
 
 df = load_anchor_proximity_dataset()
 if df.empty:
@@ -105,6 +108,20 @@ candidate_products_df["candidate_label"] = (
 )
 candidate_label_to_code = dict(
     zip(candidate_products_df["candidate_label"], candidate_products_df["candidate_hs4"])
+)
+anchor_products_df = (
+    df[["anchor_hs4", "anchor_product_name_short", "anchor_sector", "anchor_hs_section_name", "anchor_density_percentile"]]
+    .dropna(subset=["anchor_hs4"])
+    .copy()
+    .assign(
+        anchor_hs4=lambda d: d["anchor_hs4"].astype(str).str.zfill(4),
+        anchor_product_name_short=lambda d: d["anchor_product_name_short"].fillna("").astype(str).str.strip(),
+    )
+    .drop_duplicates(subset=["anchor_hs4"])
+    .sort_values("anchor_hs4")
+)
+anchor_products_df["anchor_label"] = (
+    anchor_products_df["anchor_hs4"] + " - " + anchor_products_df["anchor_product_name_short"]
 )
 proximity_rank_max = int(pd.to_numeric(df["proximity_rank"], errors="coerce").max())
 accessible_market_max = float(df["accessible_market_size_b"].max()) if not df.empty else 0.0
@@ -153,6 +170,7 @@ st.session_state.setdefault(
     (float(anchor_density_min), float(anchor_density_max)),
 )
 st.session_state.setdefault("p3_above_median_proximity_only", False)
+st.session_state.setdefault("p3_anchor_search", "")
 
 
 def _apply_page3_profile(profile_name: str) -> None:
@@ -172,14 +190,16 @@ def _apply_page3_profile(profile_name: str) -> None:
         float(anchor_density_max),
     )
     st.session_state["p3_above_median_proximity_only"] = False
+    st.session_state["p3_anchor_search"] = ""
 
     if profile_name == "top_candidates":
         st.session_state["p3_strategic_balance"] = 0.50
-        st.session_state["p3_w_pci"] = 0.35
-        st.session_state["p3_w_cog"] = 0.35
-        st.session_state["p3_w_growth"] = 0.15
-        st.session_state["p3_w_market"] = 0.15
+        st.session_state["p3_w_pci"] = 0.50
+        st.session_state["p3_w_cog"] = 0.00
+        st.session_state["p3_w_growth"] = 0.25
+        st.session_state["p3_w_market"] = 0.25
         st.session_state["p3_candidates_to_display"] = 30
+        st.session_state["p3_candidate_rca_max"] = 0.50
         st.session_state["p3_selected_anchor_sections"] = anchor_sections_excluding_123
         st.session_state["p3_selected_candidate_sections"] = candidate_sections_excluding_123
         st.session_state["p3_excluded_product_labels"] = natural_resource_exclusion_labels
@@ -188,6 +208,7 @@ def _apply_page3_profile(profile_name: str) -> None:
             min(50.0, float(anchor_density_max)),
         )
         st.session_state["p3_proximity_rank_range"] = (1, min(10, max(1, proximity_rank_max)))
+        st.session_state["p3_above_median_proximity_only"] = True
 
 
 def _reset_page3_filters() -> None:
@@ -207,10 +228,11 @@ def _reset_page3_filters() -> None:
         float(anchor_density_max),
     )
     st.session_state["p3_above_median_proximity_only"] = False
+    st.session_state["p3_anchor_search"] = ""
 
 with st.sidebar:
     st.header("Perfiles predefinidos")
-    if st.button("Top de Candidatos Anclados", use_container_width=True):
+    if st.button("Candidatos seleccionados", use_container_width=True):
         _apply_page3_profile("top_candidates")
         st.rerun()
 
@@ -344,6 +366,11 @@ if selected_candidate_sections:
     flt = flt[flt["candidate_hs_section_name"].isin(selected_candidate_sections)]
 if selected_anchor_sections:
     flt = flt[flt["anchor_hs_section_name"].isin(selected_anchor_sections)]
+flt["anchor_label"] = flt["anchor_hs4"].astype(str).str.zfill(4) + " - " + flt["anchor_product_name_short"].astype(str)
+anchor_search_value = str(st.session_state.get("p3_anchor_search", "")).strip()
+if anchor_search_value:
+    anchor_search_norm = anchor_search_value.lower()
+    flt = flt[flt["anchor_label"].str.lower().str.contains(anchor_search_norm, na=False)]
 excluded_hs4_codes = {candidate_label_to_code[label] for label in excluded_product_labels}
 if excluded_hs4_codes:
     flt = flt[~flt["candidate_hs4"].astype(str).str.zfill(4).isin(excluded_hs4_codes)]
@@ -446,6 +473,36 @@ c3.metric("Candidatos únicos", f"{flt['candidate_hs4'].nunique():,}")
 if flt.empty:
     st.info("Ningún vínculo ancla-candidato coincide con los filtros actuales.")
     st.stop()
+
+st.subheader("Anclas seleccionadas")
+selected_anchor_table = (
+    flt[["anchor_hs4", "anchor_product_name_short", "anchor_sector", "anchor_hs_section_name", "anchor_density_percentile"]]
+    .drop_duplicates(subset=["anchor_hs4"])
+    .copy()
+)
+selected_anchor_table["anchor_density_percentile"] = pd.to_numeric(
+    selected_anchor_table["anchor_density_percentile"], errors="coerce"
+)
+selected_anchor_table = selected_anchor_table.sort_values(["anchor_hs4", "anchor_product_name_short"]).reset_index(drop=True)
+st.dataframe(
+    selected_anchor_table,
+    use_container_width=True,
+    hide_index=True,
+    column_config={
+        "anchor_hs4": st.column_config.TextColumn("HS4"),
+        "anchor_product_name_short": st.column_config.TextColumn("Producto ancla"),
+        "anchor_sector": st.column_config.TextColumn("Sector"),
+        "anchor_hs_section_name": st.column_config.TextColumn("Sección HS"),
+        "anchor_density_percentile": st.column_config.NumberColumn("Percentil de densidad del ancla", format="%.2f"),
+    },
+)
+
+anchor_search = st.text_input(
+    "Buscar anclas (HS4 o nombre)",
+    value=st.session_state["p3_anchor_search"],
+    key="p3_anchor_search",
+    placeholder="Ej. 0304 o filetes",
+)
 
 anchor_labels = (
     flt[["anchor_hs4", "anchor_product_name_short", "anchor_sector"]]
@@ -649,7 +706,7 @@ treemap.update_traces(
     textfont=dict(size=18, color="#ffffff"),
     marker=dict(line=dict(width=1, color="rgba(255,255,255,0.45)")),
 )
-treemap.update_layout(margin=dict(t=60, l=10, r=10, b=95))
+treemap.update_layout(margin=dict(t=60, l=10, r=10, b=95), height=880)
 if treemap_color_label == "Sector":
     treemap.update_layout(
         legend=dict(

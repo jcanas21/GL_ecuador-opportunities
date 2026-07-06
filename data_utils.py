@@ -586,6 +586,14 @@ def _nearest_existing_data_file(filename: str, data_subdir: str) -> Path | None:
     return None
 
 
+def _nearest_existing_data_file_any(filenames: list[str], data_subdir: str) -> Path | None:
+    for filename in filenames:
+        candidate = _nearest_existing_data_file(filename, data_subdir)
+        if candidate is not None:
+            return candidate
+    return None
+
+
 def _file_mtime_ns(path: Path) -> int:
     try:
         return path.stat().st_mtime_ns
@@ -1583,6 +1591,88 @@ def load_accessible_market_destinations_by_product(hs4: str, focus_year: int = 2
         .sort_values("accessible_market_imports", ascending=False)
         .reset_index(drop=True)
     )
+
+
+@st.cache_data(show_spinner=False)
+def load_top_exporters_for_product_markets(
+    hs4: str,
+    importers: tuple[str, ...],
+    focus_year: int = 2024,
+    top_n: int = 20,
+) -> pd.DataFrame:
+    hs4 = str(hs4).zfill(4)
+    importer_set = {str(x).upper().strip() for x in importers if str(x).strip()}
+    if not importer_set:
+        return pd.DataFrame(columns=["exporter_iso", "export_value", "export_value_m", "market_share"])
+
+    compact_path = _nearest_existing_data_file_any(
+        ["exporters_by_importer_hs4_2024.csv.gz", "exporters_by_importer_hs4_2024.csv"],
+        "intermediate",
+    )
+    if compact_path is not None and int(focus_year) == 2024:
+        df = pd.read_csv(compact_path, low_memory=False)
+        if df.empty:
+            return pd.DataFrame(columns=["rank", "exporter_iso", "export_value", "export_value_m", "market_share"])
+        df["hs4"] = df["hs4"].astype(str).str.zfill(4)
+        df["importer_iso"] = df["importer_iso"].astype(str).str.upper().str.strip()
+        df["exporter_iso"] = df["exporter_iso"].astype(str).str.upper().str.strip()
+        df["export_value"] = pd.to_numeric(df["export_value"], errors="coerce").fillna(0.0)
+        out = (
+            df[(df["hs4"] == hs4) & (df["importer_iso"].isin(importer_set))]
+            .groupby("exporter_iso", as_index=False)["export_value"]
+            .sum()
+            .sort_values("export_value", ascending=False)
+            .reset_index(drop=True)
+        )
+        if out.empty:
+            return pd.DataFrame(columns=["rank", "exporter_iso", "export_value", "export_value_m", "market_share"])
+        total_value = float(out["export_value"].sum())
+        out["export_value_m"] = out["export_value"] / 1_000_000
+        out["market_share"] = out["export_value"] / total_value if total_value > 0 else 0.0
+        out["rank"] = np.arange(1, len(out) + 1)
+        return out.head(int(top_n))[["rank", "exporter_iso", "export_value", "export_value_m", "market_share"]]
+
+    trade_path = _nearest_existing_data_file("hs92_country_country_product_year_6_2020_2024.csv", "input")
+    if trade_path is None:
+        return pd.DataFrame(columns=["exporter_iso", "export_value", "export_value_m", "market_share"])
+
+    acc = pd.Series(dtype="float64")
+    usecols = ["country_iso3_code", "partner_iso3_code", "product_hs92_code", "year", "export_value"]
+    for chunk in pd.read_csv(trade_path, usecols=usecols, chunksize=500_000, low_memory=False):
+        chunk["year"] = pd.to_numeric(chunk["year"], errors="coerce")
+        chunk = chunk[chunk["year"] == int(focus_year)]
+        if chunk.empty:
+            continue
+        chunk["hs4"] = chunk["product_hs92_code"].astype(str).str.zfill(4).str[:4]
+        chunk = chunk[chunk["hs4"] == hs4]
+        if chunk.empty:
+            continue
+        chunk["importer_iso"] = chunk["partner_iso3_code"].astype(str).str.upper().str.strip()
+        chunk = chunk[chunk["importer_iso"].isin(importer_set)]
+        if chunk.empty:
+            continue
+        chunk["exporter_iso"] = chunk["country_iso3_code"].astype(str).str.upper().str.strip()
+        chunk = chunk[chunk["exporter_iso"].str.len() == 3]
+        if chunk.empty:
+            continue
+        chunk["export_value"] = pd.to_numeric(chunk["export_value"], errors="coerce").fillna(0.0)
+        grp = chunk.groupby("exporter_iso")["export_value"].sum()
+        acc = grp.copy() if acc.empty else acc.add(grp, fill_value=0)
+
+    if acc.empty:
+        return pd.DataFrame(columns=["exporter_iso", "export_value", "export_value_m", "market_share"])
+
+    out = (
+        acc.rename("export_value")
+        .reset_index()
+        .sort_values("export_value", ascending=False)
+        .reset_index(drop=True)
+    )
+    total_value = float(out["export_value"].sum())
+    out["export_value_m"] = out["export_value"] / 1_000_000
+    out["market_share"] = out["export_value"] / total_value if total_value > 0 else 0.0
+    out["rank"] = np.arange(1, len(out) + 1)
+    return out.head(int(top_n))[["rank", "exporter_iso", "export_value", "export_value_m", "market_share"]]
 
 
 @st.cache_data(show_spinner=False)

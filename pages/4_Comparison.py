@@ -1,6 +1,7 @@
 import numpy as np
 import plotly.express as px
 import streamlit as st
+from branding import render_dashboard_header
 
 from preset_utils import (
     PAGE2_PRESETS,
@@ -17,8 +18,10 @@ COMPARE_GROUP_COLORS = {
 }
 
 
-st.title("Comparación")
-st.caption("Compare las recomendaciones producidas por los perfiles vigentes de la Página 2 y la Página 3.")
+render_dashboard_header(
+    "Comparación",
+    "Compare las recomendaciones producidas por los perfiles vigentes de la Página 2 y la Página 3.",
+)
 
 csel1, csel2 = st.columns(2)
 page2_preset = csel1.selectbox("Perfil de la Página 2", list(PAGE2_PRESETS.keys()), index=0)

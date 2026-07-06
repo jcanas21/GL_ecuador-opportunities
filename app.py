@@ -3,10 +3,14 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+from branding import render_dashboard_header
+
 
 def render_guide_and_glossary() -> None:
-    st.title("Tablero de Oportunidades de Exportación del Ecuador")
-    st.caption("Guía y glosario de las páginas del tablero V1 (HS92 a 4 dígitos).")
+    render_dashboard_header(
+        "Tablero de Oportunidades de Exportación del Ecuador",
+        "Guía y glosario de las páginas del tablero V1 (HS92 a 4 dígitos).",
+    )
 
     st.markdown("## Página 2: Análisis de Oportunidades")
     st.markdown(
