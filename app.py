@@ -129,7 +129,7 @@ La lógica del tablero no busca identificar “el producto más complejo” en a
 
 st.set_page_config(
     page_title="Oportunidades del Ecuador",
-    page_icon=":bar_chart:",
+    page_icon="🇪🇨",
     layout="wide",
 )
 
