@@ -2,6 +2,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 from branding import render_dashboard_header
+from pathlib import Path
 
 from data_utils import load_accessible_market_destinations_by_product, load_top_exporters_for_product_markets
 from preset_utils import (
@@ -90,9 +91,81 @@ PRESET_SOURCES = {
 }
 
 
+@st.cache_data(show_spinner=False)
+def load_theme_mapping() -> pd.DataFrame:
+    path = Path(__file__).resolve().parents[1] / "data" / "input" / "hs4_temas.csv"
+    if not path.exists():
+        return pd.DataFrame(columns=["hs4", "tema"])
+    df = pd.read_csv(path, dtype={"hs4": str})
+    df["hs4"] = df["hs4"].astype(str).str.zfill(4)
+    df["tema"] = df["tema"].fillna("").astype(str).str.strip()
+    return df[["hs4", "tema"]].drop_duplicates("hs4")
+
+
+@st.cache_data(show_spinner=False)
+def load_accessible_market_destinations_by_theme(hs4_codes: tuple[str, ...], focus_year: int = 2024) -> pd.DataFrame:
+    codes = tuple(sorted({str(x).zfill(4) for x in hs4_codes if str(x).strip()}))
+    if not codes:
+        return pd.DataFrame(columns=["importer_iso", "accessible_market_imports"])
+
+    acc = pd.Series(dtype="float64")
+    for hs4 in codes:
+        df = load_accessible_market_destinations_by_product(hs4, focus_year=focus_year).copy()
+        if df.empty:
+            continue
+        grp = df.groupby("importer_iso")["accessible_market_imports"].sum()
+        acc = grp.copy() if acc.empty else acc.add(grp, fill_value=0.0)
+
+    if acc.empty:
+        return pd.DataFrame(columns=["importer_iso", "accessible_market_imports"])
+
+    return (
+        acc.rename("accessible_market_imports")
+        .reset_index()
+        .sort_values("accessible_market_imports", ascending=False)
+        .reset_index(drop=True)
+    )
+
+
+@st.cache_data(show_spinner=False)
+def load_top_exporters_for_theme_markets(
+    hs4_codes: tuple[str, ...],
+    importers: tuple[str, ...],
+    focus_year: int = 2024,
+    top_n: int = 20,
+) -> pd.DataFrame:
+    codes = tuple(sorted({str(x).zfill(4) for x in hs4_codes if str(x).strip()}))
+    importer_set = tuple(sorted({str(x).upper().strip() for x in importers if str(x).strip()}))
+    if not codes or not importer_set:
+        return pd.DataFrame(columns=["rank", "exporter_iso", "export_value", "export_value_m", "market_share"])
+
+    acc = pd.Series(dtype="float64")
+    for hs4 in codes:
+        df = load_top_exporters_for_product_markets(hs4, importer_set, focus_year=focus_year, top_n=200).copy()
+        if df.empty:
+            continue
+        grp = df.groupby("exporter_iso")["export_value"].sum()
+        acc = grp.copy() if acc.empty else acc.add(grp, fill_value=0.0)
+
+    if acc.empty:
+        return pd.DataFrame(columns=["rank", "exporter_iso", "export_value", "export_value_m", "market_share"])
+
+    out = (
+        acc.rename("export_value")
+        .reset_index()
+        .sort_values("export_value", ascending=False)
+        .reset_index(drop=True)
+    )
+    total_value = float(out["export_value"].sum())
+    out["export_value_m"] = out["export_value"] / 1_000_000
+    out["market_share"] = out["export_value"] / total_value if total_value > 0 else 0.0
+    out["rank"] = range(1, len(out) + 1)
+    return out.head(int(top_n))[["rank", "exporter_iso", "export_value", "export_value_m", "market_share"]]
+
+
 render_dashboard_header(
-    "Mercado Accesible por Producto",
-    "Seleccione un producto proveniente de un preset y explore su mercado accesible por país de destino.",
+    "Mercado Accesible por Producto o Tema",
+    "Seleccione un producto o un tema proveniente de un preset y explore su mercado accesible por país de destino.",
 )
 
 source_label = st.selectbox("Origen del producto", list(PRESET_SOURCES.keys()), index=0)
@@ -107,21 +180,59 @@ if preset_df.empty:
     st.warning("No hay productos disponibles para el preset seleccionado.")
     st.stop()
 
-product_options = (
-    preset_df[["hs4", "product_name_short"]]
-    .drop_duplicates()
-    .sort_values(["hs4", "product_name_short"])
-    .reset_index(drop=True)
-)
-product_options["product_label"] = product_options["hs4"].astype(str).str.zfill(4) + " - " + product_options["product_name_short"].astype(str)
-product_label_to_hs4 = dict(zip(product_options["product_label"], product_options["hs4"]))
+theme_map = load_theme_mapping()
+preset_df["hs4"] = preset_df["hs4"].astype(str).str.zfill(4)
+preset_df = preset_df.merge(theme_map, on="hs4", how="left")
+preset_df["tema"] = preset_df["tema"].fillna("Sin tema asignado")
 
-selected_product_label = st.selectbox("Producto", product_options["product_label"].tolist(), index=0)
-selected_hs4 = product_label_to_hs4[selected_product_label]
+view_level = st.radio("Nivel de visualización", ["Producto", "Tema"], horizontal=True, index=0)
 
-dest_df = load_accessible_market_destinations_by_product(selected_hs4, focus_year=2024).copy()
+selected_product_label = None
+selected_hs4 = None
+selected_theme = None
+selected_theme_hs4 = tuple()
+
+if view_level == "Producto":
+    product_options = (
+        preset_df[["hs4", "product_name_short"]]
+        .drop_duplicates()
+        .sort_values(["hs4", "product_name_short"])
+        .reset_index(drop=True)
+    )
+    product_options["product_label"] = product_options["hs4"].astype(str).str.zfill(4) + " - " + product_options["product_name_short"].astype(str)
+    product_label_to_hs4 = dict(zip(product_options["product_label"], product_options["hs4"]))
+
+    selected_product_label = st.selectbox("Producto", product_options["product_label"].tolist(), index=0)
+    selected_hs4 = product_label_to_hs4[selected_product_label]
+    dest_df = load_accessible_market_destinations_by_product(selected_hs4, focus_year=2024).copy()
+else:
+    theme_summary = (
+        preset_df.groupby("tema", as_index=False)
+        .agg(
+            product_count=("hs4", "nunique"),
+            accessible_market_size_b=("accessible_market_size_b", "sum"),
+        )
+        .sort_values(["accessible_market_size_b", "tema"], ascending=[False, True])
+        .reset_index(drop=True)
+    )
+    theme_summary["theme_label"] = theme_summary.apply(
+        lambda r: f"{r['tema']} ({int(r['product_count'])} productos | {float(r['accessible_market_size_b']):,.1f} B USD)",
+        axis=1,
+    )
+    label_to_theme = dict(zip(theme_summary["theme_label"], theme_summary["tema"]))
+    selected_theme_label = st.selectbox("Tema", theme_summary["theme_label"].tolist(), index=0)
+    selected_theme = label_to_theme[selected_theme_label]
+    selected_theme_hs4 = tuple(
+        preset_df.loc[preset_df["tema"] == selected_theme, "hs4"].dropna().astype(str).str.zfill(4).unique().tolist()
+    )
+    dest_df = load_accessible_market_destinations_by_theme(selected_theme_hs4, focus_year=2024).copy()
+
 if dest_df.empty:
-    st.info("Este producto no tiene mercados accesibles positivos en el archivo detallado disponible.")
+    st.info(
+        "Este producto no tiene mercados accesibles positivos en el archivo detallado disponible."
+        if view_level == "Producto"
+        else "Este tema no tiene mercados accesibles positivos en el archivo detallado disponible."
+    )
     st.stop()
 
 continent_map = build_continent_map()
@@ -141,9 +252,15 @@ dest_df["share"] = dest_df["accessible_market_imports_b"] / total_accessible_b i
 dest_df["market_option_label"] = dest_df["importer_iso"] + " - " + dest_df["country_name"]
 
 metric1, metric2, metric3 = st.columns(3)
-metric1.metric("Producto seleccionado", selected_hs4)
+if view_level == "Producto":
+    metric1.metric("Producto seleccionado", selected_hs4)
+else:
+    metric1.metric("Tema seleccionado", selected_theme)
 metric2.metric("Mercado accesible total (miles de millones USD)", f"{total_accessible_b:,.1f}")
-metric3.metric("Destinos accesibles", f"{dest_df['importer_iso'].nunique():,}")
+if view_level == "Producto":
+    metric3.metric("Destinos accesibles", f"{dest_df['importer_iso'].nunique():,}")
+else:
+    metric3.metric("Productos en el tema", f"{len(selected_theme_hs4):,}")
 
 dl1, dl2 = st.columns(2)
 dl1.download_button(
@@ -151,7 +268,11 @@ dl1.download_button(
     data=dest_df[["importer_iso", "country_name", "continent", "accessible_market_imports", "accessible_market_imports_b", "share"]]
     .to_csv(index=False)
     .encode("utf-8-sig"),
-    file_name=f"mercado_accesible_{selected_hs4}_2024.csv",
+    file_name=(
+        f"mercado_accesible_{selected_hs4}_2024.csv"
+        if view_level == "Producto"
+        else f"mercado_accesible_tema_{selected_theme.replace(' ', '_').lower()}_2024.csv"
+    ),
     mime="text/csv",
     use_container_width=True,
 )
@@ -186,20 +307,25 @@ fig.update_traces(
     sort=False,
 )
 fig.update_layout(
-    title=f"Treemap del mercado accesible para {selected_product_label} | Fuente: {source_label}",
+    title=(
+        f"Treemap del mercado accesible para {selected_product_label} | Fuente: {source_label}"
+        if view_level == "Producto"
+        else f"Treemap del mercado accesible para el tema {selected_theme} | Fuente: {source_label}"
+    ),
     margin=dict(t=70, l=8, r=8, b=48),
-    height=850,
+    height=700,
     legend_title_text="Continente",
     legend=dict(orientation="h", yanchor="top", y=-0.03, xanchor="center", x=0.5),
 )
 st.plotly_chart(fig, use_container_width=True)
 
 market_options = ["Todos los mercados accesibles"] + dest_df["market_option_label"].tolist()
+entity_key = selected_hs4 if view_level == "Producto" else selected_theme.replace(" ", "_").lower()
 selected_market_option = st.selectbox(
     "Mercado para treemap de competidores",
     market_options,
     index=0,
-    key=f"market_selector_{selected_hs4}",
+    key=f"market_selector_{view_level}_{entity_key}",
 )
 if selected_market_option != "Todos los mercados accesibles":
     selected_market_iso = selected_market_option.split(" - ", 1)[0].strip().upper()
@@ -210,7 +336,10 @@ if selected_market_option != "Todos los mercados accesibles":
 
 st.caption(f"Mercado seleccionado para treemap de competidores: **{selected_market_name}**")
 
-competitors_df = load_top_exporters_for_product_markets(selected_hs4, selected_importers, focus_year=2024, top_n=20).copy()
+if view_level == "Producto":
+    competitors_df = load_top_exporters_for_product_markets(selected_hs4, selected_importers, focus_year=2024, top_n=20).copy()
+else:
+    competitors_df = load_top_exporters_for_theme_markets(selected_theme_hs4, selected_importers, focus_year=2024, top_n=20).copy()
 competitors_df["exporter_name"] = competitors_df["exporter_iso"].map(country_name_map).fillna(competitors_df["exporter_iso"])
 competitors_df["continent"] = competitors_df["exporter_iso"].map(continent_map).fillna("Otros")
 competitors_df = competitors_df[competitors_df["continent"].isin(CONTINENT_COLORS.keys())].copy()
@@ -231,7 +360,11 @@ dl2.download_button(
     data=competitors_df[["rank", "exporter_iso", "exporter_name", "continent", "export_value", "export_value_m", "market_share"]]
     .to_csv(index=False)
     .encode("utf-8-sig"),
-    file_name=f"competidores_{selected_hs4}_{selected_market_iso or 'todos'}_2024.csv",
+    file_name=(
+        f"competidores_{selected_hs4}_{selected_market_iso or 'todos'}_2024.csv"
+        if view_level == "Producto"
+        else f"competidores_tema_{selected_theme.replace(' ', '_').lower()}_{selected_market_iso or 'todos'}_2024.csv"
+    ),
     mime="text/csv",
     use_container_width=True,
 )
@@ -259,9 +392,13 @@ fig_comp.update_traces(
     sort=False,
 )
 fig_comp.update_layout(
-    title=f"Treemap de competidores para {selected_market_name} | Producto {selected_product_label}",
+    title=(
+        f"Treemap de competidores para {selected_market_name} | Producto {selected_product_label}"
+        if view_level == "Producto"
+        else f"Treemap de competidores para {selected_market_name} | Tema {selected_theme}"
+    ),
     margin=dict(t=70, l=8, r=8, b=48),
-    height=850,
+    height=700,
     legend_title_text="Continente",
     legend=dict(orientation="h", yanchor="top", y=-0.03, xanchor="center", x=0.5),
 )
