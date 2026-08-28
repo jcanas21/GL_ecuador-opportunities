@@ -21,11 +21,11 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 0304,Fish fillets,Filetes de pescado,pending_manual_validation,ecu_previo,
 0305,Preserved fish,Pescado seco / salado / ahumado,manual_validated,cordoba_curado,
 0306,Crustaceans,Crustáceos,manual_validated,cordoba_curado,
-0307,Molluscs,Moluscos,manual_validated,cordoba_curado,
+0307,Molluscs,Moluscos e invertebrados acuáticos,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 0401,Milk,Leche fluida,manual_validated,cordoba_curado,
 0402,"Milk, concentrated",Leche en polvo / concentrada,manual_validated,cordoba_curado,
-0403,Fermented milk products,Yogur / suero de manteca,manual_validated,cordoba_curado,
-0404,Whey,Suero lácteo,manual_validated,cordoba_curado,
+0403,Fermented milk products,Leches fermentadas y yogur,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
+0404,Whey,Lactosuero y componentes de la leche,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 0405,Butter,Manteca,manual_validated,cordoba_curado,
 0406,Cheese,Quesos,manual_validated,cordoba_curado,
 0407,"Eggs, in shell",Huevos con cáscara,manual_validated,cordoba_curado,
@@ -38,10 +38,10 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 0504,"Animal guts, except fish",Tripas / vejigas animales,manual_validated,cordoba_curado,
 0505,Feathers and down,Plumas / pieles de aves,manual_validated,cordoba_curado,
 0506,"Bones, simply prepared",Huesos / cuernos animales,manual_validated,cordoba_curado,
-0507,Whalebone & horns,Marfil / coral natural,manual_validated,cordoba_curado,
-0508,Coral and shells,Coral / conchas / esponjas,manual_validated,cordoba_curado,
+0507,Whalebone & horns,"Marfil, cuernos, astas y cascos sin trabajar",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
+0508,Coral and shells,Coral y conchas sin trabajar,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 0509,Sponges of animal origin,Esponjas de origen animal,pending_manual_validation,ecu_previo,
-0510,Animal products used in pharmaceuticals,Productos farmacéuticos animales,manual_validated,cordoba_curado,
+0510,Animal products used in pharmaceuticals,Glándulas y productos animales para farmacia,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 0511,Animal products n.e.c.,Otros productos animales n.c.p.,manual_validated,cordoba_curado,
 0601,Flower bulbs,Bulbos / tubérculos,manual_validated,cordoba_curado,
 0602,Other live plants,Plantas vivas,manual_validated,cordoba_curado,
@@ -60,7 +60,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 0711,"Vegetables, provisionally preserved",Hortalizas preservadas provisionalmente,manual_validated,cordoba_curado,
 0712,"Vegetables, dried",Hortalizas secas,manual_validated,cordoba_curado,
 0713,"Legumes, dried",Legumbres secas,manual_validated,cordoba_curado,
-0714,Tubers,Raíces / tubérculos comestibles,manual_validated,cordoba_curado,
+0714,Tubers,"Yuca, camote y raíces con alto almidón",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 0801,Cashew nuts & coconuts,Coco / nuez de Brasil / castaña de cajú,manual_validated,cordoba_curado,
 0802,Other nuts,Frutos secos,manual_validated,cordoba_curado,
 0803,Bananas and plantains,Bananas,manual_validated,cordoba_curado,
@@ -98,7 +98,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 1103,Cereal meals,Sémolas / grañones,manual_validated,cordoba_curado,
 1104,Worked cereal grains,Granos de cereales trabajados,manual_validated,cordoba_curado,
 1105,Potato flour,Harina / copos de papa,manual_validated,cordoba_curado,
-1106,Flour of dried legumes,Harina de legumbres secas,manual_validated,cordoba_curado,
+1106,Flour of dried legumes,"Harinas de legumbres, raíces y frutas",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 1107,Malt,Malta,manual_validated,cordoba_curado,
 1108,Starches,Almidones,manual_validated,cordoba_curado,
 1109,Wheat gluten,Gluten de trigo,manual_validated,cordoba_curado,
@@ -113,11 +113,11 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 1209,Seeds used for sowing,Semillas para siembra,manual_validated,cordoba_curado,
 1210,Hop cones,Conos de lúpulo,manual_validated,cordoba_curado,
 1211,"Plants used in perfumery, pharmacy or insecticide",Plantas medicinales / aromáticas,manual_validated,cordoba_curado,
-1212,Seaweeds & edible vegetable products,Algarroba / algas comestibles,manual_validated,cordoba_curado,
+1212,Seaweeds & edible vegetable products,"Algarroba, algas, remolacha y caña",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 1213,Cereal straw and husks,Pajas / cáscaras de cereales,manual_validated,cordoba_curado,
 1214,Forage products,Alfalfa / forrajeras,manual_validated,cordoba_curado,
 1301,Lac,Gomas / resinas naturales,manual_validated,cordoba_curado,
-1302,Vegetable saps and extracts,Mucílagos / espesantes vegetales,manual_validated,cordoba_curado,
+1302,Vegetable saps and extracts,"Jugos, extractos y mucílagos vegetales",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 1401,Vegetable materials used for plaiting,Material trenzable vegetal,manual_validated,cordoba_curado,
 1402,Vegetable materials used as stuffing,Materias vegetales utilizadas como relleno,pending_manual_validation,ecu_previo,
 1403,Vegetable materials used for brooms,Materias vegetales utilizadas para escobas,pending_manual_validation,ecu_previo,
@@ -138,7 +138,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 1514,"Rapeseed, colza or mustard oil,",Aceite de colza / canola,manual_validated,cordoba_curado,
 1515,Other vegetable fats and oils,Aceite de maíz,manual_validated,cordoba_curado,
 1516,"Vegetable fats, hydrogenated",Grasas / aceites hidrogenados,manual_validated,cordoba_curado,
-1517,Margarine,Margarina,manual_validated,cordoba_curado,
+1517,Margarine,Margarina y mezclas de grasas comestibles,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 1518,"Animal or vegetable fats and oils, processed",Grasas / aceites químicamente modificados,manual_validated,cordoba_curado,
 1519,Stearic acid,Ácidos grasos industriales,manual_validated,cordoba_curado,
 1520,Glycerol,Glicerol,manual_validated,cordoba_curado,
@@ -150,7 +150,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 1604,Prepared or preserved fish,Pescado preparado / en conserva,manual_validated,cordoba_curado,
 1605,Prepared aquatic invertibrates,Crustáceos / moluscos preparados,manual_validated,cordoba_curado,
 1701,Sugarcane & sucrose,Azúcar,manual_validated,cordoba_curado,
-1702,Other sugars,Glucosa / fructosa,manual_validated,cordoba_curado,
+1702,Other sugars,"Otros azúcares, jarabes y miel artificial",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 1703,Molasses,Melazas,manual_validated,cordoba_curado,
 1704,Confectionery sugar,Confitería sin cacao,manual_validated,cordoba_curado,
 1801,Cocoa beans,Cacao en grano,manual_validated,cordoba_curado,
@@ -159,11 +159,11 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 1804,Cocoa butter,Manteca de cacao,manual_validated,cordoba_curado,
 1805,Cocoa powder,Cacao en polvo,manual_validated,cordoba_curado,
 1806,Chocolates,Chocolate / preparaciones con cacao,manual_validated,cordoba_curado,
-1901,Malt extract,Dulce de leche / prep. de leche,manual_validated,cordoba_curado,
+1901,Malt extract,Extracto de malta y preparaciones de harina,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 1902,Pasta,Pastas alimenticias,manual_validated,cordoba_curado,
 1903,Tapioca,Tapioca,manual_validated,cordoba_curado,
-1904,Cereal foods,Cereales matinales / granola,manual_validated,cordoba_curado,
-1905,Bakery products,Panificados / galletas,manual_validated,cordoba_curado,
+1904,Cereal foods,Cereales inflados o tostados,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
+1905,Bakery products,"Pan, pasteles y galletas",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2001,Pickled fruits and vegetables,Hortalizas en vinagre,manual_validated,cordoba_curado,
 2002,"Tomatoes, prepared or preserved",Tomate procesado,manual_validated,cordoba_curado,
 2003,"Mushrooms, prepared or preserved",Hongos preparados,manual_validated,cordoba_curado,
@@ -171,15 +171,15 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2005,"Other vegetables, prepared or preserved",Hortalizas preparadas o conservadas,manual_validated,cordoba_ajustado_ecu,
 2006,"Vegetables, fruits and nuts, preserved by sugar",Frutas confitadas,manual_validated,cordoba_curado,
 2007,"Jams, jellies and marmalades",Mermeladas / jaleas / dulces,manual_validated,cordoba_curado,
-2008,"Fruits and nuts, otherwise prepared","Frutos preparados (maní tostado, duraznos)",manual_validated,cordoba_curado,
+2008,"Fruits and nuts, otherwise prepared",Frutas y frutos secos preparados,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2009,Fruit juices,Jugos de frutas y hortalizas,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
-2101,Coffee extracts,Café / té / yerba (extractos),manual_validated,cordoba_curado,
+2101,Coffee extracts,"Extractos de café, té y mate",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2102,Yeasts,Levaduras,manual_validated,cordoba_curado,
 2103,Sauces and seasonings,Salsas / condimentos,manual_validated,cordoba_curado,
 2104,Soups and broths,Sopas / caldos,manual_validated,cordoba_curado,
 2105,Ice cream,Helados,manual_validated,cordoba_curado,
 2106,Food preparations n.e.c.,Preparaciones alimenticias n.c.p.,manual_validated,cordoba_curado,
-2201,Waters,Aguas (no minerales),manual_validated,cordoba_curado,
+2201,Waters,"Agua, incluida mineral, sin azúcar",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2202,"Waters, flavored or sweetened",Bebidas no alcohólicas,manual_validated,cordoba_curado,
 2203,Beer,Cerveza,manual_validated,cordoba_curado,
 2204,Wine,Vino,manual_validated,cordoba_curado,
@@ -189,11 +189,11 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2208,Spirits < 80% alcohol,Bebidas espirituosas,manual_validated,cordoba_curado,
 2209,Vinegars,Vinagre,manual_validated,cordoba_curado,
 2301,"Flours of fish, for animal feed",Harina de carne / pescado,manual_validated,cordoba_curado,
-2302,Cereal residues,Afrecho / pellets de cereales,manual_validated,cordoba_curado,
+2302,Cereal residues,Salvado y residuos de cereales,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2303,Starch residues,Residuos de almidonería,manual_validated,cordoba_curado,
 2304,Solid soybean residues,Pellets de soja (torta),manual_validated,cordoba_curado,
 2305,Solid peanut residues,Pellets de maní (torta),manual_validated,cordoba_curado,
-2306,Solid vegetable oil and fat residues,Pellets de girasol (torta),manual_validated,cordoba_curado,
+2306,Solid vegetable oil and fat residues,Tortas y residuos de aceites vegetales,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2307,Wine lees,Heces de vino / tártaro,manual_validated,cordoba_curado,
 2308,Vegetable materials for animal feeding,Otros residuos vegetales para forraje,manual_validated,cordoba_curado,
 2309,Animal feed,Alimentos para animales preparados,manual_validated,cordoba_curado,
@@ -215,7 +215,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2513,Natural abrasives,Piedra pómez,manual_validated,cordoba_curado,
 2514,Slate,Pizarra,manual_validated,cordoba_curado,
 2515,Marble,Mármol / travertino,manual_validated,cordoba_curado,
-2516,Granite,Granito / piedra,manual_validated,cordoba_curado,
+2516,Granite,"Granito, basalto y piedra de construcción",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2517,Gravel,Cantos / piedras trituradas,manual_validated,cordoba_curado,
 2518,Dolomite,Dolomita,manual_validated,cordoba_curado,
 2519,Natural magnesia,Magnesia / carbonato de magnesio,manual_validated,cordoba_curado,
@@ -225,7 +225,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2523,Cements,Cemento,manual_validated,cordoba_curado,
 2524,Asbestos,Amianto (asbesto),manual_validated,cordoba_curado,
 2525,Mica,Mica,manual_validated,cordoba_curado,
-2526,Natural steatite,Esteatita natural,manual_validated,cordoba_curado,
+2526,Natural steatite,Esteatita natural y talco,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2527,Natural cryolite,Criolita natural,pending_manual_validation,ecu_previo,
 2528,Natural borates,Boratos,manual_validated,cordoba_curado,
 2529,Feldspar,Feldespato / leucita,manual_validated,cordoba_curado,
@@ -262,7 +262,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2709,"Petroleum oils, crude","Aceites de petróleo, crudos",pending_manual_validation,ecu_previo,
 2710,"Petroleum oils, refined",Aceites de petróleo (no crudos),manual_validated,cordoba_curado,
 2711,Petroleum gases,Gases de petróleo,manual_validated,cordoba_curado,
-2712,Petroleum jelly,Vaselina / parafina,manual_validated,cordoba_curado,
+2712,Petroleum jelly,"Vaselina, parafina y ceras minerales",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2713,Petroleum coke,Coque de petróleo,manual_validated,cordoba_curado,
 2714,"Bitumen and asphalt, natural",Betunes / asfaltos naturales,manual_validated,cordoba_curado,
 2715,Bituminous mixtures,Mezclas bituminosas,manual_validated,cordoba_curado,
@@ -309,14 +309,14 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2840,Borates,Boratos / peroxoboratos,manual_validated,cordoba_curado,
 2841,Salts of oxometallic acids,Sales de ácidos oxometálicos,manual_validated,cordoba_curado,
 2842,Other salts of acids,Otras sales / peroxosales,manual_validated,cordoba_curado,
-2843,Compounds of precious metals,Metales preciosos coloidales,manual_validated,cordoba_curado,
+2843,Compounds of precious metals,Compuestos de metales preciosos,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2844,Uranium,Elementos radiactivos,manual_validated,cordoba_curado,
 2845,Non-radioactive isotopes,Isótopos,manual_validated,cordoba_curado,
 2846,Compounds of rare-earth metals,Compuestos tierras raras,manual_validated,cordoba_curado,
 2847,Hydrogen peroxide,Peróxido de hidrógeno,manual_validated,cordoba_curado,
 2848,Phosphides,Fosfuros,manual_validated,cordoba_curado,
 2849,Carbides,Carburos,manual_validated,cordoba_curado,
-2850,"Hydrides, nitrides, azides, silicides and borides",Hidruros / nitruros,manual_validated,cordoba_curado,
+2850,"Hydrides, nitrides, azides, silicides and borides","Hidruros, nitruros, siliciuros y boruros",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2851,"Inorganic compounds, liquid or compressed air",Otros compuestos inorgánicos,manual_validated,cordoba_curado,
 2901,Acyclic hydrocarbons,Hidrocarburos acíclicos,manual_validated,cordoba_curado,
 2902,Cyclic hydrocarbons,Hidrocarburos cíclicos,manual_validated,cordoba_curado,
@@ -326,14 +326,14 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2906,Cyclic alcohols,Alcoholes cíclicos,manual_validated,cordoba_curado,
 2907,"Phenols, phenol-alcohols",Fenoles,manual_validated,cordoba_curado,
 2908,Derivatives of phenols,Derivados halogenados de fenoles,manual_validated,cordoba_curado,
-2909,Ethers,Éteres,manual_validated,cordoba_curado,
+2909,Ethers,"Éteres, éter-alcoholes y peróxidos",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2910,Epoxides,Epóxidos / éteres cíclicos,manual_validated,cordoba_curado,
 2911,Acetals and hemiacetals,Acetales / hemiacetales,manual_validated,cordoba_curado,
 2912,Aldehydes,Aldehídos,manual_validated,cordoba_curado,
 2913,Derivatives of aldehydes,Derivados de aldehídos,manual_validated,cordoba_curado,
 2914,Ketones and quinones,Cetonas / quinonas,manual_validated,cordoba_curado,
-2915,Saturated acyclic monocarboxylic acids,Ácidos monocarboxílicos,manual_validated,cordoba_curado,
-2916,Unsaturated acyclic monocarboxylic acids,Ácidos monocarboxílicos cíclicos,manual_validated,cordoba_curado,
+2915,Saturated acyclic monocarboxylic acids,Ácidos monocarboxílicos acíclicos saturados,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
+2916,Unsaturated acyclic monocarboxylic acids,Ácidos monocarboxílicos insaturados y cíclicos,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2917,Polycarboxylic acids,Ácidos policarboxílicos,manual_validated,cordoba_curado,
 2918,Carboxylic acids with additional oxygen function,Ácidos carboxílicos con función oxigenada,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2919,Phosporic esters,Ésteres fosfóricos,manual_validated,cordoba_curado,
@@ -354,14 +354,14 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2934,Nucleic acids and their salts,Otros heterocíclicos,manual_validated,cordoba_curado,
 2935,Sulfonamides,Sulfonamidas,manual_validated,cordoba_curado,
 2936,Vitamins,Provitaminas / vitaminas,manual_validated,cordoba_curado,
-2937,Hormones,Hormonas,manual_validated,cordoba_curado,
+2937,Hormones,Hormonas y prostaglandinas,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2938,Glycosides,Heterósidos,manual_validated,cordoba_curado,
 2939,Vegetable alkaloids,Alcaloides,manual_validated,cordoba_curado,
 2940,"Other sugars, chemically pure",Azúcares químicamente puros,manual_validated,cordoba_curado,
 2941,Antibiotics,Antibióticos,manual_validated,cordoba_curado,
 2942,Other organic compounds,Otros compuestos orgánicos,manual_validated,cordoba_curado,
-3001,Heparin for therapeutic use,Glándulas / extractos orgánicos,manual_validated,cordoba_curado,
-3002,Serums and vaccines,Biológicos / vacunas / cultivos,manual_validated,cordoba_curado,
+3001,Heparin for therapeutic use,Glándulas y extractos para opoterapia,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
+3002,Serums and vaccines,"Sangre, antisueros y vacunas",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3003,"Medicaments, not packaged",Medicamentos (granel),manual_validated,cordoba_curado,
 3004,"Medicaments, packaged",Medicamentos (dosificados),manual_validated,cordoba_curado,
 3005,"Wadding, gauze and bandages",Apósitos / vendajes,manual_validated,cordoba_curado,
@@ -372,12 +372,12 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 3104,Potassic fertilizers,Fertilizantes potásicos,manual_validated,cordoba_curado,
 3105,Mixed fertilizers,Fertilizantes complejos,manual_validated,cordoba_curado,
 3201,Vegetable tanning extracts,Extracto de quebracho / curtientes vegetales,manual_validated,cordoba_curado,
-3202,Synthetic tanning substances,Productos curtientes inorgánicos,manual_validated,cordoba_curado,
-3203,Coloring matter of animal or vegetable origin,Materias colorantes vegetales,manual_validated,cordoba_curado,
+3202,Synthetic tanning substances,Productos curtientes orgánicos e inorgánicos,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
+3203,Coloring matter of animal or vegetable origin,Materias colorantes vegetales o animales,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3204,Synthetic organic coloring matter,Colorantes orgánicos sintéticos,manual_validated,cordoba_curado,
 3205,Color lakes,Lacas colorantes,manual_validated,cordoba_curado,
 3206,Other coloring matter,Otras materias colorantes,manual_validated,cordoba_curado,
-3207,Prepared pigments,Pigmentos / vitrificables,manual_validated,cordoba_curado,
+3207,Prepared pigments,Pigmentos y esmaltes para cerámica y vidrio,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3208,"Paints and varnishes, nonaqueous",Pinturas sintéticas (no acuosas),manual_validated,cordoba_curado,
 3209,"Paints and varnishes, aqueous",Pinturas / barnices acuosos,manual_validated,cordoba_curado,
 3210,Other paints and varnishes,Otras pinturas / barnices,manual_validated,cordoba_curado,
@@ -392,12 +392,12 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 3304,Make-up preparations,Productos de belleza / maquillaje,manual_validated,cordoba_curado,
 3305,Hair products,Productos para el cabello,manual_validated,cordoba_curado,
 3306,Dental hygiene products,Higiene bucal,manual_validated,cordoba_curado,
-3307,Toiletries,Preparaciones de afeitar / depilación,manual_validated,cordoba_curado,
+3307,Toiletries,"Afeitado, desodorantes y preparaciones de baño",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3401,Soap,Jabones,manual_validated,cordoba_curado,
 3402,Cleaning products,Detergentes / tensioactivos,manual_validated,cordoba_curado,
 3403,Lubricants,Lubricantes,manual_validated,cordoba_curado,
 3404,Artificial and prepared waxes,Ceras,manual_validated,cordoba_curado,
-3405,Polishes and creams,Betunes / cremas para calzado,manual_validated,cordoba_curado,
+3405,Polishes and creams,Betunes y ceras para calzado y muebles,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3406,Candles,Velas,manual_validated,cordoba_curado,
 3407,Modeling pastes,Pastas para moldear,manual_validated,cordoba_curado,
 3501,Casein,Caseína,manual_validated,cordoba_curado,
@@ -419,7 +419,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 3704,"Photographic film, not developed",Placas reveladas,manual_validated,cordoba_curado,
 3705,"Photographic film, developed",Productos químicos fotográficos,manual_validated,cordoba_curado,
 3706,Motion-picture film,Películas cinematográficas,manual_validated,cordoba_curado,
-3707,Chemical preparations for photographic uses,Reveladores / fijadores fotográficos,manual_validated,cordoba_curado,
+3707,Chemical preparations for photographic uses,Preparaciones químicas para fotografía,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3801,Artificial graphite,Grafito artificial,manual_validated,cordoba_curado,
 3802,Activated carbon,Carbón activado,manual_validated,cordoba_curado,
 3803,Tall oil,Aceite de tall,manual_validated,cordoba_curado,
@@ -427,11 +427,11 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 3805,Turpentines,Esencias de trementina,manual_validated,cordoba_curado,
 3806,Rosin and resin acids,Colofonia,manual_validated,cordoba_curado,
 3807,Wood tar and oils,Brea / aceites de madera,manual_validated,cordoba_curado,
-3808,"Insecticides, rodenticides, fungicides, etc.",Agroquímicos (insec/herb/fungicidas),manual_validated,cordoba_curado,
+3808,"Insecticides, rodenticides, fungicides, etc.","Insecticidas, herbicidas y fungicidas",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3809,Finishing agents,Aprestos / acabados textiles,manual_validated,cordoba_curado,
-3810,Pickling preparations for metal surfaces,Decapantes para metales,manual_validated,cordoba_curado,
+3810,Pickling preparations for metal surfaces,Decapantes y fundentes para soldadura,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3811,Anti-knock,Aditivos para combustibles / lubricantes,manual_validated,cordoba_curado,
-3812,Stabilizers for rubber or plastic,Aceleradores de vulcanización,manual_validated,cordoba_curado,
+3812,Stabilizers for rubber or plastic,"Aceleradores, plastificantes y estabilizantes",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3813,Preparations for fire extinguishers,Cargas para extintores,manual_validated,cordoba_curado,
 3814,Organic composite solvents and thinners,Disolventes / diluyentes,manual_validated,cordoba_curado,
 3815,Catalytic preparations,Catalizadores,manual_validated,cordoba_curado,
@@ -460,7 +460,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 3915,Plastic waste,Desechos / desperdicios plásticos,manual_validated,cordoba_curado,
 3916,Monofilament,Monofilamentos / barras plásticas,manual_validated,cordoba_curado,
 3917,Plastic tubes and fittings,Tubos plásticos,manual_validated,cordoba_curado,
-3918,Plastic floor coverings,Revestimientos plásticos para suelos,manual_validated,cordoba_curado,
+3918,Plastic floor coverings,Revestimientos plásticos de suelos y paredes,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3919,Self-adhesive plastic sheets,Placas / películas autoadhesivas,manual_validated,cordoba_curado,
 3920,"Other plates of plastics, noncellular and not reinforced",Otras placas / películas plásticas,manual_validated,cordoba_curado,
 3921,"Other plastic plates, sheets etc.",Otras placas / hojas plásticas,manual_validated,cordoba_curado,
@@ -486,19 +486,19 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 4015,Vulcanized rubber articles of apparel,Prendas de caucho,manual_validated,cordoba_curado,
 4016,Other articles of vulcanized rubber,Otras manufacturas de caucho,manual_validated,cordoba_curado,
 4017,Hard rubber,Caucho endurecido (ebonita),manual_validated,cordoba_curado,
-4101,Raw hides of bovines or equines,Cueros bovinos en bruto,manual_validated,cordoba_curado,
+4101,Raw hides of bovines or equines,Cueros en bruto de bovino y equino,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4102,Raw skins of sheep or lambs,Cueros / pieles de ovino,manual_validated,cordoba_curado,
 4103,Other raw hides and skins,Otros cueros / pieles en bruto,manual_validated,cordoba_curado,
-4104,Tanned hides of bovines or equines,Cueros bovinos curtidos,manual_validated,cordoba_curado,
+4104,Tanned hides of bovines or equines,Cueros curtidos de bovino y equino,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4105,Tanned sheepskins,Cueros / pieles preparados de ovino,manual_validated,cordoba_curado,
 4106,Tanned skins of other animals,Otros cueros preparados,manual_validated,cordoba_curado,
-4107,Bovine leather further prepared,Cueros bovinos curtidos (terminados),manual_validated,cordoba_curado,
+4107,Bovine leather further prepared,Cueros preparados de bovino y equino,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4108,Chamois leather,Cueros para guantes / vestido,manual_validated,cordoba_curado,
 4109,Patent leather,Cueros barnizados,manual_validated,cordoba_curado,
 4110,Waste of leather,Recortes de cuero,manual_validated,cordoba_curado,
 4111,Composition leather,Cuero artificial / regenerado,manual_validated,cordoba_curado,
 4201,Saddlery and harnesses,Arneses / artículos de talabartería,manual_validated,cordoba_curado,
-4202,Trunks or cases,Bolsos / valijas / artículos de viaje,manual_validated,cordoba_curado,
+4202,Trunks or cases,"Baúles, maletas y bolsos",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4203,Leather apparel,Prendas de cuero,manual_validated,cordoba_curado,
 4204,Articles of leather for technical uses,Cueros para usos técnicos,manual_validated,cordoba_curado,
 4205,Other articles of leather,Otras manufacturas de cuero,manual_validated,cordoba_curado,
@@ -507,7 +507,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 4302,Other tanned furskins,Pieles finas curtidas,manual_validated,cordoba_curado,
 4303,Furskin apparel,Prendas de peletería,manual_validated,cordoba_curado,
 4304,Artificial fur,Pieles facticias / sintéticas,manual_validated,cordoba_curado,
-4401,Fuel wood,Leña / madera para combustible,manual_validated,cordoba_curado,
+4401,Fuel wood,"Leña, astillas y aserrín",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4402,Wood charcoal,Carbón vegetal,manual_validated,cordoba_curado,
 4403,Wood in the rough,Madera en bruto,manual_validated,cordoba_curado,
 4404,Strips and other pieces of wood,Tiras / formas de madera,manual_validated,cordoba_curado,
@@ -543,15 +543,15 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 4707,Paper waste,Papel / cartón para reciclar,manual_validated,cordoba_curado,
 4801,Newsprint,Papel prensa,manual_validated,cordoba_curado,
 4802,Paper used for graphic purposes,Papel sin recubrir,manual_validated,cordoba_curado,
-4803,Tissue,Papel higiénico (en bobinas),manual_validated,cordoba_curado,
+4803,Tissue,Papel para uso sanitario en bobinas,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4804,Uncoated kraft paper and paperboard,Kraft (sin estucar),manual_validated,cordoba_curado,
 4805,Other uncoated paper and paperboard,Otros papeles / cartones sin estucar,manual_validated,cordoba_curado,
 4806,Transparent paper,Papel sulfurizado / vegetal,manual_validated,cordoba_curado,
 4807,Uncoated composite paper,Papel compuesto,manual_validated,cordoba_curado,
-4808,Corrugated paper and paperboard,Papel ondulado,manual_validated,cordoba_curado,
+4808,Corrugated paper and paperboard,"Papel ondulado, rizado o gofrado",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4809,Carbon paper,Papel carbón / autocopia,manual_validated,cordoba_curado,
 4810,"Paper and paperboard, coated with kaolin",Papel estucado,manual_validated,cordoba_curado,
-4811,"Cellulose wadding, coated",Papel estucado / impregnado,manual_validated,cordoba_curado,
+4811,"Cellulose wadding, coated","Papel recubierto, impregnado o coloreado",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4812,Filter blocks of paper pulp,Bloques / placas para filtros,manual_validated,cordoba_curado,
 4813,Cigarette paper,Papel de cigarrillos,manual_validated,cordoba_curado,
 4814,Wallpaper,Papel para empapelar paredes,manual_validated,cordoba_curado,
@@ -559,7 +559,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 4816,Other carbon paper,Papel carbón / esténciles,manual_validated,cordoba_curado,
 4817,Letterstock,Sobres / tarjetas postales,manual_validated,cordoba_curado,
 4818,Toilet paper,Papel higiénico y artículos sanitarios,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
-4819,Cardboard packing containers,Cajas y cartón corrugado,manual_validated,cordoba_curado,
+4819,Cardboard packing containers,Cajas y envases de papel o cartón,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4820,Notebooks,"Artículos de papelería y oficina, de papel",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4821,Paper labels,Etiquetas de papel,manual_validated,cordoba_curado,
 4822,"Bobbins, spools, cops of paper",Carretes / bobinas de papel,manual_validated,cordoba_curado,
@@ -570,7 +570,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 4904,"Music, printed or in manuscript",Música impresa,manual_validated,cordoba_curado,
 4905,Maps,Mapas / planos impresos,manual_validated,cordoba_curado,
 4906,"Architectural, engineering, etc. drawings",Planos / dibujos técnicos,manual_validated,cordoba_curado,
-4907,Unused stamps,Estampillas / billetes,manual_validated,cordoba_curado,
+4907,Unused stamps,"Sellos, billetes y títulos valores",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4908,Transfers (decalcomanias),Calcomanías,manual_validated,cordoba_curado,
 4909,Printed or illustrated postcards,Tarjetas postales / felicitación,manual_validated,cordoba_curado,
 4910,Calendars,Calendarios,manual_validated,cordoba_curado,
@@ -609,7 +609,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 5212,Other woven cotton fabrics,Otros tejidos de algodón,manual_validated,cordoba_curado,
 5301,"Flax, raw or processed",Lino en bruto,manual_validated,cordoba_curado,
 5302,Hemp fiber,Cáñamo en bruto,manual_validated,cordoba_curado,
-5303,Textile bast fibers,Yute / otras fibras,manual_validated,cordoba_curado,
+5303,Textile bast fibers,Yute y otras fibras textiles de líber,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 5304,Sisal and agave fibers,Sisal / agave,manual_validated,cordoba_curado,
 5305,Vegetable textile fibers,Coco / abacá / ramio,manual_validated,cordoba_curado,
 5306,Flax yarn,Hilados de lino,manual_validated,cordoba_curado,
@@ -646,7 +646,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 5602,Felt,Fieltro,manual_validated,cordoba_curado,
 5603,Nonwoven textiles,Telas no tejidas,manual_validated,cordoba_curado,
 5604,Rubber textiles,Hilos / cordeles cubiertos de caucho,manual_validated,cordoba_curado,
-5605,Metallised yarn,Hilos metálicos,manual_validated,cordoba_curado,
+5605,Metallised yarn,Hilados metalizados,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 5606,Gimp yarn,Hilados entorchados (gimp),manual_validated,cordoba_curado,
 5607,Twine and ropes of baste fibers,Cordeles / cuerdas / cordajes,manual_validated,cordoba_curado,
 5608,Nets,Redes anudadas,manual_validated,cordoba_curado,
@@ -660,13 +660,13 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 5802,Terry cloth,Tejidos con bucles para toallas,manual_validated,cordoba_curado,
 5803,Gauze,Tejidos de gasa de vuelta,manual_validated,cordoba_curado,
 5804,Lace and net fabrics,Tules / encajes mecánicos,manual_validated,cordoba_curado,
-5805,Hand-woven tapestries,Tapicería tejida a mano,manual_validated,cordoba_curado,
-5806,Narrow woven fabrics,Cintas,manual_validated,cordoba_curado,
+5805,Hand-woven tapestries,Tapices tejidos a mano,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
+5806,Narrow woven fabrics,Cintas y tejidos estrechos,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 5807,Labels and badges of textiles,Etiquetas / escudos textiles,manual_validated,cordoba_curado,
 5808,Braids in piece,Trencillas / pasamanería,manual_validated,cordoba_curado,
 5809,Woven fabric incorporating metal threads,Tejidos con hilos metálicos,manual_validated,cordoba_curado,
 5810,Embroidery in the piece,Bordados,manual_validated,cordoba_curado,
-5811,Quilted textile products,Tejidos acolchados / matelassé,manual_validated,cordoba_curado,
+5811,Quilted textile products,Productos textiles acolchados,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 5901,Stiffened textiles,Telas recubiertas (para libros / mapas),manual_validated,cordoba_curado,
 5902,Tire cord fabric,Napas para neumáticos,manual_validated,cordoba_curado,
 5903,Textile fabrics impregnated with plastics,Tejidos impregnados con plástico,manual_validated,cordoba_curado,
@@ -674,7 +674,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 5905,Textile wall coverings,Revestimientos textiles de pared,manual_validated,cordoba_curado,
 5906,Rubberized textile fabrics,Tejidos cauchutados,manual_validated,cordoba_curado,
 5907,"Other textile fabrics impregnated, coated or covered",Otros tejidos impregnados,manual_validated,cordoba_curado,
-5908,Textile wicks,Mechas para velas,manual_validated,cordoba_curado,
+5908,Textile wicks,Mechas textiles y manguitos de incandescencia,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 5909,Textile hosepiping and similar tubing,Mangueras textiles (presión),manual_validated,cordoba_curado,
 5910,"Transmission belts or belting, of textile material",Correas transportadoras textiles,manual_validated,cordoba_curado,
 5911,Textile articles for technical use,Artículos textiles para usos técnicos,manual_validated,cordoba_curado,
@@ -692,9 +692,9 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 6110,"Sweaters, pullovers, sweatshirts etc., knit",Suéteres / pulóveres,manual_validated,cordoba_curado,
 6111,"Babies' garments, knit",Prendas de bebé de punto,manual_validated,cordoba_curado,
 6112,"Activewear, knit",Conjuntos deportivos de punto,manual_validated,cordoba_curado,
-6113,Garments knit with impregnated fibers,Prendas de tejidos impregnados,manual_validated,cordoba_curado,
+6113,Garments knit with impregnated fibers,Prendas de punto impregnadas o recubiertas,manual_validated,revision_partida_general,"desambiguado: 6113 de punto, 6210 de tejido"
 6114,"Other garments, knit",Otras prendas de punto,manual_validated,cordoba_curado,
-6115,"Socks, stockings, etc., knit",Calcetería / pantis,manual_validated,cordoba_curado,
+6115,"Socks, stockings, etc., knit","Medias, calcetines y calcetería",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 6116,"Gloves, knit",Guantes de punto,manual_validated,cordoba_curado,
 6117,"Other clothing accesories, knit",Otros accesorios de punto,manual_validated,cordoba_curado,
 6201,"Men's overcoats, not knit",Abrigos / chaquetones (hombres) - tela,manual_validated,cordoba_curado,
@@ -706,7 +706,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 6207,Men's undergarments,Calzoncillos / pijamas (hombres) - tela,manual_validated,cordoba_curado,
 6208,Women's undergarments,Combinaciones / pijamas (mujeres) - tela,manual_validated,cordoba_curado,
 6209,Babies' garments,Prendas de bebé - tela,manual_validated,cordoba_curado,
-6210,Garments made of textile felts and nonwoven fabric,Prendas de tejidos impregnados,manual_validated,cordoba_curado,
+6210,Garments made of textile felts and nonwoven fabric,Prendas de tejidos impregnados o recubiertos,manual_validated,revision_partida_general,"desambiguado: 6113 de punto, 6210 de tejido"
 6211,Activewear,Conjuntos deportivos - tela,manual_validated,cordoba_curado,
 6212,Brassieres,Corseterías / sostenes,manual_validated,cordoba_curado,
 6213,Handkerchiefs,Pañuelos,manual_validated,cordoba_curado,
@@ -748,7 +748,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 6802,Worked building stone,Piedra trabajada,manual_validated,cordoba_curado,
 6803,Worked slate,Pizarra trabajada,manual_validated,cordoba_curado,
 6804,Grindstones,Muelas / piedras de afilar,manual_validated,cordoba_curado,
-6805,Natural or artificial abrasive powder,Abrasivos naturales / artificiales,manual_validated,cordoba_curado,
+6805,Natural or artificial abrasive powder,Abrasivos sobre soporte (lijas),manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 6806,Mineral wools and insulating materials,Lanas minerales / aislantes,manual_validated,cordoba_curado,
 6807,Asphalt,Manufacturas de asfalto,manual_validated,cordoba_curado,
 6808,Panels of vegetable fibers,Paneles de fibras vegetales,manual_validated,cordoba_curado,
@@ -759,7 +759,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 6813,Friction material and articles thereof,Guarniciones de fricción (frenos),manual_validated,cordoba_curado,
 6814,Mica articles,Mica trabajada,manual_validated,cordoba_curado,
 6815,Articles of stone or of other mineral substances,Otras manufacturas de piedra / minerales,manual_validated,cordoba_curado,
-6901,"Bricks, blocks, and other ceramic goods",Ladrillos / tejas refractarios,manual_validated,cordoba_curado,
+6901,"Bricks, blocks, and other ceramic goods",Ladrillos de harinas silíceas fósiles,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 6902,"Bricks, tiles and similar refractory ceramic constructional goods",Otros ladrillos refractarios,manual_validated,cordoba_curado,
 6903,Other refractory ceramic goods,Otros productos cerámicos refractarios,manual_validated,cordoba_curado,
 6904,Ceramic building bricks,Ladrillos no refractarios,manual_validated,cordoba_curado,
@@ -857,10 +857,10 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 7315,Chain of iron or steel,Cadenas de hierro / acero,manual_validated,cordoba_curado,
 7316,Anchors of iron or steel,Anclas / arpeos,manual_validated,cordoba_curado,
 7317,Nails and similar articles of iron or steel,"Clavos, tachuelas y grapas",manual_validated,cordoba_ajustado_ecu,
-7318,Screws and similar articles of iron or steel,"Tornillos, tuercas",manual_validated,cordoba_curado,
+7318,Screws and similar articles of iron or steel,"Tornillos, tuercas, remaches y arandelas",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 7319,Articles for sewing of iron or steel,Agujas / alfileres,manual_validated,cordoba_curado,
 7320,Springs of iron or steel,Resortes / ballestas,manual_validated,cordoba_curado,
-7321,Stoves and similar non-electric appliances of iron or steel,Estufas / cocinas (hierro / acero),manual_validated,cordoba_curado,
+7321,Stoves and similar non-electric appliances of iron or steel,Cocinas y estufas no eléctricas,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 7322,Radiators for central heating of iron or steel,Radiadores / generadores de aire caliente,manual_validated,cordoba_curado,
 7323,Household articles of iron or steel,Artículos domésticos de hierro / acero,manual_validated,cordoba_curado,
 7324,Sanitary ware and parts of iron or steel,Artículos sanitarios,manual_validated,cordoba_curado,
@@ -880,7 +880,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 7412,Copper tube or pipe fittings,Accesorios de tubería de cobre,manual_validated,cordoba_curado,
 7413,"Copper wire, uninsulated",Cables de cobre,manual_validated,cordoba_curado,
 7414,Endless bands of copper wire for machinery,"Telas, redes y bandas de alambre de cobre",manual_validated,manual_ecu,
-7415,Screws and similar articles of copper,Tornillos de cobre,manual_validated,cordoba_curado,
+7415,Screws and similar articles of copper,"Clavos, tornillos y pernos de cobre",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 7416,Copper springs,Resortes de cobre,manual_validated,cordoba_curado,
 7417,Copper cooking products,Aparatos de cocción o calefacción de cobre,manual_validated,manual_ecu,
 7418,Household articles of copper,Artículos de uso doméstico de cobre,manual_validated,cordoba_curado,
@@ -940,7 +940,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8109,Zirconium,Circonio,manual_validated,cordoba_curado,
 8110,Antimony,Antimonio,manual_validated,cordoba_curado,
 8111,Manganese,Manganeso,manual_validated,cordoba_curado,
-8112,Other metals,Otros metales comunes,manual_validated,cordoba_curado,
+8112,Other metals,"Berilio, cromo, germanio y otros metales",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8113,Cermets,Cermets,manual_validated,cordoba_curado,
 8201,Handtools for gardening,Herramientas agrícolas / forestales,manual_validated,cordoba_curado,
 8202,Handsaws,Sierras,manual_validated,cordoba_curado,
@@ -951,7 +951,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8207,Interchangeable tools for hand tools,Útiles intercambiables para máquinas-herramienta,manual_validated,cordoba_curado,
 8208,Knives and blades for machines,Cuchillas para máquinas,manual_validated,cordoba_curado,
 8209,"Articles for utensils, of cermet",Plaquitas para herramientas,manual_validated,cordoba_curado,
-8210,"Hand-operated appliances, food preparation, <10kg",Aparatos mecánicos manuales,manual_validated,cordoba_curado,
+8210,"Hand-operated appliances, food preparation, <10kg",Aparatos manuales para preparar alimentos,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8211,Knife sets,Cuchillos,manual_validated,cordoba_curado,
 8212,Razors,Navajas / hojas de afeitar,manual_validated,cordoba_curado,
 8213,Scissors,Tijeras,manual_validated,cordoba_curado,
@@ -961,7 +961,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8302,"Base metal mountings, fittings and similar articles",Herrajes y guarniciones,manual_validated,cordoba_curado,
 8303,Safes,Cajas fuertes,manual_validated,cordoba_curado,
 8304,"Paper trays and similar office equipment, of base metal",Archivadores / soportes de oficina,manual_validated,cordoba_curado,
-8305,"Paper clips and similar office articles, of metal",Mecanismos para encuadernación,manual_validated,cordoba_curado,
+8305,"Paper clips and similar office articles, of metal",Herrajes para carpetas y clips de oficina,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8306,"Ornaments, statuettes, etc. of metal",Estatuillas / objetos ornamentales (metal),manual_validated,cordoba_curado,
 8307,Flexible tubing of base metal,Tubos flexibles de metal,manual_validated,cordoba_curado,
 8308,"Clasps, buckles etc. of metal",Cierres / hebillas,manual_validated,cordoba_curado,
@@ -989,14 +989,14 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8419,Equipment for temperature change of materials,Aparatos térmicos industriales,manual_validated,cordoba_curado,
 8420,"Calendering or other rolling machines, other than for metals or glass",Calandrias / rodillos,manual_validated,cordoba_curado,
 8421,Centrifuges,Centrifugadoras / filtros,manual_validated,cordoba_curado,
-8422,Dish washing machines,Máquinas para envasado,manual_validated,cordoba_curado,
+8422,Dish washing machines,Lavavajillas y máquinas de envasado,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8423,Weighing machinery,Balanzas / básculas,manual_validated,cordoba_curado,
-8424,Sprays and powder dispersers,Pulverizadores,manual_validated,cordoba_curado,
+8424,Sprays and powder dispersers,Pulverizadores y extintores,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8425,Pulleys and winches,Aparejos / cabrestantes,manual_validated,cordoba_curado,
 8426,Ships' derricks; cranes,Grúas / camiones grúa,manual_validated,cordoba_curado,
 8427,Fork-lift trucks,Autoelevadores / montacargas,manual_validated,cordoba_curado,
 8428,Other lifting machinery,Otras máquinas elevadoras,manual_validated,cordoba_curado,
-8429,"Self-propelled bulldozers, excavators and road rollers",Topadoras / niveladoras,manual_validated,cordoba_curado,
+8429,"Self-propelled bulldozers, excavators and road rollers","Excavadoras, niveladoras y palas mecánicas",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8430,"Other moving, excavating or boring machinery",Otras máquinas para mover tierra,manual_validated,cordoba_curado,
 8431,Parts for use with hoists and excavation machinery,Partes para máquinas elevadoras,manual_validated,cordoba_curado,
 8432,Machinery for soil preparation or cultivation,Sembradoras / arados,manual_validated,cordoba_curado,
@@ -1005,17 +1005,17 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8435,Machines for wine and juice production,Prensas para vino / aceite,manual_validated,cordoba_curado,
 8436,Other agricultural machinery,Otras máquinas agrícolas y forestales,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8437,Machinery for processing grain,Máquinas para granos / molinería,manual_validated,cordoba_curado,
-8438,Machinery for the industrial preparation of food or drink,Máquinas industria alimenticia,manual_validated,cordoba_curado,
-8439,Machinery for making paper,Máquinas para fabricar pasta de papel,manual_validated,cordoba_curado,
+8438,Machinery for the industrial preparation of food or drink,Máquinas para la industria alimentaria,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
+8439,Machinery for making paper,Máquinas para pasta y papel,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8440,Bookbinding machinery,Máquinas para encuadernación,manual_validated,cordoba_curado,
 8441,Other machinery for making paper,Otras máquinas para papel,manual_validated,cordoba_curado,
 8442,Machinery for making printing components,Máquinas para impresión / cliché,manual_validated,cordoba_curado,
-8443,Printers and copiers,Imprentas,manual_validated,cordoba_curado,
+8443,Printers and copiers,Máquinas de imprimir e impresoras,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8444,"Machines to extrude, cut manmade textile fibres",Máquinas textiles (preparación),manual_validated,cordoba_curado,
 8445,Machines for preparing textile fibers,Máquinas textiles (hilatura),manual_validated,cordoba_curado,
 8446,Looms,Telares,manual_validated,cordoba_curado,
 8447,Knitting machines,Máquinas de tricotar,manual_validated,cordoba_curado,
-8448,Auxiliary machinery for use with knitting and textile machines,Partes para máquinas textiles,manual_validated,cordoba_curado,
+8448,Auxiliary machinery for use with knitting and textile machines,Máquinas auxiliares y partes textiles,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8449,Machinery to manufacture felt,Máquinas para fieltro / tela no tejida,manual_validated,cordoba_curado,
 8450,Household- or laundry-type washing machines,Lavadoras,manual_validated,cordoba_ajustado_ecu,
 8451,Machinery for processing fabrics,Máquinas para lavado / tintura,manual_validated,cordoba_curado,
@@ -1023,13 +1023,13 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8453,Machinery for preparing leather,Máquinas para cueros / calzado,manual_validated,cordoba_curado,
 8454,Machines used in metallurgy,Convertidores / cucharas para metalurgia,manual_validated,cordoba_curado,
 8455,Metal-rolling mills,Trenes de laminación,manual_validated,cordoba_curado,
-8456,Machines for working materials by laser and similar means,Máquinas-herramienta (láser / agua),manual_validated,cordoba_curado,
+8456,Machines for working materials by laser and similar means,Máquinas-herramienta por láser o electroerosión,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8457,Machining centers for working metal,Centros de mecanizado,manual_validated,cordoba_curado,
 8458,Lathes for removing metal,Tornos,manual_validated,cordoba_curado,
-8459,Machine tools for drilling by removing metal,Fresadoras / agujereadoras,manual_validated,cordoba_curado,
+8459,Machine tools for drilling by removing metal,Taladradoras y fresadoras,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8460,Machines with grinding stones for finishing metal,Rectificadoras,manual_validated,cordoba_curado,
 8461,Other machine tools for planing and cutting metals,Cepilladoras / mortajadoras,manual_validated,cordoba_curado,
-8462,Machine tools for molding and forging metals,Prensas para forjar metal,manual_validated,cordoba_curado,
+8462,Machine tools for molding and forging metals,"Prensas de forja, estampado y curvado",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8463,"Other machine tools for working metal, without removal",Otras máquinas de conformación,manual_validated,cordoba_curado,
 8464,Machine tools for working stone,Máquinas-herramienta (piedra / vidrio),manual_validated,cordoba_curado,
 8465,Machine tools for working wood,Máquinas-herramienta para madera,manual_validated,cordoba_curado,
@@ -1040,7 +1040,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8470,"Cash registers, calculators, etc.",Calculadoras / cajas registradoras,manual_validated,cordoba_curado,
 8471,Computers,Computadoras / equipos de cómputo,manual_validated,cordoba_curado,
 8472,Other office machines,Otras máquinas de oficina,manual_validated,cordoba_curado,
-8473,Parts and accessories for office machines,Partes de computadoras,manual_validated,cordoba_curado,
+8473,Parts and accessories for office machines,Partes de máquinas de oficina y cómputo,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8474,Machinery for working minerals,Mezcladoras / molinos de minerales,manual_validated,cordoba_curado,
 8475,Machines for assembling electric lamps,Máquinas para vidrio / lámparas,manual_validated,cordoba_curado,
 8476,Automatic goods-vending machines,Máquinas expendedoras,manual_validated,cordoba_curado,
@@ -1052,7 +1052,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8482,Ball or roller bearings,Rodamientos,manual_validated,cordoba_curado,
 8483,Transmission shafts,Árboles de transmisión / poleas,manual_validated,cordoba_curado,
 8484,Gaskets and similar joints of metal sheeting,Juntas / empaquetaduras,manual_validated,cordoba_curado,
-8485,"Machinery parts, not containing electrical features, n.e.c.",Manufactura aditiva (3D),manual_validated,cordoba_curado,
+8485,"Machinery parts, not containing electrical features, n.e.c.",Partes de máquinas sin conexiones eléctricas,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8501,Electric motors and generators,Motores eléctricos / generadores,manual_validated,cordoba_curado,
 8502,Electric generating sets and rotary converters,Grupos electrógenos,manual_validated,cordoba_curado,
 8503,Parts for use with electric generators,Partes para motores / generadores eléctricos,manual_validated,cordoba_curado,
@@ -1067,7 +1067,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8512,Electrical lighting equipment used for motor vehicles,Equipos eléctricos de iluminación / señalización,manual_validated,cordoba_curado,
 8513,Portable electric lamps,Linternas portátiles,manual_validated,cordoba_curado,
 8514,Industrial electric furnaces,Hornos eléctricos industriales,manual_validated,cordoba_curado,
-8515,Electric soldering machines,Soldadura eléctrica,manual_validated,cordoba_curado,
+8515,Electric soldering machines,Máquinas de soldadura eléctrica y láser,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8516,Electric heaters,Aparatos electrotérmicos domésticos,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8517,Telephones,Teléfonos / equipos de telecomunicaciones,manual_validated,cordoba_curado,
 8518,Microphones,Micrófonos / altavoces,manual_validated,cordoba_curado,
@@ -1087,12 +1087,12 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8532,Electrical capacitors,Condensadores eléctricos,manual_validated,cordoba_curado,
 8533,Electrical resistors,Resistencias eléctricas,manual_validated,cordoba_curado,
 8534,Electronic printed circuits,Circuitos impresos,manual_validated,cordoba_curado,
-8535,Electrical apparatus for > 1k volts,Aparatos conmutación (alta tensión),manual_validated,cordoba_curado,
-8536,Electrical apparatus for < 1k volts,Aparatos eléctricos de conmutación,manual_validated,cordoba_curado,
+8535,Electrical apparatus for > 1k volts,Aparatos de conmutación de alta tensión,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
+8536,Electrical apparatus for < 1k volts,Aparatos de conmutación de baja tensión,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8537,Electrical boards,Tableros eléctricos,manual_validated,cordoba_curado,
 8538,Parts for electrical apparatus,Partes para aparatos eléctricos,manual_validated,cordoba_curado,
 8539,Electrical filament,Lámparas y tubos eléctricos,manual_validated,cordoba_curado,
-8540,"Thermionic, cold cathode or photocathode tubes",Tubos catódicos,manual_validated,cordoba_curado,
+8540,"Thermionic, cold cathode or photocathode tubes",Tubos electrónicos y de rayos catódicos,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8541,Semiconductor devices,Diodos / transistores / semiconductores,manual_validated,cordoba_curado,
 8542,Electronic integrated circuits,Circuitos integrados,manual_validated,cordoba_curado,
 8543,Electrical machines with individual functions n.e.c.,Otras máquinas eléctricas n.c.p.,manual_validated,cordoba_curado,
@@ -1135,7 +1135,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8902,Fishing vessels,Barcos pesqueros,manual_validated,cordoba_curado,
 8903,Pleasure or sport boats,Yates y otras embarcaciones de recreo,manual_validated,cordoba_curado,
 8904,Tugs and pusher craft,Remolcadores,manual_validated,cordoba_curado,
-8905,"Special function vessels, n.e.c.",Faros / embarcaciones especiales,manual_validated,cordoba_curado,
+8905,"Special function vessels, n.e.c.","Barcos faro, dragas y diques flotantes",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8906,Other vessels,Otros barcos,manual_validated,cordoba_curado,
 8907,Other floating structures,Estructuras flotantes,manual_validated,cordoba_curado,
 8908,Floating structures for scrapping,Embarcaciones para desguace,manual_validated,cordoba_curado,
@@ -1143,7 +1143,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 9002,Lenses and other optical elements,Lentes / prismas (montados),manual_validated,cordoba_curado,
 9003,"Frames for spectacles, goggles",Monturas para gafas,manual_validated,cordoba_curado,
 9004,Glasses,Gafas / anteojos,manual_validated,cordoba_curado,
-9005,Binoculars and telescopes,Telescopios,manual_validated,cordoba_curado,
+9005,Binoculars and telescopes,Binoculares y telescopios,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 9006,Photographic cameras,Cámaras fotográficas,manual_validated,cordoba_curado,
 9007,Cinematographic cameras and projectors,Cámaras / proyectores cinematográficos,manual_validated,cordoba_curado,
 9008,Still image projectors,Proyectores de imagen fija,manual_validated,cordoba_curado,
@@ -1151,21 +1151,21 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 9010,"Apparatus and equipment for photographic laboratories, n.e.c.",Equipos para laboratorio fotográfico,manual_validated,cordoba_curado,
 9011,Optical microscopes,Microscopios ópticos,manual_validated,cordoba_curado,
 9012,"Microscopes, other than optical",Otros microscopios,manual_validated,cordoba_curado,
-9013,Liquid crystal devices,Otros instrumentos ópticos,manual_validated,cordoba_curado,
+9013,Liquid crystal devices,Dispositivos de cristal líquido y láseres,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 9014,Navigational instruments,Brújulas / aparatos de navegación,manual_validated,cordoba_curado,
 9015,Surveying instruments,Instrumentos de geodesia / topografía,manual_validated,cordoba_curado,
 9016,Balances of a sensitivity < 50 milligram,Balanzas de precisión,manual_validated,cordoba_curado,
 9017,Drafting tables and machines,Instrumentos de dibujo,manual_validated,cordoba_curado,
 9018,Medical instruments,Instrumentos médicos,manual_validated,cordoba_curado,
 9019,Therapy applicances,Aparatos mecanoterapia / ozonoterapia,manual_validated,cordoba_curado,
-9020,Other breathing appliances and gas masks,Aparatos respiratorios,manual_validated,cordoba_curado,
+9020,Other breathing appliances and gas masks,Aparatos respiratorios y máscaras antigás,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 9021,Orthopedic appliances,Aparatos de ortopedia y prótesis,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 9022,X-ray machines,Aparatos de rayos X,manual_validated,cordoba_curado,
 9023,Instruments designed for demonstrational purposes,Instrumentos / aparatos para demostración,manual_validated,cordoba_curado,
 9024,Machines for testing the mechanical properties of materials,Máquinas de ensayo / pruebas,manual_validated,cordoba_curado,
 9025,"Thermometers, hydrometers etc.",Densímetros / termómetros,manual_validated,cordoba_curado,
 9026,Instruments for measuring properties of liquids or gases,Caudalímetros / medidores,manual_validated,cordoba_curado,
-9027,Instruments for physical or chemical analysis,Instrumentos de análisis (espectro),manual_validated,cordoba_curado,
+9027,Instruments for physical or chemical analysis,Instrumentos de análisis físico o químico,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 9028,"Gas, liquid or electricity meters",Contadores de gas / agua / electricidad,manual_validated,cordoba_curado,
 9029,Meters,Otros contadores,manual_validated,cordoba_curado,
 9030,Instruments for measuring electricity,Osciloscopios / instrumentos eléctricos,manual_validated,cordoba_curado,
@@ -1217,13 +1217,13 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 9507,Fishing and hunting equipment,Cañas de pescar / artículos de pesca,manual_validated,cordoba_curado,
 9508,Fairground amusements,Carruseles / atracciones,manual_validated,cordoba_curado,
 9601,Worked animal carving material,Marfil / hueso / madreperla trabajado,manual_validated,cordoba_curado,
-9602,Worked vegetable or mineral carving material,Materias vegetales modeladas,manual_validated,cordoba_curado,
+9602,Worked vegetable or mineral carving material,Materias vegetales o minerales talladas,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 9603,Brooms and mops,Escobas / cepillos,manual_validated,cordoba_curado,
 9604,Hand sieves and riddles,Tamices / cribas a mano,manual_validated,cordoba_curado,
 9605,Travel sets,Surtidos de viaje (aseo / costura),manual_validated,cordoba_curado,
 9606,Buttons,Botones / cierres a presión,manual_validated,cordoba_curado,
 9607,Slide fasteners,Cierres de cremallera,manual_validated,cordoba_curado,
-9608,Pens,Bolígrafos / lapiceras,manual_validated,cordoba_curado,
+9608,Pens,"Bolígrafos, rotuladores y plumas",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 9609,"Pencils, crayons, pastels, etc.",Lápices,manual_validated,cordoba_curado,
 9610,"Slates and boards, with writing or drawing surfaces",Pizarras / tableros,manual_validated,cordoba_curado,
 9611,Hand-operated stamps,Sellos manuales,manual_validated,cordoba_curado,
