@@ -37,11 +37,12 @@ La lógica del tablero no busca señalar “el producto más complejo” en abst
 
     st.markdown(
         """
-### Cuatro páginas
+### Cinco páginas
 
 - **Guía y glosario** (acá): contexto metodológico, definiciones y fórmulas clave.
 - **Análisis de Oportunidades**: tablero principal para visualizar el análisis de complejidad económica tradicional y priorizar productos del **margen intensivo**.
 - **Análisis de Proximidad Anclada**: identifica oportunidades del **margen extensivo** a partir de productos ancla del Ecuador y sus proximidades más altas.
+- **Temas de Diversificación**: agrupa las cincuenta oportunidades de ambos márgenes en los seis temas que operan como unidad de política, con su composición y su peso de mercado.
 - **Mercado Accesible por Producto**: descompone geográficamente el mercado accesible de los productos priorizados y muestra los principales competidores por destino.
 """
     )
@@ -56,7 +57,10 @@ La lógica del tablero no busca señalar “el producto más complejo” en abst
 - **Página 3: Análisis de Proximidad Anclada**  
   Esta página está orientada al **margen extensivo**: productos en los que Ecuador hoy exporta poco o nada, pero que podrían desarrollarse con mayor realismo porque están conectados a capacidades ya existentes. Para eso parte de productos **ancla** de la canasta exportadora ecuatoriana y, desde ellos, identifica candidatos cercanos en el espacio de productos. La pregunta central es: **¿hacia dónde puede diversificarse Ecuador sin dar saltos imposibles?**
 
-- **Página 4: Mercado Accesible por Producto**  
+- **Página 4: Temas de Diversificación**  
+  Las oportunidades sueltas no son una agenda. Esta página las agrupa en **temas**, que son conjuntos de productos que un mismo paquete de intervención mueve a la vez y que resultan legibles para el gobierno, los inversionistas y las firmas al mismo tiempo. Cada tema cruza ambos márgenes, y su perfil de apuesta depende de cuánto es escalar lo que ya se exporta y cuánto es inaugurar. La pregunta central es: **¿cómo se convierte una lista de productos en una agenda ejecutable?**
+
+- **Página 5: Mercado Accesible por Producto**  
   Esta página baja un nivel adicional y muestra **dónde está la demanda accesible** de cada producto priorizado y **contra quién compite Ecuador** en esos mercados. Sirve para pasar de la priorización general a una lectura más operativa de destinos y competencia.
 """
     )
@@ -70,6 +74,19 @@ La lógica del tablero no busca señalar “el producto más complejo” en abst
 - El **Puntaje Combinado de Oportunidad** rebalancea factibilidad y atractivo según el control estratégico y luego se reescala entre 0 y 1 para ordenar.
 
 Estos puntajes no sustituyen el juicio de política pública: su función es **ordenar y hacer comparables** distintas oportunidades bajo criterios explícitos y transparentes.
+"""
+    )
+
+    st.markdown("### El espacio de productos")
+    st.markdown(
+        """
+Producir un bien exige un conjunto de capacidades: conocimiento técnico, proveedores, maquinaria, normas, mano de obra con oficios concretos. Esas capacidades no se observan directamente, pero sí se observa una huella suya. **Si dos productos exigen capacidades parecidas, los países que exportan uno tienden a exportar también el otro.**
+
+El espacio de productos convierte esa regularidad en un mapa. Cada nodo es un producto y la cercanía entre dos nodos, la **proximidad**, resume con qué frecuencia los países exportan ambos con ventaja comparativa. No mide parecido físico ni pertenencia al mismo capítulo arancelario: el azúcar y la confitería pueden estar lejos, y la cerámica sanitaria puede estar cerca del acero, si eso es lo que muestran las canastas exportadoras del mundo.
+
+Sobre ese mapa se ubica lo que el Ecuador ya exporta con ventaja. La **densidad** de un producto mide qué proporción de su vecindario ya está ocupada por el país. Alta densidad significa que las capacidades que ese producto necesita están, en buena medida, ya instaladas. Baja densidad significa que el salto es largo.
+
+De ahí sale la advertencia central de este trabajo. Las capacidades ecuatorianas se concentran en la **periferia** del mapa, en zonas poco densas y con pocas conexiones hacia bienes más complejos. Diversificar solo hacia lo cercano dejaría al país recorriendo su propio vecindario. Por eso el análisis no se guía únicamente por proximidad, sino que la combina con el atractivo del mercado y con la alineación de la red comercial.
 """
     )
 
@@ -116,6 +133,43 @@ Todo lo demás, incluidos el mercado accesible, el índice de alineación de la 
     st.dataframe(glossary, use_container_width=True, hide_index=True)
 
     st.markdown("### Álgebra e interpretación")
+    st.markdown("#### Ventaja Comparativa Revelada (RCA)")
+    st.latex(r"RCA_{c,p} = \frac{X_{c,p} \big/ \sum_{p'} X_{c,p'}}{\sum_{c'} X_{c',p} \big/ \sum_{c',p'} X_{c',p'}}")
+    st.markdown("- `X_{c,p}`: exportaciones del país `c` en el producto `p`.")
+    st.markdown("- Compara el peso del producto en la canasta del país contra su peso en el comercio mundial.")
+    st.markdown("- `RCA = 1` significa que el país exporta ese bien en la proporción exacta del mundo. Por encima de 1 hay especialización revelada.")
+    st.markdown("- A partir del RCA se define la matriz binaria de presencia, que es el insumo de todo lo demás.")
+    st.latex(r"M_{c,p} = 1 \ \text{si} \ RCA_{c,p} \ge 1, \quad 0 \ \text{en caso contrario}")
+
+    st.markdown("#### Diversidad y ubicuidad")
+    st.latex(r"k_c = \sum_p M_{c,p} \qquad k_p = \sum_c M_{c,p}")
+    st.markdown("- `k_c`: cuántos productos exporta el país con ventaja. `k_p`: cuántos países exportan ese producto con ventaja.")
+    st.markdown("- Un producto ubicuo lo hace casi cualquiera. Uno poco ubicuo, hecho además por países diversificados, exige capacidades raras.")
+
+    st.markdown("#### PCI (Índice de Complejidad del Producto)")
+    st.latex(r"\tilde{M}_{p,p'} = \sum_c \frac{M_{c,p}}{k_c}\cdot\frac{M_{c,p'}}{k_{p'}}")
+    st.markdown("- El PCI es el **segundo autovector** de esa matriz, estandarizado a media cero y desviación uno.")
+    st.markdown("- La idea es un promedio que se refina sobre sí mismo: un producto es complejo si lo exportan países diversificados, y un país es diversificado si exporta productos complejos.")
+    st.markdown("- Interpretación: PCI alto indica un bien que exige un acervo de capacidades amplio y difícil de replicar.")
+
+    st.markdown("#### Proximidad entre productos")
+    st.latex(r"\varphi_{p,p'} = \frac{\sum_c M_{c,p}\,M_{c,p'}}{\max\left(k_p,\ k_{p'}\right)}")
+    st.markdown("- Es la probabilidad condicional mínima entre las dos direcciones: dado que un país exporta uno de los dos bienes, cuál es la probabilidad de que exporte también el otro.")
+    st.markdown("- Se toma el mínimo para no confundir con proximidad lo que en realidad es ubicuidad de uno de los dos productos.")
+    st.markdown("- Interpretación: es la distancia del espacio de productos. Cercano significa que exigen capacidades parecidas.")
+
+    st.markdown("#### Densidad")
+    st.latex(r"\omega_{c,p} = \frac{\sum_{p'} M_{c,p'}\,\varphi_{p,p'}}{\sum_{p'} \varphi_{p,p'}}")
+    st.markdown("- Numerador: cuánta proximidad del producto `p` apunta hacia bienes que el país **ya** exporta con ventaja.")
+    st.markdown("- Denominador: toda la proximidad del producto, exporte el país o no.")
+    st.markdown("- Interpretación: fracción del vecindario de `p` que el país ya ocupa. Se lee de 0 a 1 y aproxima qué tan corto es el salto.")
+
+    st.markdown("#### COG (ganancia de oportunidad)")
+    st.latex(r"COG_{c,p} = \left(1 - M_{c,p}\right) \sum_{p'} \left(1 - M_{c,p'}\right) \frac{\varphi_{p,p'}}{\sum_{p''} \varphi_{p',p''}}\, PCI_{p'}")
+    st.markdown("- Recorre los productos que el país **todavía no** exporta y pondera la complejidad de cada uno por la fracción de su vecindario que `p` representa.")
+    st.markdown("- Interpretación: cuánta complejidad futura queda al alcance si el país entra en `p`. Mide el valor de `p` como puente, no su valor en sí mismo, que ya lo recoge el PCI.")
+    st.markdown("- Por construcción vale cero para productos que el país ya exporta con ventaja.")
+
     st.markdown("#### Percentil de Densidad")
     st.latex(r"\mathrm{DensityPercentile}_{z,i} = \frac{\mathrm{rank}_i(Density_{z,i})-1}{N_i-1}")
     st.markdown("- `z`: país (Ecuador en este tablero), `i`: producto.")
@@ -159,6 +213,7 @@ pages = [
     st.Page(render_guide_and_glossary, title="Guía y glosario", icon=":material/menu_book:", default=True),
     st.Page(Path("pages/1_Opportunity_Analysis.py"), title="Análisis de Oportunidades", icon=":material/insights:"),
     st.Page(Path("pages/3_Anchored_Proximity_Analysis.py"), title="Análisis de Proximidad Anclada", icon=":material/account_tree:"),
+    st.Page(Path("pages/4_Temas_de_Diversificacion.py"), title="Temas de Diversificación", icon=":material/category:"),
     st.Page(Path("pages/5_Mercado_Accesible_por_Producto.py"), title="Mercado Accesible por Producto", icon=":material/grid_view:"),
 ]
 pg = st.navigation(pages, position="sidebar", expanded=True)
