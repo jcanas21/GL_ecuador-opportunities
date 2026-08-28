@@ -73,6 +73,18 @@ Estos puntajes no sustituyen el juicio de política pública: su función es **o
 """
     )
 
+    st.markdown("### Fuentes de los datos")
+    st.markdown(
+        """
+El tablero se apoya en dos fuentes, ninguna de elaboración propia.
+
+- **Atlas of Economic Complexity**, Growth Lab de la Universidad de Harvard. Aporta el comercio bilateral, las métricas de complejidad (PCI, COG, densidad), la matriz de proximidad entre productos, la clasificación de productos y sectores, y el universo de países. Clasificación **HS92 a cuatro dígitos**, período **2020-2024** con **2024** como año de referencia.
+- **Base Gravity del CEPII**, versión 202211. Aporta las **distancias bilaterales** entre países, que alimentan la regla del mercado accesible.
+
+Todo lo demás, incluidos el mercado accesible, el índice de alineación de la demanda, las anclas y los puntajes de factibilidad y atractivo, es elaboración propia sobre esas dos fuentes.
+"""
+    )
+
     st.markdown("### Glosario de variables del tablero")
     st.caption("Definiciones breves y guía de interpretación para las variables técnicas clave.")
     glossary = pd.DataFrame(
