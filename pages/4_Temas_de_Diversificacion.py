@@ -158,6 +158,9 @@ st.plotly_chart(fig, use_container_width=True)
 st.subheader("Resumen por tema")
 st.dataframe(
     resumen.style.format({
+        "Productos": "{:,.0f}",
+        "Intensivo": "{:,.0f}",
+        "Extensivo": "{:,.0f}",
         "Mercado accesible (USD mil M)": "{:,.1f}",
         "Crecimiento ponderado (%)": "{:,.1f}",
         "Complejidad media": "{:,.2f}",
