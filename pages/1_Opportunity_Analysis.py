@@ -314,8 +314,14 @@ strategic_balance = st.sidebar.slider(
 st.sidebar.header("Controles de Pesos")
 st.sidebar.caption("Cada índice es un promedio ponderado de componentes normalizados.")
 if st.sidebar.button("Restablecer pesos"):
+    # solo los pesos. 'strategic_balance' vive en 'defaults' pero tiene su propio
+    # control, dibujado más arriba en esta misma pasada, y Streamlit prohíbe
+    # reasignar en session_state la clave de un widget ya instanciado.
     for k, v in defaults.items():
+        if not k.startswith("w_"):
+            continue
         st.session_state[k] = v
+    st.rerun()
 
 with st.sidebar.expander("Componentes de Factibilidad", expanded=True):
     w_rca = st.slider("Peso del RCA continuo", 0.0, 1.0, float(st.session_state["w_rca"]), 0.05, key="w_rca")
