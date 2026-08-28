@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
-from branding import render_dashboard_header
+from branding import perfil_predefinido_container, render_dashboard_header
 
 from data_utils import (
     load_opportunity_dataset,
@@ -207,7 +207,7 @@ def _apply_profile(profile_name: str) -> None:
         st.session_state["w_market_size"] = 0.25
         st.session_state["rows_to_display"] = 20
 
-if st.sidebar.button("Margen Intensivo", use_container_width=True):
+if perfil_predefinido_container().button("Margen Intensivo", use_container_width=True):
     _apply_profile("intensive")
     st.rerun()
 

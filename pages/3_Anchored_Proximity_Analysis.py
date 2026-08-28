@@ -4,7 +4,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 import re
-from branding import render_dashboard_header
+from branding import perfil_predefinido_container, render_dashboard_header
 
 from data_utils import (
     load_anchor_proximity_dataset,
@@ -237,7 +237,7 @@ def _reset_page3_filters() -> None:
 
 with st.sidebar:
     st.header("Perfiles predefinidos")
-    if st.button("Margen Extensivo", use_container_width=True):
+    if perfil_predefinido_container().button("Margen Extensivo", use_container_width=True):
         _apply_page3_profile("top_candidates")
         st.rerun()
 
@@ -545,10 +545,10 @@ else:
     fig_ps.update_layout(
         height=680, margin=dict(l=20, r=20, t=20, b=110),
         xaxis=dict(visible=False),
-        # scaleanchor fija la relación de aspecto a la natural de los datos, 1,47:1.
-        # scaleratio 1/1,4 da a cada unidad de y el 71,4% de los píxeles de una de x,
-        # lo que ensancha el mapa un 40% sin tocar el alto y separa los puntos.
-        yaxis=dict(visible=False, scaleanchor="x", scaleratio=1 / 1.4),
+        # sin scaleanchor: atar los ejes obligaba a respetar la relación natural de los
+        # datos, 1,47:1, y dejaba franjas vacías a los lados en vez de usar el ancho.
+        # Libres, la nube ocupa todo el contenedor y los puntos quedan más separados.
+        yaxis=dict(visible=False),
         plot_bgcolor="white",
         hoverlabel=dict(bgcolor="rgba(16,24,44,0.95)", font_color="white"),
         legend=dict(orientation="h", yanchor="top", y=-0.02, xanchor="center", x=0.5,

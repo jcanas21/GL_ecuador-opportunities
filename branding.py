@@ -100,6 +100,42 @@ def inject_branding_css() -> None:
     )
 
 
+PERFIL_CONTAINER_KEY = "perfil_predefinido"
+
+
+def perfil_predefinido_container():
+    """Contenedor del botón de perfil, resaltado sobre el resto de los filtros.
+
+    Streamlit expone la clase `st-key-<key>` de un contenedor con clave, que es el
+    punto de anclaje estable para acotar el CSS a este botón y no a todos los demás.
+    """
+    st.markdown(
+        f"""
+        <style>
+        .st-key-{PERFIL_CONTAINER_KEY} button {{
+            background-color: #2F5D74 !important;
+            border: 1px solid #2F5D74 !important;
+            box-shadow: 0 1px 2px rgba(16, 24, 44, 0.18) !important;
+        }}
+        .st-key-{PERFIL_CONTAINER_KEY} button:hover,
+        .st-key-{PERFIL_CONTAINER_KEY} button:focus,
+        .st-key-{PERFIL_CONTAINER_KEY} button:active {{
+            background-color: #24485B !important;
+            border-color: #24485B !important;
+        }}
+        .st-key-{PERFIL_CONTAINER_KEY} button p,
+        .st-key-{PERFIL_CONTAINER_KEY} button div,
+        .st-key-{PERFIL_CONTAINER_KEY} button span {{
+            color: #FFFFFF !important;
+            font-weight: 600 !important;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+    return st.sidebar.container(key=PERFIL_CONTAINER_KEY)
+
+
 def render_dashboard_header(title: str, subtitle: str) -> None:
     inject_branding_css()
     logo_src = _image_to_data_uri(str(GROWTH_LAB_LOGO))
