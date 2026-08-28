@@ -26,6 +26,22 @@ THEME_COLORS = {
 }
 
 
+def _envolver(texto: str, ancho: int = 18) -> str:
+    """Parte la etiqueta en renglones, como en los treemaps de las otras páginas."""
+    palabras = str(texto).split()
+    if not palabras:
+        return str(texto)
+    lineas, actual = [], palabras[0]
+    for w in palabras[1:]:
+        if len(actual) + 1 + len(w) <= ancho:
+            actual = f"{actual} {w}"
+        else:
+            lineas.append(actual)
+            actual = w
+    lineas.append(actual)
+    return "<br>".join(lineas)
+
+
 @st.cache_data(show_spinner=False)
 def load_temas() -> pd.DataFrame:
     path = Path(__file__).resolve().parents[1] / "data" / "input" / "hs4_temas.csv"
@@ -75,7 +91,7 @@ if cartera.empty:
 resumen = (
     cartera.groupby("tema", as_index=False)
     .apply(lambda g: pd.Series({
-        "Productos": len(g),
+        "Productos": int(len(g)),
         "Intensivo": int((g["margen"] == "Intensivo").sum()),
         "Extensivo": int((g["margen"] == "Extensivo").sum()),
         "Mercado accesible (USD mil M)": g["accessible_market_size_b"].sum(),
@@ -87,7 +103,12 @@ resumen = (
     }), include_groups=False)
     .sort_values("Mercado accesible (USD mil M)", ascending=False)
     .reset_index(drop=True)
+    .rename(columns={"tema": "Tema"})
 )
+# el apply devuelve todo como float: los conteos vuelven a entero para que la
+# tabla no muestre seis decimales en columnas que cuentan productos
+for col in ("Productos", "Intensivo", "Extensivo"):
+    resumen[col] = resumen[col].astype(int)
 
 m1, m2, m3 = st.columns(3)
 m1.metric("Temas", f"{cartera['tema'].nunique()}")
@@ -101,25 +122,36 @@ st.caption(
     "al mercado accesible. Haga clic en un tema para abrirlo y en el título para volver."
 )
 
+cartera["etiqueta_env"] = cartera["etiqueta"].map(_envolver)
+
 fig = px.treemap(
     cartera,
-    path=[px.Constant("Cartera"), "tema", "etiqueta"],
+    path=["tema", "etiqueta_env"],
     values="accessible_market_size_b",
     color="tema",
-    color_discrete_map={**THEME_COLORS, "(?)": "#d5dde2", "Cartera": "#ffffff"},
-    custom_data=["margen", "sector", "puntaje", "accessible_market_size_b", "crecimiento_pct"],
-)
-fig.update_traces(
-    marker=dict(line=dict(color="white", width=2)),
-    textfont=dict(color="white", size=15),
-    texttemplate="<b>%{label}</b><br>$%{value:,.1f} mil M",
-    hovertemplate=(
-        "<b>%{label}</b><br>Margen: %{customdata[0]}<br>Sector: %{customdata[1]}<br>"
-        "Puntaje: %{customdata[2]:.3f}<br>Mercado accesible: $%{customdata[3]:,.2f} mil M<br>"
-        "Crecimiento: %{customdata[4]:.1f}%<extra></extra>"
+    color_discrete_map=THEME_COLORS,
+    hover_data={
+        "margen": True,
+        "sector": True,
+        "puntaje": ":.3f",
+        "accessible_market_size_b": ":.3f",
+        "crecimiento_pct": ":.1f",
+        "pci": ":.3f",
+        "tema": False,
+        "etiqueta_env": False,
+    },
+    title=(
+        f"Oportunidades por tema (n = {len(cartera)} productos en {cartera['tema'].nunique()} temas | "
+        f"Mercado Accesible total = {cartera['accessible_market_size_b'].sum():,.1f} B USD) "
+        "| tamaño = mercado accesible (miles de millones USD) | color = tema"
     ),
 )
-fig.update_layout(height=640, margin=dict(t=30, l=10, r=10, b=10), plot_bgcolor="white")
+fig.update_traces(
+    textinfo="label",
+    textfont=dict(size=18, color="#ffffff"),
+    marker=dict(line=dict(width=1, color="rgba(255,255,255,0.45)")),
+)
+fig.update_layout(margin=dict(t=60, l=10, r=10, b=95), height=700)
 st.plotly_chart(fig, use_container_width=True)
 
 # ── tabla por tema ──────────────────────────────────────────────────────────
