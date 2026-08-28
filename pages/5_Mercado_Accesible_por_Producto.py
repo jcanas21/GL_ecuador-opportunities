@@ -92,6 +92,28 @@ PRESET_SOURCES = {
 
 
 @st.cache_data(show_spinner=False)
+def load_combined_theme_opportunities() -> pd.DataFrame:
+    page2_df = build_page2_recommendations("Margen Intensivo").copy()
+    page2_df["source_page"] = "Página 2 · Margen Intensivo"
+    page3_df = build_page3_recommendations("Margen Extensivo").copy()
+    page3_df["source_page"] = "Página 3 · Margen Extensivo"
+
+    combined = pd.concat([page2_df, page3_df], ignore_index=True, sort=False)
+    if combined.empty:
+        return combined
+
+    combined["hs4"] = combined["hs4"].astype(str).str.zfill(4)
+
+    # Keep one row per product for theme construction, preferring the entry with the
+    # highest opportunity score when a product appears in both presets.
+    sort_cols = [c for c in ["combined_score", "attractiveness_index", "feasibility_index"] if c in combined.columns]
+    if sort_cols:
+        combined = combined.sort_values(sort_cols, ascending=False)
+    combined = combined.drop_duplicates(subset=["hs4"], keep="first").reset_index(drop=True)
+    return combined
+
+
+@st.cache_data(show_spinner=False)
 def load_theme_mapping() -> pd.DataFrame:
     path = Path(__file__).resolve().parents[1] / "data" / "input" / "hs4_temas.csv"
     if not path.exists():
@@ -165,27 +187,40 @@ def load_top_exporters_for_theme_markets(
 
 render_dashboard_header(
     "Mercado Accesible por Producto o Tema",
-    "Seleccione un producto o un tema proveniente de un preset y explore su mercado accesible por país de destino.",
+    "Explore el mercado accesible por producto o por tema, partiendo de las oportunidades priorizadas en las páginas 2 y 3.",
 )
 
-source_label = st.selectbox("Origen del producto", list(PRESET_SOURCES.keys()), index=0)
-source_type, preset_name = PRESET_SOURCES[source_label]
+view_level = st.radio("Nivel de visualización", ["Producto", "Tema"], horizontal=True, index=0)
 
-if source_type == "page2":
-    preset_df = build_page2_recommendations(preset_name)
+if view_level == "Producto":
+    source_label = st.selectbox("Origen de oportunidades", list(PRESET_SOURCES.keys()), index=0)
+    source_type, preset_name = PRESET_SOURCES[source_label]
+    if source_type == "page2":
+        preset_df = build_page2_recommendations(preset_name)
+    else:
+        preset_df = build_page3_recommendations(preset_name)
+    source_caption = (
+        "La vista por producto trabaja con **una sola fuente a la vez**. "
+        "Puede alternar entre las oportunidades de la página 2 y las de la página 3."
+    )
 else:
-    preset_df = build_page3_recommendations(preset_name)
+    source_label = "Página 2 + Página 3"
+    preset_df = load_combined_theme_opportunities()
+    source_caption = (
+        "La vista por tema **combina automáticamente** las oportunidades identificadas en "
+        "**Página 2 · Margen Intensivo** y **Página 3 · Margen Extensivo**."
+    )
+
+st.caption(source_caption)
 
 if preset_df.empty:
-    st.warning("No hay productos disponibles para el preset seleccionado.")
+    st.warning("No hay productos disponibles para la vista seleccionada.")
     st.stop()
 
 theme_map = load_theme_mapping()
 preset_df["hs4"] = preset_df["hs4"].astype(str).str.zfill(4)
 preset_df = preset_df.merge(theme_map, on="hs4", how="left")
 preset_df["tema"] = preset_df["tema"].fillna("Sin tema asignado")
-
-view_level = st.radio("Nivel de visualización", ["Producto", "Tema"], horizontal=True, index=0)
 
 selected_product_label = None
 selected_hs4 = None
@@ -261,6 +296,11 @@ if view_level == "Producto":
     metric3.metric("Destinos accesibles", f"{dest_df['importer_iso'].nunique():,}")
 else:
     metric3.metric("Productos en el tema", f"{len(selected_theme_hs4):,}")
+
+st.caption(
+    f"Fuente activa: **{source_label}**. "
+    "El tamaño del mercado accesible del tema es la suma de los mercados accesibles de los productos incluidos en esa fuente."
+)
 
 dl1, dl2 = st.columns(2)
 dl1.download_button(

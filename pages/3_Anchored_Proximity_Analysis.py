@@ -6,7 +6,12 @@ import streamlit as st
 import re
 from branding import render_dashboard_header
 
-from data_utils import load_anchor_proximity_dataset, load_natural_resource_exclusion_labels, normalize_0_1
+from data_utils import (
+    load_anchor_proximity_dataset,
+    load_natural_resource_exclusion_labels,
+    load_product_space_layout,
+    normalize_0_1,
+)
 
 
 SECTOR_COLORS = {
@@ -473,6 +478,67 @@ c3.metric("Candidatos únicos", f"{flt['candidate_hs4'].nunique():,}")
 if flt.empty:
     st.info("Ningún vínculo ancla-candidato coincide con los filtros actuales.")
     st.stop()
+
+st.subheader("Espacio de productos — Ecuador")
+st.caption(
+    "Las anclas del conjunto vigente aparecen coloreadas por su agrupación en el espacio "
+    "de productos del Atlas; el resto del universo queda en gris claro. El tamaño del punto "
+    "corresponde al mercado accesible del producto. El mapa responde a los filtros de anclas "
+    "de la barra lateral. Pase el cursor sobre un punto para ver su código y su nombre."
+)
+
+_ps = load_product_space_layout()
+if _ps.empty:
+    st.info("No se encontró la disposición del espacio de productos entre los insumos.")
+else:
+    _anclas_vigentes = set(flt["anchor_hs4"].astype(str).str.zfill(4))
+    _ps = _ps.copy()
+    _ps["es_ancla"] = _ps["hs4"].isin(_anclas_vigentes)
+
+    # la disposición del Atlas no cubre todo el universo HS4, así que se declara
+    # cuántas anclas del conjunto vigente quedan efectivamente representadas
+    _en_mapa = int(_ps["es_ancla"].sum())
+    if _en_mapa < len(_anclas_vigentes):
+        st.caption(
+            f"El mapa representa {_en_mapa} de las {len(_anclas_vigentes)} anclas del conjunto vigente. "
+            f"La disposición del Atlas cubre {len(_ps):,} de los códigos HS4 del universo y deja fuera "
+            "los de menor comercio mundial."
+        )
+
+    def _hover(fila, ancla: bool) -> str:
+        mercado = fila["accessible_market_size"] / 1e9
+        estado = "ancla del conjunto vigente" if ancla else "fuera del conjunto de anclas"
+        return (f"HS {fila['hs4']} · {fila['product_name_short']}<br>"
+                f"{fila['cluster_es']} · {estado}<br>"
+                f"Mercado accesible: USD {mercado:,.2f} mil M")
+
+    fig_ps = go.Figure()
+    _fondo = _ps[~_ps["es_ancla"]]
+    fig_ps.add_trace(go.Scatter(
+        x=_fondo["product_space_x"], y=_fondo["product_space_y"], mode="markers",
+        marker=dict(size=_fondo["marker_size"], color="#eeeef2", line=dict(width=0.4, color="#d0d0d6")),
+        text=[_hover(f, False) for _, f in _fondo.iterrows()], hoverinfo="text",
+        name="Fuera del conjunto de anclas", showlegend=True,
+    ))
+    # una traza por agrupación para que la leyenda permita encender y apagar sectores
+    for _cluster, _g in _ps[_ps["es_ancla"]].groupby("cluster_es", sort=True):
+        fig_ps.add_trace(go.Scatter(
+            x=_g["product_space_x"], y=_g["product_space_y"], mode="markers",
+            marker=dict(size=_g["marker_size"], color=_g["color"].iloc[0],
+                        line=dict(width=0.6, color="#ffffff"), opacity=0.92),
+            text=[_hover(f, True) for _, f in _g.iterrows()], hoverinfo="text",
+            name=_cluster, showlegend=True,
+        ))
+    fig_ps.update_layout(
+        height=680, margin=dict(l=20, r=20, t=20, b=110),
+        xaxis=dict(visible=False), yaxis=dict(visible=False, scaleanchor="x"),
+        plot_bgcolor="white",
+        hoverlabel=dict(bgcolor="rgba(16,24,44,0.95)", font_color="white"),
+        legend=dict(orientation="h", yanchor="top", y=-0.02, xanchor="center", x=0.5,
+                    title_text="Agrupación en el espacio de productos",
+                    title_font=dict(size=13), font=dict(size=12), itemsizing="constant"),
+    )
+    st.plotly_chart(fig_ps, use_container_width=True)
 
 st.subheader("Anclas seleccionadas")
 selected_anchor_table = (
