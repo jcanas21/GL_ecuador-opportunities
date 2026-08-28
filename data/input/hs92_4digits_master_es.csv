@@ -172,7 +172,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2006,"Vegetables, fruits and nuts, preserved by sugar",Frutas confitadas,manual_validated,cordoba_curado,
 2007,"Jams, jellies and marmalades",Mermeladas / jaleas / dulces,manual_validated,cordoba_curado,
 2008,"Fruits and nuts, otherwise prepared","Frutos preparados (maní tostado, duraznos)",manual_validated,cordoba_curado,
-2009,Fruit juices,Jugos de fruta,manual_validated,cordoba_curado,
+2009,Fruit juices,Jugos de frutas y hortalizas,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2101,Coffee extracts,Café / té / yerba (extractos),manual_validated,cordoba_curado,
 2102,Yeasts,Levaduras,manual_validated,cordoba_curado,
 2103,Sauces and seasonings,Salsas / condimentos,manual_validated,cordoba_curado,
@@ -335,7 +335,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 2915,Saturated acyclic monocarboxylic acids,Ácidos monocarboxílicos,manual_validated,cordoba_curado,
 2916,Unsaturated acyclic monocarboxylic acids,Ácidos monocarboxílicos cíclicos,manual_validated,cordoba_curado,
 2917,Polycarboxylic acids,Ácidos policarboxílicos,manual_validated,cordoba_curado,
-2918,Carboxylic acids with additional oxygen function,Ácidos carboxílicos con oxígeno,manual_validated,cordoba_curado,
+2918,Carboxylic acids with additional oxygen function,Ácidos carboxílicos con función oxigenada,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 2919,Phosporic esters,Ésteres fosfóricos,manual_validated,cordoba_curado,
 2920,Esters of other inorganic acids of nonmetals,Ésteres de ácidos inorgánicos no metálicos,manual_validated,cordoba_curado,
 2921,Amine-function compounds,Compuestos amino,manual_validated,cordoba_curado,
@@ -403,7 +403,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 3501,Casein,Caseína,manual_validated,cordoba_curado,
 3502,Albumins,Albúminas,manual_validated,cordoba_curado,
 3503,Gelatin,Gelatina,manual_validated,cordoba_curado,
-3504,Peptones,Peptonas,manual_validated,cordoba_curado,
+3504,Peptones,Peptonas y otras materias proteínicas,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 3505,Dextrins and other modified starches,Almidones modificados / dextrinas,manual_validated,cordoba_curado,
 3506,Glues and adhesives,Colas / adhesivos preparados,manual_validated,cordoba_curado,
 3507,Enzymes,Enzimas,manual_validated,cordoba_curado,
@@ -558,9 +558,9 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 4815,Floor coverings of paper,Cubre suelos de papel,manual_validated,cordoba_curado,
 4816,Other carbon paper,Papel carbón / esténciles,manual_validated,cordoba_curado,
 4817,Letterstock,Sobres / tarjetas postales,manual_validated,cordoba_curado,
-4818,Toilet paper,Papel higiénico / pañuelos,manual_validated,cordoba_curado,
+4818,Toilet paper,Papel higiénico y artículos sanitarios,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4819,Cardboard packing containers,Cajas y cartón corrugado,manual_validated,cordoba_curado,
-4820,Notebooks,Libros de registro / cuadernos,manual_validated,cordoba_curado,
+4820,Notebooks,"Artículos de papelería y oficina, de papel",manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 4821,Paper labels,Etiquetas de papel,manual_validated,cordoba_curado,
 4822,"Bobbins, spools, cops of paper",Carretes / bobinas de papel,manual_validated,cordoba_curado,
 4823,Other paper cut to size,Otros artículos de papel,manual_validated,cordoba_curado,
@@ -785,7 +785,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 7010,Glass containers for conveyance,Envases de vidrio,manual_validated,cordoba_curado,
 7011,Glass envelopes,Ampollas / bulbos de vidrio,manual_validated,cordoba_curado,
 7012,Glass inners for vacuum flasks,Recipientes interiores de vidrio para termos,pending_manual_validation,ecu_previo,
-7013,Glassware for interior decorative use,Vajilla de vidrio,manual_validated,cordoba_curado,
+7013,Glassware for interior decorative use,Artículos de vidrio para mesa y cocina,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 7014,Signaling glassware,Vidriería para señalización,manual_validated,cordoba_curado,
 7015,Clock or watch glasses and similar glasses,Vidrios para relojería / óptica,manual_validated,cordoba_curado,
 7016,Glass paving blocks or other molded products,Adoquines / bloques de vidrio,manual_validated,cordoba_curado,
@@ -985,7 +985,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8415,Air conditioners,Acondicionadores de aire,manual_validated,cordoba_curado,
 8416,Furnace burners,Quemadores,manual_validated,cordoba_curado,
 8417,Industrial furnaces,Hornos industriales,manual_validated,cordoba_curado,
-8418,"Refrigerators, freezers",Refrigeradores,manual_validated,cordoba_curado,
+8418,"Refrigerators, freezers",Refrigeradores y congeladores,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8419,Equipment for temperature change of materials,Aparatos térmicos industriales,manual_validated,cordoba_curado,
 8420,"Calendering or other rolling machines, other than for metals or glass",Calandrias / rodillos,manual_validated,cordoba_curado,
 8421,Centrifuges,Centrifugadoras / filtros,manual_validated,cordoba_curado,
@@ -1000,10 +1000,10 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8430,"Other moving, excavating or boring machinery",Otras máquinas para mover tierra,manual_validated,cordoba_curado,
 8431,Parts for use with hoists and excavation machinery,Partes para máquinas elevadoras,manual_validated,cordoba_curado,
 8432,Machinery for soil preparation or cultivation,Sembradoras / arados,manual_validated,cordoba_curado,
-8433,Harvesting or agricultural machinery,Cosechadoras,manual_validated,cordoba_curado,
+8433,Harvesting or agricultural machinery,Máquinas de cosecha y trilla,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8434,Dairy machinery,Máquinas ordeñadoras,manual_validated,cordoba_curado,
 8435,Machines for wine and juice production,Prensas para vino / aceite,manual_validated,cordoba_curado,
-8436,Other agricultural machinery,Otra maquinaria agrícola,manual_validated,cordoba_curado,
+8436,Other agricultural machinery,Otras máquinas agrícolas y forestales,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8437,Machinery for processing grain,Máquinas para granos / molinería,manual_validated,cordoba_curado,
 8438,Machinery for the industrial preparation of food or drink,Máquinas industria alimenticia,manual_validated,cordoba_curado,
 8439,Machinery for making paper,Máquinas para fabricar pasta de papel,manual_validated,cordoba_curado,
@@ -1068,7 +1068,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 8513,Portable electric lamps,Linternas portátiles,manual_validated,cordoba_curado,
 8514,Industrial electric furnaces,Hornos eléctricos industriales,manual_validated,cordoba_curado,
 8515,Electric soldering machines,Soldadura eléctrica,manual_validated,cordoba_curado,
-8516,Electric heaters,Calentadores eléctricos domésticos,manual_validated,cordoba_curado,
+8516,Electric heaters,Aparatos electrotérmicos domésticos,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 8517,Telephones,Teléfonos / equipos de telecomunicaciones,manual_validated,cordoba_curado,
 8518,Microphones,Micrófonos / altavoces,manual_validated,cordoba_curado,
 8519,Sound reproducing apparatus,Aparatos de grabación / reproducción sonora,manual_validated,cordoba_curado,
@@ -1159,7 +1159,7 @@ hs4,product_name_short,product_name_short_es,translation_status,translation_sour
 9018,Medical instruments,Instrumentos médicos,manual_validated,cordoba_curado,
 9019,Therapy applicances,Aparatos mecanoterapia / ozonoterapia,manual_validated,cordoba_curado,
 9020,Other breathing appliances and gas masks,Aparatos respiratorios,manual_validated,cordoba_curado,
-9021,Orthopedic appliances,Aparatos ortopédicos / implantes,manual_validated,cordoba_curado,
+9021,Orthopedic appliances,Aparatos de ortopedia y prótesis,manual_validated,revision_partida_general,renombrado a la cláusula general de la partida
 9022,X-ray machines,Aparatos de rayos X,manual_validated,cordoba_curado,
 9023,Instruments designed for demonstrational purposes,Instrumentos / aparatos para demostración,manual_validated,cordoba_curado,
 9024,Machines for testing the mechanical properties of materials,Máquinas de ensayo / pruebas,manual_validated,cordoba_curado,
