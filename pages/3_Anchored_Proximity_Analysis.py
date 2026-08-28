@@ -498,18 +498,28 @@ else:
     # la disposición del Atlas no cubre todo el universo HS4, así que se declara
     # cuántas anclas del conjunto vigente quedan efectivamente representadas
     _en_mapa = int(_ps["es_ancla"].sum())
-    if _en_mapa < len(_anclas_vigentes):
+    _sin_coordenadas = sorted(_anclas_vigentes - set(_ps["hs4"]))
+    if _sin_coordenadas:
+        _nombres = dict(zip(flt["anchor_hs4"].astype(str).str.zfill(4),
+                            flt["anchor_product_name_short"].astype(str)))
         st.caption(
-            f"El mapa representa {_en_mapa} de las {len(_anclas_vigentes)} anclas del conjunto vigente. "
-            f"La disposición del Atlas cubre {len(_ps):,} de los códigos HS4 del universo y deja fuera "
-            "los de menor comercio mundial."
+            f"El mapa dibuja {_en_mapa} de las {len(_anclas_vigentes)} anclas del conjunto vigente. "
+            f"La disposición del espacio de productos del Atlas cubre {len(_ps):,} códigos HS4 y las "
+            f"{len(_sin_coordenadas)} restantes no tienen coordenadas en ella, de modo que no se pueden "
+            "situar. Siguen contando en la tabla de anclas y en todo el análisis."
         )
+        with st.expander(f"Anclas sin coordenadas en la disposición ({len(_sin_coordenadas)})"):
+            st.dataframe(
+                pd.DataFrame({"HS4": _sin_coordenadas,
+                              "Producto": [_nombres.get(h, "") for h in _sin_coordenadas]}),
+                hide_index=True, use_container_width=True,
+            )
 
     def _hover(fila, ancla: bool) -> str:
         mercado = fila["accessible_market_size"] / 1e9
         estado = "ancla del conjunto vigente" if ancla else "fuera del conjunto de anclas"
         return (f"HS {fila['hs4']} · {fila['product_name_short']}<br>"
-                f"{fila['cluster_es']} · {estado}<br>"
+                f"{fila['sector']} · {estado}<br>"
                 f"Mercado accesible: USD {mercado:,.2f} mil M")
 
     fig_ps = go.Figure()
@@ -520,23 +530,30 @@ else:
         text=[_hover(f, False) for _, f in _fondo.iterrows()], hoverinfo="text",
         name="Fuera del conjunto de anclas", showlegend=True,
     ))
-    # una traza por agrupación para que la leyenda permita encender y apagar sectores
-    for _cluster, _g in _ps[_ps["es_ancla"]].groupby("cluster_es", sort=True):
+    # una traza por sector, en el orden de la paleta, para que la leyenda permita
+    # encender y apagar sectores y coincida con la taxonomía de la tabla de anclas
+    _anclas_ps = _ps[_ps["es_ancla"]]
+    for _sector in [s for s in SECTOR_COLORS if s in set(_anclas_ps["sector"])]:
+        _g = _anclas_ps[_anclas_ps["sector"] == _sector]
         fig_ps.add_trace(go.Scatter(
             x=_g["product_space_x"], y=_g["product_space_y"], mode="markers",
-            marker=dict(size=_g["marker_size"], color=_g["color"].iloc[0],
+            marker=dict(size=_g["marker_size"], color=SECTOR_COLORS[_sector],
                         line=dict(width=0.6, color="#ffffff"), opacity=0.92),
             text=[_hover(f, True) for _, f in _g.iterrows()], hoverinfo="text",
-            name=_cluster, showlegend=True,
+            name=_sector, showlegend=True,
         ))
     fig_ps.update_layout(
         height=680, margin=dict(l=20, r=20, t=20, b=110),
-        xaxis=dict(visible=False), yaxis=dict(visible=False, scaleanchor="x"),
+        xaxis=dict(visible=False),
+        # scaleanchor fija la relación de aspecto a la natural de los datos, 1,47:1.
+        # scaleratio 1/1,4 da a cada unidad de y el 71,4% de los píxeles de una de x,
+        # lo que ensancha el mapa un 40% sin tocar el alto y separa los puntos.
+        yaxis=dict(visible=False, scaleanchor="x", scaleratio=1 / 1.4),
         plot_bgcolor="white",
         hoverlabel=dict(bgcolor="rgba(16,24,44,0.95)", font_color="white"),
         legend=dict(orientation="h", yanchor="top", y=-0.02, xanchor="center", x=0.5,
-                    title_text="Agrupación en el espacio de productos",
-                    title_font=dict(size=13), font=dict(size=12), itemsizing="constant"),
+                    title_text="Sector", title_font=dict(size=13), font=dict(size=12),
+                    itemsizing="constant"),
     )
     st.plotly_chart(fig_ps, use_container_width=True)
 

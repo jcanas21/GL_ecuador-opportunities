@@ -831,27 +831,6 @@ def load_anchor_proximity_dataset() -> pd.DataFrame:
     return df
 
 
-# nombres del layout del Atlas -> nombres estándar de su paleta
-UMAP_TO_CLUSTER = {
-    "Agriculture": "Agricultural Goods",
-    "Construction, Building, and Home Supplies": "Construction Goods",
-    "Electronic and Electrical Goods": "Electronics",
-    "Industrial Chemicals and Metals": "Chemicals & Basic Metals",
-    "Metalworking and Electrical Machinery and Parts": "Metalworking Machinery",
-    "Minerals": "Minerals",
-    "Textile Apparel and Accessories": "Apparel",
-    "Textile and Home Goods": "Textile & Home Goods",
-}
-CLUSTER_ES_LABEL = {
-    "Agricultural Goods": "Bienes agrícolas",
-    "Construction Goods": "Bienes de construcción",
-    "Electronics": "Electrónica",
-    "Chemicals & Basic Metals": "Químicos y metales básicos",
-    "Metalworking Machinery": "Maquinaria metalmecánica",
-    "Minerals": "Minerales",
-    "Textile & Home Goods": "Textiles y hogar",
-    "Apparel": "Indumentaria",
-}
 # escala de tamaño por mercado accesible. La distribución está muy concentrada, con
 # un rango intercuartílico de un orden de magnitud, así que un log lineal deja al
 # petróleo, que tiene 943 veces la mediana, con solo tres veces su área. El exponente
@@ -868,26 +847,20 @@ def product_space_marker_size(mercado_accesible) -> pd.Series:
 
 @st.cache_data(show_spinner=False)
 def load_product_space_layout() -> pd.DataFrame:
-    """Disposición del espacio de productos del Atlas, lista para graficar.
+    """Disposición del espacio de productos, lista para graficar.
 
-    Devuelve un HS4 por fila con sus coordenadas, la agrupación en español, el color
-    de la paleta del Atlas, el nombre en español y el diámetro del punto derivado del
-    mercado accesible. Solo alimenta la visualización: ninguna columna entra en el
-    cálculo de anclas, filtros ni puntajes.
+    Devuelve un HS4 por fila con sus coordenadas, el sector del proyecto, el nombre en
+    español y el diámetro del punto derivado del mercado accesible. El sector es el mismo
+    que usan las tablas del tablero, de modo que un producto que la tabla llama Metales
+    también sale como Metales en el mapa. Solo alimenta la visualización: ninguna columna
+    entra en el cálculo de anclas, filtros ni puntajes.
     """
     layout_path = _nearest_existing_data_file("umap_layout_hs92.csv", "input")
-    paleta_path = _nearest_existing_data_file("product_space_clusters.csv", "input")
-    if layout_path is None or paleta_path is None:
+    if layout_path is None:
         return pd.DataFrame()
 
     ps = pd.read_csv(layout_path, dtype={"product_hs92_code": str})
     ps["hs4"] = ps["product_hs92_code"].str.zfill(4)
-    ps["cluster"] = ps["product_space_cluster_name"].map(UMAP_TO_CLUSTER).fillna("")
-    ps["cluster_es"] = ps["cluster"].map(CLUSTER_ES_LABEL).fillna("Otros")
-
-    paleta = pd.read_csv(paleta_path)
-    colores = dict(zip(paleta["Name"], paleta["Hex Code"]))
-    ps["color"] = ps["cluster"].map(colores).fillna("#b8bec7")
 
     metricas = pd.read_csv(_resolve_intermediate_csv("opportunity_metrics_hs4_ecu.csv"), dtype={"hs4": str})
     metricas["hs4"] = metricas["hs4"].str.zfill(4)
@@ -895,12 +868,13 @@ def load_product_space_layout() -> pd.DataFrame:
     ps["accessible_market_size"] = pd.to_numeric(ps["accessible_market_size"], errors="coerce").fillna(0.0)
     ps["marker_size"] = product_space_marker_size(ps["accessible_market_size"])
 
-    nombres = load_hs92_reference()[["hs4", "product_name_short"]].copy()
-    nombres["hs4"] = nombres["hs4"].astype(str).str.zfill(4)
-    ps = ps.merge(nombres, on="hs4", how="left")
+    ref = load_hs92_reference()[["hs4", "product_name_short", "sector"]].copy()
+    ref["hs4"] = ref["hs4"].astype(str).str.zfill(4)
+    ps = ps.merge(ref, on="hs4", how="left")
     ps["product_name_short"] = ps["product_name_short"].fillna("").astype(str).str.strip()
-    return ps[["hs4", "product_space_x", "product_space_y", "cluster", "cluster_es",
-               "color", "accessible_market_size", "marker_size", "product_name_short"]]
+    ps["sector"] = ps["sector"].fillna("Otros").astype(str).str.strip()
+    return ps[["hs4", "product_space_x", "product_space_y", "sector",
+               "accessible_market_size", "marker_size", "product_name_short"]]
 
 
 @st.cache_data(show_spinner=False)
