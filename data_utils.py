@@ -1646,6 +1646,50 @@ def load_accessible_market_destinations_by_product(hs4: str, focus_year: int = 2
 
 
 @st.cache_data(show_spinner=False)
+def _load_exporters_by_importer_cached(_mtime_ns: int, path_str: str) -> pd.DataFrame:
+    """Tabla de exportadores por importador y HS4, leída una sola vez.
+
+    Son unos 3 millones de filas. Con las tres columnas de texto como object ocupa
+    algo más de 500 MB, lo que agota la memoria de la nube en cuanto la vista por
+    tema recorre varios productos. Como categorías baja a unos 40 MB, y al quedar
+    cacheada se comparte entre todas las consultas en vez de releerse en cada una.
+    """
+    # se lee ya como categorías para que pandas nunca materialice las tres columnas
+    # de texto sobre los 3 millones de filas, que es el pico que mataba al proceso
+    df = pd.read_csv(
+        path_str,
+        low_memory=False,
+        dtype={"hs4": "category", "importer_iso": "category",
+               "exporter_iso": "category", "export_value": "float64"},
+    )
+    if df.empty:
+        return df
+
+    def _normalizar(col: pd.Series, fn) -> pd.Series:
+        """Normaliza sobre el catálogo de categorías, no sobre cada fila."""
+        nuevas = [fn(c) for c in col.cat.categories]
+        if len(set(nuevas)) == len(nuevas):
+            return col.cat.rename_categories(nuevas)
+        return col.astype(str).map(fn).astype("category")  # dos categorías colapsan
+
+    df["hs4"] = _normalizar(df["hs4"], lambda c: str(c).zfill(4))
+    df["importer_iso"] = _normalizar(df["importer_iso"], lambda c: str(c).upper().strip())
+    df["exporter_iso"] = _normalizar(df["exporter_iso"], lambda c: str(c).upper().strip())
+    df["export_value"] = df["export_value"].fillna(0.0)
+    return df
+
+
+def load_exporters_by_importer() -> pd.DataFrame:
+    path = _nearest_existing_data_file_any(
+        ["exporters_by_importer_hs4_2024.csv.gz", "exporters_by_importer_hs4_2024.csv"],
+        "intermediate",
+    )
+    if path is None:
+        return pd.DataFrame()
+    return _load_exporters_by_importer_cached(_file_mtime_ns(path), str(path))
+
+
+@st.cache_data(show_spinner=False)
 def load_top_exporters_for_product_markets(
     hs4: str,
     importers: tuple[str, ...],
@@ -1657,21 +1701,11 @@ def load_top_exporters_for_product_markets(
     if not importer_set:
         return pd.DataFrame(columns=["exporter_iso", "export_value", "export_value_m", "market_share"])
 
-    compact_path = _nearest_existing_data_file_any(
-        ["exporters_by_importer_hs4_2024.csv.gz", "exporters_by_importer_hs4_2024.csv"],
-        "intermediate",
-    )
-    if compact_path is not None and int(focus_year) == 2024:
-        df = pd.read_csv(compact_path, low_memory=False)
-        if df.empty:
-            return pd.DataFrame(columns=["rank", "exporter_iso", "export_value", "export_value_m", "market_share"])
-        df["hs4"] = df["hs4"].astype(str).str.zfill(4)
-        df["importer_iso"] = df["importer_iso"].astype(str).str.upper().str.strip()
-        df["exporter_iso"] = df["exporter_iso"].astype(str).str.upper().str.strip()
-        df["export_value"] = pd.to_numeric(df["export_value"], errors="coerce").fillna(0.0)
+    df = load_exporters_by_importer()
+    if not df.empty and int(focus_year) == 2024:
         out = (
             df[(df["hs4"] == hs4) & (df["importer_iso"].isin(importer_set))]
-            .groupby("exporter_iso", as_index=False)["export_value"]
+            .groupby("exporter_iso", as_index=False, observed=True)["export_value"]
             .sum()
             .sort_values("export_value", ascending=False)
             .reset_index(drop=True)

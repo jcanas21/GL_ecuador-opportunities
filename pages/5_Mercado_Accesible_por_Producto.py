@@ -124,11 +124,52 @@ def load_theme_mapping() -> pd.DataFrame:
     return df[["hs4", "tema"]].drop_duplicates("hs4")
 
 
+def _ranking_exportadores(acc: pd.Series, top_n: int) -> pd.DataFrame:
+    """Convierte una serie exportador -> valor en la tabla ordenada con cuota y rango."""
+    if acc.empty:
+        return pd.DataFrame(columns=["rank", "exporter_iso", "export_value", "export_value_m", "market_share"])
+    out = acc.rename("export_value").reset_index().sort_values("export_value", ascending=False).reset_index(drop=True)
+    total = float(out["export_value"].sum())
+    out["export_value_m"] = out["export_value"] / 1_000_000
+    out["market_share"] = out["export_value"] / total if total > 0 else 0.0
+    out["rank"] = range(1, len(out) + 1)
+    return out.head(int(top_n))[["rank", "exporter_iso", "export_value", "export_value_m", "market_share"]]
+
+
 @st.cache_data(show_spinner=False)
-def load_accessible_market_destinations_by_theme(hs4_codes: tuple[str, ...], focus_year: int = 2024) -> pd.DataFrame:
+def _preset_tema(nombre: str) -> pd.DataFrame:
+    """Agregado por tema precomputado en el repositorio.
+
+    Evita recorrer producto por producto la tabla de exportadores por importador,
+    que tiene tres millones de filas y agotaba la memoria del despliegue. Si el
+    archivo no está, quien llama vuelve al cálculo en vivo.
+    """
+    from data_utils import _nearest_existing_data_file_any
+    path = _nearest_existing_data_file_any([f"{nombre}.csv.gz", f"{nombre}.csv"], "intermediate")
+    if path is None:
+        return pd.DataFrame()
+    df = pd.read_csv(path)
+    for col in ("tema", "importer_iso", "exporter_iso"):
+        if col in df.columns:
+            df[col] = df[col].astype(str).str.strip()
+    return df
+
+
+@st.cache_data(show_spinner=False)
+def load_accessible_market_destinations_by_theme(
+    tema: str, hs4_codes: tuple[str, ...], focus_year: int = 2024
+) -> pd.DataFrame:
     codes = tuple(sorted({str(x).zfill(4) for x in hs4_codes if str(x).strip()}))
     if not codes:
         return pd.DataFrame(columns=["importer_iso", "accessible_market_imports"])
+
+    pre = _preset_tema("temas_destinos")
+    if not pre.empty and tema in set(pre["tema"]):
+        return (
+            pre.loc[pre["tema"] == tema, ["importer_iso", "accessible_market_imports"]]
+            .sort_values("accessible_market_imports", ascending=False)
+            .reset_index(drop=True)
+        )
 
     acc = pd.Series(dtype="float64")
     for hs4 in codes:
@@ -151,6 +192,7 @@ def load_accessible_market_destinations_by_theme(hs4_codes: tuple[str, ...], foc
 
 @st.cache_data(show_spinner=False)
 def load_top_exporters_for_theme_markets(
+    tema: str,
     hs4_codes: tuple[str, ...],
     importers: tuple[str, ...],
     focus_year: int = 2024,
@@ -160,6 +202,16 @@ def load_top_exporters_for_theme_markets(
     importer_set = tuple(sorted({str(x).upper().strip() for x in importers if str(x).strip()}))
     if not codes or not importer_set:
         return pd.DataFrame(columns=["rank", "exporter_iso", "export_value", "export_value_m", "market_share"])
+
+    # el preset conserva el detalle por importador, así que el selector de mercados
+    # sigue funcionando sobre cualquier subconjunto sin tocar la tabla grande
+    pre = _preset_tema("temas_competidores")
+    if not pre.empty and tema in set(pre["tema"]):
+        acc = (
+            pre[(pre["tema"] == tema) & (pre["importer_iso"].isin(set(importer_set)))]
+            .groupby("exporter_iso")["export_value"].sum()
+        )
+        return _ranking_exportadores(acc, top_n)
 
     acc = pd.Series(dtype="float64")
     for hs4 in codes:
@@ -260,7 +312,7 @@ else:
     selected_theme_hs4 = tuple(
         preset_df.loc[preset_df["tema"] == selected_theme, "hs4"].dropna().astype(str).str.zfill(4).unique().tolist()
     )
-    dest_df = load_accessible_market_destinations_by_theme(selected_theme_hs4, focus_year=2024).copy()
+    dest_df = load_accessible_market_destinations_by_theme(selected_theme, selected_theme_hs4, focus_year=2024).copy()
 
 if dest_df.empty:
     st.info(
@@ -379,7 +431,7 @@ st.caption(f"Mercado seleccionado para treemap de competidores: **{selected_mark
 if view_level == "Producto":
     competitors_df = load_top_exporters_for_product_markets(selected_hs4, selected_importers, focus_year=2024, top_n=20).copy()
 else:
-    competitors_df = load_top_exporters_for_theme_markets(selected_theme_hs4, selected_importers, focus_year=2024, top_n=20).copy()
+    competitors_df = load_top_exporters_for_theme_markets(selected_theme, selected_theme_hs4, selected_importers, focus_year=2024, top_n=20).copy()
 competitors_df["exporter_name"] = competitors_df["exporter_iso"].map(country_name_map).fillna(competitors_df["exporter_iso"])
 competitors_df["continent"] = competitors_df["exporter_iso"].map(continent_map).fillna("Otros")
 competitors_df = competitors_df[competitors_df["continent"].isin(CONTINENT_COLORS.keys())].copy()
