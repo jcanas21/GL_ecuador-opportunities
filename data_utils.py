@@ -1716,6 +1716,10 @@ def load_top_exporters_for_product_markets(
         out["export_value_m"] = out["export_value"] / 1_000_000
         out["market_share"] = out["export_value"] / total_value if total_value > 0 else 0.0
         out["rank"] = np.arange(1, len(out) + 1)
+        # la tabla compartida usa categorías para ahorrar memoria, pero eso no debe
+        # salir de aquí: quien consume espera texto y rellenar una categoría con un
+        # valor ausente del catálogo revienta en las versiones nuevas de pandas
+        out["exporter_iso"] = out["exporter_iso"].astype(str)
         return out.head(int(top_n))[["rank", "exporter_iso", "export_value", "export_value_m", "market_share"]]
 
     trade_path = _nearest_existing_data_file("hs92_country_country_product_year_6_2020_2024.csv", "input")
