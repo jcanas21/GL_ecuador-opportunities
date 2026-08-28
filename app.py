@@ -209,12 +209,30 @@ st.set_page_config(
     layout="wide",
 )
 
-pages = [
-    st.Page(render_guide_and_glossary, title="Guía y glosario", icon=":material/menu_book:", default=True),
-    st.Page(Path("pages/1_Opportunity_Analysis.py"), title="Análisis de Oportunidades", icon=":material/insights:"),
-    st.Page(Path("pages/3_Anchored_Proximity_Analysis.py"), title="Análisis de Proximidad Anclada", icon=":material/account_tree:"),
-    st.Page(Path("pages/4_Temas_de_Diversificacion.py"), title="Temas de Diversificación", icon=":material/category:"),
-    st.Page(Path("pages/5_Mercado_Accesible_por_Producto.py"), title="Mercado Accesible por Producto", icon=":material/grid_view:"),
+AQUI = Path(__file__).resolve().parent
+CATALOGO = [
+    ("pages/1_Opportunity_Analysis.py", "Análisis de Oportunidades", ":material/insights:"),
+    ("pages/3_Anchored_Proximity_Analysis.py", "Análisis de Proximidad Anclada", ":material/account_tree:"),
+    ("pages/4_Temas_de_Diversificacion.py", "Temas de Diversificación", ":material/category:"),
+    ("pages/5_Mercado_Accesible_por_Producto.py", "Mercado Accesible por Producto", ":material/grid_view:"),
 ]
+
+# Si un archivo de página falta, se omite del menú en lugar de tumbar el tablero
+# entero. Pasa cuando el despliegue sincroniza el repositorio a medias y toma un
+# app.py nuevo con archivos de página que todavía no bajó.
+pages = [st.Page(render_guide_and_glossary, title="Guía y glosario", icon=":material/menu_book:", default=True)]
+ausentes = []
+for ruta, titulo, icono in CATALOGO:
+    if (AQUI / ruta).exists():
+        pages.append(st.Page(Path(ruta), title=titulo, icon=icono))
+    else:
+        ausentes.append(titulo)
+
 pg = st.navigation(pages, position="sidebar", expanded=True)
+if ausentes:
+    st.warning(
+        "No se encontraron los archivos de estas páginas, así que quedaron fuera del menú: "
+        + ", ".join(ausentes)
+        + ". Si el tablero se acaba de actualizar, reinícielo para que termine de sincronizar."
+    )
 pg.run()
